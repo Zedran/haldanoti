@@ -1,6 +1,7 @@
 #pragma once
 
 #include <random>
+#include <span>
 
 namespace utils {
 
@@ -15,6 +16,9 @@ public:
 
     // Creates a new Source, seeding it from the specified seed value.
     Source(const int low, const int high, const unsigned long seed);
+
+    // Fills the specified container with unique random numbers.
+    void fill(std::span<int> out);
 
     // Generates a new random number.
     int get();

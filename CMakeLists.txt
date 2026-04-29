@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
+option(MAKE_TESTS "Build test target" OFF)
+
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -22,3 +24,10 @@ add_subdirectory(core)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE core)
+
+if(MAKE_TESTS)
+    include(FetchCatch2)
+
+    enable_testing()
+    add_subdirectory(tests)
+endif()
