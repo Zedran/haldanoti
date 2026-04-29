@@ -1,4 +1,5 @@
 add_library(core STATIC
+    src/game/helpers.cpp
     src/utils/Source.cpp
 )
 
