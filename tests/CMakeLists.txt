@@ -1,6 +1,7 @@
 set (TEST_NAME t)
 
 add_executable(${TEST_NAME}
+    game/test_Row.cpp
     game/test_helpers.cpp
     utils/test_Source.cpp
 )
