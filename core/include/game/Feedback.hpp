@@ -1,6 +1,6 @@
 #pragma once
 
-namespace game::internal {
+namespace game {
 
 // Feedback the player receives after submitting their guess.
 struct Feedback {
@@ -11,4 +11,4 @@ struct Feedback {
     int white_count;
 };
 
-} // namespace game::internal
+} // namespace game

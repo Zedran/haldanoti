@@ -7,6 +7,7 @@
 #include "game/helpers.hpp"
 
 TEST_CASE("compare_codes") {
+    using namespace game;
     using namespace game::internal;
 
     constexpr std::size_t ARR_LEN = 4;
