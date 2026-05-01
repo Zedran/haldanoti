@@ -1,0 +1,86 @@
+#include <cassert>
+
+#include "game/Game.hpp"
+#include "game/Row.hpp"
+
+namespace game {
+
+Game::Game() : active_row_num_{}, rand_{Game::SCORE_MIN, Game::SCORE_MAX}, rows_{} {
+    generate_code();
+}
+
+Game::Game(const unsigned long seed) : active_row_num_{}, rand_{Game::SCORE_MIN, Game::SCORE_MAX, seed}, rows_{} {
+    generate_code();
+}
+
+std::size_t Game::active_row_num() const noexcept {
+    return active_row_num_;
+}
+
+const Row& Game::active_row() const noexcept {
+    assert(within_bounds());
+    return rows_[active_row_num_];
+}
+
+Row& Game::active_row_mut() noexcept {
+    assert(within_bounds());
+    return rows_[active_row_num_];
+}
+
+void Game::advance() noexcept {
+    assert(within_bounds());
+    assert(!last_row());
+    active_row_num_++;
+}
+
+void Game::generate_code() noexcept {
+    rand_.fill(good_code_);
+}
+
+std::span<const int, Row::ROW_LEN> Game::good_code() const noexcept {
+    return good_code_;
+}
+
+bool Game::last_row() const noexcept {
+    return active_row_num_ == rows_.size() - 1;
+}
+
+void Game::reset() noexcept {
+    active_row_num_ = 0;
+    for (auto& r : rows_) {
+        r.reset();
+    }
+    generate_code();
+}
+
+State Game::state() const noexcept {
+    const Row& cur_row = active_row();
+
+    if (!cur_row.locked()) {
+        return State::Running;
+    }
+
+    if (cur_row.feedback().red_count == Row::ROW_LEN) {
+        return State::Won;
+    }
+
+    if (last_row()) {
+        return State::Lost;
+    }
+
+    return State::Running;
+}
+
+void Game::submit_code(std::span<const int, Row::ROW_LEN> guess) noexcept {
+    for (const auto& e : guess) {
+        assert(e >= SCORE_MIN);
+        assert(e <= SCORE_MAX);
+    }
+    active_row_mut().commit(good_code_, guess);
+}
+
+bool Game::within_bounds() const noexcept {
+    return active_row_num_ < rows_.size();
+}
+
+} // namespace game
