@@ -4,7 +4,7 @@
 
 #include "utils/Source.hpp"
 
-TEST_CASE("Source::fill") {
+TEST_CASE("Source::read") {
     constexpr std::size_t T = 8;
 
     constexpr int MIN = 1;
@@ -15,7 +15,7 @@ TEST_CASE("Source::fill") {
     utils::Source rand{MIN, MAX, SEED};
 
     std::array<int, T> arr;
-    rand.fill(arr);
+    rand.read(arr);
 
     bool has_min{}, has_max{};
 
