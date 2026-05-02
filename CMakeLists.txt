@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 option(MAKE_TESTS "Build test target" OFF)
+option(COVER "Generate test coverage report target if MAKE_TESTS=ON" OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
