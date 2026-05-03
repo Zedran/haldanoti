@@ -7,9 +7,6 @@ namespace utils {
 
 // Random number generator.
 class Source {
-    std::uniform_int_distribution<int> dist_;
-    std::default_random_engine         re_;
-
 public:
     // Creates a new Source, seeding it from random_device.
     Source(const int low, const int high);
@@ -22,6 +19,10 @@ public:
 
     // Fills the specified container with unique random numbers.
     void read(std::span<int> out);
+
+private:
+    std::uniform_int_distribution<int> dist_;
+    std::default_random_engine         re_;
 };
 
 } // namespace utils
