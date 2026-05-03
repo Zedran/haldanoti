@@ -21,6 +21,8 @@ endif()
 
 project(mm C CXX)
 
+include(FetchSFML)
+
 add_subdirectory(core)
 
 add_executable(${PROJECT_NAME} src/main.cpp)

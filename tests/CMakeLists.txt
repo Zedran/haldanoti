@@ -8,7 +8,7 @@ add_executable(${TEST_NAME}
 )
 
 set_target_properties(${TEST_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
-target_link_libraries(${TEST_NAME} PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(${TEST_NAME} PRIVATE Catch2::Catch2WithMain SFML::Graphics)
 
 add_test(
     NAME ${TEST_NAME}
