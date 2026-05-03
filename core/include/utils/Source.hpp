@@ -14,6 +14,8 @@ public:
     // Creates a new Source, seeding it from the specified seed value.
     Source(const int low, const int high, const unsigned long seed);
 
+    ~Source();
+
     // Generates a new random number.
     int get();
 

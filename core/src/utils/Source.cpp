@@ -16,6 +16,8 @@ Source::Source(const int low, const int high, const unsigned long seed) : dist_{
     re_.seed(seed);
 }
 
+Source::~Source() = default;
+
 int Source::get() {
     return dist_(re_);
 }
