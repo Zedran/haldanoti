@@ -13,6 +13,8 @@ Game::Game(const unsigned long seed) : active_row_num_{}, rand_{Game::SCORE_MIN,
     generate_code();
 }
 
+Game::~Game() = default;
+
 std::size_t Game::active_row_num() const noexcept {
     return active_row_num_;
 }

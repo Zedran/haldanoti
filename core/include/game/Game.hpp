@@ -29,6 +29,8 @@ public:
     // generator with a custom seed.
     explicit Game(const unsigned long seed);
 
+    ~Game();
+
     // Returns a const reference to the currently active row.
     const Row& active_row() const noexcept;
 
