@@ -10,6 +10,8 @@ Row::Row() noexcept : code_{}, feedback_{}, locked_{} {
     code_.fill(CODE_VALUE_NONE);
 }
 
+Row::~Row() = default;
+
 std::span<const int, Row::ROW_LEN> Row::code() const noexcept {
     return code_;
 }

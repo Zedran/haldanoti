@@ -21,6 +21,8 @@ public:
     // Constructs a new Row.
     Row() noexcept;
 
+    ~Row();
+
     // Returns the view into the current code held by the Row.
     std::span<const int, ROW_LEN> code() const noexcept;
 
