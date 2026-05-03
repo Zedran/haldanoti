@@ -3,6 +3,7 @@ set(CORE_SOURCES
     src/game/Row.cpp
     src/game/helpers.cpp
     src/utils/Source.cpp
+    src/utils/utils.cpp
 )
 
 add_library(core STATIC ${CORE_SOURCES})

@@ -5,6 +5,7 @@ add_executable(${TEST_NAME}
     game/test_Row.cpp
     game/test_helpers.cpp
     utils/test_Source.cpp
+    utils/test_utils.cpp
 )
 
 set_target_properties(${TEST_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
