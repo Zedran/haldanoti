@@ -3,6 +3,7 @@
 #include <string>
 
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/System/Vector2.hpp>
 
 namespace utils {
 
@@ -10,5 +11,9 @@ namespace utils {
 // are "#rrggbb" and "#rrggbbaa". '#' is optional. Throws runtime_error
 // if html_code has invalid format.
 sf::Color decode_color(std::string html_code);
+
+// Returns sf::Vector2f with rounded components. Fractions can cause a blur
+// at the edges of drawable objects.
+sf::Vector2f round(sf::Vector2f v);
 
 } // namespace utils

@@ -1,3 +1,4 @@
+#include <cmath>
 #include <cstddef>
 #include <cstdint>
 #include <stdexcept>
@@ -21,6 +22,10 @@ sf::Color decode_color(std::string html_code) {
 
     const unsigned long long hex = std::stoull(html_code.substr(first_index), nullptr, 16);
     return sf::Color{static_cast<std::uint32_t>(hex)};
+}
+
+sf::Vector2f round(sf::Vector2f v) {
+    return {std::round(v.x), std::round(v.y)};
 }
 
 } // namespace utils
