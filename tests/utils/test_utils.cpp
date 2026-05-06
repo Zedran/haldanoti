@@ -4,6 +4,8 @@
 #include <variant>
 
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/System/Vector2.hpp>
 
 #include "utils/utils.hpp"
 
@@ -42,5 +44,31 @@ TEST_CASE("decode_color") {
         } else {
             REQUIRE_THROWS(utils::decode_color(c.input));
         }
+    }
+}
+
+TEST_CASE("detect_collision") {
+    struct test_data {
+        sf::Vector2f point;
+        bool         expected;
+    };
+
+    constexpr sf::FloatRect rect{{0, 0}, {50, 50}};
+
+    const test_data test_cases[]{
+        {{0, 0}, true},
+        {{50, 50}, true},
+        {{25, 25}, true},
+        {{-1, -1}, false},
+        {{25, -5}, false},
+        {{-5, 25}, false},
+        {{51, 51}, false},
+    };
+
+    for (const auto& c : test_cases) {
+        CAPTURE(c.point.x, c.point.y);
+
+        const bool out = utils::detect_collision(rect, c.point);
+        REQUIRE(out == c.expected);
     }
 }
