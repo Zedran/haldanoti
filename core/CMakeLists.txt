@@ -3,6 +3,7 @@ set(CORE_SOURCES
     src/game/Row.cpp
     src/game/helpers.cpp
     src/gfx/Box.cpp
+    src/gfx/Button.cpp
     src/gfx/Label.cpp
     src/gfx/Layout.cpp
     src/utils/Source.cpp

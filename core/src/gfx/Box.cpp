@@ -32,6 +32,12 @@ sf::Vector2f Box::get_size() const {
     return bg_.getSize();
 }
 
+void Box::handle_event(const sf::Event& event) {
+    for (const auto& c : components_) {
+        c->handle_event(event);
+    }
+}
+
 void Box::set_position(sf::Vector2f pos) {
     bg_.setPosition(utils::round(pos));
     layout_->place(bg_.getGlobalBounds(), components_);

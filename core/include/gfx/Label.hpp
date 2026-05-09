@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
@@ -28,9 +29,13 @@ public:
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
+    sf::FloatRect get_bounds() const;
+
     sf::Vector2f get_position() const override;
 
     sf::Vector2f get_size() const override;
+
+    void handle_event(const sf::Event& event) override;
 
     void set_bg_color(sf::Color c);
 

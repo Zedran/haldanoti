@@ -29,6 +29,8 @@ public:
 
     virtual sf::Vector2f get_size() const override;
 
+    virtual void handle_event(const sf::Event& event) override;
+
     virtual void set_position(sf::Vector2f pos) override;
 
 private:

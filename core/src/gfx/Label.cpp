@@ -1,6 +1,5 @@
 #include <cmath>
 
-#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/Vector2.hpp>
 
@@ -65,12 +64,19 @@ void Label::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(fg_, states);
 }
 
+sf::FloatRect Label::get_bounds() const {
+    return bg_.getGlobalBounds();
+}
+
 sf::Vector2f Label::get_position() const {
     return bg_.getPosition();
 }
 
 sf::Vector2f Label::get_size() const {
     return bg_.getSize();
+}
+
+void Label::handle_event([[maybe_unused]] const sf::Event& event) {
 }
 
 void Label::set_bg_color(sf::Color c) {
