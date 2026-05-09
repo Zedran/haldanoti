@@ -57,12 +57,12 @@ TEST_CASE("detect_collision") {
 
     const test_data test_cases[]{
         {{0, 0}, true},
-        {{50, 50}, true},
+        {{49, 49}, true},
         {{25, 25}, true},
         {{-1, -1}, false},
         {{25, -5}, false},
         {{-5, 25}, false},
-        {{51, 51}, false},
+        {{50, 50}, false},
     };
 
     for (const auto& c : test_cases) {

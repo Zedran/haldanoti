@@ -25,7 +25,6 @@ sf::Color decode_color(std::string html_code) {
 }
 
 bool detect_collision(sf::FloatRect rect, sf::Vector2f point) {
-    rect.size += {0.1f, 0.1f};
     return rect.contains(point);
 }
 
