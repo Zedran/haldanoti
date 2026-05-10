@@ -9,6 +9,10 @@ RowLayout::RowLayout() noexcept = default;
 RowLayout::~RowLayout() = default;
 
 void RowLayout::place(sf::FloatRect container, std::span<std::unique_ptr<Widget>> widgets) {
+    if (widgets.empty()) {
+        return;
+    }
+
     const float pady{(container.size.y - widgets[0]->get_size().y) / 2.0f};
 
     float widget_space_x{0.0f};
