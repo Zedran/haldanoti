@@ -4,6 +4,38 @@
 
 namespace gfx::ui {
 
+ColumnLayout::ColumnLayout() noexcept = default;
+
+ColumnLayout::~ColumnLayout() = default;
+
+void ColumnLayout::place(sf::FloatRect container, std::span<std::unique_ptr<Widget>> widgets) {
+    if (widgets.empty()) {
+        return;
+    }
+
+    const float padx{(container.size.x - widgets[0]->get_size().x) / 2.0f};
+
+    float widget_space_y{0.0f};
+
+    for (const auto& w : widgets) {
+        widget_space_y += w->get_size().y;
+    }
+
+    const float pad_space_y{container.size.y - widget_space_y};
+    const float pady_per_elem{pad_space_y / static_cast<float>(widgets.size() + 1)};
+
+    sf::Vector2f pos = container.position;
+
+    pos.y += pady_per_elem;
+    pos.x  = std::round(pos.x + padx);
+
+    for (auto& w : widgets) {
+        w->set_position(pos);
+        pos.y += pady_per_elem + w->get_size().y;
+        pos.y  = std::round(pos.y);
+    }
+}
+
 RowLayout::RowLayout() noexcept = default;
 
 RowLayout::~RowLayout() = default;

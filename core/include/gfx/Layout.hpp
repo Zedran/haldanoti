@@ -12,6 +12,7 @@ namespace gfx::ui {
 // Abstract base class for every Layout type.
 struct Layout {
     enum class Type {
+        ColumnLayout,
         RowLayout,
     };
 
@@ -21,6 +22,15 @@ struct Layout {
     // container and uses this information to position widgets wthin the
     // specified bounds.
     virtual void place(sf::FloatRect container, std::span<std::unique_ptr<Widget>> widgets) = 0;
+};
+
+// Places elements spaced evenly across a single column.
+struct ColumnLayout : public Layout {
+    ColumnLayout() noexcept;
+
+    virtual ~ColumnLayout();
+
+    void place(sf::FloatRect container, std::span<std::unique_ptr<Widget>> widgets) override final;
 };
 
 // Places elements spaced evenly across a single row.
