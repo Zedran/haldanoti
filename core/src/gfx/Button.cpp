@@ -18,8 +18,7 @@ Button::Button(
     bg_color_hover_{utils::decode_color(bg_color_hover)},
     bg_color_active_{utils::decode_color(bg_color_active)},
     pressed_by{},
-    state_{State::Normal} {
-}
+    state_{State::Normal} {}
 
 Button::~Button() = default;
 
