@@ -21,7 +21,11 @@ public:
 
     virtual ~Box();
 
-    void add_component(std::unique_ptr<Widget> w);
+    template <typename T, typename... Args>
+    T& add_component(Args&&... args) {
+        auto& ref = components_.emplace_back(std::make_unique<T>(std::forward<Args>(args)...));
+        return *static_cast<T*>(ref.get());
+    }
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 

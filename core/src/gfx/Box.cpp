@@ -14,10 +14,6 @@ Box::Box(sf::Vector2f size, sf::Color bg_color, Layout::Type layout) : bg_{size}
 
 Box::~Box() = default;
 
-void Box::add_component(std::unique_ptr<Widget> w) {
-    components_.push_back(std::move(w));
-}
-
 void Box::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(bg_, states);
     for (const auto& c : components_) {
