@@ -1,4 +1,6 @@
 #include "gfx/Button.hpp"
+#include "gfx/Binding.hpp"
+#include "utils/FinalAction.hpp"
 #include "utils/utils.hpp"
 
 namespace gfx::ui {
@@ -10,17 +12,24 @@ Button::Button(
     std::string     bg_color_normal,
     std::string     bg_color_hover,
     std::string     bg_color_active,
-    std::string     text,
-    Callback        callback
+    std::string     text
 ) : Label{font, size, fg_color, bg_color_normal, text},
     bg_color_normal_{utils::decode_color(bg_color_normal)},
     bg_color_hover_{utils::decode_color(bg_color_hover)},
     bg_color_active_{utils::decode_color(bg_color_active)},
-    callback_{callback},
+    pressed_by{},
     state_{State::Normal} {
 }
 
 Button::~Button() = default;
+
+void Button::bind(sf::Mouse::Button button, Binding::Callback callback) {
+    bindings_.emplace_back(std::move(callback), button);
+}
+
+void Button::bind(sf::Keyboard::Key key, Binding::Callback callback) {
+    bindings_.emplace_back(std::move(callback), key);
+}
 
 bool Button::check_collision(sf::Vector2i pos) {
     return check_collision(static_cast<sf::Vector2f>(pos));
@@ -31,41 +40,107 @@ bool Button::check_collision(sf::Vector2f pos) {
 }
 
 void Button::handle_event(const sf::Event& event) {
-    if (const auto* e = event.getIf<sf::Event::MouseButtonPressed>()) {
-        handle_lmb_press(*e);
-    } else if (const auto* e = event.getIf<sf::Event::MouseButtonReleased>()) {
-        handle_lmb_release(*e);
-    } else if (const auto* e = event.getIf<sf::Event::MouseMoved>()) {
+    const auto update = utils::finally([this] { this->update(); });
+
+    if (const auto* e = event.getIf<sf::Event::MouseMoved>()) {
         handle_mouse_move(*e);
-    } else {
         return;
     }
-    update();
+
+    if (pressed_by) {
+        if (const auto* e = event.getIf<sf::Event::MouseButtonReleased>()) {
+            if (handle_release(*e, *pressed_by)) {
+                return;
+            }
+        }
+
+        if (const auto* e = event.getIf<sf::Event::KeyReleased>()) {
+            handle_release(*e, *pressed_by);
+        }
+        return;
+    }
+
+    for (auto& b : bindings_) {
+        if (const auto* e = event.getIf<sf::Event::MouseButtonPressed>()) {
+            if (handle_press(*e, b)) {
+                return;
+            }
+        }
+
+        if (const auto* e = event.getIf<sf::Event::MouseButtonReleased>()) {
+            if (handle_release(*e, b)) {
+                return;
+            }
+        }
+
+        if (const auto* e = event.getIf<sf::Event::KeyPressed>()) {
+            if (handle_press(*e, b)) {
+                return;
+            }
+        }
+
+        if (const auto* e = event.getIf<sf::Event::KeyReleased>()) {
+            if (handle_release(*e, b)) {
+                return;
+            }
+        }
+    }
 }
 
-void Button::handle_lmb_press(const sf::Event::MouseButtonPressed& e) {
-    if (e.button != sf::Mouse::Button::Left) {
-        return;
+bool Button::handle_press(const sf::Event::KeyPressed& event, Binding& b) {
+    if (!b.matches(event)) {
+        return false;
     }
 
-    if (check_collision(e.position)) {
-        state_ = State::Active;
-    }
+    b.press();
+    pressed_by = &b;
+    state_     = State::Active;
+    return true;
 }
 
-void Button::handle_lmb_release(const sf::Event::MouseButtonReleased& e) {
-    if (e.button != sf::Mouse::Button::Left) {
-        return;
+bool Button::handle_press(const sf::Event::MouseButtonPressed& event, Binding& b) {
+    if (!b.matches(event)) {
+        return false;
     }
 
-    if (check_collision(e.position)) {
-        if (state_ == State::Active) {
-            invoke();
+    if (check_collision(event.position)) {
+        b.press();
+        pressed_by = &b;
+        state_     = State::Active;
+    }
+    return true;
+}
+
+bool Button::handle_release(const sf::Event::KeyReleased& event, Binding& b) {
+    if (!b.matches(event)) {
+        return false;
+    }
+
+    if (b.is_pressed()) {
+        b.invoke();
+    }
+    state_     = State::Normal;
+    pressed_by = nullptr;
+    b.release();
+    return true;
+}
+
+bool Button::handle_release(const sf::Event::MouseButtonReleased& event, Binding& b) {
+    if (!b.matches(event)) {
+        return false;
+    }
+
+    if (check_collision(event.position)) {
+        if (b.is_pressed()) {
+            b.invoke();
         }
         state_ = State::Hover;
     } else {
         state_ = State::Normal;
     }
+    b.release();
+    pressed_by = nullptr;
+    return true;
 }
 
 void Button::handle_mouse_move(const sf::Event::MouseMoved& e) {
@@ -78,13 +153,11 @@ void Button::handle_mouse_move(const sf::Event::MouseMoved& e) {
     }
 }
 
-void Button::invoke() {
-    if (callback_) {
-        callback_();
-    }
-}
-
 void Button::update() {
+    if (pressed_by) {
+        state_ = State::Active;
+    }
+
     switch (state_) {
     case State::Normal: set_bg_color(bg_color_normal_); break;
     case State::Hover:  set_bg_color(bg_color_hover_); break;
