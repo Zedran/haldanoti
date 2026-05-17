@@ -31,10 +31,6 @@ void Button::bind(sf::Keyboard::Key key, Binding::Callback callback) {
 }
 
 bool Button::check_collision(sf::Vector2i pos) {
-    return check_collision(static_cast<sf::Vector2f>(pos));
-}
-
-bool Button::check_collision(sf::Vector2f pos) {
     return utils::detect_collision(get_bounds(), pos);
 }
 

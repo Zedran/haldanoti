@@ -13,6 +13,8 @@ namespace utils {
 // if html_code has invalid format.
 sf::Color decode_color(std::string html_code);
 
+bool detect_collision(sf::FloatRect rect, sf::Vector2i point);
+
 // Returns true if point is in contact with rect.
 bool detect_collision(sf::FloatRect rect, sf::Vector2f point);
 

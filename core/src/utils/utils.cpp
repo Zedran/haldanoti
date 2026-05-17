@@ -24,6 +24,10 @@ sf::Color decode_color(std::string html_code) {
     return sf::Color{static_cast<std::uint32_t>(hex)};
 }
 
+bool detect_collision(sf::FloatRect rect, sf::Vector2i point) {
+    return detect_collision(rect, static_cast<sf::Vector2f>(point));
+}
+
 bool detect_collision(sf::FloatRect rect, sf::Vector2f point) {
     return rect.contains(point);
 }

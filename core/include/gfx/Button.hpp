@@ -67,8 +67,6 @@ private:
 
     bool check_collision(sf::Vector2i pos);
 
-    bool check_collision(sf::Vector2f pos);
-
     // A fragment of the handle_event procedure that processes
     // MouseButtonPressed events.
     bool handle_press(const sf::Event::MouseButtonPressed& event, Binding& button);
