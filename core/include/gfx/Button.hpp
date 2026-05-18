@@ -17,13 +17,16 @@ namespace gfx::ui {
 
 class Button : public Label {
 public:
+    struct Style {
+        Label::Style normal;
+        Label::Style hover;
+        Label::Style active;
+    };
+
     Button(
         const sf::Font& font,
         sf::Vector2f    size,
-        std::string     fg_color,
-        std::string     bg_color_normal,
-        std::string     bg_color_hover,
-        std::string     bg_color_active,
+        Style           style,
         std::string     text
     );
 
@@ -50,10 +53,6 @@ private:
         Active
     };
 
-    sf::Color bg_color_normal_;
-    sf::Color bg_color_hover_;
-    sf::Color bg_color_active_;
-
     // A container holding bound keys and mouse buttons.
     std::vector<Binding> bindings_;
 
@@ -64,6 +63,8 @@ private:
     Binding* pressed_by;
 
     State state_;
+
+    Style style_;
 
     bool check_collision(sf::Vector2i pos);
 

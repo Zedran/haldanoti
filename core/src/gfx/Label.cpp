@@ -11,13 +11,11 @@ namespace gfx ::ui {
 Label::Label(
     const sf::Font& font,
     sf::Vector2f    size,
-    std::string     fg_color,
-    std::string     bg_color,
+    Style           style,
     std::string     text
 ) : bg_{size},
     fg_{font, std::move(text)} {
-    set_bg_color(bg_color);
-    set_fg_color(fg_color);
+    set_style(style);
 }
 
 Label::~Label() = default;
@@ -98,6 +96,11 @@ void Label::set_fg_color(std::string c_hex) {
 void Label::set_position(sf::Vector2f pos) {
     bg_.setPosition(utils::round(pos));
     center_text();
+}
+
+void Label::set_style(Style style) {
+    set_bg_color(style.bg);
+    set_fg_color(style.fg);
 }
 
 void Label::set_text(std::string text) {

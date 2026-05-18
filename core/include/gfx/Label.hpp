@@ -17,11 +17,15 @@ namespace gfx::ui {
 
 class Label : public Widget {
 public:
+    struct Style {
+        sf::Color bg;
+        sf::Color fg;
+    };
+
     Label(
         const sf::Font& font,
         sf::Vector2f    size,
-        std::string     fg_color,
-        std::string     bg_color,
+        Style           style,
         std::string     text
     );
 
@@ -46,6 +50,8 @@ public:
     void set_fg_color(std::string c_hex);
 
     void set_position(sf::Vector2f pos) override;
+
+    void set_style(Style style);
 
     void set_text(std::string text);
 

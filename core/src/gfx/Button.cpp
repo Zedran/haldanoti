@@ -8,17 +8,12 @@ namespace gfx::ui {
 Button::Button(
     const sf::Font& font,
     sf::Vector2f    size,
-    std::string     fg_color,
-    std::string     bg_color_normal,
-    std::string     bg_color_hover,
-    std::string     bg_color_active,
+    Style           style,
     std::string     text
-) : Label{font, size, fg_color, bg_color_normal, text},
-    bg_color_normal_{utils::decode_color(bg_color_normal)},
-    bg_color_hover_{utils::decode_color(bg_color_hover)},
-    bg_color_active_{utils::decode_color(bg_color_active)},
+) : Label{font, size, style.normal, text},
     pressed_by{},
-    state_{State::Normal} {}
+    state_{State::Normal},
+    style_{style} {}
 
 Button::~Button() = default;
 
@@ -154,9 +149,9 @@ void Button::update() {
     }
 
     switch (state_) {
-    case State::Normal: set_bg_color(bg_color_normal_); break;
-    case State::Hover:  set_bg_color(bg_color_hover_); break;
-    case State::Active: set_bg_color(bg_color_active_); break;
+    case State::Normal: set_style(style_.normal); break;
+    case State::Hover:  set_style(style_.hover); break;
+    case State::Active: set_style(style_.active); break;
     }
 }
 
