@@ -10,7 +10,7 @@ Button::Button(
     sf::Vector2f    size,
     Style           style,
     std::string     text
-) : Label{font, size, style.normal, text},
+) : Label{font, size, style.normal, std::move(text)},
     pressed_by{},
     state_{State::Normal},
     style_{style} {}
