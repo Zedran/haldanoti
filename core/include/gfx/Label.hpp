@@ -41,14 +41,6 @@ public:
 
     void handle_event(const sf::Event& event) override;
 
-    void set_bg_color(sf::Color c);
-
-    void set_bg_color(std::string c_hex);
-
-    void set_fg_color(sf::Color c);
-
-    void set_fg_color(std::string c_hex);
-
     void set_position(sf::Vector2f pos) override;
 
     void set_style(Style style);

@@ -77,30 +77,14 @@ sf::Vector2f Label::get_size() const {
 void Label::handle_event([[maybe_unused]] const sf::Event& event) {
 }
 
-void Label::set_bg_color(sf::Color c) {
-    bg_.setFillColor(c);
-}
-
-void Label::set_bg_color(std::string c_hex) {
-    set_bg_color(utils::decode_color(std::move(c_hex)));
-}
-
-void Label::set_fg_color(sf::Color c) {
-    fg_.setFillColor(c);
-}
-
-void Label::set_fg_color(std::string c_hex) {
-    set_fg_color(utils::decode_color(std::move(c_hex)));
-}
-
 void Label::set_position(sf::Vector2f pos) {
     bg_.setPosition(utils::round(pos));
     center_text();
 }
 
 void Label::set_style(Style style) {
-    set_bg_color(style.bg);
-    set_fg_color(style.fg);
+    bg_.setFillColor(style.bg);
+    fg_.setFillColor(style.fg);
 }
 
 void Label::set_text(std::string text) {
