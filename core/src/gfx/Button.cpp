@@ -11,7 +11,7 @@ Button::Button(
     Style           style,
     std::string     text
 ) : Label{font, size, style.normal, std::move(text)},
-    pressed_by{},
+    pressed_by_{},
     state_{State::Normal},
     style_{style} {}
 
@@ -37,15 +37,15 @@ void Button::handle_event(const sf::Event& event) {
         return;
     }
 
-    if (pressed_by) {
+    if (pressed_by_) {
         if (const auto* e = event.getIf<sf::Event::MouseButtonReleased>()) {
-            if (handle_release(*e, *pressed_by)) {
+            if (handle_release(*e, *pressed_by_)) {
                 return;
             }
         }
 
         if (const auto* e = event.getIf<sf::Event::KeyReleased>()) {
-            handle_release(*e, *pressed_by);
+            handle_release(*e, *pressed_by_);
         }
         return;
     }
@@ -83,8 +83,8 @@ bool Button::handle_press(const sf::Event::KeyPressed& event, Binding& b) {
     }
 
     b.press();
-    pressed_by = &b;
-    state_     = State::Active;
+    pressed_by_ = &b;
+    state_      = State::Active;
     return true;
 }
 
@@ -95,8 +95,8 @@ bool Button::handle_press(const sf::Event::MouseButtonPressed& event, Binding& b
 
     if (check_collision(event.position)) {
         b.press();
-        pressed_by = &b;
-        state_     = State::Active;
+        pressed_by_ = &b;
+        state_      = State::Active;
     }
     return true;
 }
@@ -109,8 +109,8 @@ bool Button::handle_release(const sf::Event::KeyReleased& event, Binding& b) {
     if (b.is_pressed()) {
         b.invoke();
     }
-    state_     = State::Normal;
-    pressed_by = nullptr;
+    state_      = State::Normal;
+    pressed_by_ = nullptr;
     b.release();
     return true;
 }
@@ -129,7 +129,7 @@ bool Button::handle_release(const sf::Event::MouseButtonReleased& event, Binding
         state_ = State::Normal;
     }
     b.release();
-    pressed_by = nullptr;
+    pressed_by_ = nullptr;
     return true;
 }
 
@@ -144,7 +144,7 @@ void Button::handle_mouse_move(const sf::Event::MouseMoved& e) {
 }
 
 void Button::update() {
-    if (pressed_by) {
+    if (pressed_by_) {
         state_ = State::Active;
     }
 

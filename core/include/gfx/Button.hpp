@@ -60,7 +60,7 @@ private:
     // null, the Button instance only listens to the events associated with
     // the Binding that "pressed" the Button. This prevents the Button from
     // responding to inputs from several bindings at once.
-    Binding* pressed_by;
+    Binding* pressed_by_;
 
     State state_;
 
