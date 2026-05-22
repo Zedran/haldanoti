@@ -27,12 +27,12 @@ void ColumnLayout::place(sf::FloatRect container, std::span<std::unique_ptr<Widg
     sf::Vector2f pos = container.position;
 
     pos.y += pady_per_elem;
-    pos.x  = std::round(pos.x + padx);
+    pos.x  = pos.x + padx;
 
     for (auto& w : widgets) {
         w->set_position(pos);
         pos.y += pady_per_elem + w->get_size().y;
-        pos.y  = std::round(pos.y);
+        pos.y  = pos.y;
     }
 }
 
@@ -59,12 +59,12 @@ void RowLayout::place(sf::FloatRect container, std::span<std::unique_ptr<Widget>
     sf::Vector2f pos = container.position;
 
     pos.x += padx_per_elem;
-    pos.y  = std::round(pos.y + pady);
+    pos.y  = pos.y + pady;
 
     for (auto& w : widgets) {
         w->set_position(pos);
         pos.x += padx_per_elem + w->get_size().x;
-        pos.x  = std::round(pos.x);
+        pos.x  = pos.x;
     }
 }
 
