@@ -42,4 +42,6 @@ struct RowLayout : public Layout {
     void place(sf::FloatRect container, std::span<std::unique_ptr<Widget>> widgets) override final;
 };
 
+std::unique_ptr<Layout> make_layout(Layout::Type layout_type);
+
 } // namespace gfx::ui

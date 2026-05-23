@@ -1,3 +1,5 @@
+#include <stdexcept>
+
 #include <SFML/System/Vector2.hpp>
 
 #include "gfx/Layout.hpp"
@@ -66,6 +68,14 @@ void RowLayout::place(sf::FloatRect container, std::span<std::unique_ptr<Widget>
         pos.x += padx_per_elem + w->get_size().x;
         pos.x  = pos.x;
     }
+}
+
+std::unique_ptr<Layout> make_layout(Layout::Type layout_type) {
+    switch (layout_type) {
+    case Layout::Type::ColumnLayout: return std::make_unique<ColumnLayout>();
+    case Layout::Type::RowLayout:    return std::make_unique<RowLayout>();
+    }
+    throw std::invalid_argument{"unknown layout type"};
 }
 
 } // namespace gfx::ui
