@@ -143,15 +143,19 @@ void Button::handle_mouse_move(const sf::Event::MouseMoved& e) {
     }
 }
 
+void Button::set_style(Style style) {
+    style_ = style;
+}
+
 void Button::update() {
     if (pressed_by_) {
         state_ = State::Active;
     }
 
     switch (state_) {
-    case State::Normal: set_style(style_.normal); break;
-    case State::Hover:  set_style(style_.hover); break;
-    case State::Active: set_style(style_.active); break;
+    case State::Normal: Label::set_style(style_.normal); break;
+    case State::Hover:  Label::set_style(style_.hover); break;
+    case State::Active: Label::set_style(style_.active); break;
     }
 }
 

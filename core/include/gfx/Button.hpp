@@ -41,6 +41,9 @@ public:
     // Handles an event passed down from the caller.
     void handle_event(const sf::Event& event) override;
 
+    // Sets the style of the Button instance.
+    void set_style(Style style);
+
 private:
     enum class State {
         // Not clicked on, not hovered above.
