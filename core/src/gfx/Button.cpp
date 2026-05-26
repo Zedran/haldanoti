@@ -29,7 +29,22 @@ bool Button::check_collision(sf::Vector2i pos) {
     return utils::detect_collision(get_bounds(), pos);
 }
 
+void Button::disable() noexcept {
+    pressed_by_ = nullptr;
+    state_      = State::Disabled;
+    update();
+}
+
+void Button::enable() noexcept {
+    state_ = State::Normal;
+    update();
+}
+
 void Button::handle_event(const sf::Event& event) {
+    if (state_ == State::Disabled) {
+        return;
+    }
+
     const auto update = utils::finally([this] { this->update(); });
 
     if (const auto* e = event.getIf<sf::Event::MouseMoved>()) {
@@ -153,6 +168,7 @@ void Button::update() {
     }
 
     switch (state_) {
+    case State::Disabled: Label::set_style(style_.disabled); break;
     case State::Normal: Label::set_style(style_.normal); break;
     case State::Hover:  Label::set_style(style_.hover); break;
     case State::Active: Label::set_style(style_.active); break;

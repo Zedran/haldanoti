@@ -18,6 +18,7 @@ namespace gfx::ui {
 class Button : public Label {
 public:
     struct Style {
+        Label::Style disabled;
         Label::Style normal;
         Label::Style hover;
         Label::Style active;
@@ -38,6 +39,12 @@ public:
     // Binds mouse button to callback.
     void bind(sf::Mouse::Button button, Binding::Callback callback);
 
+    // Makes the Button non-interactive.
+    void disable() noexcept;
+
+    // Restores interactivity to the Button instance.
+    void enable() noexcept;
+
     // Handles an event passed down from the caller.
     void handle_event(const sf::Event& event) override;
 
@@ -46,6 +53,9 @@ public:
 
 private:
     enum class State {
+        // Not responding to user input.
+        Disabled,
+
         // Not clicked on, not hovered above.
         Normal,
 
