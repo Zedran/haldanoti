@@ -169,9 +169,9 @@ void Button::update() {
 
     switch (state_) {
     case State::Disabled: Label::set_style(style_.disabled); break;
-    case State::Normal: Label::set_style(style_.normal); break;
-    case State::Hover:  Label::set_style(style_.hover); break;
-    case State::Active: Label::set_style(style_.active); break;
+    case State::Normal:   Label::set_style(style_.normal); break;
+    case State::Hover:    Label::set_style(style_.hover); break;
+    case State::Active:   Label::set_style(style_.active); break;
     }
 }
 
