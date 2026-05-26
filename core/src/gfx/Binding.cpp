@@ -6,6 +6,8 @@ Binding::Binding(Callback callback, sf::Keyboard::Key key) : callback_{callback}
 
 Binding::Binding(Callback callback, sf::Mouse::Button button) : callback_{callback}, pressed_{}, trigger_{button} {}
 
+Binding::~Binding() = default;
+
 bool Binding::bound_to_key() const noexcept {
     return std::holds_alternative<sf::Keyboard::Key>(trigger_);
 }

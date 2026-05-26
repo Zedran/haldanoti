@@ -20,6 +20,8 @@ public:
     // Constructs a new Binding that responds to a mouse button.
     Binding(Callback callback, sf::Mouse::Button button);
 
+    virtual ~Binding();
+
     // Calls the stored function.
     void invoke();
 
