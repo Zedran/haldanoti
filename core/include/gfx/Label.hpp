@@ -1,5 +1,6 @@
 #pragma once
 
+#include <optional>
 #include <string>
 
 #include <SFML/Graphics/Color.hpp>
@@ -22,11 +23,15 @@ public:
         sf::Color fg;
     };
 
+    // Constructs a new Label. If specified font_size is at least equal to 1,
+    // the constructor will attempt to preserve it. If text does not fit
+    // inside the Label, font size will be decreased.
     Label(
-        const sf::Font& font,
-        sf::Vector2f    size,
-        Style           style,
-        std::string     text
+        const sf::Font&      font,
+        sf::Vector2f         size,
+        Style                style,
+        std::string          text,
+        std::optional<float> font_size = std::nullopt
     );
 
     virtual ~Label();
@@ -53,6 +58,9 @@ private:
 
     sf::RectangleShape bg_;
     sf::Text           fg_;
+
+    // Preferred font size.
+    std::optional<float> pref_font_size_;
 
     void center_text();
 };

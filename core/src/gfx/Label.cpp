@@ -9,12 +9,14 @@
 namespace gfx ::ui {
 
 Label::Label(
-    const sf::Font& font,
-    sf::Vector2f    size,
-    Style           style,
-    std::string     text
+    const sf::Font&      font,
+    sf::Vector2f         size,
+    Style                style,
+    std::string          text,
+    std::optional<float> font_size
 ) : bg_{size},
-    fg_{font, std::move(text)} {
+    fg_{font, std::move(text)},
+    pref_font_size_{font_size} {
     set_style(style);
 }
 
@@ -31,8 +33,13 @@ void Label::center_text() {
         return;
     }
 
-    // Initial estimate.
-    float font_size = max_height;
+    float font_size;
+
+    if (!pref_font_size_ || *pref_font_size_ < 1.0f) {
+        font_size = max_height;
+    } else {
+        font_size = *pref_font_size_;
+    }
 
     while (font_size > 1.0f) {
         fg_.setCharacterSize(static_cast<unsigned int>(font_size));

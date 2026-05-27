@@ -1,5 +1,6 @@
 #pragma once
 
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -24,11 +25,15 @@ public:
         Label::Style active;
     };
 
+    // Constructs a new Button. If specified font_size is at least equal to 1,
+    // the constructor will attempt to preserve it. If text does not fit
+    // inside the Button, font size will be decreased.
     Button(
-        const sf::Font& font,
-        sf::Vector2f    size,
-        Style           style,
-        std::string     text
+        const sf::Font&      font,
+        sf::Vector2f         size,
+        Style                style,
+        std::string          text,
+        std::optional<float> font_size = std::nullopt
     );
 
     virtual ~Button();
