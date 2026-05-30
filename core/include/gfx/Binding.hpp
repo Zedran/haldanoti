@@ -21,19 +21,20 @@ class Binding {
 public:
     using Callback = std::function<void()>;
 
-    // Constructs a new Binding that responds to a key.
-    Binding(Callback callback, sf::Keyboard::Key key);
-
-    // Constructs a new Binding that responds to a mouse button.
-    Binding(Callback callback, sf::Mouse::Button button);
+    // Constructs a new Binding that responds to the specified activator.
+    template <typename Input>
+        requires Bindable<Input>
+    Binding(Callback callback, Input activator)
+        : callback_{std::move(callback)}, pressed_{}, trigger_{activator} {}
 
     virtual ~Binding();
 
-    // Returns true if the specified mouse button activates the Binding.
-    bool activated_by(sf::Mouse::Button button) const noexcept;
-
-    // Returns true if the specified key activates the Binding.
-    bool activated_by(sf::Keyboard::Key key) const noexcept;
+    // Returns true if the specified key or mouse button activates the Binding.
+    template <typename Input>
+        requires Bindable<Input>
+    bool activated_by(Input activator) const noexcept {
+        return std::holds_alternative<Input>(trigger_) && activator == std::get<Input>(trigger_);
+    }
 
     // Calls the stored function.
     void invoke();
@@ -68,14 +69,6 @@ private:
 
     // Stores the key or a mouse button that the Binding instance responds to.
     std::variant<sf::Keyboard::Key, sf::Mouse::Button> trigger_;
-
-    // A wrapper for std::holds_alternative<sf::Keyboard::Key>().
-    // It makes the overloaded ::matches member functions easier to read.
-    bool bound_to_key() const noexcept;
-
-    // A wrapper for std::holds_alternative<sf::Mouse::Button>().
-    // It makes the overloaded ::matches member functions easier to read.
-    bool bound_to_mouse() const noexcept;
 };
 
 } // namespace gfx::ui

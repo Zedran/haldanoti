@@ -2,27 +2,7 @@
 
 namespace gfx::ui {
 
-Binding::Binding(Callback callback, sf::Keyboard::Key key) : callback_{callback}, pressed_{}, trigger_{key} {}
-
-Binding::Binding(Callback callback, sf::Mouse::Button button) : callback_{callback}, pressed_{}, trigger_{button} {}
-
 Binding::~Binding() = default;
-
-bool Binding::activated_by(sf::Mouse::Button button) const noexcept {
-    return bound_to_mouse() && button == std::get<sf::Mouse::Button>(trigger_);
-}
-
-bool Binding::activated_by(sf::Keyboard::Key key) const noexcept {
-    return bound_to_key() && key == std::get<sf::Keyboard::Key>(trigger_);
-}
-
-bool Binding::bound_to_key() const noexcept {
-    return std::holds_alternative<sf::Keyboard::Key>(trigger_);
-}
-
-bool Binding::bound_to_mouse() const noexcept {
-    return std::holds_alternative<sf::Mouse::Button>(trigger_);
-}
 
 void Binding::invoke() {
     if (callback_) {
@@ -36,19 +16,19 @@ bool Binding::is_pressed() const noexcept {
 }
 
 bool Binding::matches(const sf::Event::MouseButtonPressed& button) const {
-    return bound_to_mouse() && button.button == std::get<sf::Mouse::Button>(trigger_);
+    return activated_by(button.button);
 }
 
 bool Binding::matches(const sf::Event::MouseButtonReleased& button) const {
-    return bound_to_mouse() && button.button == std::get<sf::Mouse::Button>(trigger_);
+    return activated_by(button.button);
 }
 
 bool Binding::matches(const sf::Event::KeyPressed& key) const {
-    return bound_to_key() && key.code == std::get<sf::Keyboard::Key>(trigger_);
+    return activated_by(key.code);
 }
 
 bool Binding::matches(const sf::Event::KeyReleased& key) const {
-    return bound_to_key() && key.code == std::get<sf::Keyboard::Key>(trigger_);
+    return activated_by(key.code);
 }
 
 void Binding::press() noexcept {
