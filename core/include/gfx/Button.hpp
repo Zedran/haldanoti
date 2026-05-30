@@ -58,9 +58,9 @@ public:
 
     // Unbinds the specified key or mouse button. If it is not bound,
     // no modification occurs and no feedback is provided.
-    template <typename T>
-        requires std::is_same_v<T, sf::Keyboard::Key> || std::is_same_v<T, sf::Mouse::Button>
-    void unbind(T activator) {
+    template <typename Input>
+        requires Bindable<Input>
+    void unbind(Input activator) {
         for (auto it = bindings_.begin(); it != bindings_.end(); it++) {
             if (it->activated_by(activator)) {
                 bindings_.erase(it);

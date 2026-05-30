@@ -9,6 +9,13 @@
 
 namespace gfx::ui {
 
+// A common constraint for template functions that accept SFML enum values
+// representing keys and mouse buttons.
+template <typename Input>
+concept Bindable =
+    std::is_same_v<Input, sf::Keyboard::Key> ||
+    std::is_same_v<Input, sf::Mouse::Button>;
+
 // Represents an action assigned to a key or mouse button.
 class Binding {
 public:
