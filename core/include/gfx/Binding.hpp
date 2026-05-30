@@ -43,7 +43,7 @@ public:
     template <typename Input>
         requires Bindable<Input>
     Binding(Callback callback, Input activator)
-        : callback_{std::move(callback)}, pressed_{}, trigger_{activator} {}
+        : callback_{std::move(callback)}, pressed_{}, activator_{activator} {}
 
     virtual ~Binding();
 
@@ -51,7 +51,7 @@ public:
     template <typename Input>
         requires Bindable<Input>
     bool activated_by(Input activator) const noexcept {
-        return std::holds_alternative<Input>(trigger_) && activator == std::get<Input>(trigger_);
+        return std::holds_alternative<Input>(activator_) && activator == std::get<Input>(activator_);
     }
 
     // Calls the stored function.
@@ -85,7 +85,7 @@ private:
     bool pressed_;
 
     // Stores the key or a mouse button that the Binding instance responds to.
-    std::variant<sf::Keyboard::Key, sf::Mouse::Button> trigger_;
+    std::variant<sf::Keyboard::Key, sf::Mouse::Button> activator_;
 };
 
 } // namespace gfx::ui
