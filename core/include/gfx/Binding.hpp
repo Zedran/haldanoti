@@ -22,6 +22,12 @@ public:
 
     virtual ~Binding();
 
+    // Returns true if the specified mouse button activates the Binding.
+    bool activated_by(sf::Mouse::Button button) const noexcept;
+
+    // Returns true if the specified key activates the Binding.
+    bool activated_by(sf::Keyboard::Key key) const noexcept;
+
     // Calls the stored function.
     void invoke();
 
