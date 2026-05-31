@@ -1,5 +1,4 @@
 #include "gfx/Box.hpp"
-#include "utils/utils.hpp"
 
 namespace gfx::ui {
 
@@ -31,7 +30,7 @@ void Box::handle_event(const sf::Event& event) {
 }
 
 void Box::set_position(sf::Vector2f pos) {
-    bg_.setPosition(utils::round(pos));
+    bg_.setPosition(pos);
     layout_->place(bg_.getGlobalBounds(), components_);
 }
 
