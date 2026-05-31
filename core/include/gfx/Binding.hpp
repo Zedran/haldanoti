@@ -63,7 +63,7 @@ public:
     // Returns true if the bound activator corresponds to the event.
     template <typename Event>
         requires InputEvent<Event>
-    bool matches(const Event& event) const {
+    bool matches(const Event& event) const noexcept {
         if constexpr (KeyboardInputEvent<Event>) {
             return activated_by(event.code);
         }
