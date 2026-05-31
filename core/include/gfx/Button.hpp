@@ -38,11 +38,12 @@ public:
 
     virtual ~Button();
 
-    // Binds keyboard key to callback.
-    void bind(sf::Keyboard::Key key, Binding::Callback callback);
-
-    // Binds mouse button to callback.
-    void bind(sf::Mouse::Button button, Binding::Callback callback);
+    // Binds keyboard key or a mouse button to callback.
+    template <typename Input>
+        requires Bindable<Input>
+    void bind(Input activator, Binding::Callback callback) {
+        bindings_.emplace_back(std::move(callback), activator);
+    }
 
     // Makes the Button non-interactive.
     void disable() noexcept;

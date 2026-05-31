@@ -18,14 +18,6 @@ Button::Button(
 
 Button::~Button() = default;
 
-void Button::bind(sf::Mouse::Button button, Binding::Callback callback) {
-    bindings_.emplace_back(std::move(callback), button);
-}
-
-void Button::bind(sf::Keyboard::Key key, Binding::Callback callback) {
-    bindings_.emplace_back(std::move(callback), key);
-}
-
 bool Button::check_collision(sf::Vector2i pos) {
     return utils::detect_collision(get_bounds(), pos);
 }
