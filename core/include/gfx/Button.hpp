@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <optional>
 #include <string>
 #include <vector>
@@ -40,7 +41,7 @@ public:
 
     // Binds keyboard key or a mouse button to callback.
     template <Bindable Input>
-    void bind(Input activator, Binding::Callback callback) {
+    void bind(Input activator, std::function<void()> callback) {
         bindings_.emplace_back(std::move(callback), activator);
     }
 

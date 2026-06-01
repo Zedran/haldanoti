@@ -37,11 +37,9 @@ concept InputEvent =
 // Represents an action assigned to a key or mouse button.
 class Binding {
 public:
-    using Callback = std::function<void()>;
-
     // Constructs a new Binding that responds to the specified activator.
     template <Bindable Input>
-    Binding(Callback callback, Input activator)
+    Binding(std::function<void()> callback, Input activator)
         : callback_{std::move(callback)}, pressed_{}, activator_{activator} {}
 
     virtual ~Binding();
@@ -77,7 +75,7 @@ public:
     void release() noexcept;
 
 private:
-    Callback callback_;
+    std::function<void()> callback_;
 
     bool pressed_;
 
