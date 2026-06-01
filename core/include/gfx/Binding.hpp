@@ -40,7 +40,7 @@ public:
     // Constructs a new Binding that responds to the specified activator.
     template <Bindable Input>
     Binding(std::function<void()> callback, Input activator)
-        : callback_{std::move(callback)}, pressed_{}, activator_{activator} {}
+        : activator_{activator}, callback_{std::move(callback)}, pressed_{} {}
 
     virtual ~Binding();
 
@@ -75,12 +75,12 @@ public:
     void release() noexcept;
 
 private:
+    // Stores the key or a mouse button that the Binding instance responds to.
+    std::variant<sf::Keyboard::Key, sf::Mouse::Button> activator_;
+
     std::function<void()> callback_;
 
     bool pressed_;
-
-    // Stores the key or a mouse button that the Binding instance responds to.
-    std::variant<sf::Keyboard::Key, sf::Mouse::Button> activator_;
 };
 
 } // namespace gfx::ui
