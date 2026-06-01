@@ -39,8 +39,7 @@ public:
     virtual ~Button();
 
     // Binds keyboard key or a mouse button to callback.
-    template <typename Input>
-        requires Bindable<Input>
+    template <Bindable Input>
     void bind(Input activator, Binding::Callback callback) {
         bindings_.emplace_back(std::move(callback), activator);
     }
@@ -59,8 +58,7 @@ public:
 
     // Unbinds the specified key or mouse button. If it is not bound,
     // no modification occurs and no feedback is provided.
-    template <typename Input>
-        requires Bindable<Input>
+    template <Bindable Input>
     void unbind(Input activator) {
         for (auto it = bindings_.begin(); it != bindings_.end(); it++) {
             if (it->activated_by(activator)) {

@@ -40,16 +40,14 @@ public:
     using Callback = std::function<void()>;
 
     // Constructs a new Binding that responds to the specified activator.
-    template <typename Input>
-        requires Bindable<Input>
+    template <Bindable Input>
     Binding(Callback callback, Input activator)
         : callback_{std::move(callback)}, pressed_{}, activator_{activator} {}
 
     virtual ~Binding();
 
     // Returns true if the specified key or mouse button activates the Binding.
-    template <typename Input>
-        requires Bindable<Input>
+    template <Bindable Input>
     bool activated_by(Input activator) const noexcept {
         return std::holds_alternative<Input>(activator_) && activator == std::get<Input>(activator_);
     }
@@ -61,8 +59,7 @@ public:
     bool is_pressed() const noexcept;
 
     // Returns true if the bound activator corresponds to the event.
-    template <typename Event>
-        requires InputEvent<Event>
+    template <InputEvent Event>
     bool matches(const Event& event) const noexcept {
         if constexpr (KeyboardInputEvent<Event>) {
             return activated_by(event.code);
