@@ -39,7 +39,7 @@ class Binding {
 public:
     // Constructs a new Binding that responds to the specified activator.
     template <Bindable Input>
-    Binding(std::function<void()> callback, Input activator)
+    Binding(Input activator, std::function<void()> callback)
         : activator_{activator}, callback_{std::move(callback)}, pressed_{} {}
 
     virtual ~Binding();
