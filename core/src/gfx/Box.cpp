@@ -2,8 +2,8 @@
 
 namespace gfx::ui {
 
-Box::Box(sf::Vector2f size, sf::Color bg_color, Layout::Type layout) : bg_{size}, layout_{make_layout(layout)} {
-    bg_.setFillColor(bg_color);
+Box::Box(sf::Vector2f size, Style style, Layout::Type layout) : bg_{size}, layout_{make_layout(layout)} {
+    set_style(style);
 }
 
 Box::~Box() = default;
@@ -32,6 +32,10 @@ void Box::handle_event(const sf::Event& event) {
 void Box::set_position(sf::Vector2f pos) {
     bg_.setPosition(pos);
     layout_->place(bg_.getGlobalBounds(), components_);
+}
+
+void Box::set_style(Style style) {
+    bg_.setFillColor(style.bg);
 }
 
 } // namespace gfx::ui

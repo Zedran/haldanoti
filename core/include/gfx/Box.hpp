@@ -17,7 +17,11 @@ namespace gfx::ui {
 // Box is a container for other Widget types.
 class Box : public Widget {
 public:
-    Box(sf::Vector2f size, sf::Color bg_color, Layout::Type layout);
+    struct Style {
+        sf::Color bg;
+    };
+
+    Box(sf::Vector2f size, Style style, Layout::Type layout);
 
     virtual ~Box();
 
@@ -36,6 +40,8 @@ public:
     virtual void handle_event(const sf::Event& event) override;
 
     virtual void set_position(sf::Vector2f pos) override;
+
+    void set_style(Style style);
 
 private:
     sf::RectangleShape bg_;
