@@ -5,7 +5,7 @@
 
 #include <SFML/Graphics/Rect.hpp>
 
-#include "gfx/Widget.hpp"
+#include "ui/Widget.hpp"
 
 namespace ui {
 

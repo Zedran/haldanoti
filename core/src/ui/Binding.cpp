@@ -1,4 +1,4 @@
-#include "gfx/Binding.hpp"
+#include "ui/Binding.hpp"
 
 namespace ui {
 

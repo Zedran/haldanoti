@@ -2,7 +2,7 @@
 
 #include <SFML/System/Vector2.hpp>
 
-#include "gfx/Layout.hpp"
+#include "ui/Layout.hpp"
 
 namespace ui {
 

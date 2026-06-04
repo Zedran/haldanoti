@@ -1,5 +1,5 @@
-#include "gfx/Button.hpp"
-#include "gfx/Binding.hpp"
+#include "ui/Button.hpp"
+#include "ui/Binding.hpp"
 #include "utils/FinalAction.hpp"
 #include "utils/utils.hpp"
 

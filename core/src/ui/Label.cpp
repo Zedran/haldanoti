@@ -3,7 +3,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/Vector2.hpp>
 
-#include "gfx/Label.hpp"
+#include "ui/Label.hpp"
 #include "utils/utils.hpp"
 
 namespace ui {

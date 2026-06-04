@@ -12,7 +12,7 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/System/Vector2.hpp>
 
-#include "gfx/Widget.hpp"
+#include "ui/Widget.hpp"
 
 namespace ui {
 

@@ -12,8 +12,8 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 
-#include "gfx/Binding.hpp"
-#include "gfx/Label.hpp"
+#include "ui/Binding.hpp"
+#include "ui/Label.hpp"
 
 namespace ui {
 

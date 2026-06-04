@@ -9,8 +9,8 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/Vector2.hpp>
 
-#include "gfx/Layout.hpp"
-#include "gfx/Widget.hpp"
+#include "ui/Layout.hpp"
+#include "ui/Widget.hpp"
 
 namespace ui {
 
