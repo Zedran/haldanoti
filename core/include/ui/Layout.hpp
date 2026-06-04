@@ -30,7 +30,7 @@ struct ColumnLayout : public Layout {
 
     virtual ~ColumnLayout();
 
-    void place(sf::FloatRect container, std::span<std::unique_ptr<Widget>> widgets) override final;
+    virtual void place(sf::FloatRect container, std::span<std::unique_ptr<Widget>> widgets) override;
 };
 
 // Places elements spaced evenly across a single row.
@@ -39,7 +39,7 @@ struct RowLayout : public Layout {
 
     virtual ~RowLayout();
 
-    void place(sf::FloatRect container, std::span<std::unique_ptr<Widget>> widgets) override final;
+    virtual void place(sf::FloatRect container, std::span<std::unique_ptr<Widget>> widgets) override;
 };
 
 std::unique_ptr<Layout> make_layout(Layout::Type layout_type);
