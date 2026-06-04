@@ -6,7 +6,7 @@
 #include "gfx/Label.hpp"
 #include "utils/utils.hpp"
 
-namespace gfx ::ui {
+namespace ui {
 
 Label::Label(
     const sf::Font&      font,
@@ -99,4 +99,4 @@ void Label::set_text(std::string text) {
     center_text();
 }
 
-} // namespace gfx::ui
+} // namespace ui

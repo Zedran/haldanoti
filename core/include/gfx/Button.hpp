@@ -15,7 +15,7 @@
 #include "gfx/Binding.hpp"
 #include "gfx/Label.hpp"
 
-namespace gfx::ui {
+namespace ui {
 
 class Button : public Label {
 public:
@@ -123,4 +123,4 @@ private:
     void update();
 };
 
-} // namespace gfx::ui
+} // namespace ui

@@ -1,6 +1,6 @@
 #include "gfx/Binding.hpp"
 
-namespace gfx::ui {
+namespace ui {
 
 Binding::~Binding() = default;
 
@@ -23,4 +23,4 @@ void Binding::release() noexcept {
     pressed_ = false;
 }
 
-} // namespace gfx::ui
+} // namespace ui

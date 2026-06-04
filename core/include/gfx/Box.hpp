@@ -12,7 +12,7 @@
 #include "gfx/Layout.hpp"
 #include "gfx/Widget.hpp"
 
-namespace gfx::ui {
+namespace ui {
 
 // Box is a container for other Widget types.
 class Box : public Widget {
@@ -51,4 +51,4 @@ private:
     std::unique_ptr<Layout> layout_;
 };
 
-} // namespace gfx::ui
+} // namespace ui

@@ -7,7 +7,7 @@
 
 #include "gfx/Widget.hpp"
 
-namespace gfx::ui {
+namespace ui {
 
 // Abstract base class for every Layout type.
 struct Layout {
@@ -44,4 +44,4 @@ struct RowLayout : public Layout {
 
 std::unique_ptr<Layout> make_layout(Layout::Type layout_type);
 
-} // namespace gfx::ui
+} // namespace ui

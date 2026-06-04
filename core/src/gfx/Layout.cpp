@@ -4,7 +4,7 @@
 
 #include "gfx/Layout.hpp"
 
-namespace gfx::ui {
+namespace ui {
 
 ColumnLayout::ColumnLayout() noexcept = default;
 
@@ -78,4 +78,4 @@ std::unique_ptr<Layout> make_layout(Layout::Type layout_type) {
     throw std::invalid_argument{"unknown layout type"};
 }
 
-} // namespace gfx::ui
+} // namespace ui

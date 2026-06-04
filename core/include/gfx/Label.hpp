@@ -14,7 +14,7 @@
 
 #include "gfx/Widget.hpp"
 
-namespace gfx::ui {
+namespace ui {
 
 class Label : public Widget {
 public:
@@ -65,4 +65,4 @@ private:
     void center_text();
 };
 
-} // namespace gfx::ui
+} // namespace ui

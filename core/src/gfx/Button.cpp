@@ -3,7 +3,7 @@
 #include "utils/FinalAction.hpp"
 #include "utils/utils.hpp"
 
-namespace gfx::ui {
+namespace ui {
 
 Button::Button(
     const sf::Font&      font,
@@ -168,4 +168,4 @@ void Button::update() {
     }
 }
 
-} // namespace gfx::ui
+} // namespace ui

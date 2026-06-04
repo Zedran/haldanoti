@@ -1,6 +1,6 @@
 #include "gfx/Box.hpp"
 
-namespace gfx::ui {
+namespace ui {
 
 Box::Box(sf::Vector2f size, Style style, Layout::Type layout) : bg_{size}, layout_{make_layout(layout)} {
     set_style(style);
@@ -38,4 +38,4 @@ void Box::set_style(Style style) {
     bg_.setFillColor(style.bg);
 }
 
-} // namespace gfx::ui
+} // namespace ui

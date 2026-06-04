@@ -7,7 +7,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 
-namespace gfx::ui {
+namespace ui {
 
 // A common constraint for template functions that accept SFML enum values
 // representing keys and mouse buttons.
@@ -83,4 +83,4 @@ private:
     bool pressed_;
 };
 
-} // namespace gfx::ui
+} // namespace ui

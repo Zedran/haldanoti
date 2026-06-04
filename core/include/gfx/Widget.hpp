@@ -7,7 +7,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 
-namespace gfx::ui {
+namespace ui {
 
 // Common interface for UI elements.
 class Widget : public sf::Drawable, public sf::Transformable {
@@ -25,4 +25,4 @@ public:
     virtual void set_position(sf::Vector2f pos) = 0;
 };
 
-} // namespace gfx::ui
+} // namespace ui
