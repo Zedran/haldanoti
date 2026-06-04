@@ -2,11 +2,11 @@ set(CORE_SOURCES
     src/game/Game.cpp
     src/game/Row.cpp
     src/game/helpers.cpp
-    src/gfx/Binding.cpp
-    src/gfx/Box.cpp
-    src/gfx/Button.cpp
-    src/gfx/Label.cpp
-    src/gfx/Layout.cpp
+    src/ui/Binding.cpp
+    src/ui/Box.cpp
+    src/ui/Button.cpp
+    src/ui/Label.cpp
+    src/ui/Layout.cpp
     src/utils/Source.cpp
     src/utils/utils.cpp
 )
