@@ -37,6 +37,8 @@ void Box::set_position(sf::Vector2f pos) {
 void Box::set_style(Style style) {
     bg_.setFillColor(style.bg);
 
+    bg_.setOutlineColor(style.ol);
+
     if (style.ol.a > 0) {
         bg_.setOutlineThickness(OUTLINE_SIZE);
     } else {
