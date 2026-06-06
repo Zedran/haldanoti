@@ -26,8 +26,8 @@ void Label::center_text() {
     const sf::FloatRect bg_bounds = bg_.getGlobalBounds();
 
     // Decrease the available space by padding value.
-    const float max_width  = std::max(0.0f, std::round(bg_bounds.size.x - (RELATIVE_PADDING * 2 * bg_bounds.size.x)));
-    const float max_height = std::max(0.0f, std::round(bg_bounds.size.y - (RELATIVE_PADDING * 2 * bg_bounds.size.y)));
+    const float max_width  = std::max(0.0f, std::round(bg_bounds.size.x - (RELATIVE_PADDING * 2 * bg_bounds.size.x) - OUTLINE_SIZE));
+    const float max_height = std::max(0.0f, std::round(bg_bounds.size.y - (RELATIVE_PADDING * 2 * bg_bounds.size.y) - OUTLINE_SIZE));
 
     if (max_width <= 0.0f || max_height <= 0.0f) {
         return;
@@ -91,6 +91,13 @@ void Label::set_position(sf::Vector2f pos) {
 
 void Label::set_style(Style style) {
     bg_.setFillColor(style.bg);
+
+    if (style.ol.a > 0) {
+        bg_.setOutlineThickness(OUTLINE_SIZE);
+    } else {
+        bg_.setOutlineThickness(0.0f);
+    }
+
     fg_.setFillColor(style.fg);
 }
 

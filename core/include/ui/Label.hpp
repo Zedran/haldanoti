@@ -21,6 +21,7 @@ public:
     struct Style {
         sf::Color bg;
         sf::Color fg;
+        sf::Color ol;
     };
 
     // Constructs a new Label. If specified font_size is at least equal to 1,
@@ -53,6 +54,9 @@ public:
     void set_text(std::string text);
 
 private:
+    // Outline size in pixels.
+    static constexpr float OUTLINE_SIZE{1.0f};
+
     // Padding value for text contained within every Label-derived type.
     static constexpr float RELATIVE_PADDING{0.05f};
 
