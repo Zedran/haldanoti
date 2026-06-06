@@ -19,6 +19,7 @@ class Box : public Widget {
 public:
     struct Style {
         sf::Color bg;
+        sf::Color ol;
     };
 
     Box(sf::Vector2f size, Style style, Layout::Type layout);
@@ -44,6 +45,9 @@ public:
     void set_style(Style style);
 
 private:
+    // Outline size in pixels.
+    static constexpr float OUTLINE_SIZE{1.0f};
+
     sf::RectangleShape bg_;
 
     std::vector<std::unique_ptr<Widget>> components_;
