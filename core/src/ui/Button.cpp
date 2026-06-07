@@ -117,9 +117,12 @@ bool Button::handle_release(const sf::Event::KeyReleased& event, Binding& b) {
     if (b.is_pressed()) {
         b.invoke();
     }
-    state_      = State::Normal;
     pressed_by_ = nullptr;
     b.release();
+
+    if (state_ != State::Disabled) {
+        state_ = State::Normal;
+    }
     return true;
 }
 
@@ -132,7 +135,9 @@ bool Button::handle_release(const sf::Event::MouseButtonReleased& event, Binding
         if (b.is_pressed()) {
             b.invoke();
         }
-        state_ = State::Hover;
+        if (state_ != State::Disabled) {
+            state_ = State::Hover;
+        }
     } else {
         state_ = State::Normal;
     }
