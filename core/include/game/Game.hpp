@@ -22,6 +22,9 @@ public:
     // The highest number that can be assigned to the code field.
     static constexpr int SCORE_MAX = 8;
 
+    // Number of unique code elements.
+    static constexpr int NUM_UNIQUE_ELEMS = SCORE_MAX - SCORE_MIN + 1;
+
     // Constructs a new instance of the Game.
     Game();
 
@@ -59,7 +62,7 @@ public:
 private:
     static_assert(SCORE_MIN < SCORE_MAX);
     static_assert(Row::CODE_VALUE_NONE < SCORE_MIN);
-    static_assert(SCORE_MAX - SCORE_MIN + 1 >= Row::ROW_LEN);
+    static_assert(NUM_UNIQUE_ELEMS >= Row::ROW_LEN);
 
     // Indicates currently active row.
     std::size_t active_row_num_;
