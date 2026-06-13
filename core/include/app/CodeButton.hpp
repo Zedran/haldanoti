@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <mutex>
 
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/System/Vector2.hpp>
 
 #include "theme/CodeButton.hpp"
