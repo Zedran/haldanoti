@@ -41,6 +41,9 @@ public:
     // value is set to its "empty" state. This behaviour is desired when
     // the game interface is first initialized and when the game board
     // is reset before beginning of the new game.
+    //
+    // The retention of active style must never be requested if the value
+    // of code_element_ is equal to CODE_VALUE_NONE.
     void disable(bool retain_active_style);
 
     // Returns true if the code value has been set (is not equal to
@@ -52,6 +55,10 @@ public:
 
     // Sets the specified code value to the CodeButton instance.
     void set_value(int value);
+
+    // Forces CodeButton instance to use its active style, even when disabled.
+    // This cannot be done if code_element_ value is equal to CODE_VALUE_NONE.
+    void use_active_style();
 
 private:
     // Font size relative to the height of CodeButton.

@@ -40,7 +40,7 @@ void CodeButton::decrement() {
 void CodeButton::disable(bool retain_active_style) {
     Button::disable();
     if (retain_active_style) {
-        Label::set_style(styles_.elements[elem_index()].active);
+        use_active_style();
     }
 }
 
@@ -89,6 +89,11 @@ void CodeButton::set_value(int value) {
     code_element_ = value;
     set_text(std::to_string(code_element_));
     set_style(styles_.elements[elem_index()]);
+}
+
+void CodeButton::use_active_style() {
+    assert(code_element_ != game::Row::CODE_VALUE_NONE);
+    Label::set_style(styles_.elements[elem_index()].active);
 }
 
 } // namespace app
