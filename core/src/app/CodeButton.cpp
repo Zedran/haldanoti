@@ -30,14 +30,11 @@ int CodeButton::code_element() const noexcept {
 }
 
 void CodeButton::decrement() {
-    code_element_--;
-
-    if (code_element_ < game::Game::SCORE_MIN) {
-        code_element_ = game::Game::SCORE_MAX;
+    switch (code_element_) {
+    case game::Row::CODE_VALUE_NONE:
+    case game::Game::SCORE_MIN:      set_value(game::Game::SCORE_MAX); break;
+    default:                         set_value(code_element_ - 1);
     }
-
-    set_text(std::to_string(code_element_));
-    set_style(styles_.elements[elem_index()]);
 }
 
 void CodeButton::disable(bool retain_active_style) {
@@ -54,14 +51,11 @@ std::size_t CodeButton::elem_index() const noexcept {
 }
 
 void CodeButton::increment() {
-    code_element_++;
-
-    if (code_element_ > game::Game::SCORE_MAX) {
-        code_element_ = game::Game::SCORE_MIN;
+    switch (code_element_) {
+    case game::Row::CODE_VALUE_NONE:
+    case game::Game::SCORE_MAX:      set_value(game::Game::SCORE_MIN); break;
+    default:                         set_value(code_element_ + 1);
     }
-
-    set_text(std::to_string(code_element_));
-    set_style(styles_.elements[elem_index()]);
 }
 
 bool CodeButton::is_set() const noexcept {
