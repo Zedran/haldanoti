@@ -27,7 +27,7 @@ void FeedbackLabel::set_pin(Pin pin) {
     switch (pin) {
     case Pin::None:  set_style(styles_.none); break;
     case Pin::Red:   set_style(styles_.red); break;
-    case Pin::White: set_style(styles_.white); break;
+    case Pin::White: set_style(styles_.white);
     }
 }
 
