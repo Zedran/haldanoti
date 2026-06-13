@@ -1,3 +1,4 @@
+#include <cassert>
 #include <mutex>
 #include <stdexcept>
 #include <string>
@@ -85,6 +86,15 @@ void CodeButton::set_theme(theme::CodeButton theme) {
             };
         }
     });
+}
+
+void CodeButton::set_value(int value) {
+    assert(value >= game::Game::SCORE_MIN);
+    assert(value <= game::Game::SCORE_MAX);
+
+    code_element_ = value;
+    set_text(std::to_string(code_element_));
+    set_style(styles_.elements[elem_index()]);
 }
 
 } // namespace app

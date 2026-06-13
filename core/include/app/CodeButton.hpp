@@ -50,6 +50,9 @@ public:
     // Resets CodeButton instance to its empty state.
     void reset();
 
+    // Sets the specified code value to the CodeButton instance.
+    void set_value(int value);
+
 private:
     // Font size relative to the height of CodeButton.
     static constexpr float FONT_REL_SIZE{0.75f};
