@@ -31,11 +31,10 @@ public:
 
     // Makes CodeButton non-interactive. A wrapper for Button::disable.
     //
-    // If retain_active_style is set to true,
-    // the style of the CodeButton instance remains set as if it was still
-    // active. This is the desired behaviour when user wishes to commit
-    // current row - the colors and numbers should still be displayed
-    // in such case.
+    // If retain_active_style is set to true, the style of the CodeButton
+    // instance remains set as if it was still active. This is the desired
+    // behaviour when user wishes to commit current row - the colors
+    // and numbers should still be displayed in such case.
     //
     // If retain_active_style is false, the CodeButton style and text
     // value is set to its "empty" state. This behaviour is desired when
