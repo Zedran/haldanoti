@@ -130,6 +130,8 @@ void GameRow::reset() {
 }
 
 void GameRow::set_feedback(game::Feedback fb) {
+    assert(static_cast<std::size_t>(fb.red_count + fb.white_count) <= game::Row::ROW_LEN);
+
     for (std::size_t i = 0; i < static_cast<std::size_t>(fb.red_count); i++) {
         fb_labels_[i]->set_pin(FeedbackLabel::Pin::Red);
     }
