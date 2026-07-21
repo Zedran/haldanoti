@@ -23,6 +23,10 @@ Feedback compare_codes(std::span<const int> good_code, std::span<const int> user
     }
 
     for (std::size_t i = 0; i < gc.size(); i++) {
+        if (gc[i] == 0) {
+            continue;
+        }
+
         const auto it = std::find(uc.begin(), uc.end(), gc[i]);
 
         if (it != uc.end()) {
