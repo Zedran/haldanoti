@@ -4,6 +4,7 @@ set(CORE_SOURCES
     src/app/FeedbackLabel.cpp
     src/app/GameRow.cpp
     src/app/SecretRow.cpp
+    src/app/Toolbar.cpp
     src/game/Game.cpp
     src/game/Row.cpp
     src/game/helpers.cpp
