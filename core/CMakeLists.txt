@@ -1,4 +1,5 @@
 set(CORE_SOURCES
+    src/app/Board.cpp
     src/app/CodeButton.cpp
     src/app/FeedbackLabel.cpp
     src/app/GameRow.cpp
