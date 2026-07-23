@@ -22,11 +22,16 @@ endif()
 project(mm C CXX)
 
 include(FetchSFML)
+include(FetchFont)
 
 add_subdirectory(core)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE core)
+
+target_compile_definitions(${PROJECT_NAME} PUBLIC
+    FONT_FILE_PATH="${FONT_FILE_PATH}"
+)
 
 if(MAKE_TESTS)
     include(FetchCatch2)
