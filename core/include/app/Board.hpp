@@ -23,8 +23,10 @@ public:
 
     ~Board();
 
-    // Displays the secret code and the result.
-    void end_game(std::span<const int, game::Row::ROW_LEN> good_code, bool won);
+    // Displays the secret code and the result. game::State::Running does not
+    // signal the conclusion of the game, therefore attempting to set this
+    // state through the end_game function will result in assertion error.
+    void end_game(std::span<const int, game::Row::ROW_LEN> good_code, game::State state);
 
     // Returns a mutable reference to the currently active GameRow.
     GameRow& get_active_row() const noexcept;

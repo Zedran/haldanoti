@@ -31,10 +31,11 @@ Board::Board(const sf::Font& font, sf::Vector2f size, theme::Board theme)
 
 Board::~Board() = default;
 
-void Board::end_game(std::span<const int, game::Row::ROW_LEN> good_code, bool won) {
+void Board::end_game(std::span<const int, game::Row::ROW_LEN> good_code, game::State state) {
+    assert(state != game::State::Running);
     assert(secret_row_);
     secret_row_->display_code(good_code);
-    secret_row_->display_info(won ? SecretRow::Info::Won : SecretRow::Info::Lost);
+    secret_row_->display_info(state);
 }
 
 GameRow& Board::get_active_row() const noexcept {

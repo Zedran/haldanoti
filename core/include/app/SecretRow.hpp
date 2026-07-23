@@ -8,6 +8,7 @@
 
 #include "app/CodeButton.hpp"
 #include "game/Row.hpp"
+#include "game/State.hpp"
 #include "theme/SecretRow.hpp"
 #include "ui/Box.hpp"
 #include "ui/Label.hpp"
@@ -18,18 +19,6 @@ namespace app {
 // upon the game's conclusion.
 class SecretRow final : public ui::Box {
 public:
-    // Indicates which notification should be shown.
-    enum class Info {
-        // No notification.
-        None,
-
-        // "Player won" notification.
-        Won,
-
-        // "Player lost" notification.
-        Lost,
-    };
-
     // Size relative to outer container.
     static constexpr sf::Vector2f REL_SIZE{1.0f, 0.077f};
 
@@ -41,7 +30,7 @@ public:
     void display_code(std::span<const int, game::Row::ROW_LEN> code);
 
     // Displays the selected info indefinitely.
-    void display_info(Info info) noexcept;
+    void display_info(game::State state) noexcept;
 
     // Clears the displayed code and info.
     void reset();

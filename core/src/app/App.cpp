@@ -91,7 +91,7 @@ void App::tick() {
     if (state != game::State::Running || game_.last_row()) {
         dbg("GAME OVER");
         board_.get_active_row().lock(true);
-        board_.end_game(game_.good_code(), state == game::State::Won);
+        board_.end_game(game_.good_code(), state);
         return;
     }
 

@@ -35,7 +35,7 @@ SecretRow::SecretRow(const sf::Font& font, sf::Vector2f size, theme::SecretRow t
         size.y * INFO_FONT_REL_SIZE
     );
 
-    display_info(Info::None);
+    display_info(game::State::Running);
 }
 
 SecretRow::~SecretRow() = default;
@@ -47,17 +47,17 @@ void SecretRow::display_code(std::span<const int, game::Row::ROW_LEN> code) {
     }
 }
 
-void SecretRow::display_info(Info info) noexcept {
-    switch (info) {
-    case Info::None:
+void SecretRow::display_info(game::State state) noexcept {
+    switch (state) {
+    case game::State::Running:
         info_->set_text("");
-        info_->set_style(theme_.info_none);
+        info_->set_style(theme_.info_running);
         break;
-    case Info::Won:
+    case game::State::Won:
         info_->set_text("Code correct");
         info_->set_style(theme_.info_won);
         break;
-    case Info::Lost:
+    case game::State::Lost:
         info_->set_text("Game over");
         info_->set_style(theme_.info_lost);
     }
@@ -67,7 +67,7 @@ void SecretRow::reset() {
     for (auto b : code_buttons_) {
         b->reset();
     }
-    display_info(Info::None);
+    display_info(game::State::Running);
 }
 
 } // namespace app

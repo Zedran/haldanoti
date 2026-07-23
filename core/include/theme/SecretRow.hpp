@@ -17,7 +17,7 @@ struct SecretRow {
     const CodeButton* code_button;
 
     // Info label: no message.
-    ui::Label::Style info_none;
+    ui::Label::Style info_running;
 
     // Info label: lost.
     ui::Label::Style info_lost;
