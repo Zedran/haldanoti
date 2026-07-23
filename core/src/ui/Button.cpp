@@ -158,6 +158,7 @@ void Button::handle_mouse_move(const sf::Event::MouseMoved& e) {
 
 void Button::set_style(Style style) {
     style_ = style;
+    update();
 }
 
 void Button::update() {
