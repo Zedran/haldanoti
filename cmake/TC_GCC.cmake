@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
+
 set(WARN   "-Wall -Wconversion -Wextra -Wpedantic")
 set(HARDEN "-fstack-protector-strong -fcf-protection=full -fstack-clash-protection -D_FORTIFY_SOURCE=2 -fPIE -pie")
 set(INSTR  "-fsanitize=address")

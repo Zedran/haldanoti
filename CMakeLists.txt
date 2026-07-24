@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
+
 cmake_minimum_required(VERSION 3.14)
 
 option(MAKE_TESTS "Build test target" OFF)
