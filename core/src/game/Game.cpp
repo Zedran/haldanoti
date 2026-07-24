@@ -77,7 +77,7 @@ State Game::state() const noexcept {
 }
 
 void Game::submit_code(std::span<const int, Row::ROW_LEN> guess) noexcept {
-    for (const auto& e : guess) {
+    for ([[maybe_unused]] const auto& e : guess) {
         assert(e >= SCORE_MIN);
         assert(e <= SCORE_MAX);
     }
