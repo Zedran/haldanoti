@@ -10,7 +10,10 @@
 
 #include "app/App.hpp"
 #include "theme/default_theme.hpp"
+#include "utils/debug.hpp"
 #include "utils/utils.hpp"
+
+#include "config.hpp"
 
 int main() {
     constexpr float relh_to_winh{0.80f};
@@ -22,6 +25,8 @@ int main() {
         static_cast<float>(desktop.size.y) * relh_to_winh * relw_to_h,
         static_cast<float>(desktop.size.y) * relh_to_winh,
     });
+
+    dbg("{}", VERSION_INFO);
 
     try {
         const sf::Font font{FONT_FILE_PATH};

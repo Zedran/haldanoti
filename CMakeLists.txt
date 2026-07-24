@@ -27,6 +27,14 @@ project(mm C CXX)
 include(FetchSFML)
 include(FetchFont)
 
+add_custom_target(configure_header
+    COMMAND ${CMAKE_COMMAND}
+        -DPROJECT_NAME="${PROJECT_NAME}"
+        -DINPUT_FILE="${CMAKE_SOURCE_DIR}/src/config.hpp.in"
+        -DOUTPUT_FILE="${CMAKE_BINARY_DIR}/src/config.hpp"
+        -P "${CMAKE_SOURCE_DIR}/cmake/configure_header.cmake"
+)
+
 add_subdirectory(core)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
@@ -35,6 +43,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE core)
 target_compile_definitions(${PROJECT_NAME} PUBLIC
     FONT_FILE_PATH="${FONT_FILE_PATH}"
 )
+
+add_dependencies(${PROJECT_NAME} configure_header)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/src)
 
 if(MAKE_TESTS)
     include(FetchCatch2)
