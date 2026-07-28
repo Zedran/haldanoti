@@ -41,11 +41,13 @@ add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE core)
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC
-    FONT_FILE_PATH="${FONT_FILE_PATH}"
+    FONT_FILE_PATH_DEV="${FONT_FILE_PATH}"
 )
 
 add_dependencies(${PROJECT_NAME} configure_header)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/src)
+
+include(InstallArtifacts)
 
 if(MAKE_TESTS)
     include(FetchCatch2)
