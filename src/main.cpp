@@ -31,8 +31,8 @@ int main() {
     dbg("{}", VERSION_INFO);
 
     try {
-        const sf::Font font = utils::load_asset<sf::Font>({FONT_FILE_PATH_DEV, FONT_FILE_PATH_SYS});
-        sf::Image      icon = utils::load_asset<sf::Image>({ICON_FILE_PATH_DEV, ICON_FILE_PATH_SYS});
+        const sf::Font font = utils::load_asset<sf::Font>({FONT_FILE_PATH_SYS, FONT_FILE_PATH_DEV});
+        sf::Image      icon = utils::load_asset<sf::Image>({ICON_FILE_PATH_SYS, ICON_FILE_PATH_DEV});
         return app::App{font, std::move(icon), window_size, theme::DEFAULT_THEME}.run();
     } catch (const sf::Exception& e) {
         std::cerr << "SFML: " << e.what() << '\n';
