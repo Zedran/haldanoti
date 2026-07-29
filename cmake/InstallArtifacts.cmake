@@ -30,3 +30,18 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC
     FONT_FILE_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/InterVariable.ttf"
     ICON_FILE_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/mm.png"
 )
+
+if(LINUX)
+    set(DT_ENTRY "${CMAKE_BINARY_DIR}/platform/linux/mm.desktop")
+
+    set(BIN_PATH  "${CMAKE_INSTALL_PREFIX}/${BIN_DIR}/${PROJECT_NAME}")
+    set(ICON_PATH "${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/mm.svg"      )
+
+    configure_file(
+        ${CMAKE_SOURCE_DIR}/platform/linux/mm.desktop.in
+        ${DT_ENTRY}
+        @ONLY
+    )
+
+    install(FILES ${DT_ENTRY} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
+endif()
