@@ -1,4 +1,4 @@
-# mm
+# <img src="assets/mm.svg" alt="mm.svg" width="24"> mm
 
 Digital version of the [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)) game.
 

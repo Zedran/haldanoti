@@ -42,6 +42,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE core)
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC
     FONT_FILE_PATH_DEV="${FONT_FILE_PATH}"
+    ICON_FILE_PATH_DEV="${CMAKE_SOURCE_DIR}/assets/mm.png"
 )
 
 add_dependencies(${PROJECT_NAME} configure_header)

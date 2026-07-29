@@ -5,6 +5,8 @@ include(ConfigUninstall)
 
 set(ASSET_FILES
     ${FONT_FILE_PATH}
+    ${CMAKE_SOURCE_DIR}/assets/mm.png
+    ${CMAKE_SOURCE_DIR}/assets/mm.svg
 )
 
 set(DOC_FILES
@@ -26,4 +28,5 @@ install(FILES   ${DOC_FILES}    DESTINATION ${DOC_DIR}   )
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC
     FONT_FILE_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/InterVariable.ttf"
+    ICON_FILE_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/mm.png"
 )

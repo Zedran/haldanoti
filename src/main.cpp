@@ -5,28 +5,17 @@
 #include <iostream>
 
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Image.hpp>
 #include <SFML/System/Exception.hpp>
 #include <SFML/Window/VideoMode.hpp>
 
 #include "app/App.hpp"
 #include "theme/default_theme.hpp"
+#include "utils/assets.hpp"
 #include "utils/debug.hpp"
 #include "utils/utils.hpp"
 
 #include "config.hpp"
-
-// Iterates over the list of possible font file locations and initializes
-// sf::Font using the first found file. Throws runtime_error if no file
-// was found.
-sf::Font load_font() {
-    for (const auto& path : {FONT_FILE_PATH_DEV, FONT_FILE_PATH_SYS}) {
-        try {
-            return sf::Font{path};
-        } catch (const sf::Exception&) {
-        }
-    }
-    throw std::runtime_error{"unable to locate font file"};
-}
 
 int main() {
     constexpr float relh_to_winh{0.80f};
@@ -42,8 +31,9 @@ int main() {
     dbg("{}", VERSION_INFO);
 
     try {
-        const sf::Font font = load_font();
-        return app::App{font, window_size, theme::DEFAULT_THEME}.run();
+        const sf::Font font = utils::load_asset<sf::Font>({FONT_FILE_PATH_DEV, FONT_FILE_PATH_SYS});
+        sf::Image      icon = utils::load_asset<sf::Image>({ICON_FILE_PATH_DEV, ICON_FILE_PATH_SYS});
+        return app::App{font, std::move(icon), window_size, theme::DEFAULT_THEME}.run();
     } catch (const sf::Exception& e) {
         std::cerr << "SFML: " << e.what() << '\n';
         return EXIT_FAILURE;
