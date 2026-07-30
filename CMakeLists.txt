@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.14)
 
 option(MAKE_TESTS "Build test target" OFF)
 option(COVER "Generate test coverage report target if MAKE_TESTS=ON" OFF)
+option(MM_VERSION "Version info is typically set through git describe. This override can be used when building from archive.")
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
@@ -30,6 +31,7 @@ include(FetchFont)
 add_custom_target(configure_header
     COMMAND ${CMAKE_COMMAND}
         -DPROJECT_NAME="${PROJECT_NAME}"
+        -DMM_VERSION="${MM_VERSION}"
         -DINPUT_FILE="${CMAKE_SOURCE_DIR}/src/config.hpp.in"
         -DOUTPUT_FILE="${CMAKE_BINARY_DIR}/src/config.hpp"
         -P "${CMAKE_SOURCE_DIR}/cmake/configure_header.cmake"
