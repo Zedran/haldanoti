@@ -1,0 +1,43 @@
+Name:           mm
+Version:        @VERSION@
+Release:        1%{?dist}
+Summary:        Digital version the Mastermind game
+
+License:        AGPL3.0-only
+URL:            https://github.com/Zedran/mm
+Vendor:         Wojciech Głąb (github.com/Zedran)
+Group:          Unspecified
+Source0:        %{name}-%{version}.tar.gz
+
+BuildRequires:  gcc-c++
+BuildRequires:  cmake
+
+%global debug_package %{nil}
+
+%description
+%{summary}
+
+%prep
+%autosetup
+
+%build
+unset CFLAGS CXXFLAGS LDFLAGS
+cmake -DCMAKE_BUILD_TYPE=Release -DMM_VERSION=v%{version} -S . -B build
+cmake --build build --parallel
+
+%install
+DESTDIR=%{buildroot} cmake --install build
+
+%files
+%license /usr/local/share/mm/LICENSE
+%license /usr/local/share/mm/NOTICE.md
+%doc     /usr/local/share/mm/README.md
+/usr/local/bin/mm
+/usr/local/share/mm/assets/InterVariable.ttf
+/usr/local/share/mm/assets/mm.png
+/usr/local/share/mm/assets/mm.svg
+/usr/local/share/applications/mm.desktop
+
+%changelog
+* Thu Jul 30 2026 Zedran <17592740+Zedran@users.noreply.github.com>
+- Initial package specification
