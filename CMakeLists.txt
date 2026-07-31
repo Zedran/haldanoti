@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION 3.14)
 option(MAKE_TESTS "Build test target" OFF)
 option(COVER "Generate test coverage report target if MAKE_TESTS=ON" OFF)
 option(MM_VERSION "Version info is typically set through git describe. This override can be used when building from archive.")
+option(MM_SET_TC_FLAGS "Set compiler flags defined in cmake/TC_*.cmake files." OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
@@ -15,15 +16,15 @@ set(CMAKE_CXX_STANDARD           20)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS        OFF)
 
-if(LINUX)
-    include(TC_GCC)
-endif()
-
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+if(MM_SET_TC_FLAGS)
+    if(LINUX)
+        include(TC_GCC)
+    endif()
 endif()
 
 project(mm C CXX)
+
+set(BUILD_SHARED_LIBS OFF)
 
 include(FetchSFML)
 include(FetchFont)
