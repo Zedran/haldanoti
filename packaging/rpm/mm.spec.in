@@ -1,6 +1,6 @@
 Name:           mm
 Version:        @VERSION@
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Digital version the Mastermind game
 
 License:        AGPL3.0-only
@@ -11,6 +11,17 @@ Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
+BuildRequires:  libXcursor-devel
+BuildRequires:  libXrandr-devel
+BuildRequires:  libXi-devel
+BuildRequires:  mesa-libGL-devel
+BuildRequires:  systemd-devel
+BuildRequires:  mbedtls-devel
+BuildRequires:  libssh2-devel
+BuildRequires:  harfbuzz-devel
+BuildRequires:  freetype-devel
+BuildRequires:  libvorbis-devel
+BuildRequires:  flac-devel
 
 %global debug_package %{nil}
 
@@ -38,6 +49,9 @@ BuildRequires:  cmake
 %{_datadir}/applications/mm.desktop
 
 %changelog
+* Sat Aug 01 2026 Zedran <17592740+Zedran@users.noreply.github.com> - v0.2.2-3
+- Add missing build requirements
+
 * Fri Jul 31 2026 Zedran <17592740+Zedran@users.noreply.github.com> - 0.2.1-2
 - Allow the build system to set flags for compiler and linker
 
