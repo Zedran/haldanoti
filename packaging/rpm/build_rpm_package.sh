@@ -8,13 +8,15 @@ fi
 
 WD=$(pwd)/rpmbuild
 
-mkdir -p "$WD"/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
+for d in BUILD BUILDROOT RPMS SOURCES SPECS SRPMS; do
+    mkdir -p "$WD/$d"
+done
 
 VERSION=$(git describe --tags | sed 's/v//')
 
 git -C .. archive                       \
     --format=tar.gz                     \
-    --prefix=mm-$VERSION/               \
+    --prefix="mm-$VERSION/"             \
     -o "$WD/SOURCES/mm-$VERSION.tar.gz" \
     HEAD
 
