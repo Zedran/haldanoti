@@ -18,7 +18,7 @@ git -C .. archive                       \
     -o "$WD/SOURCES/mm-$VERSION.tar.gz" \
     HEAD
 
-sed "s/@VERSION@/$VERSION/" ../packaging/rpm/mm.spec.in > "$WD/SPECS/mm.spec"
+sed "s/@VERSION@/$VERSION/" "$(dirname "$0")/mm.spec.in" > "$WD/SPECS/mm.spec"
 
 if [ "$1" != "--local" ]; then
     dnf builddep -y "$WD/SPECS/mm.spec"
