@@ -1,7 +1,7 @@
 Name:           mm
 Version:        @VERSION@
 Release:        3%{?dist}
-Summary:        Digital version the Mastermind game
+Summary:        Digital version of the Mastermind game
 
 License:        AGPL3.0-only
 URL:            https://github.com/Zedran/mm
