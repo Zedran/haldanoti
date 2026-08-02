@@ -41,6 +41,8 @@ BuildRequires:  flac-devel
 %files
 %license %{_datadir}/mm/LICENSE
 %license %{_datadir}/mm/NOTICE.md
+%license %{_datadir}/mm/docs/licenses/Inter.txt
+%license %{_datadir}/mm/docs/licenses/SFML.txt
 %doc     %{_datadir}/mm/README.md
 %{_bindir}/mm
 %{_datadir}/mm/assets/InterVariable.ttf

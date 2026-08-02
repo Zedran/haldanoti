@@ -15,16 +15,23 @@ set(DOC_FILES
     ${PROJECT_SOURCE_DIR}/README.md
 )
 
+set(LIC_FILES
+    ${PROJECT_SOURCE_DIR}/docs/licenses/Inter.txt
+    ${PROJECT_SOURCE_DIR}/docs/licenses/SFML.txt
+)
+
 set(BIN_DIR bin)
 
 set(APP_DIR "share/${PROJECT_NAME}")
 
 set(ASSETS_DIR ${APP_DIR}/assets)
 set(DOC_DIR ${APP_DIR})
+set(LIC_DIR ${APP_DIR}/docs/licenses)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${BIN_DIR}   )
 install(FILES   ${ASSET_FILES}  DESTINATION ${ASSETS_DIR})
 install(FILES   ${DOC_FILES}    DESTINATION ${DOC_DIR}   )
+install(FILES   ${LIC_FILES}    DESTINATION ${LIC_DIR}   )
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC
     FONT_FILE_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/InterVariable.ttf"
