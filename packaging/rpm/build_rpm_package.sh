@@ -3,7 +3,7 @@
 set -e
 
 if [ "$1" != "--local" ]; then
-    dnf install -y git rpmdevtools rpmlint
+    dnf install -y rpmdevtools rpmlint
 fi
 
 WD=$(pwd)/rpmbuild
