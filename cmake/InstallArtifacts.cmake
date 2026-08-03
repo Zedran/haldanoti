@@ -39,13 +39,13 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC
 )
 
 if(LINUX)
-    set(DT_ENTRY "${CMAKE_BINARY_DIR}/platform/linux/mm.desktop")
+    set(DT_ENTRY "${CMAKE_BINARY_DIR}/platform/linux/mm-game.desktop")
 
     set(BIN_PATH  "${CMAKE_INSTALL_PREFIX}/${BIN_DIR}/${PROJECT_NAME}")
     set(ICON_PATH "${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/mm.svg"      )
 
     configure_file(
-        ${CMAKE_SOURCE_DIR}/platform/linux/mm.desktop.in
+        ${CMAKE_SOURCE_DIR}/platform/linux/mm-game.desktop.in
         ${DT_ENTRY}
         @ONLY
     )

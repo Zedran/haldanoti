@@ -22,7 +22,7 @@ if(MM_SET_TC_FLAGS)
     endif()
 endif()
 
-project(mm C CXX)
+project(mm-game C CXX)
 
 set(BUILD_SHARED_LIBS OFF)
 

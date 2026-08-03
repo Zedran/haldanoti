@@ -1,6 +1,6 @@
-Name:           mm
+Name:           mm-game
 Version:        @VERSION@
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Digital version of the Mastermind game
 
 License:        AGPL3.0-only
@@ -39,18 +39,21 @@ BuildRequires:  flac-devel
 %cmake_install
 
 %files
-%license %{_datadir}/mm/LICENSE
-%license %{_datadir}/mm/NOTICE.md
-%license %{_datadir}/mm/docs/licenses/Inter.txt
-%license %{_datadir}/mm/docs/licenses/SFML.txt
-%doc     %{_datadir}/mm/README.md
-%{_bindir}/mm
-%{_datadir}/mm/assets/InterVariable.ttf
-%{_datadir}/mm/assets/mm.png
-%{_datadir}/mm/assets/mm.svg
-%{_datadir}/applications/mm.desktop
+%license %{_datadir}/%{name}/LICENSE
+%license %{_datadir}/%{name}/NOTICE.md
+%license %{_datadir}/%{name}/docs/licenses/Inter.txt
+%license %{_datadir}/%{name}/docs/licenses/SFML.txt
+%doc     %{_datadir}/%{name}/README.md
+%{_bindir}/%{name}
+%{_datadir}/%{name}/assets/InterVariable.ttf
+%{_datadir}/%{name}/assets/mm.png
+%{_datadir}/%{name}/assets/mm.svg
+%{_datadir}/applications/%{name}.desktop
 
 %changelog
+* Mon Aug 03 2026 Zedran <17592740+Zedran@users.noreply.github.com> - 0.2.3-4
+- Rename the package and its components to prevent naming conflicts
+
 * Sat Aug 01 2026 Zedran <17592740+Zedran@users.noreply.github.com> - v0.2.2-3
 - Add missing build requirements
 

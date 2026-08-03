@@ -1,4 +1,4 @@
-Source: mm
+Source: mm-game
 Section: games
 Priority: optional
 Maintainer: Wojciech Głąb (github.com/Zedran)
@@ -23,7 +23,7 @@ Homepage: https://github.com/Zedran/mm
 Rules-Requires-Root: no
 Vcs-Git: https://github.com/Zedran/mm.git
 
-Package: mm
+Package: mm-game
 Architecture: any
 Multi-Arch: foreign
 Depends:

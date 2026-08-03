@@ -14,16 +14,16 @@ done
 
 VERSION=$(git describe --tags | sed 's/v//')
 
-git -C .. archive                       \
-    --format=tar.gz                     \
-    --prefix="mm-$VERSION/"             \
-    -o "$WD/SOURCES/mm-$VERSION.tar.gz" \
+git -C .. archive                            \
+    --format=tar.gz                          \
+    --prefix="mm-game-$VERSION/"             \
+    -o "$WD/SOURCES/mm-game-$VERSION.tar.gz" \
     HEAD
 
-sed "s/@VERSION@/$VERSION/" "$(dirname "$0")/mm.spec.in" > "$WD/SPECS/mm.spec"
+sed "s/@VERSION@/$VERSION/" "$(dirname "$0")/mm-game.spec.in" > "$WD/SPECS/mm-game.spec"
 
 if [ "$1" != "--build-deps" ]; then
-    dnf builddep -y "$WD/SPECS/mm.spec"
+    dnf builddep -y "$WD/SPECS/mm-game.spec"
 fi
 
-rpmbuild --define "_topdir $WD" -ba "$WD/SPECS/mm.spec"
+rpmbuild --define "_topdir $WD" -ba "$WD/SPECS/mm-game.spec"
