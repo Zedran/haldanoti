@@ -54,7 +54,7 @@ BuildRequires:  flac-devel
 * Mon Aug 03 2026 Zedran <17592740+Zedran@users.noreply.github.com> - 0.2.3-4
 - Rename the package and its components to prevent naming conflicts
 
-* Sat Aug 01 2026 Zedran <17592740+Zedran@users.noreply.github.com> - v0.2.2-3
+* Sat Aug 01 2026 Zedran <17592740+Zedran@users.noreply.github.com> - 0.2.2-3
 - Add missing build requirements
 
 * Fri Jul 31 2026 Zedran <17592740+Zedran@users.noreply.github.com> - 0.2.1-2
