@@ -1,0 +1,32 @@
+Source: mm
+Section: games
+Priority: optional
+Maintainer: Zedran <17592740+Zedran@users.noreply.github.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ cmake,
+ libx11-dev,
+ libxrandr-dev,
+ libxcursor-dev,
+ libxi-dev,
+ libudev-dev,
+ libgl-dev,
+ libmbedtls-dev,
+ libssh2-1-dev,
+ libfreetype-dev,
+ libharfbuzz-dev,
+ libvorbis-dev,
+ libflac-dev,
+Standards-Version: 4.7.0
+Homepage: https://github.com/Zedran/mm
+Rules-Requires-Root: no
+Vcs-Git: https://github.com/Zedran/mm.git
+
+Package: mm
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: Digital version of the Mastermind game
