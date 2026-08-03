@@ -2,7 +2,7 @@
 
 set -e
 
-if [ "$1" != "--local" ]; then
+if [ "$1" != "--build-deps" ]; then
     dnf install -y rpmdevtools rpmlint
 fi
 
@@ -22,7 +22,7 @@ git -C .. archive                       \
 
 sed "s/@VERSION@/$VERSION/" "$(dirname "$0")/mm.spec.in" > "$WD/SPECS/mm.spec"
 
-if [ "$1" != "--local" ]; then
+if [ "$1" != "--build-deps" ]; then
     dnf builddep -y "$WD/SPECS/mm.spec"
 fi
 
