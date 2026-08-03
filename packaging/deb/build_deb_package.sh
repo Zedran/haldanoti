@@ -60,6 +60,10 @@ tar -xzf "mm_$VERSION.tar.gz"
 
 cd "mm_$VERSION"
 
+if [ "$1" != "--local" ]; then
+    yes | mk-build-deps -i -r debian/control
+fi
+
 debuild -us -uc -b
 
 cd "$OWD"
