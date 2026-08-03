@@ -1,7 +1,7 @@
 Source: mm
 Section: games
 Priority: optional
-Maintainer: Zedran <17592740+Zedran@users.noreply.github.com>
+Maintainer: Wojciech Głąb (github.com/Zedran)
 Build-Depends:
  debhelper-compat (= 13),
  build-essential,
