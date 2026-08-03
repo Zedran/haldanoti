@@ -2,7 +2,7 @@
 
 set -e
 
-if [ "$1" != "--build-deps" ]; then
+if [ "$1" == "--build-deps" ]; then
     dnf install -y rpmdevtools rpmlint
 fi
 
@@ -22,7 +22,7 @@ git -C .. archive                            \
 
 sed "s/@VERSION@/$VERSION/" "$(dirname "$0")/mm-game.spec.in" > "$WD/SPECS/mm-game.spec"
 
-if [ "$1" != "--build-deps" ]; then
+if [ "$1" == "--build-deps" ]; then
     dnf builddep -y "$WD/SPECS/mm-game.spec"
 fi
 
