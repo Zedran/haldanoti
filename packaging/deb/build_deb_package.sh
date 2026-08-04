@@ -14,18 +14,20 @@ mkdir -p "$WD"
 
 VERSION=$(git describe --tags | sed 's/v//')
 
+PACKAGE_NAME="mm-game_$VERSION"
+
 ROOT=$(git rev-parse --show-toplevel)
 
-git -C .. archive                       \
-    --format=tar.gz                     \
-    --prefix="mm_$VERSION/"             \
-    -o "$WD/mm_$VERSION.tar.gz"         \
+git -C .. archive                 \
+    --format=tar.gz               \
+    --prefix="$PACKAGE_NAME/"     \
+    -o "$WD/$PACKAGE_NAME.tar.gz" \
     HEAD
 
-DEB_DIR="$WD/mm_$VERSION/debian"
+DEB_DIR="$WD/$PACKAGE_NAME/debian"
 mkdir -p "$DEB_DIR"
 
-cp "$WD/mm_$VERSION.tar.gz" "$WD/mm_$VERSION.orig.tar.gz"
+cp "$WD/$PACKAGE_NAME.tar.gz" "$WD/$PACKAGE_NAME.orig.tar.gz"
 
 sed "s/@VERSION@/$VERSION/" "$(dirname "$0")/rules.in" > "$DEB_DIR/rules"
 chmod +x "$DEB_DIR/rules"
@@ -48,7 +50,7 @@ export DEBEMAIL="17592740+Zedran@users.noreply.github.com"
 export NAME="Zedran"
 
 dch --create                  \
-    --package mm              \
+    --package mm-game         \
     --newversion "$VERSION-1" \
     "Automated build"         \
 
@@ -56,9 +58,9 @@ unset DEBEMAIL NAME
 
 cd "$WD"
 
-tar -xzf "mm_$VERSION.tar.gz"
+tar -xzf "$PACKAGE_NAME.tar.gz"
 
-cd "mm_$VERSION"
+cd "$PACKAGE_NAME"
 
 if [ "$1" = "--build-deps" ]; then
     yes | mk-build-deps -i -r debian/control
