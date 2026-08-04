@@ -2,7 +2,7 @@
 
 set -e
 
-if [ "$1" == "--build-deps" ]; then
+if [ "$1" = "--build-deps" ]; then
     apt install -y debmake
 fi
 
@@ -60,7 +60,7 @@ tar -xzf "mm_$VERSION.tar.gz"
 
 cd "mm_$VERSION"
 
-if [ "$1" == "--build-deps" ]; then
+if [ "$1" = "--build-deps" ]; then
     yes | mk-build-deps -i -r debian/control
 fi
 
