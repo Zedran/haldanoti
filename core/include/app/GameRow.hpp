@@ -13,6 +13,7 @@
 #include "app/FeedbackLabel.hpp"
 #include "game/Feedback.hpp"
 #include "game/Row.hpp"
+#include "lang/GameRow.hpp"
 #include "theme/GameRow.hpp"
 #include "ui/Box.hpp"
 #include "ui/Button.hpp"
@@ -24,6 +25,9 @@ class GameRow final : public ui::Box {
 public:
     // Size relative to outer container.
     static constexpr sf::Vector2f REL_SIZE{1.0f, 0.077f};
+
+    // Sets the value of the static member lang_.
+    static void set_lang(lang::GameRow lang) noexcept;
 
     // Sets the static member styles_.
     static void set_theme(theme::GameRow theme) noexcept;
@@ -73,6 +77,9 @@ private:
 
     // Size of the ok box relative to the dimensions of the outer container.
     static constexpr sf::Vector2f OK_BUTTON_REL_SIZE{0.75f, 0.5f};
+
+    // Contains text value set to the ok button.
+    static lang::GameRow lang_;
 
     // Stores the styles associated with different box states.
     static theme::GameRow styles_;

@@ -9,6 +9,7 @@ namespace app {
 Toolbar::Toolbar(
     const sf::Font&       font,
     sf::Vector2f          size,
+    lang::Toolbar         lang,
     theme::Toolbar        theme,
     std::function<void()> new_game_func,
     std::function<void()> exit_func
@@ -24,7 +25,7 @@ Toolbar::Toolbar(
         font,
         sf::Vector2f{size.y * BUTTON_RELSIZE.x, size.y * BUTTON_RELSIZE.y},
         theme.new_game,
-        " New\nGame",
+        lang.new_game,
         size.y * DOUBLE_LINE_REL_TEXT_SIZE
     )
         .bind(sf::Mouse::Button::Left, new_game_func);
@@ -33,7 +34,7 @@ Toolbar::Toolbar(
         font,
         sf::Vector2f{size.y * BUTTON_RELSIZE.x, size.y * BUTTON_RELSIZE.y},
         theme.exit,
-        "Exit",
+        lang.exit,
         size.y * SINGLE_LINE_REL_TEXT_SIZE
     )
         .bind(sf::Mouse::Button::Left, exit_func);

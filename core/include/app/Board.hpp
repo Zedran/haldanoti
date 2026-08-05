@@ -11,6 +11,7 @@
 
 #include "app/GameRow.hpp"
 #include "app/SecretRow.hpp"
+#include "lang/Board.hpp"
 #include "theme/Board.hpp"
 #include "ui/Box.hpp"
 
@@ -22,7 +23,7 @@ public:
     // Size relative to outer container.
     static constexpr sf::Vector2f REL_SIZE{0.90f, 0.88f};
 
-    Board(const sf::Font& font, sf::Vector2f size, theme::Board theme);
+    Board(const sf::Font& font, sf::Vector2f size, lang::Board lang, theme::Board theme);
 
     ~Board();
 

@@ -12,12 +12,15 @@
 #include "app/FeedbackLabel.hpp"
 #include "app/GameRow.hpp"
 #include "game/Row.hpp"
+#include "lang/GameRow.hpp"
 #include "theme/GameRow.hpp"
 #include "ui/Button.hpp"
 #include "ui/Layout.hpp"
 #include "utils/debug.hpp"
 
 namespace app {
+
+lang::GameRow GameRow::lang_{};
 
 theme::GameRow GameRow::styles_{};
 
@@ -147,6 +150,10 @@ void GameRow::set_feedback(game::Feedback fb) {
     }
 }
 
+void GameRow::set_lang(lang::GameRow lang) noexcept {
+    lang_ = lang;
+}
+
 void GameRow::set_theme(theme::GameRow theme) noexcept {
     styles_ = theme;
 }
@@ -157,7 +164,7 @@ void GameRow::unlock() {
     for (auto& b : code_buttons_) {
         b->enable();
     }
-    ok_button_->set_text("Ok");
+    ok_button_->set_text(lang_.ok);
     ok_button_->enable();
 
     update_box_styles();

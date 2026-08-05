@@ -12,6 +12,7 @@
 #include "app/Board.hpp"
 #include "app/Toolbar.hpp"
 #include "game/Game.hpp"
+#include "lang/Lang.hpp"
 #include "theme/Theme.hpp"
 
 namespace app {
@@ -19,7 +20,7 @@ namespace app {
 // Main class of the application.
 class App {
 public:
-    App(const sf::Font& font, sf::Image icon, sf::Vector2f window_size, theme::Theme theme);
+    App(const sf::Font& font, sf::Image icon, sf::Vector2f window_size, lang::Lang lang, theme::Theme theme);
 
     ~App();
 

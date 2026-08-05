@@ -1,0 +1,29 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
+
+#pragma once
+
+#include <SFML/System/String.hpp>
+
+#include "lang/Lang.hpp"
+
+namespace lang {
+
+const Lang DEFAULT_LANG{
+    .board{
+        .game_row{
+            .ok{L"Ok"}
+        },
+        .secret_row{
+            .info_running{},
+            .info_won{L"Code correct"},
+            .info_lost{L"Game over"},
+        },
+    },
+    .toolbar{
+        .new_game{L" New\ngame"},
+        .exit{L"Exit"},
+    }
+};
+
+} // namespace lang

@@ -12,6 +12,7 @@
 #include "app/CodeButton.hpp"
 #include "game/Row.hpp"
 #include "game/State.hpp"
+#include "lang/SecretRow.hpp"
 #include "theme/SecretRow.hpp"
 #include "ui/Box.hpp"
 #include "ui/Label.hpp"
@@ -25,7 +26,7 @@ public:
     // Size relative to outer container.
     static constexpr sf::Vector2f REL_SIZE{1.0f, 0.077f};
 
-    SecretRow(const sf::Font& font, sf::Vector2f size, theme::SecretRow theme);
+    SecretRow(const sf::Font& font, sf::Vector2f size, lang::SecretRow lang, theme::SecretRow theme);
 
     ~SecretRow();
 
@@ -56,6 +57,9 @@ private:
 
     // Holds non-owning pointer to the info Label.
     ui::Label* info_;
+
+    // Contains strings that can be set to notification label.
+    lang::SecretRow lang_;
 
     // Stores styling information required by different notifications displayed
     // in the info box.
