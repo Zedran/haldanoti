@@ -27,6 +27,7 @@ project(mm-game C CXX)
 set(BUILD_SHARED_LIBS OFF)
 
 include(FetchSFML)
+include(FetchJSON)
 include(FetchFont)
 
 add_custom_target(configure_header

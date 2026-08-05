@@ -18,6 +18,7 @@ Build-Depends:
  libharfbuzz-dev,
  libvorbis-dev,
  libflac-dev,
+ nlohmann-json3-dev,
 Standards-Version: 4.7.0
 Homepage: https://github.com/Zedran/mm
 Rules-Requires-Root: no

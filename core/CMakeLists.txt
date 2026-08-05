@@ -23,7 +23,12 @@ set(CORE_SOURCES
 
 add_library(core STATIC ${CORE_SOURCES})
 target_include_directories(core PUBLIC include)
-target_link_libraries(core PUBLIC SFML::System SFML::Window SFML::Graphics)
+target_link_libraries(core PUBLIC
+    SFML::System
+    SFML::Window
+    SFML::Graphics
+    nlohmann_json::nlohmann_json
+)
 
 if(MAKE_TESTS AND COVER)
     add_library(core_coverage ${CORE_SOURCES})

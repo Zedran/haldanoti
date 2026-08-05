@@ -22,6 +22,7 @@ BuildRequires:  harfbuzz-devel
 BuildRequires:  freetype-devel
 BuildRequires:  libvorbis-devel
 BuildRequires:  flac-devel
+BuildRequires:  json-devel
 
 %global debug_package %{nil}
 
