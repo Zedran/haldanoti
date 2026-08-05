@@ -15,7 +15,7 @@ Label::Label(
     const sf::Font&      font,
     sf::Vector2f         size,
     Style                style,
-    std::string          text,
+    sf::String           text,
     std::optional<float> font_size
 ) : bg_{size},
     fg_{font, std::move(text)},
@@ -106,7 +106,7 @@ void Label::set_style(Style style) {
     fg_.setFillColor(style.fg);
 }
 
-void Label::set_text(std::string text) {
+void Label::set_text(sf::String text) {
     fg_.setString(text);
     center_text();
 }

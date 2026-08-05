@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <cstddef>
+#include <string>
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
@@ -107,7 +108,7 @@ bool GameRow::is_locked() const noexcept {
 
 void GameRow::lock(bool commit) {
     if (commit && !all_set()) {
-        dbg("failed to commit row {}", row_num_);
+        dbg("failed to commit row {}", row_num_.toAnsiString());
         return;
     }
 
@@ -121,7 +122,7 @@ void GameRow::lock(bool commit) {
 
     update_box_styles();
 
-    dbg("locked row {}: commit = {}", row_num_, commit);
+    dbg("locked row {}: commit = {}", row_num_.toAnsiString(), commit);
 }
 
 void GameRow::reset() {
@@ -161,7 +162,7 @@ void GameRow::unlock() {
 
     update_box_styles();
 
-    dbg("unlocked row {}", row_num_);
+    dbg("unlocked row {}", row_num_.toAnsiString());
 }
 
 void GameRow::update_box_styles() {

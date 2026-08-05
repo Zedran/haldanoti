@@ -17,7 +17,9 @@
 
 // A wrapper for debug::write that captures source_location at the call site.
 // Accepts a format_string along with an arbitrary number of arguments
-// and prints the formatted log entry to stderr.
+// and prints the formatted log entry to stderr. This macro does not
+// display non-ASCII characters correctly, but such characters are
+// only used for presentation purposes and do not need to examined.
 #define dbg(fmt, ...) debug::write(std::source_location::current(), fmt __VA_OPT__(, ) __VA_ARGS__)
 
 namespace debug {

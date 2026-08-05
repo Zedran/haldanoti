@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include <string>
 #include <vector>
 
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
 
 #include "app/CodeButton.hpp"
@@ -104,7 +104,7 @@ private:
     bool locked_;
 
     // Row number in string form, stored for the ok button.
-    std::string row_num_;
+    sf::String row_num_;
 
     // Sets the correct box styles following locking and unlocking
     // of the GameRow instance.
