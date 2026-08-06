@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include "lang/GameRow.hpp"
 #include "lang/SecretRow.hpp"
 
@@ -12,5 +14,7 @@ struct Board {
     GameRow   game_row;
     SecretRow secret_row;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Board, game_row, secret_row);
 
 } // namespace lang

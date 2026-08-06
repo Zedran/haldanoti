@@ -3,4 +3,4 @@
 
 include_guard(GLOBAL)
 
-find_package(nlohmann_json 3 REQUIRED)
+find_package(nlohmann_json 3.9.0 REQUIRED)

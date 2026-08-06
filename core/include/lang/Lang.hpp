@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include "lang/Board.hpp"
 #include "lang/Toolbar.hpp"
 
@@ -12,5 +14,7 @@ struct Lang {
     Board   board;
     Toolbar toolbar;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Lang, board, toolbar);
 
 } // namespace lang

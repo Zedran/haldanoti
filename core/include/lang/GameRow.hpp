@@ -4,11 +4,16 @@
 #pragma once
 
 #include <SFML/System/String.hpp>
+#include <nlohmann/json.hpp>
+
+#include "lang/conversions.hpp" // IWYU pragma: keep
 
 namespace lang {
 
 struct GameRow {
     sf::String ok;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(GameRow, ok);
 
 } // namespace lang
