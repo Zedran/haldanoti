@@ -42,15 +42,10 @@ BuildRequires:  json-devel >= 3.9.0
 %files
 %license %{_datadir}/%{name}/LICENSE
 %license %{_datadir}/%{name}/NOTICE.md
-%license %{_datadir}/%{name}/docs/licenses/Inter.txt
-%license %{_datadir}/%{name}/docs/licenses/JSON.txt
-%license %{_datadir}/%{name}/docs/licenses/SFML.txt
+%license %{_datadir}/%{name}/docs/licenses
 %doc     %{_datadir}/%{name}/README.md
 %{_bindir}/%{name}
-%{_datadir}/%{name}/assets/InterVariable.ttf
-%{_datadir}/%{name}/assets/mm.png
-%{_datadir}/%{name}/assets/mm.svg
-%{_datadir}/%{name}/assets/lang
+%{_datadir}/%{name}/assets
 %{_datadir}/applications/%{name}.desktop
 
 %changelog
