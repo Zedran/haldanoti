@@ -49,6 +49,7 @@ BuildRequires:  json-devel >= 3.9.0
 %{_datadir}/%{name}/assets/InterVariable.ttf
 %{_datadir}/%{name}/assets/mm.png
 %{_datadir}/%{name}/assets/mm.svg
+%{_datadir}/%{name}/assets/lang
 %{_datadir}/applications/%{name}.desktop
 
 %changelog
