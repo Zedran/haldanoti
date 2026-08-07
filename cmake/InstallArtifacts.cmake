@@ -19,6 +19,7 @@ set(DOC_FILES
 
 set(LIC_FILES
     ${PROJECT_SOURCE_DIR}/docs/licenses/Inter.txt
+    ${PROJECT_SOURCE_DIR}/docs/licenses/JSON.txt
     ${PROJECT_SOURCE_DIR}/docs/licenses/SFML.txt
 )
 
