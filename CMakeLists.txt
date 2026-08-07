@@ -27,6 +27,7 @@ project(mm-game C CXX)
 set(BUILD_SHARED_LIBS OFF)
 
 include(FetchSFML)
+include(FetchJSON)
 include(FetchFont)
 
 add_custom_target(configure_header
@@ -46,6 +47,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE core)
 target_compile_definitions(${PROJECT_NAME} PUBLIC
     FONT_FILE_PATH_DEV="${FONT_FILE_PATH}"
     ICON_FILE_PATH_DEV="${CMAKE_SOURCE_DIR}/assets/mm.png"
+    LANG_DIR_PATH_DEV="${CMAKE_SOURCE_DIR}/assets/lang"
 )
 
 add_dependencies(${PROJECT_NAME} configure_header)

@@ -9,6 +9,8 @@ set(ASSET_FILES
     ${CMAKE_SOURCE_DIR}/assets/mm.svg
 )
 
+set(LANG_DIR ${PROJECT_SOURCE_DIR}/assets/lang)
+
 set(DOC_FILES
     ${PROJECT_SOURCE_DIR}/LICENSE
     ${PROJECT_SOURCE_DIR}/NOTICE.md
@@ -17,6 +19,7 @@ set(DOC_FILES
 
 set(LIC_FILES
     ${PROJECT_SOURCE_DIR}/docs/licenses/Inter.txt
+    ${PROJECT_SOURCE_DIR}/docs/licenses/JSON.txt
     ${PROJECT_SOURCE_DIR}/docs/licenses/SFML.txt
 )
 
@@ -32,10 +35,12 @@ install(TARGETS ${PROJECT_NAME} DESTINATION ${BIN_DIR}   )
 install(FILES   ${ASSET_FILES}  DESTINATION ${ASSETS_DIR})
 install(FILES   ${DOC_FILES}    DESTINATION ${DOC_DIR}   )
 install(FILES   ${LIC_FILES}    DESTINATION ${LIC_DIR}   )
+install(DIRECTORY ${LANG_DIR}   DESTINATION ${ASSETS_DIR})
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC
     FONT_FILE_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/InterVariable.ttf"
     ICON_FILE_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/mm.png"
+    LANG_DIR_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/lang"
 )
 
 if(LINUX)

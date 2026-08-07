@@ -13,11 +13,11 @@
 
 namespace app {
 
-App::App(const sf::Font& font, sf::Image icon, sf::Vector2f window_size, theme::Theme theme)
+App::App(const sf::Font& font, sf::Image icon, sf::Vector2f window_size, lang::Lang lang, theme::Theme theme)
     : bg_{theme.bg},
-      board_{font, window_size.componentWiseMul(Board::REL_SIZE), theme.board},
+      board_{font, window_size.componentWiseMul(Board::REL_SIZE), lang.board, theme.board},
       game_{},
-      toolbar_{font, window_size.componentWiseMul(Toolbar::REL_SIZE), theme.toolbar, [this] { this->new_game(); }, [this] { this->close(); }},
+      toolbar_{font, window_size.componentWiseMul(Toolbar::REL_SIZE), lang.toolbar, theme.toolbar, [this] { this->new_game(); }, [this] { this->close(); }},
       window_{sf::VideoMode(static_cast<sf::Vector2u>(window_size)), "mm", sf::Style::Close} {
     window_.setIcon(std::move(icon));
     window_.setVerticalSyncEnabled(true);

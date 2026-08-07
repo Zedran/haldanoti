@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <cstddef>
+#include <string>
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
@@ -11,12 +12,15 @@
 #include "app/FeedbackLabel.hpp"
 #include "app/GameRow.hpp"
 #include "game/Row.hpp"
+#include "lang/GameRow.hpp"
 #include "theme/GameRow.hpp"
 #include "ui/Button.hpp"
 #include "ui/Layout.hpp"
 #include "utils/debug.hpp"
 
 namespace app {
+
+lang::GameRow GameRow::lang_{};
 
 theme::GameRow GameRow::styles_{};
 
@@ -107,7 +111,7 @@ bool GameRow::is_locked() const noexcept {
 
 void GameRow::lock(bool commit) {
     if (commit && !all_set()) {
-        dbg("failed to commit row {}", row_num_);
+        dbg("failed to commit row {}", row_num_.toAnsiString());
         return;
     }
 
@@ -121,7 +125,7 @@ void GameRow::lock(bool commit) {
 
     update_box_styles();
 
-    dbg("locked row {}: commit = {}", row_num_, commit);
+    dbg("locked row {}: commit = {}", row_num_.toAnsiString(), commit);
 }
 
 void GameRow::reset() {
@@ -146,6 +150,10 @@ void GameRow::set_feedback(game::Feedback fb) {
     }
 }
 
+void GameRow::set_lang(lang::GameRow lang) noexcept {
+    lang_ = lang;
+}
+
 void GameRow::set_theme(theme::GameRow theme) noexcept {
     styles_ = theme;
 }
@@ -156,12 +164,12 @@ void GameRow::unlock() {
     for (auto& b : code_buttons_) {
         b->enable();
     }
-    ok_button_->set_text("Ok");
+    ok_button_->set_text(lang_.ok);
     ok_button_->enable();
 
     update_box_styles();
 
-    dbg("unlocked row {}", row_num_);
+    dbg("unlocked row {}", row_num_.toAnsiString());
 }
 
 void GameRow::update_box_styles() {

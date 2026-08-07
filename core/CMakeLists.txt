@@ -12,18 +12,25 @@ set(CORE_SOURCES
     src/game/Game.cpp
     src/game/Row.cpp
     src/game/helpers.cpp
+    src/lang/conversions.cpp
     src/ui/Binding.cpp
     src/ui/Box.cpp
     src/ui/Button.cpp
     src/ui/Label.cpp
     src/ui/Layout.cpp
     src/utils/Source.cpp
+    src/utils/assets.cpp
     src/utils/utils.cpp
 )
 
 add_library(core STATIC ${CORE_SOURCES})
 target_include_directories(core PUBLIC include)
-target_link_libraries(core PUBLIC SFML::System SFML::Window SFML::Graphics)
+target_link_libraries(core PUBLIC
+    SFML::System
+    SFML::Window
+    SFML::Graphics
+    nlohmann_json::nlohmann_json
+)
 
 if(MAKE_TESTS AND COVER)
     add_library(core_coverage ${CORE_SOURCES})

@@ -23,6 +23,10 @@ SFML uses the following libraries (quoted from the project's [README](https://gi
 > -   [_wepoll_](https://github.com/piscisaureus/wepoll) is under the [BSD license](https://github.com/piscisaureus/wepoll/blob/dist/LICENSE)
 > -   [_libssh2_](https://github.com/libssh2/libssh2) is under the [BSD license](https://github.com/libssh2/libssh2/blob/master/COPYING)
 
+## [JSON](https://github.com/nlohmann/json)
+
+[License text](docs/licenses/JSON.txt)
+
 ## [Inter font](https://github.com/rsms/inter)
 
 [License text](docs/licenses/Inter.txt)

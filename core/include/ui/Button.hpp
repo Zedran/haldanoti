@@ -5,13 +5,13 @@
 
 #include <functional>
 #include <optional>
-#include <string>
 #include <vector>
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 
@@ -36,7 +36,7 @@ public:
         const sf::Font&      font,
         sf::Vector2f         size,
         Style                style,
-        std::string          text,
+        sf::String           text,
         std::optional<float> font_size = std::nullopt
     );
 

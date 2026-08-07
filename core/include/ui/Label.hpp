@@ -4,7 +4,6 @@
 #pragma once
 
 #include <optional>
-#include <string>
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
@@ -13,6 +12,7 @@
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
 
 #include "ui/Widget.hpp"
@@ -34,7 +34,7 @@ public:
         const sf::Font&      font,
         sf::Vector2f         size,
         Style                style,
-        std::string          text,
+        sf::String           text,
         std::optional<float> font_size = std::nullopt
     );
 
@@ -54,7 +54,7 @@ public:
 
     void set_style(Style style);
 
-    void set_text(std::string text);
+    void set_text(sf::String text);
 
 private:
     // Outline size in pixels.

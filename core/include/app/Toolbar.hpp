@@ -8,6 +8,7 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include "lang/Toolbar.hpp"
 #include "theme/Toolbar.hpp"
 #include "ui/Box.hpp"
 
@@ -26,6 +27,7 @@ public:
     Toolbar(
         const sf::Font&       font,
         sf::Vector2f          size,
+        lang::Toolbar         lang,
         theme::Toolbar        theme,
         std::function<void()> new_game_func,
         std::function<void()> exit_func

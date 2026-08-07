@@ -1,0 +1,16 @@
+{
+    "board": {
+        "game_row": {
+            "ok": "Ok"
+        },
+        "secret_row": {
+            "info_running": "",
+            "info_won": "Kod prawidłowy",
+            "info_lost": "Koniec gry"
+        }
+    },
+    "toolbar": {
+        "new_game": "Nowa\n  gra",
+        "exit": "Wyjście"
+    }
+}
