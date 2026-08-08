@@ -10,10 +10,10 @@
 namespace ui {
 
 Label::Label(
-    const sf::Font&      font,
-    sf::Vector2f         size,
-    Style                style,
-    sf::String           text,
+    const sf::Font&             font,
+    sf::Vector2f                size,
+    Style                       style,
+    sf::String                  text,
     std::optional<unsigned int> font_size
 ) : bg_{size},
     fg_{font},
