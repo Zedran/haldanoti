@@ -35,7 +35,7 @@ public:
         sf::Vector2f         size,
         Style                style,
         sf::String           text,
-        std::optional<float> font_size = std::nullopt
+        std::optional<unsigned int> font_size = std::nullopt
     );
 
     virtual ~Label();
@@ -67,7 +67,7 @@ private:
     sf::Text           fg_;
 
     // Preferred font size.
-    std::optional<float> pref_font_size_;
+    std::optional<unsigned int> pref_font_size_;
 
     void center_text();
 };

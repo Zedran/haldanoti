@@ -14,7 +14,7 @@ Toolbar::Toolbar(
     std::function<void()> new_game_func,
     std::function<void()> exit_func
 ) : ui::Box{size, theme.box, ui::Layout::Type::RowLayout} {
-    const float font_size = size.y * FONT_REL_SIZE;
+    const unsigned int font_size = static_cast<unsigned int>(size.y * FONT_REL_SIZE);
 
     add_component<ui::Button>(
         font,

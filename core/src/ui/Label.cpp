@@ -14,7 +14,7 @@ Label::Label(
     sf::Vector2f         size,
     Style                style,
     sf::String           text,
-    std::optional<float> font_size
+    std::optional<unsigned int> font_size
 ) : bg_{size},
     fg_{font},
     pref_font_size_{font_size} {
@@ -35,23 +35,23 @@ void Label::center_text() {
         return;
     }
 
-    float font_size;
+    unsigned int font_size;
 
-    if (!pref_font_size_ || *pref_font_size_ < 1.0f) {
-        font_size = max_height;
+    if (!pref_font_size_ || *pref_font_size_ < 1) {
+        font_size = static_cast<unsigned int>(max_height);
     } else {
         font_size = *pref_font_size_;
     }
 
-    while (font_size > 1.0f) {
-        fg_.setCharacterSize(static_cast<unsigned int>(font_size));
+    while (font_size > 1) {
+        fg_.setCharacterSize(font_size);
         const sf::FloatRect fg_bounds = fg_.getLocalBounds();
         if (fg_bounds.size.x < max_width && fg_bounds.size.y < max_height) {
             break;
         }
-        font_size -= 1.0f;
+        font_size--;
     }
-    fg_.setCharacterSize(static_cast<unsigned int>(font_size));
+    fg_.setCharacterSize(font_size);
 
     fg_.setOrigin(fg_.getLocalBounds().getCenter());
     fg_.setPosition(bg_bounds.getCenter());

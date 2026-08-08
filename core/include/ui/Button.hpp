@@ -37,7 +37,7 @@ public:
         sf::Vector2f         size,
         Style                style,
         sf::String           text,
-        std::optional<float> font_size = std::nullopt
+        std::optional<unsigned int> font_size = std::nullopt
     );
 
     virtual ~Button();
