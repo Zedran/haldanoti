@@ -21,7 +21,7 @@ const Lang DEFAULT_LANG{
         },
     },
     .toolbar{
-        .new_game{L" New\ngame"},
+        .new_game{L"New\ngame"},
         .exit{L"Exit"},
     }
 };

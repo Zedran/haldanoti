@@ -14,19 +14,14 @@ Toolbar::Toolbar(
     std::function<void()> new_game_func,
     std::function<void()> exit_func
 ) : ui::Box{size, theme.box, ui::Layout::Type::RowLayout} {
-    // Temporary fixed values for text size in buttons, depending on whether
-    // it is split across two lines or is contained in a single line.
-    // Multiline text positioning should be done properly before adding
-    // customizable localization.
-    constexpr float DOUBLE_LINE_REL_TEXT_SIZE{0.3f};
-    constexpr float SINGLE_LINE_REL_TEXT_SIZE{0.4f};
+    const float font_size = size.y * FONT_REL_SIZE;
 
     add_component<ui::Button>(
         font,
         sf::Vector2f{size.y * BUTTON_RELSIZE.x, size.y * BUTTON_RELSIZE.y},
         theme.new_game,
         lang.new_game,
-        size.y * DOUBLE_LINE_REL_TEXT_SIZE
+        font_size
     )
         .bind(sf::Mouse::Button::Left, new_game_func);
 
@@ -35,7 +30,7 @@ Toolbar::Toolbar(
         sf::Vector2f{size.y * BUTTON_RELSIZE.x, size.y * BUTTON_RELSIZE.y},
         theme.exit,
         lang.exit,
-        size.y * SINGLE_LINE_REL_TEXT_SIZE
+        font_size
     )
         .bind(sf::Mouse::Button::Left, exit_func);
 }

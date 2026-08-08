@@ -20,6 +20,9 @@ class Toolbar final : public ui::Box {
     // Button size relative to Toolbar's height.
     static constexpr sf::Vector2f BUTTON_RELSIZE{1.5f, 0.8f};
 
+    // Font size relative to the height of the button.
+    static constexpr float FONT_REL_SIZE{0.4f};
+
 public:
     // Size relative to outer container.
     static constexpr sf::Vector2f REL_SIZE{1.0f, 0.065f};
