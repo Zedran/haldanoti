@@ -61,7 +61,7 @@ private:
     static constexpr float OUTLINE_SIZE{1.0f};
 
     // Padding value for text contained within every Label-derived type.
-    static constexpr float RELATIVE_PADDING{0.05f};
+    static constexpr float RELATIVE_PADDING{0.09f};
 
     sf::RectangleShape bg_;
     sf::Text           fg_;
