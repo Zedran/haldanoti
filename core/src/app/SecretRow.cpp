@@ -35,7 +35,7 @@ SecretRow::SecretRow(const sf::Font& font, sf::Vector2f size, lang::SecretRow la
         size.componentWiseMul(INFO_BOX_REL_SIZE),
         theme.info_won,
         "Info",
-        size.y * INFO_FONT_REL_SIZE
+        static_cast<unsigned int>(size.y * INFO_FONT_REL_SIZE)
     );
 
     display_info(game::State::Running);

@@ -10,7 +10,7 @@
         }
     },
     "toolbar": {
-        "new_game": "Nowa\n  gra",
+        "new_game": "Nowa\ngra",
         "exit": "Wyjście"
     }
 }

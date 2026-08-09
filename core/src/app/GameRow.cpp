@@ -78,7 +78,7 @@ GameRow::GameRow(const sf::Font& font, sf::Vector2f size, int row_number)
         },
         styles_.ok_button,
         "",
-        size.y * OK_BUTTON_FONT_REL_SIZE
+        static_cast<unsigned int>(size.y * OK_BUTTON_FONT_REL_SIZE)
     );
     ok_button_->bind(sf::Mouse::Button::Left, [this] { this->lock(true); });
 

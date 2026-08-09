@@ -22,8 +22,7 @@ bool detect_collision(sf::FloatRect rect, sf::Vector2i point);
 // Returns true if point is in contact with rect.
 bool detect_collision(sf::FloatRect rect, sf::Vector2f point);
 
-// Returns sf::Vector2f with rounded components. Fractions can cause a blur
-// at the edges of drawable objects.
+// Returns sf::Vector2f with rounded components.
 sf::Vector2f round(sf::Vector2f v);
 
 } // namespace utils

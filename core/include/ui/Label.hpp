@@ -31,11 +31,11 @@ public:
     // the constructor will attempt to preserve it. If text does not fit
     // inside the Label, font size will be decreased.
     Label(
-        const sf::Font&      font,
-        sf::Vector2f         size,
-        Style                style,
-        sf::String           text,
-        std::optional<float> font_size = std::nullopt
+        const sf::Font&             font,
+        sf::Vector2f                size,
+        Style                       style,
+        sf::String                  text,
+        std::optional<unsigned int> font_size = std::nullopt
     );
 
     virtual ~Label();
@@ -61,13 +61,13 @@ private:
     static constexpr float OUTLINE_SIZE{1.0f};
 
     // Padding value for text contained within every Label-derived type.
-    static constexpr float RELATIVE_PADDING{0.05f};
+    static constexpr float RELATIVE_PADDING{0.09f};
 
     sf::RectangleShape bg_;
     sf::Text           fg_;
 
     // Preferred font size.
-    std::optional<float> pref_font_size_;
+    std::optional<unsigned int> pref_font_size_;
 
     void center_text();
 };

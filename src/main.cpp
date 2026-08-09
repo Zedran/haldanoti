@@ -32,9 +32,10 @@ int main() {
     dbg("{}", VERSION_INFO);
 
     try {
-        const sf::Font font = utils::load_asset<sf::Font>({FONT_FILE_PATH_SYS, FONT_FILE_PATH_DEV});
-        sf::Image      icon = utils::load_asset<sf::Image>({ICON_FILE_PATH_SYS, ICON_FILE_PATH_DEV});
-        lang::Lang     lang = utils::load_language({LANG_DIR_PATH_SYS, LANG_DIR_PATH_DEV});
+        sf::Font font = utils::load_asset<sf::Font>({FONT_FILE_PATH_SYS, FONT_FILE_PATH_DEV});
+        font.setSmooth(false);
+        sf::Image  icon = utils::load_asset<sf::Image>({ICON_FILE_PATH_SYS, ICON_FILE_PATH_DEV});
+        lang::Lang lang = utils::load_language({LANG_DIR_PATH_SYS, LANG_DIR_PATH_DEV});
         return app::App{font, std::move(icon), window_size, lang, theme::DEFAULT_THEME}.run();
     } catch (const nlohmann::json::exception& e) {
         std::cerr << "JSON: " << e.what() << '\n';

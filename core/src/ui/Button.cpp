@@ -9,11 +9,11 @@
 namespace ui {
 
 Button::Button(
-    const sf::Font&      font,
-    sf::Vector2f         size,
-    Style                style,
-    sf::String           text,
-    std::optional<float> font_size
+    const sf::Font&             font,
+    sf::Vector2f                size,
+    Style                       style,
+    sf::String                  text,
+    std::optional<unsigned int> font_size
 ) : Label{font, size, style.normal, std::move(text), font_size},
     pressed_by_{},
     state_{State::Normal},

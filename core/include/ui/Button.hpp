@@ -33,11 +33,11 @@ public:
     // the constructor will attempt to preserve it. If text does not fit
     // inside the Button, font size will be decreased.
     Button(
-        const sf::Font&      font,
-        sf::Vector2f         size,
-        Style                style,
-        sf::String           text,
-        std::optional<float> font_size = std::nullopt
+        const sf::Font&             font,
+        sf::Vector2f                size,
+        Style                       style,
+        sf::String                  text,
+        std::optional<unsigned int> font_size = std::nullopt
     );
 
     virtual ~Button();

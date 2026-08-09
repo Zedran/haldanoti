@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
-#include <cmath>
-
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/Vector2.hpp>
 
@@ -12,14 +10,15 @@
 namespace ui {
 
 Label::Label(
-    const sf::Font&      font,
-    sf::Vector2f         size,
-    Style                style,
-    sf::String           text,
-    std::optional<float> font_size
+    const sf::Font&             font,
+    sf::Vector2f                size,
+    Style                       style,
+    sf::String                  text,
+    std::optional<unsigned int> font_size
 ) : bg_{size},
-    fg_{font, std::move(text)},
+    fg_{font},
     pref_font_size_{font_size} {
+    set_text(std::move(text));
     set_style(style);
 }
 
@@ -29,42 +28,33 @@ void Label::center_text() {
     const sf::FloatRect bg_bounds = bg_.getGlobalBounds();
 
     // Decrease the available space by padding value.
-    const float max_width  = std::max(0.0f, std::round(bg_bounds.size.x - (RELATIVE_PADDING * 2 * bg_bounds.size.x) - OUTLINE_SIZE));
-    const float max_height = std::max(0.0f, std::round(bg_bounds.size.y - (RELATIVE_PADDING * 2 * bg_bounds.size.y) - OUTLINE_SIZE));
+    const float max_width  = std::max(0.0f, bg_bounds.size.x - (RELATIVE_PADDING * 2 * bg_bounds.size.x) - OUTLINE_SIZE);
+    const float max_height = std::max(0.0f, bg_bounds.size.y - (RELATIVE_PADDING * 2 * bg_bounds.size.y) - OUTLINE_SIZE);
 
     if (max_width <= 0.0f || max_height <= 0.0f) {
         return;
     }
 
-    float font_size;
+    unsigned int font_size;
 
-    if (!pref_font_size_ || *pref_font_size_ < 1.0f) {
-        font_size = max_height;
+    if (!pref_font_size_ || *pref_font_size_ < 1) {
+        font_size = static_cast<unsigned int>(max_height);
     } else {
         font_size = *pref_font_size_;
     }
 
-    while (font_size > 1.0f) {
-        fg_.setCharacterSize(static_cast<unsigned int>(font_size));
+    while (font_size > 1) {
+        fg_.setCharacterSize(font_size);
         const sf::FloatRect fg_bounds = fg_.getLocalBounds();
-        if (fg_bounds.size.x <= max_width && fg_bounds.size.y <= max_height) {
+        if (fg_bounds.size.x < max_width && fg_bounds.size.y < max_height) {
             break;
         }
-        font_size -= 1.0f;
+        font_size--;
     }
-    fg_.setCharacterSize(static_cast<unsigned int>(font_size));
+    fg_.setCharacterSize(font_size);
 
-    const sf::FloatRect fg_bounds = fg_.getLocalBounds();
-
-    fg_.setOrigin(utils::round({
-        fg_bounds.position.x + fg_bounds.size.x / 2.0f,
-        fg_bounds.position.y + fg_bounds.size.y / 2.0f,
-    }));
-
-    fg_.setPosition(utils::round({
-        bg_bounds.position.x + bg_bounds.size.x / 2.0f,
-        bg_bounds.position.y + bg_bounds.size.y / 2.0f,
-    }));
+    fg_.setOrigin(fg_.getLocalBounds().getCenter());
+    fg_.setPosition(bg_bounds.getCenter());
 }
 
 void Label::draw(sf::RenderTarget& target, sf::RenderStates states) const {
@@ -107,7 +97,14 @@ void Label::set_style(Style style) {
 }
 
 void Label::set_text(sf::String text) {
-    fg_.setString(text);
+    // Centering small, single-line text causes it to drift to the left.
+    if (text.find(sf::String{"\n"}) != sf::String::InvalidPos) {
+        fg_.setLineAlignment(sf::Text::LineAlignment::Center);
+    } else {
+        fg_.setLineAlignment(sf::Text::LineAlignment::Left);
+    }
+
+    fg_.setString(std::move(text));
     center_text();
 }
 
