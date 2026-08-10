@@ -23,6 +23,7 @@ Feedback compare_codes(std::span<const int> good_code, std::span<const int> user
         if (uc[i] == gc[i]) {
             fb.red_count++;
             gc[i] = game::Row::CODE_VALUE_NONE;
+            uc[i] = game::Row::CODE_VALUE_NONE;
         }
     }
 
