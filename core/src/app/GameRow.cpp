@@ -52,6 +52,7 @@ GameRow::GameRow(const sf::Font& font, sf::Vector2f size, int row_number)
         ui::Layout::Type::RowLayout
     );
 
+    FeedbackLabel::set_lang(lang_.fb_label);
     FeedbackLabel::set_theme(styles_.fb_label);
 
     const sf::Vector2f fbl_size{

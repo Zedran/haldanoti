@@ -1,6 +1,11 @@
 {
     "board": {
         "game_row": {
+            "fb_label": {
+                "none": "",
+                "red": "+",
+                "white": "-"
+            },
             "ok": "Ok"
         },
         "secret_row": {

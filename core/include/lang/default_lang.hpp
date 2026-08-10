@@ -12,6 +12,11 @@ namespace lang {
 const Lang DEFAULT_LANG{
     .board{
         .game_row{
+            .fb_label{
+                L"",
+                L"+",
+                L"-"
+            },
             .ok{L"Ok"}
         },
         .secret_row{

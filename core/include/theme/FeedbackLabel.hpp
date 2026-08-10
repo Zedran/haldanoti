@@ -8,6 +8,8 @@
 namespace theme {
 
 struct FeedbackLabel {
+    bool show_text;
+
     ui::Label::Style none;
     ui::Label::Style red;
     ui::Label::Style white;

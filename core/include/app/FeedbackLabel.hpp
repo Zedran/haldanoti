@@ -8,6 +8,7 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include "lang/FeedbackLabel.hpp"
 #include "theme/FeedbackLabel.hpp"
 #include "ui/Label.hpp"
 
@@ -41,6 +42,9 @@ public:
     // Size relative to the height of the FeedbackLabel's container.
     static constexpr sf::Vector2f REL_SIZE{0.25f, 0.25f};
 
+    // Sets the static member lang_. This operation is only done once.
+    static void set_lang(lang::FeedbackLabel lang);
+
     // Sets the static member styles_. This operation is only done once.
     static void set_theme(theme::FeedbackLabel theme);
 
@@ -58,14 +62,27 @@ public:
     void set_pin(Pin pin);
 
 private:
+    // Font size relative to the height of FeedbackLabel.
+    static constexpr float FONT_REL_SIZE{0.75f};
+
+    // Contains text value set to the FeedbackLabel, depending on its state
+    // and styles_.show_text.
+    static lang::FeedbackLabel lang_;
+
     // Stores the styles associated with different Pin values.
     static theme::FeedbackLabel styles_;
+
+    // This once_flag is used by the static set_lang member function.
+    static std::once_flag lang_set_;
 
     // This once_flag is used by the static set_theme member function.
     static std::once_flag styles_set_;
 
     // Holds current Pin assigned to the FeedbackLabel instance.
     Pin pin_;
+
+    // Updates FeedbackLabel's text after a new style has been set.
+    void update_text();
 };
 
 } // namespace app
