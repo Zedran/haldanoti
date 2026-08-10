@@ -33,8 +33,6 @@ GameRow::GameRow(const sf::Font& font, sf::Vector2f size, int row_number)
         ui::Layout::Type::RowLayout
     );
 
-    assert(styles_.code_button);
-
     const sf::Vector2f cb_size{
         size.y * CodeButton::REL_SIZE.x,
         size.y * CodeButton::REL_SIZE.y,
@@ -154,7 +152,7 @@ void GameRow::set_lang(lang::GameRow lang) noexcept {
 
 void GameRow::set_theme(theme::GameRow theme) noexcept {
     styles_ = theme;
-    CodeButton::set_theme(*styles_.code_button);
+    CodeButton::set_theme(styles_.code_button);
     FeedbackLabel::set_theme(styles_.fb_label);
 }
 

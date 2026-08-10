@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "theme/CodeButton.hpp"
 #include "ui/Box.hpp"
 #include "ui/Label.hpp"
 
@@ -15,9 +14,6 @@ struct SecretRow {
 
     // Box with code buttons.
     ui::Box::Style code_box;
-
-    // Passed to CodeButton to set its styles_ static member.
-    const CodeButton* code_button;
 
     // Info label: no message.
     ui::Label::Style info_running;

@@ -98,7 +98,6 @@ const Theme DEFAULT_THEME{
             .bg{a0},
             .ol{a0},
         },
-        .code_button{cb},
         .game_row{
             .box{
                 .active{
@@ -113,7 +112,7 @@ const Theme DEFAULT_THEME{
             .code_box{rbs_a0},
             .fb_box{rbs_a0},
             .ok_box{rbs_a0},
-            .code_button = &cb,
+            .code_button{cb},
             .fb_label{
                 .show_text = false,
                 .none{dbs},
@@ -137,7 +136,6 @@ const Theme DEFAULT_THEME{
                 .bg{0xf2dec6ff},
                 .ol{a0},
             },
-            .code_button = &cb,
             .info_running{
                 .bg{a0},
                 .fg{a0},

@@ -23,8 +23,8 @@ struct GameRow {
     // Box containing the ok button or row number.
     RowBoxStyle ok_box;
 
-    // Passed to CodeButton to set its styles_ static member.
-    const CodeButton* code_button;
+    // Passed to CodeButton to set its theme-related static members.
+    CodeButton code_button;
 
     // Passed to FeedbackLabel to set its theme-related static members.
     FeedbackLabel fb_label;
