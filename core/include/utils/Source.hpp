@@ -22,6 +22,9 @@ public:
     // Generates a new random number.
     int get();
 
+    // Fills the specified container with random numbers.
+    void read(std::span<int> out);
+
     // Fills the specified container with unique random numbers.
     void read_unique(std::span<int> out);
 
