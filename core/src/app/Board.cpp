@@ -14,15 +14,15 @@ namespace app {
 
 Board::Board(const sf::Font& font, sf::Vector2f size, lang::Board lang, theme::Board theme)
     : ui::Box{size, theme.box, ui::Layout::Type::ColumnLayout}, active_row_{}, game_rows_(game::Game::NUM_ROWS) {
+    GameRow::set_lang(lang.game_row);
+    GameRow::set_theme(theme.game_row);
+
     secret_row_ = &add_component<SecretRow>(
         font,
         size.componentWiseMul(SecretRow::REL_SIZE),
         lang.secret_row,
         theme.secret_row
     );
-
-    GameRow::set_lang(lang.game_row);
-    GameRow::set_theme(theme.game_row);
 
     for (std::size_t i = game::Game::NUM_ROWS; i > 0; i--) {
         GameRow* ptr = &add_component<GameRow>(

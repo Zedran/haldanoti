@@ -4,7 +4,6 @@
 #pragma once
 
 #include <cstddef>
-#include <mutex>
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -22,7 +21,7 @@ public:
     // Size relative to the height of the CodeButton's container.
     static constexpr sf::Vector2f REL_SIZE{0.5f, 0.5f};
 
-    // Sets the static member styles_. This operation is only done once.
+    // Sets the static member styles_.
     static void set_theme(theme::CodeButton theme);
 
     CodeButton(const sf::Font& font, sf::Vector2f size);
@@ -68,9 +67,6 @@ private:
 
     // Stores the styles associated with different button states.
     static theme::CodeButton styles_;
-
-    // This once_flag is used by the static set_theme member function.
-    static std::once_flag styles_set_;
 
     // Holds current code element value.
     int code_element_;

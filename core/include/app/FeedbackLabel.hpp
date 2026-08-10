@@ -3,8 +3,6 @@
 
 #pragma once
 
-#include <mutex>
-
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/System/Vector2.hpp>
 
@@ -42,10 +40,10 @@ public:
     // Size relative to the height of the FeedbackLabel's container.
     static constexpr sf::Vector2f REL_SIZE{0.25f, 0.25f};
 
-    // Sets the static member lang_. This operation is only done once.
+    // Sets the static member lang_.
     static void set_lang(lang::FeedbackLabel lang);
 
-    // Sets the static member styles_. This operation is only done once.
+    // Sets the static member styles_.
     static void set_theme(theme::FeedbackLabel theme);
 
     FeedbackLabel(const sf::Font& font, sf::Vector2f size);
@@ -71,12 +69,6 @@ private:
 
     // Stores the styles associated with different Pin values.
     static theme::FeedbackLabel styles_;
-
-    // This once_flag is used by the static set_lang member function.
-    static std::once_flag lang_set_;
-
-    // This once_flag is used by the static set_theme member function.
-    static std::once_flag styles_set_;
 
     // Holds current Pin assigned to the FeedbackLabel instance.
     Pin pin_;

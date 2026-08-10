@@ -10,11 +10,7 @@ namespace app {
 
 lang::FeedbackLabel FeedbackLabel::lang_{};
 
-std::once_flag FeedbackLabel::lang_set_{};
-
 theme::FeedbackLabel FeedbackLabel::styles_{};
-
-std::once_flag FeedbackLabel::styles_set_{};
 
 FeedbackLabel::FeedbackLabel(const sf::Font& font, sf::Vector2f size)
     : ui::Label{font, size, styles_.none, lang_.none, static_cast<unsigned int>(FONT_REL_SIZE * size.y)}, pin_{Pin::None} {}
@@ -30,9 +26,7 @@ void FeedbackLabel::reset() {
 }
 
 void FeedbackLabel::set_lang(lang::FeedbackLabel lang) {
-    std::call_once(lang_set_, [lang] {
-        FeedbackLabel::lang_ = lang;
-    });
+    FeedbackLabel::lang_ = lang;
 }
 
 void FeedbackLabel::set_pin(Pin pin) {
@@ -48,9 +42,7 @@ void FeedbackLabel::set_pin(Pin pin) {
 }
 
 void FeedbackLabel::set_theme(theme::FeedbackLabel theme) {
-    std::call_once(styles_set_, [theme] {
-        FeedbackLabel::styles_ = theme;
-    });
+    FeedbackLabel::styles_ = theme;
 }
 
 void FeedbackLabel::update_text() {

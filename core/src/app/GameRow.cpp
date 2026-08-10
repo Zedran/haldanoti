@@ -34,7 +34,6 @@ GameRow::GameRow(const sf::Font& font, sf::Vector2f size, int row_number)
     );
 
     assert(styles_.code_button);
-    CodeButton::set_theme(*styles_.code_button);
 
     const sf::Vector2f cb_size{
         size.y * CodeButton::REL_SIZE.x,
@@ -51,9 +50,6 @@ GameRow::GameRow(const sf::Font& font, sf::Vector2f size, int row_number)
         styles_.fb_box.inactive,
         ui::Layout::Type::RowLayout
     );
-
-    FeedbackLabel::set_lang(lang_.fb_label);
-    FeedbackLabel::set_theme(styles_.fb_label);
 
     const sf::Vector2f fbl_size{
         size.y * FeedbackLabel::REL_SIZE.x,
@@ -153,10 +149,13 @@ void GameRow::set_feedback(game::Feedback fb) {
 
 void GameRow::set_lang(lang::GameRow lang) noexcept {
     lang_ = lang;
+    FeedbackLabel::set_lang(lang_.fb_label);
 }
 
 void GameRow::set_theme(theme::GameRow theme) noexcept {
     styles_ = theme;
+    CodeButton::set_theme(*styles_.code_button);
+    FeedbackLabel::set_theme(styles_.fb_label);
 }
 
 void GameRow::unlock() {

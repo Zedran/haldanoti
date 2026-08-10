@@ -2,7 +2,6 @@
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
 #include <cassert>
-#include <mutex>
 #include <stdexcept>
 #include <string>
 
@@ -13,8 +12,6 @@
 #include "utils/debug.hpp"
 
 namespace app {
-
-std::once_flag CodeButton::styles_set_{};
 
 theme::CodeButton CodeButton::styles_{};
 
@@ -72,17 +69,15 @@ void CodeButton::reset() {
 }
 
 void CodeButton::set_theme(theme::CodeButton theme) {
-    std::call_once(styles_set_, [theme] {
-        CodeButton::styles_ = theme;
+    CodeButton::styles_ = theme;
 
-        if (CodeButton::styles_.elements.size() != game::Game::NUM_UNIQUE_ELEMS) {
-            throw std::logic_error{
-                "incorrect number of CodeButton styles (" +
-                std::to_string(styles_.elements.size()) +
-                ')'
-            };
-        }
-    });
+    if (CodeButton::styles_.elements.size() != game::Game::NUM_UNIQUE_ELEMS) {
+        throw std::logic_error{
+            "incorrect number of CodeButton styles (" +
+            std::to_string(styles_.elements.size()) +
+            ')'
+        };
+    }
 }
 
 void CodeButton::set_value(int value) {

@@ -15,9 +15,6 @@ SecretRow::SecretRow(const sf::Font& font, sf::Vector2f size, lang::SecretRow la
         ui::Layout::Type::RowLayout
     );
 
-    assert(theme.code_button);
-    CodeButton::set_theme(*theme.code_button);
-
     const sf::Vector2f button_size{
         size.y * CodeButton::REL_SIZE.x,
         size.y * CodeButton::REL_SIZE.y,
