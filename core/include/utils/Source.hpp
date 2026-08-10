@@ -23,7 +23,7 @@ public:
     int get();
 
     // Fills the specified container with unique random numbers.
-    void read(std::span<int> out);
+    void read_unique(std::span<int> out);
 
 private:
     std::uniform_int_distribution<int> dist_;

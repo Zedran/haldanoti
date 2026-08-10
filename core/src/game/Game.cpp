@@ -39,7 +39,7 @@ void Game::advance() noexcept {
 }
 
 void Game::generate_code() noexcept {
-    rand_.read(good_code_);
+    rand_.read_unique(good_code_);
 }
 
 std::span<const int, Row::ROW_LEN> Game::good_code() const noexcept {

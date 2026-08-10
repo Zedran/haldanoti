@@ -25,7 +25,7 @@ int Source::get() {
     return dist_(re_);
 }
 
-void Source::read(std::span<int> out) {
+void Source::read_unique(std::span<int> out) {
     // Since out is filled with unique values, ensure that its length does not
     // exceed the number of distinct values that Source can provide.
     assert(dist_.max() - dist_.min() + 1 >= static_cast<int>(out.size()));
