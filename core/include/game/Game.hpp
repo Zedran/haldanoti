@@ -4,6 +4,7 @@
 #pragma once
 
 #include <array>
+#include <concepts>
 #include <cstddef>
 #include <span>
 
@@ -29,11 +30,16 @@ public:
     static constexpr int NUM_UNIQUE_ELEMS = SCORE_MAX - SCORE_MIN + 1;
 
     // Constructs a new instance of the Game.
-    Game();
+    explicit Game(bool repetitions);
 
     // Constructs a new instance of the Game, initializing random number
     // generator with a custom seed.
-    explicit Game(const unsigned long seed);
+    Game(bool unique_elems, const unsigned long seed);
+
+    // Prevents Game(bool) from interpreting unsigned int as bool when calling
+    // Game{seed} by mistake.
+    template <std::integral T>
+    Game(T) = delete;
 
     ~Game();
 
@@ -45,6 +51,9 @@ public:
 
     // Progresses to the next row. Game cannot be advanced past the last row.
     void advance() noexcept;
+
+    // When set to true, new codes may not contain repeating elements.
+    void allow_unique_only(bool v) noexcept;
 
     // Returns a view into the correct code.
     std::span<const int, Row::ROW_LEN> good_code() const noexcept;
@@ -79,6 +88,9 @@ private:
     // Container for Row instances, each representing a single attempt
     // at guessing.
     std::array<Row, NUM_ROWS> rows_;
+
+    // true allows the generated code to contain unique elements only.
+    bool unique_elems_;
 
     // Returns a reference to the currently active row.
     Row& active_row_mut() noexcept;
