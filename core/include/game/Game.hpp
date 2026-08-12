@@ -30,7 +30,7 @@ public:
     static constexpr int NUM_UNIQUE_ELEMS = SCORE_MAX - SCORE_MIN + 1;
 
     // Constructs a new instance of the Game.
-    explicit Game(bool repetitions);
+    explicit Game(bool unique_elems);
 
     // Constructs a new instance of the Game, initializing random number
     // generator with a custom seed.
