@@ -8,11 +8,19 @@
 
 namespace game {
 
-Game::Game() : active_row_num_{}, rand_{Game::SCORE_MIN, Game::SCORE_MAX}, rows_{} {
+Game::Game(bool unique_elems)
+    : active_row_num_{},
+      rand_{Game::SCORE_MIN, Game::SCORE_MAX},
+      rows_{},
+      unique_elems_{unique_elems} {
     generate_code();
 }
 
-Game::Game(const unsigned long seed) : active_row_num_{}, rand_{Game::SCORE_MIN, Game::SCORE_MAX, seed}, rows_{} {
+Game::Game(bool unique_elems, const unsigned long seed)
+    : active_row_num_{},
+      rand_{Game::SCORE_MIN, Game::SCORE_MAX, seed},
+      rows_{},
+      unique_elems_{unique_elems} {
     generate_code();
 }
 
@@ -38,8 +46,16 @@ void Game::advance() noexcept {
     active_row_num_++;
 }
 
+void Game::allow_unique_only(bool v) noexcept {
+    unique_elems_ = v;
+}
+
 void Game::generate_code() noexcept {
-    rand_.read(good_code_);
+    if (unique_elems_) {
+        rand_.read_unique(good_code_);
+    } else {
+        rand_.read(good_code_);
+    }
 }
 
 std::span<const int, Row::ROW_LEN> Game::good_code() const noexcept {

@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <vector>
 
+#include "game/Row.hpp"
 #include "game/helpers.hpp"
 
 namespace game::internal {
@@ -21,12 +22,13 @@ Feedback compare_codes(std::span<const int> good_code, std::span<const int> user
     for (std::size_t i = 0; i < uc.size(); i++) {
         if (uc[i] == gc[i]) {
             fb.red_count++;
-            gc[i] = 0;
+            gc[i] = game::Row::CODE_VALUE_NONE;
+            uc[i] = game::Row::CODE_VALUE_NONE;
         }
     }
 
     for (std::size_t i = 0; i < gc.size(); i++) {
-        if (gc[i] == 0) {
+        if (gc[i] == game::Row::CODE_VALUE_NONE) {
             continue;
         }
 
@@ -34,7 +36,7 @@ Feedback compare_codes(std::span<const int> good_code, std::span<const int> user
 
         if (it != uc.end()) {
             fb.white_count++;
-            uc[static_cast<std::size_t>(std::distance(uc.begin(), it))] = 0;
+            uc[static_cast<std::size_t>(std::distance(uc.begin(), it))] = game::Row::CODE_VALUE_NONE;
         }
     }
 

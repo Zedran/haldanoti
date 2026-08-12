@@ -7,7 +7,7 @@
 
 #include "utils/Source.hpp"
 
-TEST_CASE("Source::read") {
+TEST_CASE("Source::read_unique") {
     constexpr std::size_t T = 8;
 
     constexpr int MIN = 1;
@@ -18,7 +18,7 @@ TEST_CASE("Source::read") {
     utils::Source rand{MIN, MAX, SEED};
 
     std::array<int, T> arr;
-    rand.read(arr);
+    rand.read_unique(arr);
 
     bool has_min{}, has_max{};
 

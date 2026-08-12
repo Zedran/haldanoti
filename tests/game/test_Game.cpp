@@ -17,8 +17,8 @@ using namespace game;
 TEST_CASE("Game::Game") {
     constexpr unsigned long SEED = 1;
 
-    const Game g_rand;
-    const Game g_seeded{SEED};
+    const Game g_rand{true};
+    const Game g_seeded{true, SEED};
 
     for (const auto& g : {g_rand, g_seeded}) {
         REQUIRE(g.active_row_num() == 0);
@@ -37,7 +37,7 @@ TEST_CASE("Game::submit_code") {
 
     constexpr std::array<int, Row::ROW_LEN> guess{1, 2, 3, 4};
 
-    Game g{SEED};
+    Game g{true, SEED};
 
     {
         // Making sure that the guess is not the same as the generated code.
@@ -68,7 +68,7 @@ TEST_CASE("Game::state") {
     constexpr unsigned long SEED = 1;
 
     // Game running from the moment of construction.
-    Game g{SEED};
+    Game g{true, SEED};
     REQUIRE(g.state() == State::Running);
 
     // Game won.
