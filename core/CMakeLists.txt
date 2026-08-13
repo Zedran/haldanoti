@@ -12,7 +12,6 @@ set(CORE_SOURCES
     src/game/Game.cpp
     src/game/Row.cpp
     src/game/helpers.cpp
-    src/lang/conversions.cpp
     src/ui/Binding.cpp
     src/ui/Box.cpp
     src/ui/Button.cpp
@@ -20,6 +19,7 @@ set(CORE_SOURCES
     src/ui/Layout.cpp
     src/utils/Source.cpp
     src/utils/assets.cpp
+    src/utils/json.cpp
     src/utils/utils.cpp
 )
 

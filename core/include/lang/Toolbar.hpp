@@ -6,7 +6,7 @@
 #include <SFML/System/String.hpp>
 #include <nlohmann/json.hpp>
 
-#include "lang/conversions.hpp" // IWYU pragma: keep
+#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace lang {
 

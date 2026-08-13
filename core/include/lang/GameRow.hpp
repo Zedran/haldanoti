@@ -7,7 +7,7 @@
 #include <nlohmann/json.hpp>
 
 #include "lang/FeedbackLabel.hpp"
-#include "lang/conversions.hpp" // IWYU pragma: keep
+#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace lang {
 
