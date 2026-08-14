@@ -3,8 +3,21 @@
 
 #pragma once
 
+#include <optional>
+#include <string>
+
 #include <SFML/System/String.hpp>
 #include <nlohmann/json.hpp>
+
+namespace std {
+
+// Converts JSON object to optional<string>. Empty string becomes nullopt.
+void from_json(const nlohmann::json& j, std::optional<std::string>& v);
+
+// Converts optional<string> to JSON object. nullopt becomes empty string.
+void to_json(nlohmann::json& j, const std::optional<std::string> v);
+
+} // namespace std
 
 namespace sf {
 

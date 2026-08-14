@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
+#include <cstdlib>
 #include <locale>
 
 #include <nlohmann/json.hpp>
@@ -9,6 +10,38 @@
 #include "utils/assets.hpp"
 
 namespace utils {
+
+std::filesystem::path find_config_dir() {
+    char* home{};
+
+#if defined(__linux__)
+    bool xdg_var_set{true};
+
+    home = std::getenv("XDG_CONFIG_HOME");
+    if (!home) {
+        home        = std::getenv("HOME");
+        xdg_var_set = false;
+    }
+#elif defined(_WIN32)
+    home = std::getenv("APPDATA");
+#endif
+
+    if (!home) {
+        throw std::runtime_error{"could not resolve config path"};
+    }
+
+    std::filesystem::path config_dir{home};
+
+#if defined(__linux__)
+    if (!xdg_var_set) {
+        config_dir /= ".config";
+    }
+#endif
+
+    constexpr auto MM_DIR_NAME{"mm-game"};
+
+    return config_dir / MM_DIR_NAME;
+}
 
 lang::Lang load_language(
     std::array<std::string, 2> lang_dirs,

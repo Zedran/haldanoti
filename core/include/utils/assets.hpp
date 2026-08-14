@@ -20,6 +20,12 @@
 
 namespace utils {
 
+// Returns user config directory.
+std::filesystem::path find_config_dir();
+
+// Location of the user config directory.
+static const std::filesystem::path CONFIG_DIR = utils::find_config_dir();
+
 // Iterates over the list of possible asset file locations and initializes
 // T using the first found file. Throws runtime_error if no file was found.
 template <typename T>

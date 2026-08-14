@@ -9,6 +9,7 @@ set(CORE_SOURCES
     src/app/GameRow.cpp
     src/app/SecretRow.cpp
     src/app/Toolbar.cpp
+    src/config/Config.cpp
     src/game/Game.cpp
     src/game/Row.cpp
     src/game/helpers.cpp
