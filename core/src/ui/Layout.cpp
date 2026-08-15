@@ -18,8 +18,6 @@ void ColumnLayout::place(sf::FloatRect container, std::span<std::unique_ptr<Widg
         return;
     }
 
-    const float padx{(container.size.x - widgets[0]->get_size().x) / 2.0f};
-
     float widget_space_y{0.0f};
 
     for (const auto& w : widgets) {
@@ -31,13 +29,15 @@ void ColumnLayout::place(sf::FloatRect container, std::span<std::unique_ptr<Widg
 
     sf::Vector2f pos = container.position;
 
-    pos.y += pady_per_elem;
-    pos.x  = pos.x + padx;
+    const float container_x = pos.x;
 
-    for (auto& w : widgets) {
-        w->set_position(pos);
-        pos.y += pady_per_elem + w->get_size().y;
-        pos.y  = pos.y;
+    for (std::size_t i = 0; i < widgets.size(); i++) {
+        pos.x  = container_x + (container.size.x - widgets[i]->get_size().x) / 2.0f;
+        pos.y += pady_per_elem;
+
+        widgets[i]->set_position({pos.x, pos.y});
+
+        pos.y += widgets[i]->get_size().y;
     }
 }
 
@@ -50,8 +50,6 @@ void RowLayout::place(sf::FloatRect container, std::span<std::unique_ptr<Widget>
         return;
     }
 
-    const float pady{(container.size.y - widgets[0]->get_size().y) / 2.0f};
-
     float widget_space_x{0.0f};
 
     for (const auto& w : widgets) {
@@ -63,13 +61,15 @@ void RowLayout::place(sf::FloatRect container, std::span<std::unique_ptr<Widget>
 
     sf::Vector2f pos = container.position;
 
-    pos.x += padx_per_elem;
-    pos.y  = pos.y + pady;
+    const float container_y = pos.y;
 
-    for (auto& w : widgets) {
-        w->set_position(pos);
-        pos.x += padx_per_elem + w->get_size().x;
-        pos.x  = pos.x;
+    for (std::size_t i = 0; i < widgets.size(); i++) {
+        pos.x += padx_per_elem;
+        pos.y  = container_y + (container.size.y - widgets[i]->get_size().y) / 2.0f;
+
+        widgets[i]->set_position({pos.x, pos.y});
+
+        pos.x += widgets[i]->get_size().x;
     }
 }
 
