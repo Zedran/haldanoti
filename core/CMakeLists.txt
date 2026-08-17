@@ -16,6 +16,7 @@ set(CORE_SOURCES
     src/ui/Binding.cpp
     src/ui/Box.cpp
     src/ui/Button.cpp
+    src/ui/Checkbox.cpp
     src/ui/Label.cpp
     src/ui/Layout.cpp
     src/utils/Source.cpp
