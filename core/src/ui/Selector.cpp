@@ -63,7 +63,11 @@ Selector::Selector(
     );
     fwd.bind(sf::Mouse::Button::Left, [this] { this->increment(); });
 
-    if (entries_.size() < 2) {
+    if (entries_.empty()) {
+        throw std::runtime_error{"no entries set for the Selector"};
+    }
+
+    if (entries_.size() == 1) {
         fwd.disable();
         rev.disable();
     }
@@ -99,8 +103,9 @@ void Selector::increment() {
 }
 
 void Selector::set_value(std::size_t index) {
+    assert(index < entries_.size());
     index_ = index;
-    sel_label_->set_text(entries_.at(index));
+    sel_label_->set_text(entries_[index]);
 }
 
 void Selector::set_value(const sf::String& v) {

@@ -29,6 +29,7 @@ public:
 
     // Constructs a new selector. The entries vector is used to display
     // the available options. It is copied into the class.
+    // This function throws runtime_error if the entries vector is empty.
     Selector(
         const sf::Font&         font,
         sf::Vector2f            size,
