@@ -8,6 +8,7 @@ set(CORE_SOURCES
     src/app/FeedbackLabel.cpp
     src/app/GameRow.cpp
     src/app/SecretRow.cpp
+    src/app/Settings.cpp
     src/app/Toolbar.cpp
     src/config/Config.cpp
     src/game/Game.cpp
