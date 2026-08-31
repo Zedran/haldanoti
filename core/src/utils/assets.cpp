@@ -2,6 +2,7 @@
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
 #include <cstdlib>
+#include <filesystem>
 #include <locale>
 
 #include <nlohmann/json.hpp>
@@ -41,6 +42,45 @@ std::filesystem::path find_config_dir() {
     constexpr auto MM_DIR_NAME{"mm-game"};
 
     return config_dir / MM_DIR_NAME;
+}
+
+std::vector<sf::String> get_lang_fnames() {
+    std::vector<sf::String> fnames;
+
+    for (const auto& d : {LANG_DIR_PATH_SYS, LANG_DIR_PATH_DEV}) {
+        const std::filesystem::path dir{d};
+
+        if (std::filesystem::exists(dir)) {
+            for (const auto& p : list_files(dir)) {
+                fnames.push_back(p.filename().replace_extension({}).string());
+            }
+            if (!fnames.empty()) {
+                // Only one, non-empty directory should be walked through.
+                break;
+            }
+        }
+    }
+
+    if (fnames.empty()) {
+        throw std::runtime_error{"could not find language files"};
+    }
+
+    // Add the default language.
+    fnames.push_back("en");
+
+    return fnames;
+}
+
+std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) {
+    std::vector<std::filesystem::path> files;
+
+    for (const auto& e : std::filesystem::directory_iterator{dir}) {
+        if (e.is_regular_file()) {
+            files.push_back(e);
+        }
+    }
+
+    return files;
 }
 
 lang::Lang load_language(

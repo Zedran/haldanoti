@@ -11,10 +11,12 @@
 #include <stdexcept>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/System/Exception.hpp>
+#include <SFML/System/String.hpp>
 
 #include "lang/Lang.hpp"
 
@@ -25,6 +27,12 @@ std::filesystem::path find_config_dir();
 
 // Location of the user config directory.
 static const std::filesystem::path CONFIG_DIR = utils::find_config_dir();
+
+// Returns a list of available language filenames without extensions.
+std::vector<sf::String> get_lang_fnames();
+
+// Returns a list of file paths in dir.
+std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);
 
 // Iterates over the list of possible asset file locations and initializes
 // T using the first found file. Throws runtime_error if no file was found.
