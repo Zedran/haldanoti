@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
+#include <cassert>
+#include <stdexcept>
+
 #include "ui/Selector.hpp"
 
 namespace ui {
@@ -77,8 +80,13 @@ void Selector::decrement() {
     sel_label_->set_text(entries_[index_]);
 }
 
-std::size_t Selector::get_value() const noexcept {
+std::size_t Selector::get_index() const noexcept {
     return index_;
+}
+
+sf::String Selector::get_value() const {
+    assert(index_ < entries_.size());
+    return entries_[index_];
 }
 
 void Selector::increment() {
@@ -93,6 +101,16 @@ void Selector::increment() {
 void Selector::set_value(std::size_t index) {
     index_ = index;
     sel_label_->set_text(entries_.at(index));
+}
+
+void Selector::set_value(const sf::String& v) {
+    for (std::size_t i = 0; i < entries_.size(); i++) {
+        if (entries_[i] == v) {
+            set_value(i);
+            return;
+        }
+    }
+    throw std::logic_error{"value '" + v.toAnsiString() + "' not found in the Selector"};
 }
 
 } // namespace ui

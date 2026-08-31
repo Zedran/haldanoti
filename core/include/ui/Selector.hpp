@@ -41,11 +41,18 @@ public:
 
     // Returns an index of the currently displayed value in the underlying
     // entries vector.
-    std::size_t get_value() const noexcept;
+    std::size_t get_index() const noexcept;
+
+    // Get string value that is currently set in the Selector.
+    sf::String get_value() const;
 
     // Set the chosen value indicated to by index. Throws if index value is out
     // ouf bounds of the underlying entries vector.
     void set_value(std::size_t index);
+
+    // Sets v as current value of the Selector. If none of the Selector's
+    // entries matches v, throws logic_error.
+    void set_value(const sf::String& v);
 
 private:
     // Size of the description Label relative to the outer Box.
