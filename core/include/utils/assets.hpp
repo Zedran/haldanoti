@@ -28,6 +28,12 @@ std::filesystem::path find_config_dir();
 // Location of the user config directory.
 static const std::filesystem::path CONFIG_DIR = utils::find_config_dir();
 
+// Name of the config file.
+static const std::filesystem::path CONFIG_FNAME{"mm.json"};
+
+// Full path to config file.
+static const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;
+
 // Returns a list of available language filenames without extensions.
 std::vector<sf::String> get_lang_fnames();
 

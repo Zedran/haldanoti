@@ -14,13 +14,9 @@
 namespace config {
 
 config::Config read_config() {
-    constexpr auto CONF_FNAME{"mm.json"};
-
-    const auto conf_path = utils::CONFIG_DIR / CONF_FNAME;
-
-    std::ifstream conf_file{conf_path};
+    std::ifstream conf_file{utils::CONFIG_PATH};
     if (!conf_file.good()) {
-        write_config(conf_path, DEFAULT_CONFIG);
+        write_config(DEFAULT_CONFIG);
         return DEFAULT_CONFIG;
     }
 
@@ -28,12 +24,12 @@ config::Config read_config() {
     return j.get<config::Config>();
 }
 
-void write_config(const std::filesystem::path& path, const Config& conf) {
-    if (!std::filesystem::exists(path.parent_path())) {
-        std::filesystem::create_directories(path.parent_path());
+void write_config(const Config& conf) {
+    if (!std::filesystem::exists(utils::CONFIG_DIR)) {
+        std::filesystem::create_directories(utils::CONFIG_DIR);
     }
 
-    std::ofstream conf_file{path, std::ios::trunc};
+    std::ofstream conf_file{utils::CONFIG_PATH, std::ios::trunc};
     if (!conf_file.good()) {
         throw std::runtime_error{"failed to open config file"};
     }

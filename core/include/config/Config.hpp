@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include <filesystem>
 #include <optional>
 #include <string>
 
@@ -28,6 +27,6 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Config, pref_language, unique_elems);
 Config read_config();
 
 // Writes Config to file at path.
-void write_config(const std::filesystem::path& path, const Config& conf);
+void write_config(const Config& conf);
 
 } // namespace config
