@@ -6,9 +6,12 @@
 #include "app/App.hpp"
 #include "app/Board.hpp"
 #include "app/GameRow.hpp"
+#include "app/Settings.hpp"
 #include "app/Toolbar.hpp"
+#include "config/Config.hpp"
 #include "game/Feedback.hpp"
 #include "game/State.hpp"
+#include "utils/assets.hpp"
 #include "utils/debug.hpp"
 
 namespace app {
@@ -17,18 +20,27 @@ App::App(
     const sf::Font& font,
     sf::Image       icon,
     sf::Vector2f    window_size,
-    bool            unique_elems,
+    config::Config  conf,
     lang::Lang      lang,
     theme::Theme    theme
 ) : bg_{theme.bg},
     board_{font, window_size.componentWiseMul(Board::REL_SIZE), lang.board, theme.board},
-    game_{unique_elems},
+    game_{conf.unique_elems},
+    scene_{Scene::Game},
+    settings_{
+        font,
+        window_size.componentWiseMul(Settings::REL_SIZE),
+        lang.settings,
+        theme.settings,
+        utils::get_lang_fnames()
+    },
     toolbar_{
         font,
         window_size.componentWiseMul(Toolbar::REL_SIZE),
         lang.toolbar,
         theme.toolbar,
         [this] { this->new_game(); },
+        [this] { this->set_scene(Scene::Settings); },
         [this] { this->close(); }
     },
     window_{sf::VideoMode(static_cast<sf::Vector2u>(window_size)), "mm", sf::Style::Close} {
@@ -43,6 +55,12 @@ App::App(
     });
     toolbar_.set_position(sf::Vector2f{0.0f, (1.0f - Toolbar::REL_SIZE.y) * window_size.y});
 
+    settings_.set_position(sf::Vector2f{
+        (1 - Settings::REL_SIZE.x) / 2 * window_size.x,
+        (1 - Settings::REL_SIZE.y) / 2 * window_size.y,
+    });
+    settings_.set_config(conf);
+
     new_game();
 }
 
@@ -54,8 +72,16 @@ void App::close() {
 
 void App::draw() {
     window_.clear(bg_);
-    window_.draw(board_);
-    window_.draw(toolbar_);
+
+    switch (scene_) {
+    case Scene::Game:
+        window_.draw(board_);
+        window_.draw(toolbar_);
+        break;
+    case Scene::Settings:
+        window_.draw(settings_);
+    };
+
     window_.display();
 }
 
@@ -73,8 +99,15 @@ void App::poll_events() {
             close();
             break;
         }
-        board_.handle_event(*event);
-        toolbar_.handle_event(*event);
+
+        switch (scene_) {
+        case Scene::Game:
+            board_.handle_event(*event);
+            toolbar_.handle_event(*event);
+            break;
+        case Scene::Settings:
+            settings_.handle_event(*event);
+        }
     }
 }
 
@@ -91,7 +124,36 @@ int App::run() {
     return EXIT_SUCCESS;
 }
 
+void App::save_config() const {
+    dbg("saving configuration");
+    config::write_config(settings_.get_config());
+}
+
+void App::set_scene(Scene scene) noexcept {
+    dbg("setting scene {}", static_cast<int>(scene));
+
+    scene_ = scene;
+
+    if (scene == Scene::Settings) {
+        settings_.set_state(Settings::State::Running);
+    }
+}
+
 void App::tick() {
+    if (scene_ == Scene::Settings) {
+        switch (settings_.get_state()) {
+        case Settings::State::Running:
+            break;
+        case Settings::State::SaveAndClose:
+            save_config();
+            set_scene(Scene::Game);
+            break;
+        case Settings::State::Close:
+            set_scene(Scene::Game);
+            break;
+        }
+    }
+
     if (game_.state() != game::State::Running || !board_.get_active_row().is_locked()) {
         return;
     }

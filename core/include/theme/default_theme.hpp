@@ -176,6 +176,24 @@ const Theme DEFAULT_THEME{
                 .ol{ol}
             },
         },
+        .settings{
+            .disabled{dbs},
+            .normal{
+                .bg{0xff9900ff},
+                .fg{0x000000ff},
+                .ol{ol}
+            },
+            .hover{
+                .bg{0xffad33ff},
+                .fg{0x000000ff},
+                .ol{ol}
+            },
+            .active{
+                .bg{0xffcc80ff},
+                .fg{0x000000ff},
+                .ol{ol}
+            },
+        },
         .exit{
             .disabled{dbs},
             .normal{
@@ -195,6 +213,66 @@ const Theme DEFAULT_THEME{
             },
         },
     },
+    .settings{
+        .box{
+            .bg{0xf2dec6ff},
+            .ol{ol}
+        },
+        .checkbox{
+            .box{
+                .bg{0xf2dec6ff},
+                .ol{a0},
+            },
+            .button_off{
+                .disabled{dbs},
+                .normal{dbs},
+                .hover{.bg{0xfff8f2ff}, .fg{dbs.fg}, .ol{ol}},
+                .active{.bg{0xffffffff}, .fg{dbs.fg}, .ol{ol}},
+            },
+            .button_on{
+                .disabled{dbs},
+                .normal{.bg{dbs.bg}, .fg{0x000000ff}, .ol{ol}},
+                .hover{.bg{0xfff8f2ff}, .fg{0x000000ff}, .ol{ol}},
+                .active{.bg{0xffffffff}, .fg{0x000000ff}, .ol{ol}},
+            },
+            .label{
+                .bg{a0},
+                .fg{0x000000ff},
+                .ol{a0},
+            },
+        },
+        .selector{
+            .box{
+                .bg{0xf2dec6ff},
+                .ol{a0},
+            },
+            .label{
+                .bg{a0},
+                .fg{0x000000ff},
+                .ol{a0},
+            },
+            .button{
+                .disabled{.bg{dbs.bg}, .fg{0x000000ff}, .ol{a0}},
+                .normal{.bg{dbs.bg}, .fg{0x000000ff}, .ol{a0}},
+                .hover{.bg{0xfff8f2ff}, .fg{0x000000ff}, .ol{ol}},
+                .active{.bg{0xffffffff}, .fg{0x000000ff}, .ol{ol}},
+            },
+        },
+        .save{
+            .disabled{.bg{0xfff8f2ff}, .fg{0x000000ff}, .ol{a0}},
+            .normal{.bg{0x009b00ff}, .fg{0xffffffff}, .ol{ol}},
+            .hover{.bg{0x00b400ff}, .fg{0xffffffff}, .ol{ol}},
+            .active{.bg{0x00ce00ff}, .fg{0x000000ff}, .ol{ol}},
+
+        },
+        .cancel{
+            .disabled{dbs},
+            .normal{.bg{0xC80000ff}, .fg{0xffffffff}, .ol{ol}},
+            .hover{.bg{0xe80000ff}, .fg{0xffffffff}, .ol{ol}},
+            .active{.bg{0xff4040ff}, .fg{0x000000ff}, .ol{ol}},
+        },
+    },
+
 };
 
 } // namespace theme

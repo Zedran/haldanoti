@@ -10,6 +10,7 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "app/Board.hpp"
+#include "app/Settings.hpp"
 #include "app/Toolbar.hpp"
 #include "game/Game.hpp"
 #include "lang/Lang.hpp"
@@ -24,7 +25,7 @@ public:
         const sf::Font& font,
         sf::Image       icon,
         sf::Vector2f    window_size,
-        bool            unique_elems,
+        config::Config  conf,
         lang::Lang      lang,
         theme::Theme    theme
     );
@@ -35,6 +36,12 @@ public:
     int run();
 
 private:
+    // Indicates which scene should be displayed.
+    enum class Scene {
+        Game,
+        Settings,
+    };
+
     // Window background color.
     sf::Color bg_;
 
@@ -43,6 +50,12 @@ private:
 
     // Logic engine.
     game::Game game_;
+
+    // Currently displayed scene.
+    Scene scene_;
+
+    // Settings page.
+    Settings settings_;
 
     Toolbar toolbar_;
 
@@ -61,6 +74,14 @@ private:
 
     // Handles SFML events.
     void poll_events();
+
+    // Gathers the state from the elements on the Settings page
+    // and writes them into the config file.
+    void save_config() const;
+
+    // Sets the current scene, allowing the App to transition between the game
+    // and subpages.
+    void set_scene(Scene scene) noexcept;
 
     // Game logic tick.
     void tick();

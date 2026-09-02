@@ -6,6 +6,7 @@
 #include <nlohmann/json.hpp>
 
 #include "lang/Board.hpp"
+#include "lang/Settings.hpp"
 #include "lang/Toolbar.hpp"
 
 namespace lang {
@@ -13,8 +14,9 @@ namespace lang {
 struct Lang {
     Board   board;
     Toolbar toolbar;
+    Settings settings;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Lang, board, toolbar);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Lang, board, toolbar, settings);
 
 } // namespace lang

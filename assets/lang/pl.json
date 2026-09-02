@@ -16,6 +16,14 @@
     },
     "toolbar": {
         "new_game": "Nowa\ngra",
+        "settings": "Opcje",
         "exit": "Wyjście"
+    },
+    "settings": {
+        "check_mark": "x",
+        "label_unique_elems": "Unikatowe elementy",
+        "label_language": "Język",
+        "save": "Zapisz",
+        "cancel": "Anuluj"
     }
 }

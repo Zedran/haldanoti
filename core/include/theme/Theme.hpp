@@ -6,6 +6,7 @@
 #include <SFML/Graphics/Color.hpp>
 
 #include "theme/Board.hpp"
+#include "theme/Settings.hpp"
 #include "theme/Toolbar.hpp"
 
 namespace theme {
@@ -15,6 +16,7 @@ struct Theme {
     sf::Color bg;
     Board     board;
     Toolbar   toolbar;
+    Settings  settings;
 };
 
 } // namespace theme

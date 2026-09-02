@@ -27,7 +27,15 @@ const Lang DEFAULT_LANG{
     },
     .toolbar{
         .new_game{L"New\ngame"},
+        .settings{L"Settings"},
         .exit{L"Exit"},
+    },
+    .settings{
+        .check_mark{L"x"},
+        .label_unique_elems{L"Unique elements"},
+        .label_language{L"Language"},
+        .save{L"Save"},
+        .cancel{L"Cancel"},
     }
 };
 
