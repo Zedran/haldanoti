@@ -12,8 +12,8 @@
 namespace lang {
 
 struct Lang {
-    Board   board;
-    Toolbar toolbar;
+    Board    board;
+    Toolbar  toolbar;
     Settings settings;
 };
 
