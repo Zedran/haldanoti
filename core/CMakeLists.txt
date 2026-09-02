@@ -15,6 +15,7 @@ set(CORE_SOURCES
     src/game/Row.cpp
     src/game/helpers.cpp
     src/ui/Binding.cpp
+    src/ui/Blank.cpp
     src/ui/Box.cpp
     src/ui/Button.cpp
     src/ui/Checkbox.cpp
