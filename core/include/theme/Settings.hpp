@@ -10,6 +10,7 @@
 namespace theme {
 
 struct Settings {
+    ui::Box::Style      bg;
     ui::Box::Style      box;
     ui::Checkbox::Style checkbox;
     ui::Selector::Style selector;

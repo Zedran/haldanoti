@@ -214,6 +214,10 @@ const Theme DEFAULT_THEME{
         },
     },
     .settings{
+        .bg{
+            .bg{0x73737373},
+            .ol{a0}
+        },
         .box{
             .bg{0xf2dec6ff},
             .ol{ol}

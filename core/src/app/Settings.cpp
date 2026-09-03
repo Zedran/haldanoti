@@ -5,6 +5,7 @@
 #include <SFML/Window/Mouse.hpp>
 
 #include "app/Settings.hpp"
+#include "ui/Blank.hpp"
 #include "ui/Box.hpp"
 #include "ui/Layout.hpp"
 
@@ -16,26 +17,20 @@ Settings::Settings(
     lang::Settings          lang,
     theme::Settings         theme,
     std::vector<sf::String> lang_fnames
-) : ui::Box{size, theme.box, ui::Layout::Type::ColumnLayout}, state_{} {
+) : ui::Box{size, theme.bg, ui::Layout::Type::ColumnLayout}, state_{} {
     constexpr Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
 
     ui::Box& opt_box = add_component<ui::Box>(
         size.componentWiseMul(OPT_BOX_REL_SIZE),
-        INNER_BOX_STYLE,
+        theme.box,
         ui::Layout::Type::ColumnLayout
     );
 
-    const sf::Vector2f toolbar_size = size.componentWiseMul(TOOLBAR_REL_SIZE);
-
-    ui::Box& toolbar = add_component<ui::Box>(
-        toolbar_size,
-        INNER_BOX_STYLE,
-        ui::Layout::Type::RowLayout
-    );
+    const sf::Vector2f opt_line_size = size.componentWiseMul(OPT_LINE_REL_SIZE);
 
     cb_unique_elems_ = &opt_box.add_component<ui::Checkbox>(
         font,
-        size.componentWiseMul(OPT_LINE_REL_SIZE),
+        opt_line_size,
         theme.checkbox,
         lang.label_unique_elems,
         lang.check_mark
@@ -43,10 +38,22 @@ Settings::Settings(
 
     sel_lang_ = &opt_box.add_component<ui::Selector>(
         font,
-        size.componentWiseMul(OPT_LINE_REL_SIZE),
+        opt_line_size,
         theme.selector,
         lang.label_language,
         lang_fnames
+    );
+
+    constexpr sf::Vector2f toolbar_spacing{0.0f, 10.0f};
+
+    opt_box.add_component<ui::Blank>(opt_line_size.componentWiseMul(toolbar_spacing));
+
+    const sf::Vector2f toolbar_size = size.componentWiseMul(TOOLBAR_REL_SIZE);
+
+    ui::Box& toolbar = opt_box.add_component<ui::Box>(
+        toolbar_size,
+        INNER_BOX_STYLE,
+        ui::Layout::Type::RowLayout
     );
 
     const unsigned int font_size = static_cast<unsigned int>(toolbar_size.y * FONT_REL_SIZE);

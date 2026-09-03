@@ -32,9 +32,6 @@ public:
         Close,
     };
 
-    // Size of the box relative to the outer container.
-    static constexpr sf::Vector2f REL_SIZE{0.8f, 0.8f};
-
     Settings(
         const sf::Font&         font,
         sf::Vector2f            size,
@@ -58,14 +55,14 @@ public:
 
 private:
     // Part of the total size of the Settings page taken by the options Box.
-    static constexpr sf::Vector2f OPT_BOX_REL_SIZE{1.0f, 0.9f};
+    static constexpr sf::Vector2f OPT_BOX_REL_SIZE{0.8f, 0.72f};
 
     // Part of the total size of the Settings page taken by the toolbar Box.
-    static constexpr sf::Vector2f TOOLBAR_REL_SIZE{1.0f, 1.0f - OPT_BOX_REL_SIZE.y};
+    static constexpr sf::Vector2f TOOLBAR_REL_SIZE{0.8f, 0.8f - OPT_BOX_REL_SIZE.y};
 
     // Dimensions of a single config option relative to the size
     // of the Settings page.
-    static constexpr sf::Vector2f OPT_LINE_REL_SIZE{1.0f, 0.05f};
+    static constexpr sf::Vector2f OPT_LINE_REL_SIZE{0.8f, 0.04f};
 
     // Button size relative to toolbar box height.
     static constexpr sf::Vector2f BUTTON_RELSIZE{0.9f, 0.5f};

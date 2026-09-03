@@ -29,7 +29,7 @@ App::App(
     scene_{Scene::Game},
     settings_{
         font,
-        window_size.componentWiseMul(Settings::REL_SIZE),
+        window_size,
         lang.settings,
         theme.settings,
         utils::get_lang_fnames()
@@ -55,10 +55,7 @@ App::App(
     });
     toolbar_.set_position(sf::Vector2f{0.0f, (1.0f - Toolbar::REL_SIZE.y) * window_size.y});
 
-    settings_.set_position(sf::Vector2f{
-        (1 - Settings::REL_SIZE.x) / 2 * window_size.x,
-        (1 - Settings::REL_SIZE.y) / 2 * window_size.y,
-    });
+    settings_.set_position({0.0f, 0.0f});
     settings_.set_config(conf);
 
     new_game();
@@ -73,14 +70,12 @@ void App::close() {
 void App::draw() {
     window_.clear(bg_);
 
-    switch (scene_) {
-    case Scene::Game:
-        window_.draw(board_);
-        window_.draw(toolbar_);
-        break;
-    case Scene::Settings:
+    window_.draw(board_);
+    window_.draw(toolbar_);
+
+    if (scene_ == Scene::Settings) {
         window_.draw(settings_);
-    };
+    }
 
     window_.display();
 }
