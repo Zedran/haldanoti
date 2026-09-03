@@ -222,6 +222,11 @@ const Theme DEFAULT_THEME{
             .bg{0xf2dec6ff},
             .ol{ol}
         },
+        .label{
+            .bg{a0},
+            .fg{0x000000ff},
+            .ol{a0}
+        },
         .checkbox{
             .box{
                 .bg{0xf2dec6ff},

@@ -7,6 +7,7 @@
 #include "app/Settings.hpp"
 #include "ui/Blank.hpp"
 #include "ui/Box.hpp"
+#include "ui/Label.hpp"
 #include "ui/Layout.hpp"
 
 namespace app {
@@ -27,6 +28,13 @@ Settings::Settings(
     );
 
     const sf::Vector2f opt_line_size = size.componentWiseMul(OPT_LINE_REL_SIZE);
+
+    opt_box.add_component<ui::Label>(
+        font,
+        opt_line_size,
+        theme.label,
+        lang.title
+    );
 
     cb_unique_elems_ = &opt_box.add_component<ui::Checkbox>(
         font,

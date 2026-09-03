@@ -32,6 +32,7 @@ const Lang DEFAULT_LANG{
     },
     .settings{
         .check_mark{L"x"},
+        .title{L"Settings"},
         .label_unique_elems{L"Unique elements"},
         .label_language{L"Language"},
         .save{L"Save"},

@@ -21,6 +21,7 @@
     },
     "settings": {
         "check_mark": "x",
+        "title": "Opcje",
         "label_unique_elems": "Unikatowe elementy",
         "label_language": "Język",
         "save": "Zapisz",

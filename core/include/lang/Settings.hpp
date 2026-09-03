@@ -12,6 +12,7 @@ namespace lang {
 
 struct Settings {
     sf::String check_mark;
+    sf::String title;
     sf::String label_unique_elems;
     sf::String label_language;
     sf::String save;
@@ -21,6 +22,7 @@ struct Settings {
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     Settings,
     check_mark,
+    title,
     label_unique_elems,
     label_language,
     save,

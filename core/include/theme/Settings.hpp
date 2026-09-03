@@ -5,6 +5,7 @@
 
 #include "ui/Box.hpp"
 #include "ui/Checkbox.hpp"
+#include "ui/Label.hpp"
 #include "ui/Selector.hpp"
 
 namespace theme {
@@ -12,6 +13,7 @@ namespace theme {
 struct Settings {
     ui::Box::Style      bg;
     ui::Box::Style      box;
+    ui::Label::Style    label;
     ui::Checkbox::Style checkbox;
     ui::Selector::Style selector;
     ui::Button::Style   save;
