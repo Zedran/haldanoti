@@ -91,14 +91,16 @@ lang::Lang load_language(
     std::array<std::string, 2> lang_dirs,
     std::string                lang_fname
 ) {
-    std::string pref_lang = lang_fname.empty() ? get_system_language() : lang_fname;
+    if (lang_fname.empty()) {
+        lang_fname = get_system_language();
+    }
 
-    if (pref_lang == "en") {
+    if (lang_fname == "en") {
         return lang::DEFAULT_LANG;
     }
 
-    const auto ext = [&pref_lang](std::string fname) {
-        fname += '/' + pref_lang;
+    const auto ext = [&lang_fname](std::string fname) {
+        fname += '/' + lang_fname;
         return fname.ends_with(".json") ? fname : fname + ".json";
     };
 
