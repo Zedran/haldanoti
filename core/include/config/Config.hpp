@@ -23,6 +23,8 @@ struct Config {
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Config, pref_language, unique_elems);
 
+Config get_default_config();
+
 // Returns Config read from the config directory.
 Config read_config();
 

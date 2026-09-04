@@ -4,20 +4,40 @@
 #include <filesystem>
 #include <fstream>
 #include <stdexcept>
+#include <string>
+#include <vector>
 
 #include <nlohmann/json.hpp>
 
 #include "config/Config.hpp"
-#include "config/default_config.hpp"
 #include "utils/assets.hpp"
 
 namespace config {
 
+Config get_default_config() {
+    const std::vector<sf::String> langs = utils::get_lang_fnames();
+
+    std::string sys_lang = utils::get_system_language();
+
+    Config c;
+
+    if (std::find(langs.begin(), langs.end(), sf::String{sys_lang}) != langs.end()) {
+        c.pref_language = std::move(sys_lang);
+    } else {
+        c.pref_language = "en";
+    }
+
+    c.unique_elems = true;
+
+    return c;
+}
+
 config::Config read_config() {
     std::ifstream conf_file{utils::CONFIG_PATH};
     if (!conf_file.good()) {
-        write_config(DEFAULT_CONFIG);
-        return DEFAULT_CONFIG;
+        Config c = get_default_config();
+        write_config(c);
+        return c;
     }
 
     nlohmann::json j = nlohmann::json::parse(conf_file);
