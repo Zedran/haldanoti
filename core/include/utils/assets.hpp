@@ -37,6 +37,9 @@ static const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;
 // Returns a list of available language filenames without extensions.
 std::vector<sf::String> get_lang_fnames();
 
+// Returns a 2-letter language code retrieved from system's default locale name.
+std::string get_system_language();
+
 // Returns a list of file paths in dir.
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);
 

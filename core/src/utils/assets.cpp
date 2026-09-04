@@ -71,6 +71,10 @@ std::vector<sf::String> get_lang_fnames() {
     return fnames;
 }
 
+std::string get_system_language() {
+    return std::locale{""}.name().substr(0, 2);
+}
+
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) {
     std::vector<std::filesystem::path> files;
 
@@ -87,7 +91,7 @@ lang::Lang load_language(
     std::array<std::string, 2> lang_dirs,
     std::optional<std::string> lang_fname
 ) {
-    std::string pref_lang = lang_fname ? lang_fname.value() : std::locale{""}.name().substr(0, 2);
+    std::string pref_lang = lang_fname ? lang_fname.value() : get_system_language();
 
     if (pref_lang == "en") {
         return lang::DEFAULT_LANG;
