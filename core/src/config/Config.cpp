@@ -44,7 +44,14 @@ config::Config read_config() {
     }
 
     nlohmann::json j = nlohmann::json::parse(conf_file);
-    return j.get<config::Config>();
+
+    Config c = j.get<config::Config>();
+
+    if (c.pref_language.empty()) {
+        c.pref_language = get_default_lang_code();
+    }
+
+    return c;
 }
 
 void write_config(const Config& conf) {
