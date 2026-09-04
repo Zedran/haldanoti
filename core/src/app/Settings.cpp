@@ -102,7 +102,7 @@ void Settings::set_config(const config::Config& c) {
     cb_unique_elems_->set_state(c.unique_elems);
 
     assert(sel_lang_);
-    sel_lang_->set_value(c.pref_language ? *c.pref_language : "en");
+    sel_lang_->set_value(c.pref_language);
 }
 
 void Settings::set_state(State s) noexcept {

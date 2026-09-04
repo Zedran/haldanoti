@@ -3,19 +3,16 @@
 
 #pragma once
 
-#include <optional>
 #include <string>
 
 #include <nlohmann/json.hpp>
-
-#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace config {
 
 struct Config {
     // Preferred language, chosen if found. Setting this field disregards
     // system's locale settings.
-    std::optional<std::string> pref_language;
+    std::string pref_language;
 
     // Does not permit repeating elements in the generated code.
     bool unique_elems;

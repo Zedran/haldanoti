@@ -7,7 +7,6 @@
 #include <filesystem>
 #include <fstream>
 #include <initializer_list>
-#include <optional>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -82,7 +81,7 @@ T load_asset(std::initializer_list<std::string_view> paths) {
 // to lang_fname if missing.
 lang::Lang load_language(
     std::array<std::string, 2> lang_dirs,
-    std::optional<std::string> lang_fname = std::nullopt
+    std::string                lang_fname
 );
 
 } // namespace utils

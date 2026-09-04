@@ -89,9 +89,9 @@ std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) 
 
 lang::Lang load_language(
     std::array<std::string, 2> lang_dirs,
-    std::optional<std::string> lang_fname
+    std::string                lang_fname
 ) {
-    std::string pref_lang = lang_fname ? lang_fname.value() : get_system_language();
+    std::string pref_lang = lang_fname.empty() ? get_system_language() : lang_fname;
 
     if (pref_lang == "en") {
         return lang::DEFAULT_LANG;
