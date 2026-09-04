@@ -65,8 +65,7 @@ std::vector<sf::String> get_lang_fnames() {
         throw std::runtime_error{"could not find language files"};
     }
 
-    // Add the default language.
-    fnames.push_back("en");
+    fnames.push_back(DEFAULT_LANG_CODE);
 
     return fnames;
 }
@@ -95,7 +94,7 @@ lang::Lang load_language(
         lang_fname = get_system_language();
     }
 
-    if (lang_fname == "en") {
+    if (lang_fname == DEFAULT_LANG_CODE) {
         return lang::DEFAULT_LANG;
     }
 
