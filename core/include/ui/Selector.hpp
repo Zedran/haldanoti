@@ -28,7 +28,7 @@ public:
     };
 
     // Constructs a new selector. The entries vector is used to display
-    // the available options. It is copied into the class.
+    // the available options. It is copied into the class and sorted.
     // This function throws runtime_error if the entries vector is empty.
     Selector(
         const sf::Font&         font,
@@ -40,16 +40,8 @@ public:
 
     virtual ~Selector();
 
-    // Returns an index of the currently displayed value in the underlying
-    // entries vector.
-    std::size_t get_index() const noexcept;
-
     // Get string value that is currently set in the Selector.
     sf::String get_value() const;
-
-    // Set the chosen value indicated to by index. Throws if index value is out
-    // ouf bounds of the underlying entries vector.
-    void set_value(std::size_t index);
 
     // Sets v as current value of the Selector. If none of the Selector's
     // entries matches v, throws logic_error.
@@ -74,6 +66,8 @@ private:
     void decrement();
 
     void increment();
+
+    void set_index(std::size_t index);
 };
 
 } // namespace ui

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
+#include <algorithm>
 #include <cassert>
 #include <stdexcept>
 
@@ -70,6 +71,8 @@ Selector::Selector(
     if (entries_.size() == 1) {
         fwd.disable();
         rev.disable();
+    } else {
+        std::sort(entries_.begin(), entries_.end());
     }
 }
 
@@ -82,10 +85,6 @@ void Selector::decrement() {
         index_--;
     }
     sel_label_->set_text(entries_[index_]);
-}
-
-std::size_t Selector::get_index() const noexcept {
-    return index_;
 }
 
 sf::String Selector::get_value() const {
@@ -102,7 +101,7 @@ void Selector::increment() {
     sel_label_->set_text(entries_[index_]);
 }
 
-void Selector::set_value(std::size_t index) {
+void Selector::set_index(std::size_t index) {
     assert(index < entries_.size());
     index_ = index;
     sel_label_->set_text(entries_[index]);
@@ -111,7 +110,7 @@ void Selector::set_value(std::size_t index) {
 void Selector::set_value(const sf::String& v) {
     for (std::size_t i = 0; i < entries_.size(); i++) {
         if (entries_[i] == v) {
-            set_value(i);
+            set_index(i);
             return;
         }
     }
