@@ -10,15 +10,14 @@
 namespace config {
 
 struct Config {
-    // Preferred language, chosen if found. Setting this field disregards
-    // system's locale settings.
-    std::string pref_language;
+    // Language used by the application.
+    std::string lang;
 
     // Does not permit repeating elements in the generated code.
     bool unique_elems;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Config, pref_language, unique_elems);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Config, lang, unique_elems);
 
 Config get_default_config();
 

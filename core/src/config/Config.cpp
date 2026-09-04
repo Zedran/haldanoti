@@ -30,8 +30,8 @@ static std::string get_default_lang_code() {
 
 Config get_default_config() {
     return Config{
-        .pref_language = get_default_lang_code(),
-        .unique_elems  = true,
+        .lang         = get_default_lang_code(),
+        .unique_elems = true,
     };
 }
 
@@ -47,8 +47,8 @@ config::Config read_config() {
 
     Config c = j.get<config::Config>();
 
-    if (c.pref_language.empty()) {
-        c.pref_language = get_default_lang_code();
+    if (c.lang.empty()) {
+        c.lang = get_default_lang_code();
     }
 
     return c;
