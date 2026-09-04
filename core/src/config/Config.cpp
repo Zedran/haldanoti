@@ -14,22 +14,25 @@
 
 namespace config {
 
-Config get_default_config() {
+// Queries system locale for the language. If the language is supported
+// by the application, its code is returned. Otherwise, the default code
+// is used as a fallback.
+static std::string get_default_lang_code() {
     const std::vector<sf::String> langs = utils::get_lang_fnames();
 
     std::string sys_lang = utils::get_system_language();
 
-    Config c;
-
     if (std::find(langs.begin(), langs.end(), sf::String{sys_lang}) != langs.end()) {
-        c.pref_language = std::move(sys_lang);
-    } else {
-        c.pref_language = "en";
+        return sys_lang;
     }
+    return "en";
+}
 
-    c.unique_elems = true;
-
-    return c;
+Config get_default_config() {
+    return Config{
+        .pref_language = get_default_lang_code(),
+        .unique_elems  = true,
+    };
 }
 
 config::Config read_config() {
