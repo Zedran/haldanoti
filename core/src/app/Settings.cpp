@@ -111,6 +111,10 @@ void Settings::set_config(const config::Config& c) {
     set_ref_config(c);
 }
 
+bool Settings::restart_required(const config::Config& c) const noexcept {
+    return ref_config_.lang != c.lang;
+}
+
 void Settings::set_ref_config(const config::Config& c) noexcept {
     ref_config_ = c;
 }

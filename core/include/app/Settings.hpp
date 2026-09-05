@@ -52,6 +52,11 @@ public:
     // Return the current State of the Settings.
     State get_state() const noexcept;
 
+    // Due to opaque design of ui::Box, some settings (e.g. language)
+    // cannot be applied after the initialization of all elements.
+    // This function returns true if these settings were changed.
+    bool restart_required(const config::Config& c) const noexcept;
+
     // Sets the values in the Settings page according to the received Config
     // and updates the internal reference Config.
     void set_config(const config::Config& c);
