@@ -7,6 +7,7 @@ set(CORE_SOURCES
     src/app/CodeButton.cpp
     src/app/FeedbackLabel.cpp
     src/app/GameRow.cpp
+    src/app/Message.cpp
     src/app/SecretRow.cpp
     src/app/Settings.cpp
     src/app/Toolbar.cpp
