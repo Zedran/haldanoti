@@ -40,6 +40,11 @@ public:
         std::vector<sf::String> lang_fnames
     );
 
+    // Returns true if conf differs from the reference Config struct. This
+    // function can be used to determine whether settings were modified
+    // since the last call to set_config or set_ref_config.
+    bool config_differs(const config::Config& c) const noexcept;
+
     // Reads the values set by the player and returns them packed into
     // the Config struct.
     config::Config get_config() const noexcept;
@@ -47,8 +52,12 @@ public:
     // Return the current State of the Settings.
     State get_state() const noexcept;
 
-    // Set the values in the Settings page according to the received Config.
+    // Sets the values in the Settings page according to the received Config
+    // and updates the internal reference Config.
     void set_config(const config::Config& c);
+
+    // Set c as the new reference for the config_differs function.
+    void set_ref_config(const config::Config& c) noexcept;
 
     // Set a new State for the Settings.
     void set_state(State s) noexcept;
@@ -77,6 +86,10 @@ private:
     // Non-owning pointer to the preferred language Selector.
     // Required for getting and setting its value.
     ui::Selector* sel_lang_;
+
+    // Config used as a reference to determine whether the settings were changed
+    // between saves.
+    config::Config ref_config_;
 
     // Stores the current state of the Settings page.
     State state_;

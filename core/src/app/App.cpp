@@ -119,9 +119,16 @@ int App::run() {
     return EXIT_SUCCESS;
 }
 
-void App::save_config() const {
+void App::save_config() {
     dbg("saving configuration");
-    config::write_config(settings_.get_config());
+
+    const config::Config c = settings_.get_config();
+
+    if (settings_.config_differs(c)) {
+        dbg("config modified");
+        config::write_config(settings_.get_config());
+        settings_.set_ref_config(c);
+    }
 }
 
 void App::set_scene(Scene scene) noexcept {

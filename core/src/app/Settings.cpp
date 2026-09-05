@@ -86,6 +86,10 @@ Settings::Settings(
     cancel.bind(sf::Mouse::Button::Left, [this] { this->set_state(State::Close); });
 }
 
+bool Settings::config_differs(const config::Config& c) const noexcept {
+    return ref_config_ != c;
+}
+
 config::Config Settings::get_config() const noexcept {
     return config::Config{
         .lang         = sel_lang_->get_value().toAnsiString(),
@@ -103,6 +107,12 @@ void Settings::set_config(const config::Config& c) {
 
     assert(sel_lang_);
     sel_lang_->set_value(c.lang);
+
+    set_ref_config(c);
+}
+
+void Settings::set_ref_config(const config::Config& c) noexcept {
+    ref_config_ = c;
 }
 
 void Settings::set_state(State s) noexcept {

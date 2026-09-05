@@ -75,9 +75,9 @@ private:
     // Handles SFML events.
     void poll_events();
 
-    // Gathers the state from the elements on the Settings page
+    // Gathers the state from the elements of the Settings page
     // and writes them into the config file.
-    void save_config() const;
+    void save_config();
 
     // Sets the current scene, allowing the App to transition between the game
     // and subpages.

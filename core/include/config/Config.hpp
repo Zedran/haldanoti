@@ -15,6 +15,8 @@ struct Config {
 
     // Does not permit repeating elements in the generated code.
     bool unique_elems;
+
+    bool operator==(const Config& other) const noexcept = default;
 };
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Config, lang, unique_elems);
