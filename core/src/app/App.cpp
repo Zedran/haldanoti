@@ -26,6 +26,12 @@ App::App(
 ) : bg_{theme.bg},
     board_{font, window_size.componentWiseMul(Board::REL_SIZE), lang.board, theme.board},
     game_{conf.unique_elems},
+    message_{
+        font,
+        window_size.componentWiseMul(Message::REL_SIZE),
+        lang.message,
+        theme.message
+    },
     scene_{Scene::Game},
     settings_{
         font,
@@ -55,6 +61,8 @@ App::App(
     });
     toolbar_.set_position(sf::Vector2f{0.0f, (1.0f - Toolbar::REL_SIZE.y) * window_size.y});
 
+    message_.set_position({0.0f, 0.8f * window_size.y});
+
     settings_.set_position({0.0f, 0.0f});
     settings_.set_config(conf);
 
@@ -76,6 +84,8 @@ void App::draw() {
     if (scene_ == Scene::Settings) {
         window_.draw(settings_);
     }
+
+    window_.draw(message_);
 
     window_.display();
 }
@@ -126,6 +136,9 @@ void App::save_config() {
 
     if (settings_.config_differs(c)) {
         dbg("config modified");
+        if (settings_.restart_required(c)) {
+            message_.show(Message::Content::RestartRequired);
+        }
         config::write_config(settings_.get_config());
         settings_.set_ref_config(c);
     }
@@ -142,6 +155,8 @@ void App::set_scene(Scene scene) noexcept {
 }
 
 void App::tick() {
+    message_.tick();
+
     if (scene_ == Scene::Settings) {
         switch (settings_.get_state()) {
         case Settings::State::Running:

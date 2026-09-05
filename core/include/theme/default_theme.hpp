@@ -153,6 +153,11 @@ const Theme DEFAULT_THEME{
             },
         }
     },
+    .message{
+        .bg{0x000000aa},
+        .fg{0xffffffff},
+        .ol{a0},
+    },
     .toolbar{
         .box{
             .bg{0xf2dec6ff},

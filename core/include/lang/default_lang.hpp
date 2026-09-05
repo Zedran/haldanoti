@@ -25,6 +25,9 @@ const Lang DEFAULT_LANG{
             .info_lost{L"Game over"},
         },
     },
+    .message{
+        .restart_required{L"Restart required"},
+    },
     .toolbar{
         .new_game{L"New\ngame"},
         .settings{L"Settings"},

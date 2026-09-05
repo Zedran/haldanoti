@@ -10,6 +10,7 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "app/Board.hpp"
+#include "app/Message.hpp"
 #include "app/Settings.hpp"
 #include "app/Toolbar.hpp"
 #include "game/Game.hpp"
@@ -50,6 +51,8 @@ private:
 
     // Logic engine.
     game::Game game_;
+
+    Message message_;
 
     // Currently displayed scene.
     Scene scene_;

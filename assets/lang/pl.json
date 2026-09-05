@@ -14,6 +14,9 @@
             "info_lost": "Koniec gry"
         }
     },
+    "message": {
+        "restart_required": "Wymagane ponowne uruchomienie"
+    },
     "toolbar": {
         "new_game": "Nowa\ngra",
         "settings": "Opcje",
