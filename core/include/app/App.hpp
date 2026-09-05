@@ -65,6 +65,10 @@ private:
     // Render target.
     sf::RenderWindow window_;
 
+    // Apply configuration options that can take effect without restarting
+    // the application.
+    void apply_config(const config::Config& c);
+
     // Function for the exit button.
     void close();
 

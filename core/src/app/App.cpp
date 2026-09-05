@@ -71,6 +71,10 @@ App::App(
 
 App::~App() = default;
 
+void App::apply_config(const config::Config& c) {
+    game_.allow_unique_only(c.unique_elems);
+}
+
 void App::close() {
     window_.close();
 }
@@ -139,6 +143,7 @@ void App::save_config() {
         if (settings_.restart_required(c)) {
             message_.show(Message::Content::RestartRequired);
         }
+        apply_config(c);
         config::write_config(settings_.get_config());
         settings_.set_ref_config(c);
     }
