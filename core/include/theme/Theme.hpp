@@ -14,11 +14,11 @@ namespace theme {
 
 // Top-level theme structure.
 struct Theme {
-    sf::Color bg;
-    Board     board;
+    sf::Color        bg;
+    Board            board;
     ui::Label::Style message;
-    Toolbar   toolbar;
-    Settings  settings;
+    Toolbar          toolbar;
+    Settings         settings;
 };
 
 } // namespace theme
