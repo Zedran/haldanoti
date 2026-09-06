@@ -9,6 +9,7 @@
 
 #include "lang/default_lang.hpp"
 #include "utils/assets.hpp"
+#include "utils/debug.hpp"
 
 namespace utils {
 
@@ -71,7 +72,14 @@ std::vector<sf::String> get_lang_fnames() {
 }
 
 std::string get_system_language() {
-    return std::locale{""}.name().substr(0, 2);
+    const std::string lang = std::locale{""}.name();
+
+    if (lang.size() < 2) {
+        dbg("locale lookup failed (got '{}'), fallback to '{}'", lang, DEFAULT_LANG_CODE);
+        return DEFAULT_LANG_CODE;
+    }
+
+    return lang.substr(0, 2);
 }
 
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) {

@@ -40,6 +40,7 @@ static constexpr std::string DEFAULT_LANG_CODE{"en"};
 std::vector<sf::String> get_lang_fnames();
 
 // Returns a 2-letter language code retrieved from system's default locale name.
+// Returns DEFAULT_LANG_CODE if querying locale fails.
 std::string get_system_language();
 
 // Returns a list of file paths in dir.
