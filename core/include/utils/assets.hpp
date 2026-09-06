@@ -41,7 +41,7 @@ std::vector<sf::String> get_lang_fnames();
 
 // Returns a 2-letter language code retrieved from system's default locale name.
 // Returns DEFAULT_LANG_CODE if querying locale fails.
-std::string get_system_language();
+std::string get_sys_lang_code();
 
 // Returns a list of file paths in dir.
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);

@@ -71,7 +71,7 @@ std::vector<sf::String> get_lang_fnames() {
     return fnames;
 }
 
-std::string get_system_language() {
+std::string get_sys_lang_code() {
     const std::string lang = std::locale{""}.name();
 
     if (lang.size() < 2) {
@@ -99,7 +99,7 @@ lang::Lang load_language(
     std::string                lang_fname
 ) {
     if (lang_fname.empty()) {
-        lang_fname = get_system_language();
+        lang_fname = get_sys_lang_code();
     }
 
     if (lang_fname == DEFAULT_LANG_CODE) {
