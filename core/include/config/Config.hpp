@@ -22,17 +22,16 @@ struct Config {
     bool operator==(const Config& other) const noexcept = default;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
-    Config,
-    lang,
-    unique_elems,
-    fb_chars
-);
+// Deserializes Config from JSON. Fills missing values with defaults.
+void from_json(const nlohmann::json& j, Config& v);
 
 Config get_default_config();
 
 // Returns Config read from the config directory.
 Config read_config();
+
+// Serializes Config into JSON.
+void to_json(nlohmann::json& j, const Config& v);
 
 // Writes Config to file at path.
 void write_config(const Config& conf);

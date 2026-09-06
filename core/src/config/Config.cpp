@@ -3,11 +3,10 @@
 
 #include <filesystem>
 #include <fstream>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
-
-#include <nlohmann/json.hpp>
 
 #include "config/Config.hpp"
 #include "utils/assets.hpp"
@@ -26,6 +25,25 @@ static std::string get_default_lang_code() {
         return sys_lang;
     }
     return utils::DEFAULT_LANG_CODE;
+}
+
+void from_json(const nlohmann::json& j, Config& v) {
+    // Lazily loaded default Config.
+    std::unique_ptr<Config> default_config;
+
+    const auto has = [&j, &default_config](const std::string& key) {
+        if (j.contains(key)) {
+            return true;
+        }
+        if (!default_config) {
+            default_config = std::make_unique<Config>(get_default_config());
+        }
+        return false;
+    };
+
+    v.lang         = has("lang") ? j["lang"].get<std::string>() : default_config->lang;
+    v.unique_elems = has("unique_elems") ? j["unique_elems"].get<bool>() : default_config->unique_elems;
+    v.fb_chars     = has("fb_chars") ? j["fb_chars"].get<bool>() : default_config->fb_chars;
 }
 
 Config get_default_config() {
@@ -53,6 +71,12 @@ config::Config read_config() {
     }
 
     return c;
+}
+
+void to_json(nlohmann::json& j, const Config& v) {
+    j["lang"]         = v.lang;
+    j["unique_elems"] = v.unique_elems;
+    j["fb_chars"]     = v.fb_chars;
 }
 
 void write_config(const Config& conf) {
