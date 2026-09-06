@@ -22,7 +22,12 @@ struct Config {
     bool operator==(const Config& other) const noexcept = default;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Config, lang, unique_elems, fb_chars);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    Config,
+    lang,
+    unique_elems,
+    fb_chars
+);
 
 Config get_default_config();
 

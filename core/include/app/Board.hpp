@@ -23,7 +23,13 @@ public:
     // Size relative to outer container.
     static constexpr sf::Vector2f REL_SIZE{0.90f, 0.88f};
 
-    Board(const sf::Font& font, sf::Vector2f size, lang::Board lang, theme::Board theme, bool force_fb_chars);
+    Board(
+        const sf::Font& font,
+        sf::Vector2f    size,
+        lang::Board     lang,
+        theme::Board    theme,
+        bool            force_fb_chars
+    );
 
     ~Board();
 
