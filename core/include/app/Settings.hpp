@@ -79,10 +79,10 @@ private:
     static constexpr sf::Vector2f OPT_LINE_REL_SIZE{0.8f, 0.04f};
 
     // Button size relative to toolbar box height.
-    static constexpr sf::Vector2f BUTTON_RELSIZE{0.9f, 0.5f};
+    static constexpr sf::Vector2f BUTTON_RELSIZE{1.125f, 0.6f};
 
     // Font size relative to the height of the button.
-    static constexpr float FONT_REL_SIZE{0.4f};
+    static constexpr float FONT_REL_SIZE{0.3f};
 
     // Non-owning pointer to the Checkbox representing the unique elements
     // choice. Required for getting and setting its state.
