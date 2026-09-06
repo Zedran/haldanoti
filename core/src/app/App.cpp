@@ -24,7 +24,7 @@ App::App(
     lang::Lang      lang,
     theme::Theme    theme
 ) : bg_{theme.bg},
-    board_{font, window_size.componentWiseMul(Board::REL_SIZE), lang.board, theme.board},
+    board_{font, window_size.componentWiseMul(Board::REL_SIZE), lang.board, theme.board, conf.fb_chars},
     game_{conf.unique_elems},
     message_{
         font,

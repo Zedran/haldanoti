@@ -32,6 +32,7 @@ Config get_default_config() {
     return Config{
         .lang         = get_default_lang_code(),
         .unique_elems = true,
+        .fb_chars     = false,
     };
 }
 

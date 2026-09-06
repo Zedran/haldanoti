@@ -15,6 +15,7 @@ struct Settings {
     sf::String title;
     sf::String label_unique_elems;
     sf::String label_language;
+    sf::String label_fb_chars;
     sf::String save;
     sf::String cancel;
 };
@@ -25,6 +26,7 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     title,
     label_unique_elems,
     label_language,
+    label_fb_chars,
     save,
     cancel
 );

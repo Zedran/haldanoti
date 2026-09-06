@@ -52,7 +52,15 @@ Settings::Settings(
         lang_fnames
     );
 
-    constexpr sf::Vector2f toolbar_spacing{0.0f, 10.0f};
+    cb_fb_chars_ = &opt_box.add_component<ui::Checkbox>(
+        font,
+        opt_line_size,
+        theme.checkbox,
+        lang.label_fb_chars,
+        lang.check_mark
+    );
+
+    constexpr sf::Vector2f toolbar_spacing{0.0f, 9.0f};
 
     opt_box.add_component<ui::Blank>(opt_line_size.componentWiseMul(toolbar_spacing));
 
@@ -94,6 +102,7 @@ config::Config Settings::get_config() const noexcept {
     return config::Config{
         .lang         = sel_lang_->get_value().toAnsiString(),
         .unique_elems = cb_unique_elems_->get_state(),
+        .fb_chars     = cb_fb_chars_->get_state(),
     };
 }
 
@@ -108,11 +117,15 @@ void Settings::set_config(const config::Config& c) {
     assert(sel_lang_);
     sel_lang_->set_value(c.lang);
 
+    assert(cb_fb_chars_);
+    cb_fb_chars_->set_state(c.fb_chars);
+
     set_ref_config(c);
 }
 
 bool Settings::restart_required(const config::Config& c) const noexcept {
-    return ref_config_.lang != c.lang;
+    return ref_config_.lang != c.lang ||
+           ref_config_.fb_chars != c.fb_chars;
 }
 
 void Settings::set_ref_config(const config::Config& c) noexcept {

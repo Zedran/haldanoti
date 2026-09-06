@@ -16,10 +16,13 @@ struct Config {
     // Does not permit repeating elements in the generated code.
     bool unique_elems;
 
+    // Always display feedback characters, regardless of the theme's settings.
+    bool fb_chars;
+
     bool operator==(const Config& other) const noexcept = default;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Config, lang, unique_elems);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Config, lang, unique_elems, fb_chars);
 
 Config get_default_config();
 

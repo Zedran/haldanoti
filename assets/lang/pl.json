@@ -27,6 +27,7 @@
         "title": "Opcje",
         "label_unique_elems": "Unikatowe elementy",
         "label_language": "Język",
+        "label_fb_chars": "Znaki info. zwrotnej",
         "save": "Zapisz",
         "cancel": "Anuluj"
     }

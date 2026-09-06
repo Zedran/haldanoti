@@ -92,6 +92,10 @@ private:
     // Required for getting and setting its value.
     ui::Selector* sel_lang_;
 
+    // Non-owning pointer to the Checkbox representing the feedback characters
+    // choice. Required for getting and setting its state.
+    ui::Checkbox* cb_fb_chars_;
+
     // Config used as a reference to determine whether the settings were changed
     // between saves.
     config::Config ref_config_;
