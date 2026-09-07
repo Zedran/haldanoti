@@ -34,7 +34,7 @@ public:
         const sf::Font&         font,
         sf::Vector2f            size,
         Style                   style,
-        sf::String              label_text,
+        sf::String              label,
         std::vector<sf::String> entries
     );
 

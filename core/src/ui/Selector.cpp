@@ -13,7 +13,7 @@ Selector::Selector(
     const sf::Font&         font,
     sf::Vector2f            size,
     Style                   style,
-    sf::String              label_text,
+    sf::String              label,
     std::vector<sf::String> entries
 ) : Box{size, style.box, Layout::Type::RowLayout}, entries_{entries}, index_{} {
     constexpr Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
@@ -36,7 +36,7 @@ Selector::Selector(
         font,
         size.componentWiseMul(LABEL_REL_SIZE),
         style.label,
-        label_text
+        label
     );
 
     const sf::Vector2f sel_button_size{rbox_size.y, rbox_size.y};
