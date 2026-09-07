@@ -100,9 +100,9 @@ bool Settings::config_differs(const config::Config& c) const noexcept {
 
 config::Config Settings::get_config() const noexcept {
     return config::Config{
+        .fb_chars     = cb_fb_chars_->get_state(),
         .lang         = sel_lang_->get_value().toAnsiString(),
         .unique_elems = cb_unique_elems_->get_state(),
-        .fb_chars     = cb_fb_chars_->get_state(),
     };
 }
 

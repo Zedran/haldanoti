@@ -10,14 +10,14 @@
 namespace config {
 
 struct Config {
+    // Always display feedback characters, regardless of the theme's settings.
+    bool fb_chars;
+
     // Language used by the application.
     std::string lang;
 
     // Does not permit repeating elements in the generated code.
     bool unique_elems;
-
-    // Always display feedback characters, regardless of the theme's settings.
-    bool fb_chars;
 
     bool operator==(const Config& other) const noexcept = default;
 };
