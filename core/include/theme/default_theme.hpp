@@ -268,7 +268,7 @@ const Theme DEFAULT_THEME{
             .button{
                 .disabled{.bg{dbs.bg}, .fg{0x000000ff}, .ol{a0}},
                 .normal{.bg{dbs.bg}, .fg{0x000000ff}, .ol{a0}},
-                .hover{.bg{0xfff8f2ff}, .fg{0x000000ff}, .ol{ol}},
+                .hover{.bg{dbs.bg}, .fg{0x000000ff}, .ol{ol}},
                 .active{.bg{0xffffffff}, .fg{0x000000ff}, .ol{ol}},
             },
         },
