@@ -48,7 +48,7 @@ Settings::Settings(
         font,
         opt_line_size,
         theme.selector,
-        lang.label_language,
+        lang.label_lang,
         lang_fnames
     );
 

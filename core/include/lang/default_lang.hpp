@@ -37,7 +37,7 @@ const Lang DEFAULT_LANG{
         .check_mark{L"x"},
         .title{L"Settings"},
         .label_unique_elems{L"Unique elements"},
-        .label_language{L"Language"},
+        .label_lang{L"Language"},
         .label_fb_chars{L"Feedback characters"},
         .save{L"Save"},
         .cancel{L"Cancel"},

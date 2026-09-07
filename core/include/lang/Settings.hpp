@@ -14,7 +14,7 @@ struct Settings {
     sf::String check_mark;
     sf::String title;
     sf::String label_unique_elems;
-    sf::String label_language;
+    sf::String label_lang;
     sf::String label_fb_chars;
     sf::String save;
     sf::String cancel;
@@ -25,7 +25,7 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     check_mark,
     title,
     label_unique_elems,
-    label_language,
+    label_lang,
     label_fb_chars,
     save,
     cancel
