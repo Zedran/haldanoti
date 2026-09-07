@@ -13,9 +13,9 @@ namespace lang {
 struct Settings {
     sf::String check_mark;
     sf::String title;
-    sf::String label_unique_elems;
-    sf::String label_lang;
-    sf::String label_fb_chars;
+    sf::String opt_unique_elems;
+    sf::String opt_lang;
+    sf::String opt_fb_chars;
     sf::String save;
     sf::String cancel;
 };
@@ -24,9 +24,9 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     Settings,
     check_mark,
     title,
-    label_unique_elems,
-    label_lang,
-    label_fb_chars,
+    opt_unique_elems,
+    opt_lang,
+    opt_fb_chars,
     save,
     cancel
 );

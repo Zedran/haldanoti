@@ -25,9 +25,9 @@
     "settings": {
         "check_mark": "x",
         "title": "Opcje",
-        "label_unique_elems": "Unikatowe elementy",
-        "label_lang": "Język",
-        "label_fb_chars": "Znaki info. zwrotnej",
+        "opt_unique_elems": "Unikatowe elementy",
+        "opt_lang": "Język",
+        "opt_fb_chars": "Znaki info. zwrotnej",
         "save": "Zapisz",
         "cancel": "Anuluj"
     }

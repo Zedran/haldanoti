@@ -40,7 +40,7 @@ Settings::Settings(
         font,
         opt_line_size,
         theme.checkbox,
-        lang.label_unique_elems,
+        lang.opt_unique_elems,
         lang.check_mark
     );
 
@@ -48,7 +48,7 @@ Settings::Settings(
         font,
         opt_line_size,
         theme.selector,
-        lang.label_lang,
+        lang.opt_lang,
         lang_fnames
     );
 
@@ -56,7 +56,7 @@ Settings::Settings(
         font,
         opt_line_size,
         theme.checkbox,
-        lang.label_fb_chars,
+        lang.opt_fb_chars,
         lang.check_mark
     );
 
