@@ -84,10 +84,6 @@ private:
     // Font size relative to the height of the button.
     static constexpr float FONT_REL_SIZE{0.3f};
 
-    // Non-owning pointer to the Checkbox representing the unique elements
-    // choice. Required for getting and setting its state.
-    ui::Checkbox* cb_unique_elems_;
-
     // Non-owning pointer to the preferred language Selector.
     // Required for getting and setting its value.
     ui::Selector* sel_lang_;
@@ -95,6 +91,10 @@ private:
     // Non-owning pointer to the Checkbox representing the feedback characters
     // choice. Required for getting and setting its state.
     ui::Checkbox* cb_fb_chars_;
+
+    // Non-owning pointer to the Checkbox representing the unique elements
+    // choice. Required for getting and setting its state.
+    ui::Checkbox* cb_unique_elems_;
 
     // Config used as a reference to determine whether the settings were changed
     // between saves.

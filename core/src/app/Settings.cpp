@@ -36,14 +36,6 @@ Settings::Settings(
         lang.title
     );
 
-    cb_unique_elems_ = &opt_box.add_component<ui::Checkbox>(
-        font,
-        opt_line_size,
-        theme.checkbox,
-        lang.opt_unique_elems,
-        lang.check_mark
-    );
-
     sel_lang_ = &opt_box.add_component<ui::Selector>(
         font,
         opt_line_size,
@@ -57,6 +49,14 @@ Settings::Settings(
         opt_line_size,
         theme.checkbox,
         lang.opt_fb_chars,
+        lang.check_mark
+    );
+
+    cb_unique_elems_ = &opt_box.add_component<ui::Checkbox>(
+        font,
+        opt_line_size,
+        theme.checkbox,
+        lang.opt_unique_elems,
         lang.check_mark
     );
 
