@@ -79,7 +79,7 @@ T load_asset(std::initializer_list<std::string_view> paths) {
 // found. Throws upon encountering JSON parsing errors.
 //
 // lang_dirs is an array containing possible locations of the lang directory.
-// lang_fname is the name of the preferred translation file. Translation files
+// lang_fname is the name of the desired translation file. Translation files
 // are named with the lower-case 2-letter country code (ISO 639). The function
 // expects the file to have the '.json' extension and it will be appended
 // to lang_fname if missing.
