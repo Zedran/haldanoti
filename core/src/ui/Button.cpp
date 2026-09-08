@@ -68,20 +68,8 @@ void Button::handle_event(const sf::Event& event) {
             }
         }
 
-        if (const auto* e = event.getIf<sf::Event::MouseButtonReleased>()) {
-            if (handle_release(*e, b)) {
-                return;
-            }
-        }
-
         if (const auto* e = event.getIf<sf::Event::KeyPressed>()) {
             if (handle_press(*e, b)) {
-                return;
-            }
-        }
-
-        if (const auto* e = event.getIf<sf::Event::KeyReleased>()) {
-            if (handle_release(*e, b)) {
                 return;
             }
         }
