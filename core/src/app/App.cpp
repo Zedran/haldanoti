@@ -57,8 +57,7 @@ App::App(
     },
     window_{sf::VideoMode(static_cast<sf::Vector2u>(window_size)), "mm", sf::Style::Close} {
     window_.setIcon(std::move(icon));
-    window_.setVerticalSyncEnabled(conf.vsync);
-    window_.setFramerateLimit(conf.vsync ? FPS_UNLIM : FPS_LIMIT);
+    set_vsync(conf.vsync);
 
     dbg("screen_size = {{{:.0f}, {:.0f}}}", window_size.x, window_size.y);
 
@@ -80,9 +79,7 @@ App::~App() = default;
 
 void App::apply_config(const config::Config& c) {
     game_.allow_unique_only(c.unique_elems);
-
-    window_.setVerticalSyncEnabled(c.vsync);
-    window_.setFramerateLimit(c.vsync ? FPS_UNLIM : FPS_LIMIT);
+    set_vsync(c.vsync);
 }
 
 void App::close() {
@@ -167,6 +164,12 @@ void App::set_scene(Scene scene) noexcept {
     if (scene == Scene::Settings) {
         settings_.set_state(Settings::State::Running);
     }
+}
+
+void App::set_vsync(bool enabled) {
+    dbg("VSync: {}", enabled);
+    window_.setVerticalSyncEnabled(enabled);
+    window_.setFramerateLimit(enabled ? FPS_UNLIM : FPS_LIMIT);
 }
 
 void App::tick() {

@@ -96,6 +96,9 @@ private:
     // and subpages.
     void set_scene(Scene scene) noexcept;
 
+    // Enables or disables VSync and sets the framerate limit accordingly.
+    void set_vsync(bool enabled);
+
     // Game logic tick.
     void tick();
 };
