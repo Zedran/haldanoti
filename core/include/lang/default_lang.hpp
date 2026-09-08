@@ -39,6 +39,7 @@ const Lang DEFAULT_LANG{
         .opt_unique_elems{L"Unique elements"},
         .opt_lang{L"Language"},
         .opt_fb_chars{L"Feedback characters"},
+        .opt_vsync{L"VSync"},
         .save{L"Save"},
         .cancel{L"Cancel"},
     }

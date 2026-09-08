@@ -43,6 +43,12 @@ private:
         Settings,
     };
 
+    // Framerate limit when vertical sync is disabled.
+    static constexpr unsigned int FPS_LIMIT = 60;
+
+    // High framerate limit that does not collide with vertical sync.
+    static constexpr unsigned int FPS_UNLIM = 9999;
+
     // Window background color.
     sf::Color bg_;
 

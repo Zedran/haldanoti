@@ -60,7 +60,15 @@ Settings::Settings(
         lang.check_mark
     );
 
-    constexpr sf::Vector2f toolbar_spacing{0.0f, 9.0f};
+    cb_vsync_ = &opt_box.add_component<ui::Checkbox>(
+        font,
+        opt_line_size,
+        theme.checkbox,
+        lang.opt_vsync,
+        lang.check_mark
+    );
+
+    constexpr sf::Vector2f toolbar_spacing{0.0f, 8.0f};
 
     opt_box.add_component<ui::Blank>(opt_line_size.componentWiseMul(toolbar_spacing));
 
@@ -103,6 +111,7 @@ config::Config Settings::get_config() const noexcept {
         .fb_chars     = cb_fb_chars_->get_state(),
         .lang         = sel_lang_->get_value().toAnsiString(),
         .unique_elems = cb_unique_elems_->get_state(),
+        .vsync        = cb_vsync_->get_state(),
     };
 }
 
@@ -119,6 +128,9 @@ void Settings::set_config(const config::Config& c) {
 
     assert(cb_fb_chars_);
     cb_fb_chars_->set_state(c.fb_chars);
+
+    assert(cb_vsync_);
+    cb_vsync_->set_state(c.vsync);
 
     set_ref_config(c);
 }

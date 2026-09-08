@@ -96,6 +96,10 @@ private:
     // choice. Required for getting and setting its state.
     ui::Checkbox* cb_unique_elems_;
 
+    // Non-owning pointer to the Checkbox representing vsync choice. Required
+    // for getting and setting its state.
+    ui::Checkbox* cb_vsync_;
+
     // Config used as a reference to determine whether the settings were changed
     // between saves.
     config::Config ref_config_;

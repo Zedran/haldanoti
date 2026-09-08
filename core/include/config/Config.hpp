@@ -19,6 +19,9 @@ struct Config {
     // Does not permit repeating elements in the generated code.
     bool unique_elems;
 
+    // Run the game at a native framerate.
+    bool vsync;
+
     bool operator==(const Config& other) const noexcept = default;
 };
 
