@@ -14,7 +14,16 @@ A feedback field does not correspond to any particular code field. Pins are plac
 
 To win the game, player must deduce the correct sequence within at most 12 attempts.
 
-Currently, the game does not allow blank elements and repetitions in the code.
+## Settings
+
+The following table presents configuration options that are available. Some changes require restarting the game to take effect.
+
+| Option                  | Restart | Description                                                                 |
+|:------------------------|:-------:|:----------------------------------------------------------------------------|
+| **Feedback characters** | yes     | Display small signs in the feedback fields in addition to colors.           |
+| **Language**            | yes     | Game's display language.                                                    |
+| **Unique elements**     |         | Do not repeat code elements.                                                |
+| **VSync**               |         | Run at native framerate instead of limiting it to 60 FPS.                   |
 
 ## License
 
