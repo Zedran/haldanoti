@@ -36,7 +36,7 @@ public:
     ~App();
 
     // Starts the application's main loop.
-    int run();
+    void run();
 
 private:
     // Indicates which scene should be displayed.

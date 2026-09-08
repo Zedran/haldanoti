@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
-#include <cstdlib>
-
 #include "app/App.hpp"
 #include "app/Board.hpp"
 #include "app/GameRow.hpp"
@@ -127,7 +125,7 @@ void App::poll_events() {
     }
 }
 
-int App::run() {
+void App::run() {
     dbg("--- MAIN LOOP BEGINS ---");
 
     while (window_.isOpen()) {
@@ -137,7 +135,6 @@ int App::run() {
     }
 
     dbg("---  MAIN LOOP ENDS  ---");
-    return EXIT_SUCCESS;
 }
 
 void App::save_config() {
