@@ -24,7 +24,11 @@ set(ASSETS_DIR ${APP_DIR}/assets)
 install(TARGETS   ${PROJECT_NAME}   DESTINATION ${BIN_DIR}        )
 install(FILES     ${TOP_DOC_FILES}  DESTINATION ${APP_DIR}        )
 install(DIRECTORY ${ASSETS_DIR_SRC} DESTINATION ${ASSETS_DIR_DEST})
-install(DIRECTORY ${DOC_DIR_SRC}    DESTINATION ${DOC_DIR_DEST}   )
+install(
+    DIRECTORY     ${DOC_DIR_SRC}
+    DESTINATION   ${DOC_DIR_DEST}
+    PATTERN       "dev" EXCLUDE
+)
 install(FILES     ${FONT_FILE_PATH} DESTINATION ${ASSETS_DIR}     )
 
 target_compile_definitions(core PUBLIC
