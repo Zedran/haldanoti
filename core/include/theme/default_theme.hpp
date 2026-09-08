@@ -220,7 +220,7 @@ const Theme DEFAULT_THEME{
     },
     .settings{
         .bg{
-            .bg{0x73737373},
+            .bg{0x00000044},
             .ol{a0}
         },
         .box{
@@ -234,18 +234,18 @@ const Theme DEFAULT_THEME{
         },
         .checkbox{
             .box{
-                .bg{0xf2dec6ff},
+                .bg{a0},
                 .ol{a0},
             },
             .button_off{
                 .disabled{dbs},
                 .normal{dbs},
-                .hover{.bg{0xfff8f2ff}, .fg{dbs.fg}, .ol{ol}},
-                .active{.bg{0xffffffff}, .fg{dbs.fg}, .ol{ol}},
+                .hover{.bg{0xfff8f2ff}, .fg{0x000000ff}, .ol{ol}},
+                .active{.bg{0xffffffff}, .fg{0x000000ff}, .ol{ol}},
             },
             .button_on{
                 .disabled{dbs},
-                .normal{.bg{dbs.bg}, .fg{0x000000ff}, .ol{ol}},
+                .normal{dbs},
                 .hover{.bg{0xfff8f2ff}, .fg{0x000000ff}, .ol{ol}},
                 .active{.bg{0xffffffff}, .fg{0x000000ff}, .ol{ol}},
             },
@@ -257,7 +257,7 @@ const Theme DEFAULT_THEME{
         },
         .selector{
             .box{
-                .bg{0xf2dec6ff},
+                .bg{a0},
                 .ol{a0},
             },
             .label{
@@ -266,9 +266,9 @@ const Theme DEFAULT_THEME{
                 .ol{a0},
             },
             .button{
-                .disabled{.bg{dbs.bg}, .fg{0x000000ff}, .ol{a0}},
-                .normal{.bg{dbs.bg}, .fg{0x000000ff}, .ol{a0}},
-                .hover{.bg{dbs.bg}, .fg{0x000000ff}, .ol{ol}},
+                .disabled{.bg{dbs.bg}, .fg{dbs.fg}, .ol{a0}},
+                .normal{.bg{dbs.bg}, .fg{dbs.fg}, .ol{a0}},
+                .hover{dbs},
                 .active{.bg{0xffffffff}, .fg{0x000000ff}, .ol{ol}},
             },
         },
