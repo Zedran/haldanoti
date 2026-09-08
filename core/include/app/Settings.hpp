@@ -89,15 +89,15 @@ private:
     ui::Selector* sel_lang_;
 
     // Non-owning pointer to the Checkbox representing the feedback characters
-    // choice. Required for getting and setting its state.
+    // option. Required for getting and setting its state.
     ui::Checkbox* cb_fb_chars_;
 
     // Non-owning pointer to the Checkbox representing the unique elements
-    // choice. Required for getting and setting its state.
+    // option. Required for getting and setting its state.
     ui::Checkbox* cb_unique_elems_;
 
-    // Non-owning pointer to the Checkbox representing vsync choice. Required
-    // for getting and setting its state.
+    // Non-owning pointer to the Checkbox representing the vsync option.
+    // Required for getting and setting its state.
     ui::Checkbox* cb_vsync_;
 
     // Config used as a reference to determine whether the settings were changed
