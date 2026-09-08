@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <limits>
+
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Image.hpp>
@@ -47,7 +49,7 @@ private:
     static constexpr unsigned int FPS_LIMIT = 60;
 
     // High framerate limit that does not collide with vertical sync.
-    static constexpr unsigned int FPS_UNLIM = 9999;
+    static constexpr unsigned int FPS_UNLIM = std::numeric_limits<unsigned int>::max();
 
     // Window background color.
     sf::Color bg_;
