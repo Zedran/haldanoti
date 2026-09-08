@@ -6,9 +6,12 @@
 #include "app/App.hpp"
 #include "app/Board.hpp"
 #include "app/GameRow.hpp"
+#include "app/Settings.hpp"
 #include "app/Toolbar.hpp"
+#include "config/Config.hpp"
 #include "game/Feedback.hpp"
 #include "game/State.hpp"
+#include "utils/assets.hpp"
 #include "utils/debug.hpp"
 
 namespace app {
@@ -17,23 +20,44 @@ App::App(
     const sf::Font& font,
     sf::Image       icon,
     sf::Vector2f    window_size,
-    bool            unique_elems,
+    config::Config  conf,
     lang::Lang      lang,
     theme::Theme    theme
 ) : bg_{theme.bg},
-    board_{font, window_size.componentWiseMul(Board::REL_SIZE), lang.board, theme.board},
-    game_{unique_elems},
+    board_{
+        font,
+        window_size.componentWiseMul(Board::REL_SIZE),
+        lang.board,
+        theme.board,
+        conf.fb_chars
+    },
+    game_{conf.unique_elems},
+    message_{
+        font,
+        window_size.componentWiseMul(Message::REL_SIZE),
+        lang.message,
+        theme.message
+    },
+    scene_{Scene::Game},
+    settings_{
+        font,
+        window_size,
+        lang.settings,
+        theme.settings,
+        utils::get_lang_fnames()
+    },
     toolbar_{
         font,
         window_size.componentWiseMul(Toolbar::REL_SIZE),
         lang.toolbar,
         theme.toolbar,
         [this] { this->new_game(); },
+        [this] { this->set_scene(Scene::Settings); },
         [this] { this->close(); }
     },
     window_{sf::VideoMode(static_cast<sf::Vector2u>(window_size)), "mm", sf::Style::Close} {
     window_.setIcon(std::move(icon));
-    window_.setVerticalSyncEnabled(true);
+    set_vsync(conf.vsync);
 
     dbg("screen_size = {{{:.0f}, {:.0f}}}", window_size.x, window_size.y);
 
@@ -43,10 +67,20 @@ App::App(
     });
     toolbar_.set_position(sf::Vector2f{0.0f, (1.0f - Toolbar::REL_SIZE.y) * window_size.y});
 
+    message_.set_position({0.0f, 0.8f * window_size.y});
+
+    settings_.set_position({0.0f, 0.0f});
+    settings_.set_config(conf);
+
     new_game();
 }
 
 App::~App() = default;
+
+void App::apply_config(const config::Config& c) {
+    game_.allow_unique_only(c.unique_elems);
+    set_vsync(c.vsync);
+}
 
 void App::close() {
     window_.close();
@@ -54,8 +88,16 @@ void App::close() {
 
 void App::draw() {
     window_.clear(bg_);
+
     window_.draw(board_);
     window_.draw(toolbar_);
+
+    if (scene_ == Scene::Settings) {
+        window_.draw(settings_);
+    }
+
+    window_.draw(message_);
+
     window_.display();
 }
 
@@ -73,8 +115,15 @@ void App::poll_events() {
             close();
             break;
         }
-        board_.handle_event(*event);
-        toolbar_.handle_event(*event);
+
+        switch (scene_) {
+        case Scene::Game:
+            board_.handle_event(*event);
+            toolbar_.handle_event(*event);
+            break;
+        case Scene::Settings:
+            settings_.handle_event(*event);
+        }
     }
 }
 
@@ -91,7 +140,55 @@ int App::run() {
     return EXIT_SUCCESS;
 }
 
+void App::save_config() {
+    dbg("saving configuration");
+
+    const config::Config c = settings_.get_config();
+
+    if (settings_.config_differs(c)) {
+        dbg("config modified");
+        if (settings_.restart_required(c)) {
+            message_.show(Message::Content::RestartRequired);
+        }
+        apply_config(c);
+        config::write_config(settings_.get_config());
+        settings_.set_ref_config(c);
+    }
+}
+
+void App::set_scene(Scene scene) noexcept {
+    dbg("setting scene {}", static_cast<int>(scene));
+
+    scene_ = scene;
+
+    if (scene == Scene::Settings) {
+        settings_.set_state(Settings::State::Running);
+    }
+}
+
+void App::set_vsync(bool enabled) {
+    dbg("VSync: {}", enabled);
+    window_.setVerticalSyncEnabled(enabled);
+    window_.setFramerateLimit(enabled ? FPS_UNLIM : FPS_LIMIT);
+}
+
 void App::tick() {
+    message_.tick();
+
+    if (scene_ == Scene::Settings) {
+        switch (settings_.get_state()) {
+        case Settings::State::Running:
+            break;
+        case Settings::State::SaveAndClose:
+            save_config();
+            set_scene(Scene::Game);
+            break;
+        case Settings::State::Close:
+            set_scene(Scene::Game);
+            break;
+        }
+    }
+
     if (game_.state() != game::State::Running || !board_.get_active_row().is_locked()) {
         return;
     }

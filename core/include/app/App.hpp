@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <limits>
+
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Image.hpp>
@@ -10,6 +12,8 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "app/Board.hpp"
+#include "app/Message.hpp"
+#include "app/Settings.hpp"
 #include "app/Toolbar.hpp"
 #include "game/Game.hpp"
 #include "lang/Lang.hpp"
@@ -24,7 +28,7 @@ public:
         const sf::Font& font,
         sf::Image       icon,
         sf::Vector2f    window_size,
-        bool            unique_elems,
+        config::Config  conf,
         lang::Lang      lang,
         theme::Theme    theme
     );
@@ -35,6 +39,18 @@ public:
     int run();
 
 private:
+    // Indicates which scene should be displayed.
+    enum class Scene {
+        Game,
+        Settings,
+    };
+
+    // Framerate limit when vertical sync is disabled.
+    static constexpr unsigned int FPS_LIMIT = 60;
+
+    // High framerate limit that does not collide with vertical sync.
+    static constexpr unsigned int FPS_UNLIM = std::numeric_limits<unsigned int>::max();
+
     // Window background color.
     sf::Color bg_;
 
@@ -44,10 +60,22 @@ private:
     // Logic engine.
     game::Game game_;
 
+    Message message_;
+
+    // Currently displayed scene.
+    Scene scene_;
+
+    // Settings page.
+    Settings settings_;
+
     Toolbar toolbar_;
 
     // Render target.
     sf::RenderWindow window_;
+
+    // Apply configuration options that can take effect without restarting
+    // the application.
+    void apply_config(const config::Config& c);
 
     // Function for the exit button.
     void close();
@@ -61,6 +89,17 @@ private:
 
     // Handles SFML events.
     void poll_events();
+
+    // Gathers the state from the elements of the Settings page
+    // and writes them into the config file.
+    void save_config();
+
+    // Sets the current scene, allowing the App to transition between the game
+    // and subpages.
+    void set_scene(Scene scene) noexcept;
+
+    // Enables or disables VSync and sets the framerate limit accordingly.
+    void set_vsync(bool enabled);
 
     // Game logic tick.
     void tick();

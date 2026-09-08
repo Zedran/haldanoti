@@ -15,6 +15,9 @@ struct Toolbar {
     // New Game button.
     ui::Button::Style new_game;
 
+    // Settings page.
+    ui::Button::Style settings;
+
     // Exit button.
     ui::Button::Style exit;
 };

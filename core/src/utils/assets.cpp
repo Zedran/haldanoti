@@ -2,12 +2,14 @@
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
 #include <cstdlib>
+#include <filesystem>
 #include <locale>
 
 #include <nlohmann/json.hpp>
 
 #include "lang/default_lang.hpp"
 #include "utils/assets.hpp"
+#include "utils/debug.hpp"
 
 namespace utils {
 
@@ -43,18 +45,69 @@ std::filesystem::path find_config_dir() {
     return config_dir / MM_DIR_NAME;
 }
 
+std::vector<sf::String> get_lang_fnames() {
+    std::vector<sf::String> fnames;
+
+    for (const auto& d : {LANG_DIR_PATH_SYS, LANG_DIR_PATH_DEV}) {
+        const std::filesystem::path dir{d};
+
+        if (std::filesystem::exists(dir)) {
+            for (const auto& p : list_files(dir)) {
+                fnames.push_back(p.filename().replace_extension({}).string());
+            }
+            if (!fnames.empty()) {
+                // Only one, non-empty directory should be walked through.
+                break;
+            }
+        }
+    }
+
+    if (fnames.empty()) {
+        throw std::runtime_error{"could not find language files"};
+    }
+
+    fnames.push_back(DEFAULT_LANG_CODE);
+
+    return fnames;
+}
+
+std::string get_sys_lang_code() {
+    const std::string lang = std::locale{""}.name();
+
+    if (lang.size() < 2) {
+        dbg("locale lookup failed (got '{}'), fallback to '{}'", lang, DEFAULT_LANG_CODE);
+        return DEFAULT_LANG_CODE;
+    }
+
+    return lang.substr(0, 2);
+}
+
+std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) {
+    std::vector<std::filesystem::path> files;
+
+    for (const auto& e : std::filesystem::directory_iterator{dir}) {
+        if (e.is_regular_file()) {
+            files.push_back(e);
+        }
+    }
+
+    return files;
+}
+
 lang::Lang load_language(
     std::array<std::string, 2> lang_dirs,
-    std::optional<std::string> lang_fname
+    std::string                lang_fname
 ) {
-    std::string pref_lang = lang_fname ? lang_fname.value() : std::locale{""}.name().substr(0, 2);
+    if (lang_fname.empty()) {
+        lang_fname = get_sys_lang_code();
+    }
 
-    if (pref_lang == "en") {
+    if (lang_fname == DEFAULT_LANG_CODE) {
         return lang::DEFAULT_LANG;
     }
 
-    const auto ext = [&pref_lang](std::string fname) {
-        fname += '/' + pref_lang;
+    const auto ext = [&lang_fname](std::string fname) {
+        fname += '/' + lang_fname;
         return fname.ends_with(".json") ? fname : fname + ".json";
     };
 

@@ -7,14 +7,15 @@
 #include <filesystem>
 #include <fstream>
 #include <initializer_list>
-#include <optional>
 #include <stdexcept>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/System/Exception.hpp>
+#include <SFML/System/String.hpp>
 
 #include "lang/Lang.hpp"
 
@@ -25,6 +26,25 @@ std::filesystem::path find_config_dir();
 
 // Location of the user config directory.
 static const std::filesystem::path CONFIG_DIR = utils::find_config_dir();
+
+// Name of the config file.
+static const std::filesystem::path CONFIG_FNAME{"mm.json"};
+
+// Full path to config file.
+static const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;
+
+// 2-letter code of the default language.
+static constexpr std::string DEFAULT_LANG_CODE{"en"};
+
+// Returns a list of available language filenames without extensions.
+std::vector<sf::String> get_lang_fnames();
+
+// Returns a 2-letter language code retrieved from system's default locale name.
+// Returns DEFAULT_LANG_CODE if querying locale fails.
+std::string get_sys_lang_code();
+
+// Returns a list of file paths in dir.
+std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);
 
 // Iterates over the list of possible asset file locations and initializes
 // T using the first found file. Throws runtime_error if no file was found.
@@ -59,13 +79,13 @@ T load_asset(std::initializer_list<std::string_view> paths) {
 // found. Throws upon encountering JSON parsing errors.
 //
 // lang_dirs is an array containing possible locations of the lang directory.
-// lang_fname is the name of the preferred translation file. Translation files
+// lang_fname is the name of the desired translation file. Translation files
 // are named with the lower-case 2-letter country code (ISO 639). The function
 // expects the file to have the '.json' extension and it will be appended
 // to lang_fname if missing.
 lang::Lang load_language(
     std::array<std::string, 2> lang_dirs,
-    std::optional<std::string> lang_fname = std::nullopt
+    std::string                lang_fname
 );
 
 } // namespace utils

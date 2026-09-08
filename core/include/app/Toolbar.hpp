@@ -33,6 +33,7 @@ public:
         lang::Toolbar         lang,
         theme::Toolbar        theme,
         std::function<void()> new_game_func,
+        std::function<void()> settings_func,
         std::function<void()> exit_func
     );
 

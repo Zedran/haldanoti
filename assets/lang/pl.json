@@ -14,8 +14,22 @@
             "info_lost": "Koniec gry"
         }
     },
+    "message": {
+        "restart_required": "Wymagane ponowne uruchomienie"
+    },
     "toolbar": {
         "new_game": "Nowa\ngra",
+        "settings": "Opcje",
         "exit": "Wyjście"
+    },
+    "settings": {
+        "check_mark": "x",
+        "title": "Opcje",
+        "opt_unique_elems": "Unikatowe elementy",
+        "opt_lang": "Język",
+        "opt_fb_chars": "Znaki info. zwrotnej",
+        "opt_vsync": "VSync",
+        "save": "Zapisz",
+        "cancel": "Anuluj"
     }
 }

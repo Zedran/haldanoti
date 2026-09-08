@@ -44,7 +44,7 @@ add_subdirectory(core)
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE core)
 
-target_compile_definitions(${PROJECT_NAME} PUBLIC
+target_compile_definitions(core PUBLIC
     FONT_FILE_PATH_DEV="${FONT_FILE_PATH}"
     ICON_FILE_PATH_DEV="${CMAKE_SOURCE_DIR}/assets/mm.png"
     LANG_DIR_PATH_DEV="${CMAKE_SOURCE_DIR}/assets/lang"

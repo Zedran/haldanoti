@@ -12,9 +12,10 @@ namespace lang {
 
 struct Toolbar {
     sf::String new_game;
+    sf::String settings;
     sf::String exit;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Toolbar, new_game, exit);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Toolbar, new_game, settings, exit);
 
 } // namespace lang

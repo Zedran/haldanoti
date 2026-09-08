@@ -12,6 +12,7 @@ Toolbar::Toolbar(
     lang::Toolbar         lang,
     theme::Toolbar        theme,
     std::function<void()> new_game_func,
+    std::function<void()> settings_func,
     std::function<void()> exit_func
 ) : ui::Box{size, theme.box, ui::Layout::Type::RowLayout} {
     const unsigned int font_size = static_cast<unsigned int>(size.y * FONT_REL_SIZE);
@@ -24,6 +25,15 @@ Toolbar::Toolbar(
         font_size
     )
         .bind(sf::Mouse::Button::Left, new_game_func);
+
+    add_component<ui::Button>(
+        font,
+        sf::Vector2f{size.y * BUTTON_RELSIZE.x, size.y * BUTTON_RELSIZE.y},
+        theme.settings,
+        lang.settings,
+        font_size
+    )
+        .bind(sf::Mouse::Button::Left, settings_func);
 
     add_component<ui::Button>(
         font,

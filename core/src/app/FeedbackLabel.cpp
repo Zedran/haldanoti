@@ -41,8 +41,11 @@ void FeedbackLabel::set_pin(Pin pin) {
     update_text();
 }
 
-void FeedbackLabel::set_theme(theme::FeedbackLabel theme) {
+void FeedbackLabel::set_theme(theme::FeedbackLabel theme, bool force_fb_chars) {
     FeedbackLabel::styles_ = theme;
+    if (force_fb_chars) {
+        FeedbackLabel::styles_.show_text = true;
+    }
 }
 
 void FeedbackLabel::update_text() {

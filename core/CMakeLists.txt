@@ -7,17 +7,22 @@ set(CORE_SOURCES
     src/app/CodeButton.cpp
     src/app/FeedbackLabel.cpp
     src/app/GameRow.cpp
+    src/app/Message.cpp
     src/app/SecretRow.cpp
+    src/app/Settings.cpp
     src/app/Toolbar.cpp
     src/config/Config.cpp
     src/game/Game.cpp
     src/game/Row.cpp
     src/game/helpers.cpp
     src/ui/Binding.cpp
+    src/ui/Blank.cpp
     src/ui/Box.cpp
     src/ui/Button.cpp
+    src/ui/Checkbox.cpp
     src/ui/Label.cpp
     src/ui/Layout.cpp
+    src/ui/Selector.cpp
     src/utils/Source.cpp
     src/utils/assets.cpp
     src/utils/json.cpp

@@ -25,9 +25,23 @@ const Lang DEFAULT_LANG{
             .info_lost{L"Game over"},
         },
     },
+    .message{
+        .restart_required{L"Restart required"},
+    },
     .toolbar{
         .new_game{L"New\ngame"},
+        .settings{L"Settings"},
         .exit{L"Exit"},
+    },
+    .settings{
+        .check_mark{L"x"},
+        .title{L"Settings"},
+        .opt_unique_elems{L"Unique elements"},
+        .opt_lang{L"Language"},
+        .opt_fb_chars{L"Feedback characters"},
+        .opt_vsync{L"VSync"},
+        .save{L"Save"},
+        .cancel{L"Cancel"},
     }
 };
 

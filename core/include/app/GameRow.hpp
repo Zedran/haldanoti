@@ -29,8 +29,9 @@ public:
     // Sets the value of the static member lang_.
     static void set_lang(lang::GameRow lang) noexcept;
 
-    // Sets the static member styles_.
-    static void set_theme(theme::GameRow theme) noexcept;
+    // Sets the static member styles_. force_fb_chars is relayed down to
+    // FeedbackLabel::set_theme.
+    static void set_theme(theme::GameRow theme, bool force_fb_chars) noexcept;
 
     GameRow(const sf::Font& font, sf::Vector2f size, int row_number);
 

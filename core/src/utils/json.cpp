@@ -3,20 +3,6 @@
 
 #include "utils/json.hpp"
 
-namespace std {
-
-void from_json(const nlohmann::json& j, std::optional<std::string>& v) {
-    if (auto s = j.get<std::string>(); !s.empty()) {
-        v = std::move(s);
-    }
-}
-
-void to_json(nlohmann::json& j, const std::optional<std::string> v) {
-    j = v ? *v : "";
-}
-
-} // namespace std
-
 namespace sf {
 
 void from_json(const nlohmann::json& j, sf::String& v) {

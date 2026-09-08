@@ -3,31 +3,40 @@
 
 #pragma once
 
-#include <filesystem>
-#include <optional>
 #include <string>
 
 #include <nlohmann/json.hpp>
 
-#include "utils/json.hpp" // IWYU pragma: keep
-
 namespace config {
 
 struct Config {
-    // Preferred language, chosen if found. Setting this field disregards
-    // system's locale settings.
-    std::optional<std::string> pref_language;
+    // Always display feedback characters, regardless of the theme's settings.
+    bool fb_chars;
+
+    // Language used by the application.
+    std::string lang;
 
     // Does not permit repeating elements in the generated code.
     bool unique_elems;
+
+    // Run the game at a native framerate.
+    bool vsync;
+
+    bool operator==(const Config& other) const noexcept = default;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Config, pref_language, unique_elems);
+// Deserializes Config from JSON. Fills missing values with defaults.
+void from_json(const nlohmann::json& j, Config& v);
+
+Config get_default_config();
 
 // Returns Config read from the config directory.
 Config read_config();
 
+// Serializes Config into JSON.
+void to_json(nlohmann::json& j, const Config& v);
+
 // Writes Config to file at path.
-void write_config(const std::filesystem::path& path, const Config& conf);
+void write_config(const Config& conf);
 
 } // namespace config
