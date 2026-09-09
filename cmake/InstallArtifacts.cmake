@@ -11,7 +11,11 @@ set(TOP_DOC_FILES
 
 set(BIN_DIR bin)
 
-set(APP_DIR "share/${PROJECT_NAME}")
+if(WIN32)
+    set(APP_DIR ".")
+else()
+    set(APP_DIR "share/${PROJECT_NAME}")
+endif()
 
 set(ASSETS_DIR_SRC ${PROJECT_SOURCE_DIR}/assets)
 set(ASSETS_DIR_DEST ${APP_DIR})

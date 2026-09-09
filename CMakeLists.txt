@@ -19,6 +19,8 @@ set(CMAKE_CXX_EXTENSIONS        OFF)
 if(MM_SET_TC_FLAGS)
     if(LINUX)
         include(TC_GCC)
+    elseif(WIN32)
+        include(TC_MSVC)
     endif()
 endif()
 
