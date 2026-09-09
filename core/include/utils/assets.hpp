@@ -55,6 +55,10 @@ template <typename T>
 T load_asset(std::initializer_list<std::string_view> paths) {
     for (const auto& p : paths) {
         try {
+            if (!std::filesystem::exists(p)) {
+                continue;
+            }
+
             if constexpr (std::is_same_v<T, sf::Font>) {
                 return sf::Font{p};
             } else if constexpr (std::is_same_v<T, sf::Image>) {
