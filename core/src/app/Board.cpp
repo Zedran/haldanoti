@@ -39,6 +39,8 @@ Board::Board(
         );
         game_rows_[i - 1] = ptr;
     }
+
+    game_rows_[active_row_]->unlock();
 }
 
 Board::~Board() = default;

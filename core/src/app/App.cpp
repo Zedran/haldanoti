@@ -70,7 +70,8 @@ App::App(
     settings_.set_position({0.0f, 0.0f});
     settings_.set_config(conf);
 
-    new_game();
+    [[maybe_unused]] const auto gc = game_.good_code();
+    dbg("secret code {} {} {} {}", gc[0], gc[1], gc[2], gc[3]);
 }
 
 App::~App() = default;
