@@ -30,12 +30,10 @@ SecretRow::SecretRow(const sf::Font& font, sf::Vector2f size, lang::SecretRow la
     info_ = &add_component<ui::Label>(
         font,
         size.componentWiseMul(INFO_BOX_REL_SIZE),
-        theme.info_won,
-        "Info",
+        theme.info_running,
+        lang.info_running,
         static_cast<unsigned int>(size.y * INFO_FONT_REL_SIZE)
     );
-
-    display_info(game::State::Running);
 }
 
 SecretRow::~SecretRow() = default;
