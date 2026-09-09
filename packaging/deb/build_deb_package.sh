@@ -3,7 +3,7 @@
 set -e
 
 if [ "$1" = "--build-deps" ]; then
-    apt install -y debmake
+    apt-get install -y debmake
 fi
 
 OWD=$(pwd)
