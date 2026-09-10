@@ -43,7 +43,15 @@ add_custom_target(configure_header
 
 add_subdirectory(core)
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+if(WIN32 AND NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_executable(${PROJECT_NAME} WIN32
+        src/main.cpp
+    )
+    target_link_options(${PROJECT_NAME} PRIVATE "/ENTRY:mainCRTStartup")
+else()
+    add_executable(${PROJECT_NAME} src/main.cpp)
+endif()
+
 target_link_libraries(${PROJECT_NAME} PRIVATE core)
 
 target_compile_definitions(core PUBLIC
