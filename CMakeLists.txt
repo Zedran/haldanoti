@@ -46,6 +46,7 @@ add_subdirectory(core)
 if(WIN32 AND NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_executable(${PROJECT_NAME} WIN32
         src/main.cpp
+        ${CMAKE_SOURCE_DIR}/platform/windows/mm-game.rc
     )
     target_link_options(${PROJECT_NAME} PRIVATE "/ENTRY:mainCRTStartup")
 else()
