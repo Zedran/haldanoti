@@ -66,6 +66,10 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/src)
 
 include(InstallArtifacts)
 
+if(WIN32 AND CPACK_GENERATOR)
+    include(BuildNSIS)
+endif()
+
 if(MAKE_TESTS)
     include(FetchCatch2)
 
