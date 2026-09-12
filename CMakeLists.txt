@@ -41,6 +41,14 @@ add_custom_target(configure_header
         -P "${CMAKE_SOURCE_DIR}/cmake/configure_header.cmake"
 )
 
+add_library(core_defs INTERFACE)
+
+target_compile_definitions(core_defs INTERFACE
+    FONT_FILE_PATH_DEV="${FONT_FILE_PATH}"
+    ICON_FILE_PATH_DEV="${CMAKE_SOURCE_DIR}/assets/mm.png"
+    LANG_DIR_PATH_DEV="${CMAKE_SOURCE_DIR}/assets/lang"
+)
+
 add_subdirectory(core)
 
 if(WIN32 AND NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -54,12 +62,6 @@ else()
 endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE core)
-
-target_compile_definitions(core PUBLIC
-    FONT_FILE_PATH_DEV="${FONT_FILE_PATH}"
-    ICON_FILE_PATH_DEV="${CMAKE_SOURCE_DIR}/assets/mm.png"
-    LANG_DIR_PATH_DEV="${CMAKE_SOURCE_DIR}/assets/lang"
-)
 
 add_dependencies(${PROJECT_NAME} configure_header)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/src)

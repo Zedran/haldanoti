@@ -32,6 +32,7 @@ set(CORE_SOURCES
 add_library(core STATIC ${CORE_SOURCES})
 target_include_directories(core PUBLIC include)
 target_link_libraries(core PUBLIC
+    core_defs
     SFML::System
     SFML::Window
     SFML::Graphics
@@ -41,7 +42,10 @@ target_link_libraries(core PUBLIC
 if(MAKE_TESTS AND COVER)
     add_library(core_coverage ${CORE_SOURCES})
     target_include_directories(core_coverage PUBLIC include)
-    target_link_libraries(core_coverage PUBLIC SFML::Graphics)
+    target_link_libraries(core_coverage PUBLIC
+        core_defs
+        SFML::Graphics
+    )
 
     target_compile_options(core_coverage PRIVATE -g --coverage)
     target_link_options(core_coverage PRIVATE --coverage)
