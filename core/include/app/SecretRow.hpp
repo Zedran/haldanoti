@@ -26,7 +26,12 @@ public:
     // Size relative to outer container.
     static constexpr sf::Vector2f REL_SIZE{1.0f, 0.077f};
 
-    SecretRow(const sf::Font& font, sf::Vector2f size, lang::SecretRow lang, theme::SecretRow theme);
+    SecretRow(
+        const sf::Font&  font,
+        sf::Vector2f     size,
+        lang::SecretRow  lang,
+        theme::SecretRow theme
+    );
 
     ~SecretRow();
 
