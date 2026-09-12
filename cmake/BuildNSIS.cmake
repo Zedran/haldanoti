@@ -34,5 +34,6 @@ set(CPACK_NSIS_URL_INFO_ABOUT                  "${CPACK_PACKAGE_HOMEPAGE_URL}"  
 set(CPACK_NSIS_MUI_ICON                        "${CMAKE_SOURCE_DIR}/platform/windows/mm.ico")
 set(CPACK_NSIS_MODIFY_PATH                     OFF                                          )
 set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON                                           )
+set(CPACK_NSIS_IGNORE_COMPONENTS_PAGE          ON                                           )
 
 include(CPack)
