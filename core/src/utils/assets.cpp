@@ -3,7 +3,13 @@
 
 #include <cstdlib>
 #include <filesystem>
+#if defined(WIN32)
+#include <climits>
+#include <windows.h>
+#include <winnls.h>
+#else
 #include <locale>
+#endif
 
 #include <nlohmann/json.hpp>
 
@@ -72,6 +78,29 @@ std::vector<sf::String> get_lang_fnames() {
 }
 
 std::string get_sys_lang_code() {
+#if defined(WIN32)
+    // Reference: https://learn.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-getuserdefaultlocalename
+
+    wchar_t   buffer[LOCALE_NAME_MAX_LENGTH];
+    const int n = GetUserDefaultLocaleName(buffer, std::size(buffer));
+    // Assuming output structured as follows: "pl-PL ".
+
+    if (n < 2) {
+        dbg("locale lookup failed, fallback to '{}'", DEFAULT_LANG_CODE);
+        return DEFAULT_LANG_CODE;
+    }
+
+    const auto is_ascii = [](wchar_t c) {
+        return c >= CHAR_MIN && c <= CHAR_MAX;
+    };
+
+    if (!is_ascii(buffer[0]) || !is_ascii(buffer[1])) {
+        dbg("buffer elements are non-ASCII characters, fallback to '{}'", DEFAULT_LANG_CODE);
+        return DEFAULT_LANG_CODE;
+    }
+
+    return std::string(buffer, buffer + 2);
+#else
     const std::string lang = std::locale{""}.name();
 
     if (lang.size() < 2) {
@@ -80,6 +109,7 @@ std::string get_sys_lang_code() {
     }
 
     return lang.substr(0, 2);
+#endif
 }
 
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) {

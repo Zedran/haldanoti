@@ -30,9 +30,15 @@ namespace debug {
 // it should not be called directly. Use the dbg macro instead.
 template <typename... Args>
 inline void write(std::source_location loc, std::format_string<Args...> fmt, Args&&... args) {
+#if defined(_WIN32)
+    constexpr std::string_view TIME_COLOR = "";
+    constexpr std::string_view FUNC_COLOR = "";
+    constexpr std::string_view RST_COLOR  = "";
+#else
     constexpr std::string_view TIME_COLOR = "\033[36m";
     constexpr std::string_view FUNC_COLOR = "\033[31m";
     constexpr std::string_view RST_COLOR  = "\033[0m";
+#endif
 
     using namespace std::chrono;
 
