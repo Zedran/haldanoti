@@ -7,10 +7,7 @@
 #include <optional>
 #include <vector>
 
-#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/RenderStates.hpp>
-#include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
