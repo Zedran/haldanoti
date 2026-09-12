@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <span>
 #include <string>
 
 #include <SFML/Graphics/Color.hpp>
@@ -10,6 +11,9 @@
 #include <SFML/System/Vector2.hpp>
 
 namespace utils {
+
+// Returns the number of distinct values found in code.
+std::size_t count_distinct(std::span<const int> code);
 
 // Returns Color structure decoded from an HTML hex format. Allowed variations
 // are "#rrggbb" and "#rrggbbaa". '#' is optional. Throws runtime_error
