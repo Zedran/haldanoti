@@ -53,7 +53,7 @@ void SecretRow::display_code(std::span<const int, game::Row::ROW_LEN> code) {
     }
 }
 
-void SecretRow::display_info(game::State state) noexcept {
+void SecretRow::display_info(game::State state) {
     game_state_ = state;
     update();
 }

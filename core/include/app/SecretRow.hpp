@@ -42,7 +42,7 @@ public:
     void display_code(std::span<const int, game::Row::ROW_LEN> code);
 
     // Displays the selected info indefinitely.
-    void display_info(game::State state) noexcept;
+    void display_info(game::State state);
 
     // Clears the displayed code and info.
     void reset();
