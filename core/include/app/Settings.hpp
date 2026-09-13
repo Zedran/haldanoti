@@ -92,6 +92,10 @@ private:
     // option. Required for getting and setting its state.
     ui::Checkbox* cb_fb_chars_;
 
+    // Non-owning pointer to the Checkbox representing the hints option.
+    // Required for getting and setting its state.
+    ui::Checkbox* cb_hints_;
+
     // Non-owning pointer to the Checkbox representing the unique elements
     // option. Required for getting and setting its state.
     ui::Checkbox* cb_unique_elems_;
