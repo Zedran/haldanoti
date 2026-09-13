@@ -16,6 +16,7 @@ struct Settings {
     sf::String opt_unique_elems;
     sf::String opt_lang;
     sf::String opt_fb_chars;
+    sf::String opt_hints;
     sf::String opt_vsync;
     sf::String save;
     sf::String cancel;
@@ -28,6 +29,7 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     opt_unique_elems,
     opt_lang,
     opt_fb_chars,
+    opt_hints,
     opt_vsync,
     save,
     cancel
