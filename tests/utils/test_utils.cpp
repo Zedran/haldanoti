@@ -3,6 +3,8 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include <array>
+#include <cstddef>
 #include <string>
 #include <variant>
 
@@ -11,6 +13,27 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "utils/utils.hpp"
+
+TEST_CASE("count_distinct") {
+    constexpr std::size_t T = 4;
+
+    struct test_data {
+        std::array<int, T> code;
+        std::size_t        distinct;
+    };
+
+    constexpr test_data test_cases[]{
+        {{1, 2, 3, 4}, 4},
+        {{1, 1, 3, 4}, 3},
+        {{1, 1, 1, 4}, 2},
+        {{1, 1, 1, 1}, 1},
+        {{1, 2, 1, 2}, 2},
+    };
+
+    for (const auto& c : test_cases) {
+        REQUIRE(utils::count_distinct(c.code) == c.distinct);
+    }
+}
 
 TEST_CASE("decode_color") {
     struct test_data {

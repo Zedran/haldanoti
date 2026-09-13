@@ -49,6 +49,10 @@ public:
     // the Config struct.
     config::Config get_config() const noexcept;
 
+    // Provides a view into the reference Config - Config that is currently
+    // in effect.
+    const config::Config& get_ref_config() const noexcept;
+
     // Return the current State of the Settings.
     State get_state() const noexcept;
 
@@ -91,6 +95,10 @@ private:
     // Non-owning pointer to the Checkbox representing the feedback characters
     // option. Required for getting and setting its state.
     ui::Checkbox* cb_fb_chars_;
+
+    // Non-owning pointer to the Checkbox representing the hints option.
+    // Required for getting and setting its state.
+    ui::Checkbox* cb_hints_;
 
     // Non-owning pointer to the Checkbox representing the unique elements
     // option. Required for getting and setting its state.

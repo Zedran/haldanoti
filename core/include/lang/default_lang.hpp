@@ -20,7 +20,6 @@ const Lang DEFAULT_LANG{
             .ok{L"Ok"}
         },
         .secret_row{
-            .info_running{},
             .info_won{L"Code correct"},
             .info_lost{L"Game over"},
         },
@@ -39,6 +38,7 @@ const Lang DEFAULT_LANG{
         .opt_unique_elems{L"Unique elements"},
         .opt_lang{L"Language"},
         .opt_fb_chars{L"Feedback characters"},
+        .opt_hints{L"Show hints"},
         .opt_vsync{L"VSync"},
         .save{L"Save"},
         .cancel{L"Cancel"},

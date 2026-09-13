@@ -83,4 +83,8 @@ void Board::reset() {
     dbg("---  BOARD RESET ENDS  ---");
 }
 
+void Board::set_hints(std::optional<std::size_t> hint) {
+    secret_row_->set_hint(hint);
+}
+
 } // namespace app

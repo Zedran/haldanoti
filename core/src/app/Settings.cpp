@@ -52,6 +52,14 @@ Settings::Settings(
         lang.check_mark
     );
 
+    cb_hints_ = &opt_box.add_component<ui::Checkbox>(
+        font,
+        opt_line_size,
+        theme.checkbox,
+        lang.opt_hints,
+        lang.check_mark
+    );
+
     cb_unique_elems_ = &opt_box.add_component<ui::Checkbox>(
         font,
         opt_line_size,
@@ -68,7 +76,7 @@ Settings::Settings(
         lang.check_mark
     );
 
-    constexpr sf::Vector2f toolbar_spacing{0.0f, 8.0f};
+    constexpr sf::Vector2f toolbar_spacing{0.0f, 7.0f};
 
     opt_box.add_component<ui::Blank>(opt_line_size.componentWiseMul(toolbar_spacing));
 
@@ -109,10 +117,15 @@ bool Settings::config_differs(const config::Config& c) const noexcept {
 config::Config Settings::get_config() const noexcept {
     return config::Config{
         .fb_chars     = cb_fb_chars_->get_state(),
+        .hints        = cb_hints_->get_state(),
         .lang         = sel_lang_->get_value().toAnsiString(),
         .unique_elems = cb_unique_elems_->get_state(),
         .vsync        = cb_vsync_->get_state(),
     };
+}
+
+const config::Config& Settings::get_ref_config() const noexcept {
+    return ref_config_;
 }
 
 Settings::State Settings::get_state() const noexcept {
@@ -122,6 +135,9 @@ Settings::State Settings::get_state() const noexcept {
 void Settings::set_config(const config::Config& c) {
     assert(cb_unique_elems_);
     cb_unique_elems_->set_state(c.unique_elems);
+
+    assert(cb_hints_);
+    cb_hints_->set_state(c.hints);
 
     assert(sel_lang_);
     sel_lang_->set_value(c.lang);

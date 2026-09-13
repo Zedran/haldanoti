@@ -1,14 +1,32 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
+#include <algorithm>
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
 #include <stdexcept>
+#include <vector>
 
 #include "utils/utils.hpp"
 
 namespace utils {
+
+std::size_t count_distinct(std::span<const int> code) {
+    std::vector<int> seen;
+    seen.reserve(code.size());
+
+    std::size_t distinct{};
+
+    for (const auto& e : code) {
+        if (std::find(seen.begin(), seen.end(), e) == seen.end()) {
+            distinct++;
+            seen.push_back(e);
+        }
+    }
+
+    return distinct;
+}
 
 sf::Color decode_color(std::string html_code) {
     constexpr std::size_t SIZE_RGB  = 6;

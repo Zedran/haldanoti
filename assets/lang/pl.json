@@ -9,7 +9,6 @@
             "ok": "Ok"
         },
         "secret_row": {
-            "info_running": "",
             "info_won": "Kod prawidłowy",
             "info_lost": "Koniec gry"
         }
@@ -28,6 +27,7 @@
         "opt_unique_elems": "Unikatowe elementy",
         "opt_lang": "Język",
         "opt_fb_chars": "Znaki info. zwrotnej",
+        "opt_hints": "Podpowiedzi",
         "opt_vsync": "VSync",
         "save": "Zapisz",
         "cancel": "Anuluj"

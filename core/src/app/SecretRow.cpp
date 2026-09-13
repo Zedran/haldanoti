@@ -2,13 +2,21 @@
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
 #include <cassert>
+#include <string>
 
 #include "app/SecretRow.hpp"
 
 namespace app {
 
-SecretRow::SecretRow(const sf::Font& font, sf::Vector2f size, lang::SecretRow lang, theme::SecretRow theme)
-    : ui::Box{size, theme.box, ui::Layout::Type::RowLayout}, lang_{lang}, theme_{theme} {
+SecretRow::SecretRow(
+    const sf::Font&  font,
+    sf::Vector2f     size,
+    lang::SecretRow  lang,
+    theme::SecretRow theme
+) : ui::Box{size, theme.box, ui::Layout::Type::RowLayout},
+    game_state_{game::State::Running},
+    lang_{lang},
+    theme_{theme} {
     auto& code_box = add_component<ui::Box>(
         size.componentWiseMul(CODE_BOX_REL_SIZE),
         theme.code_box,
@@ -31,7 +39,7 @@ SecretRow::SecretRow(const sf::Font& font, sf::Vector2f size, lang::SecretRow la
         font,
         size.componentWiseMul(INFO_BOX_REL_SIZE),
         theme.info_running,
-        lang.info_running,
+        "",
         static_cast<unsigned int>(size.y * INFO_FONT_REL_SIZE)
     );
 }
@@ -45,11 +53,32 @@ void SecretRow::display_code(std::span<const int, game::Row::ROW_LEN> code) {
     }
 }
 
-void SecretRow::display_info(game::State state) noexcept {
-    switch (state) {
+void SecretRow::display_info(game::State state) {
+    game_state_ = state;
+    update();
+}
+
+void SecretRow::reset() {
+    for (auto b : code_buttons_) {
+        b->reset();
+    }
+    display_info(game::State::Running);
+}
+
+void SecretRow::set_hint(std::optional<std::size_t> hint) {
+    if (hint) {
+        hint_ = static_cast<sf::String>(std::to_string(*hint));
+    } else {
+        hint_ = std::nullopt;
+    }
+    update();
+}
+
+void SecretRow::update() {
+    switch (game_state_) {
     case game::State::Running:
-        info_->set_text(lang_.info_running);
-        info_->set_style(theme_.info_running);
+        info_->set_text(hint_ ? *hint_ : "");
+        info_->set_style(hint_ ? theme_.info_running_hint : theme_.info_running);
         break;
     case game::State::Won:
         info_->set_text(lang_.info_won);
@@ -59,13 +88,6 @@ void SecretRow::display_info(game::State state) noexcept {
         info_->set_text(lang_.info_lost);
         info_->set_style(theme_.info_lost);
     }
-}
-
-void SecretRow::reset() {
-    for (auto b : code_buttons_) {
-        b->reset();
-    }
-    display_info(game::State::Running);
 }
 
 } // namespace app

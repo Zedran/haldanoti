@@ -11,6 +11,7 @@
 #include "game/State.hpp"
 #include "utils/assets.hpp"
 #include "utils/debug.hpp"
+#include "utils/utils.hpp"
 
 namespace app {
 
@@ -63,6 +64,8 @@ App::App(
         (1 - Board::REL_SIZE.x) / 2 * window_size.x,
         (1 - Board::REL_SIZE.y - Toolbar::REL_SIZE.y) / 2 * window_size.y,
     });
+    configure_hints(conf);
+
     toolbar_.set_position(sf::Vector2f{0.0f, (1.0f - Toolbar::REL_SIZE.y) * window_size.y});
 
     message_.set_position({0.0f, 0.8f * window_size.y});
@@ -77,12 +80,21 @@ App::App(
 App::~App() = default;
 
 void App::apply_config(const config::Config& c) {
+    configure_hints(c);
     game_.allow_unique_only(c.unique_elems);
     set_vsync(c.vsync);
 }
 
 void App::close() {
     window_.close();
+}
+
+void App::configure_hints(const config::Config& c) {
+    if (c.hints) {
+        board_.set_hints(utils::count_distinct(game_.good_code()));
+    } else {
+        board_.set_hints(std::nullopt);
+    }
 }
 
 void App::draw() {
@@ -103,6 +115,8 @@ void App::draw() {
 void App::new_game() {
     board_.reset();
     game_.reset();
+
+    configure_hints(settings_.get_ref_config());
 
     [[maybe_unused]] const auto gc = game_.good_code();
     dbg("secret code {} {} {} {}", gc[0], gc[1], gc[2], gc[3]);

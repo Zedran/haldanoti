@@ -15,8 +15,11 @@ struct SecretRow {
     // Box with code buttons.
     ui::Box::Style code_box;
 
-    // Info label: no message.
+    // Info label: no hint.
     ui::Label::Style info_running;
+
+    // Info label: hint displayed.
+    ui::Label::Style info_running_hint;
 
     // Info label: lost.
     ui::Label::Style info_lost;
