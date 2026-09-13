@@ -18,6 +18,9 @@ struct SecretRow {
     // Info label: no message.
     ui::Label::Style info_running;
 
+    // Info label: no message, hint displayed.
+    ui::Label::Style info_running_hint;
+
     // Info label: lost.
     ui::Label::Style info_lost;
 

@@ -141,6 +141,11 @@ const Theme DEFAULT_THEME{
                 .fg{a0},
                 .ol{a0},
             },
+            .info_running_hint{
+                .bg{0xf2dec6ff},
+                .fg{0x000000ff},
+                .ol{a0},
+            },
             .info_lost{
                 .bg{0xf2dec6ff},
                 .fg{0x000000ff},

@@ -2,6 +2,7 @@
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
 #include <cassert>
+#include <string>
 
 #include "app/SecretRow.hpp"
 
@@ -64,11 +65,20 @@ void SecretRow::reset() {
     display_info(game::State::Running);
 }
 
+void SecretRow::set_hint(std::optional<std::size_t> hint) {
+    if (hint) {
+        hint_ = static_cast<sf::String>(std::to_string(*hint));
+    } else {
+        hint_ = std::nullopt;
+    }
+    update();
+}
+
 void SecretRow::update() {
     switch (game_state_) {
     case game::State::Running:
-        info_->set_text(lang_.info_running);
-        info_->set_style(theme_.info_running);
+        info_->set_text(hint_ ? lang_.info_running_hint + *hint_ : lang_.info_running);
+        info_->set_style(hint_ ? theme_.info_running_hint : theme_.info_running);
         break;
     case game::State::Won:
         info_->set_text(lang_.info_won);

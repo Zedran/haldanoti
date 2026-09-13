@@ -21,6 +21,7 @@ const Lang DEFAULT_LANG{
         },
         .secret_row{
             .info_running{},
+            .info_running_hint{},
             .info_won{L"Code correct"},
             .info_lost{L"Game over"},
         },

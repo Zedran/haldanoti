@@ -3,10 +3,13 @@
 
 #pragma once
 
+#include <cstddef>
+#include <optional>
 #include <span>
 #include <vector>
 
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
 
 #include "app/CodeButton.hpp"
@@ -44,6 +47,11 @@ public:
     // Clears the displayed code and info.
     void reset();
 
+    // Accepts the number of distinct elements in the secret code. If nullopt
+    // is received, the hint is hidden. This function updates style and text
+    // of the info box.
+    void set_hint(std::optional<std::size_t> hint);
+
 private:
     // Size of the code box relative to the dimensions of the SecretRow's
     // container.
@@ -62,6 +70,11 @@ private:
 
     // Current state of the Game. Decides which notification is displayed.
     game::State game_state_;
+
+    // Hint consists of the number of distinct elements in the secret code.
+    // Value for this member is set when the player requests hints
+    // to be displayed.
+    std::optional<sf::String> hint_;
 
     // Holds non-owning pointer to the info Label.
     ui::Label* info_;
