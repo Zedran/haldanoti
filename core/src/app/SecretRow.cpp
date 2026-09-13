@@ -39,7 +39,7 @@ SecretRow::SecretRow(
         font,
         size.componentWiseMul(INFO_BOX_REL_SIZE),
         theme.info_running,
-        lang.info_running,
+        "",
         static_cast<unsigned int>(size.y * INFO_FONT_REL_SIZE)
     );
 }
@@ -77,7 +77,7 @@ void SecretRow::set_hint(std::optional<std::size_t> hint) {
 void SecretRow::update() {
     switch (game_state_) {
     case game::State::Running:
-        info_->set_text(hint_ ? lang_.info_running_hint + *hint_ : lang_.info_running);
+        info_->set_text(hint_ ? *hint_ : "");
         info_->set_style(hint_ ? theme_.info_running_hint : theme_.info_running);
         break;
     case game::State::Won:

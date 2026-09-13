@@ -9,8 +9,6 @@
             "ok": "Ok"
         },
         "secret_row": {
-            "info_running": "",
-            "info_running_hint": "",
             "info_won": "Kod prawidłowy",
             "info_lost": "Koniec gry"
         }
