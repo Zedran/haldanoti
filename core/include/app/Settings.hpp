@@ -49,6 +49,10 @@ public:
     // the Config struct.
     config::Config get_config() const noexcept;
 
+    // Provides a view into the reference Config - Config that is currently
+    // in effect.
+    const config::Config& get_ref_config() const noexcept;
+
     // Return the current State of the Settings.
     State get_state() const noexcept;
 

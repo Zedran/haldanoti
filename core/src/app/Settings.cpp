@@ -124,6 +124,10 @@ config::Config Settings::get_config() const noexcept {
     };
 }
 
+const config::Config& Settings::get_ref_config() const noexcept {
+    return ref_config_;
+}
+
 Settings::State Settings::get_state() const noexcept {
     return state_;
 }
