@@ -4,6 +4,7 @@
 #pragma once
 
 #include <cstddef>
+#include <optional>
 #include <span>
 
 #include <SFML/Graphics/Font.hpp>
@@ -50,6 +51,10 @@ public:
 
     // Resets the Board instance.
     void reset();
+
+    // Relays the number of distinct elements in secret code
+    // to the SecretRow::set_hint function. nullopt disables hints.
+    void set_hints(std::optional<std::size_t> hint);
 
 private:
     // Index of the currently active GameRow.

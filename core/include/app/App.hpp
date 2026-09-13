@@ -80,6 +80,16 @@ private:
     // Function for the exit button.
     void close();
 
+    // Sets the hints on the Board according to the user's preference.
+    // Hint is a number of distinct elements in the secret code or nullopt,
+    // in case hints are to be hidden.
+    //
+    // Calls related to this function need to be passed all the way down from
+    // App to the SecretRow, because the former controls the logic engine and
+    // config. The logic engine provides the secret code from which the hint
+    // is derived and config determines whether the player wants hints.
+    void configure_hints(const config::Config& c);
+
     // Calls the draw member function for every sf::Drawable
     // and displays the resulting frame.
     void draw();
