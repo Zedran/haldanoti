@@ -13,6 +13,9 @@ struct Config {
     // Always display feedback characters, regardless of the theme's settings.
     bool fb_chars;
 
+    // Display hints regarding secret code elements.
+    bool hints;
+
     // Language used by the application.
     std::string lang;
 
