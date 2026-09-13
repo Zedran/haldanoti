@@ -13,6 +13,7 @@ SecretRow::SecretRow(
     lang::SecretRow  lang,
     theme::SecretRow theme
 ) : ui::Box{size, theme.box, ui::Layout::Type::RowLayout},
+    game_state_{game::State::Running},
     lang_{lang},
     theme_{theme} {
     auto& code_box = add_component<ui::Box>(
@@ -52,7 +53,19 @@ void SecretRow::display_code(std::span<const int, game::Row::ROW_LEN> code) {
 }
 
 void SecretRow::display_info(game::State state) noexcept {
-    switch (state) {
+    game_state_ = state;
+    update();
+}
+
+void SecretRow::reset() {
+    for (auto b : code_buttons_) {
+        b->reset();
+    }
+    display_info(game::State::Running);
+}
+
+void SecretRow::update() {
+    switch (game_state_) {
     case game::State::Running:
         info_->set_text(lang_.info_running);
         info_->set_style(theme_.info_running);
@@ -65,13 +78,6 @@ void SecretRow::display_info(game::State state) noexcept {
         info_->set_text(lang_.info_lost);
         info_->set_style(theme_.info_lost);
     }
-}
-
-void SecretRow::reset() {
-    for (auto b : code_buttons_) {
-        b->reset();
-    }
-    display_info(game::State::Running);
 }
 
 } // namespace app

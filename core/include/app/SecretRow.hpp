@@ -60,6 +60,9 @@ private:
     // code.
     std::vector<CodeButton*> code_buttons_;
 
+    // Current state of the Game. Decides which notification is displayed.
+    game::State game_state_;
+
     // Holds non-owning pointer to the info Label.
     ui::Label* info_;
 
@@ -69,6 +72,9 @@ private:
     // Stores styling information required by different notifications displayed
     // in the info box.
     theme::SecretRow theme_;
+
+    // Update style of the info box, depending on the currently set Game state.
+    void update();
 };
 
 } // namespace app
