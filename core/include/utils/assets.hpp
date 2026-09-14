@@ -34,7 +34,7 @@ static const std::filesystem::path CONFIG_FNAME{"mm.json"};
 static const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;
 
 // 2-letter code of the default language.
-static constexpr std::string DEFAULT_LANG_CODE{"en"};
+static constexpr std::string_view DEFAULT_LANG_CODE{"en"};
 
 // Returns a list of available language filenames without extensions.
 std::vector<sf::String> get_lang_fnames();

@@ -24,7 +24,7 @@ static std::string get_default_lang_code() {
     if (std::find(langs.begin(), langs.end(), sf::String{sys_lang}) != langs.end()) {
         return sys_lang;
     }
-    return utils::DEFAULT_LANG_CODE;
+    return std::string{utils::DEFAULT_LANG_CODE};
 }
 
 void from_json(const nlohmann::json& j, Config& v) {

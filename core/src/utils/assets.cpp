@@ -72,7 +72,7 @@ std::vector<sf::String> get_lang_fnames() {
         throw std::runtime_error{"could not find language files"};
     }
 
-    fnames.push_back(DEFAULT_LANG_CODE);
+    fnames.push_back(sf::String{DEFAULT_LANG_CODE});
 
     return fnames;
 }
@@ -87,7 +87,7 @@ std::string get_sys_lang_code() {
 
     if (n < 2) {
         dbg("locale lookup failed, fallback to '{}'", DEFAULT_LANG_CODE);
-        return DEFAULT_LANG_CODE;
+        return std::string{DEFAULT_LANG_CODE};
     }
 
     const auto is_ascii = [](wchar_t c) {
@@ -96,7 +96,7 @@ std::string get_sys_lang_code() {
 
     if (!is_ascii(buffer[0]) || !is_ascii(buffer[1])) {
         dbg("buffer elements are non-ASCII characters, fallback to '{}'", DEFAULT_LANG_CODE);
-        return DEFAULT_LANG_CODE;
+        return std::string{DEFAULT_LANG_CODE};
     }
 
     return std::string(buffer, buffer + 2);
@@ -105,7 +105,7 @@ std::string get_sys_lang_code() {
 
     if (lang.size() < 2) {
         dbg("locale lookup failed (got '{}'), fallback to '{}'", lang, DEFAULT_LANG_CODE);
-        return DEFAULT_LANG_CODE;
+        return std::string{DEFAULT_LANG_CODE};
     }
 
     return lang.substr(0, 2);
