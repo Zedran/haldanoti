@@ -67,7 +67,7 @@ void SecretRow::reset() {
 
 void SecretRow::set_hint(std::optional<std::size_t> hint) {
     if (hint) {
-        hint_ = static_cast<sf::String>(std::to_string(*hint));
+        hint_ = sf::String{std::to_string(*hint)};
     } else {
         hint_ = std::nullopt;
     }
