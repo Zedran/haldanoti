@@ -3,7 +3,7 @@
 
 #include <cstdlib>
 #include <filesystem>
-#if defined(WIN32)
+#if defined(_WIN32)
 #include <climits>
 #include <windows.h>
 #include <winnls.h>
@@ -78,7 +78,7 @@ std::vector<sf::String> get_lang_fnames() {
 }
 
 std::string get_sys_lang_code() {
-#if defined(WIN32)
+#if defined(_WIN32)
     // Reference: https://learn.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-getuserdefaultlocalename
 
     wchar_t   buffer[LOCALE_NAME_MAX_LENGTH];
