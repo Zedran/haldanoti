@@ -48,6 +48,15 @@ public:
     void set_style(Style style);
 
 private:
+    // This struct holds information on whether individual visual elements
+    // are visible. Each time set_style is called, colors of the new Style
+    // are evaluated in regards to their alpha value. The ones with alpha
+    // value of 0 are not drawn. This evaluation reduces the amount of
+    // unnecessary calls to RenderTarget::draw.
+    struct Visible {
+        bool bg;
+    };
+
     // Outline size in pixels.
     static constexpr float OUTLINE_SIZE{1.0f};
 
@@ -56,6 +65,8 @@ private:
     std::vector<std::unique_ptr<Widget>> components_;
 
     std::unique_ptr<Layout> layout_;
+
+    Visible visible_;
 };
 
 } // namespace ui

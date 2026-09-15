@@ -12,7 +12,10 @@ Box::Box(sf::Vector2f size, Style style, Layout::Type layout) : bg_{size}, layou
 Box::~Box() = default;
 
 void Box::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(bg_, states);
+    if (visible_.bg) {
+        target.draw(bg_, states);
+    }
+
     for (const auto& c : components_) {
         target.draw(*c, states);
     }
@@ -38,6 +41,8 @@ void Box::set_position(sf::Vector2f pos) {
 }
 
 void Box::set_style(Style style) {
+    visible_.bg = style.bg.a > 0 || style.ol.a > 0;
+
     bg_.setFillColor(style.bg);
 
     bg_.setOutlineColor(style.ol);

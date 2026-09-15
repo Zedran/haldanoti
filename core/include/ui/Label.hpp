@@ -57,6 +57,16 @@ public:
     void set_text(sf::String text);
 
 private:
+    // This struct holds information on whether individual visual elements
+    // are visible. Each time set_style is called, colors of the new Style
+    // are evaluated in regards to their alpha value. The ones with alpha
+    // value of 0 are not drawn. This evaluation reduces the amount of
+    // unnecessary calls to RenderTarget::draw.
+    struct Visible {
+        bool bg;
+        bool fg;
+    };
+
     // Outline size in pixels.
     static constexpr float OUTLINE_SIZE{1.0f};
 
@@ -68,6 +78,8 @@ private:
 
     // Preferred font size.
     std::optional<unsigned int> pref_font_size_;
+
+    Visible visible_;
 
     void center_text();
 };

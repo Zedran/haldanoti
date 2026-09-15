@@ -58,8 +58,12 @@ void Label::center_text() {
 }
 
 void Label::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(bg_, states);
-    target.draw(fg_, states);
+    if (visible_.bg) {
+        target.draw(bg_, states);
+    }
+    if (visible_.fg) {
+        target.draw(fg_, states);
+    }
 }
 
 sf::FloatRect Label::get_bounds() const {
@@ -83,6 +87,9 @@ void Label::set_position(sf::Vector2f pos) {
 }
 
 void Label::set_style(Style style) {
+    visible_.bg = style.bg.a > 0 || style.ol.a > 0;
+    visible_.fg = style.fg.a > 0;
+
     bg_.setFillColor(style.bg);
 
     bg_.setOutlineColor(style.ol);
