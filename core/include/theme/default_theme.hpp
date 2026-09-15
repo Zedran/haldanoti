@@ -95,7 +95,7 @@ const Theme DEFAULT_THEME{
     .bg{0x8b7659ff},
     .board{
         .box{
-            .bg{a0},
+            .bg{0xfff8f2ff},
             .ol{a0},
         },
         .game_row{
@@ -105,7 +105,7 @@ const Theme DEFAULT_THEME{
                     .ol{a0},
                 },
                 .inactive{
-                    .bg{0xfff8f2ff},
+                    .bg{a0},
                     .ol{a0},
                 },
             },
