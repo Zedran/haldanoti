@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Image.hpp>
+#include <SFML/Main.hpp>
 #include <SFML/System/Exception.hpp>
 #include <SFML/Window/VideoMode.hpp>
 
