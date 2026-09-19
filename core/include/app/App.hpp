@@ -26,7 +26,6 @@ class App {
 public:
     App(
         const sf::Font& font,
-        sf::Image       icon,
         sf::Vector2f    window_size,
         config::Config  conf,
         lang::Lang      lang,

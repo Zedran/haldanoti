@@ -17,7 +17,6 @@ namespace app {
 
 App::App(
     const sf::Font& font,
-    sf::Image       icon,
     sf::Vector2f    window_size,
     config::Config  conf,
     lang::Lang      lang,
@@ -55,7 +54,7 @@ App::App(
         [this] { this->close(); }
     },
     window_{sf::VideoMode(static_cast<sf::Vector2u>(window_size)), "mm", sf::Style::Close} {
-    window_.setIcon(std::move(icon));
+    window_.setIcon(utils::load_asset<sf::Image>(utils::ICON_FNAME));
     set_vsync(conf.vsync);
 
     dbg("screen_size = {{{:.0f}, {:.0f}}}", window_size.x, window_size.y);

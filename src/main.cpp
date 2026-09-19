@@ -39,12 +39,10 @@ int main() {
         sf::Font font = utils::load_asset<sf::Font>("InterVariable.ttf");
         font.setSmooth(false);
 
-        sf::Image  icon = utils::load_asset<sf::Image>("mm.png");
         lang::Lang lang = utils::load_language(conf.lang);
 
         app::App app{
             font,
-            std::move(icon),
             window_size,
             conf,
             lang,

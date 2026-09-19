@@ -37,6 +37,9 @@ static const std::filesystem::path ASSETS_DIRNAME{"assets"};
 // Language files subdirectory. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
 static const std::filesystem::path LANG_DIRNAME{"lang"};
 
+// Name of the icon file. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
+static const std::filesystem::path ICON_FNAME{"mm.png"};
+
 // 2-letter code of the default language.
 static constexpr std::string_view DEFAULT_LANG_CODE{"en"};
 
