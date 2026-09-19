@@ -42,7 +42,15 @@ int main() {
         sf::Image  icon = utils::load_asset<sf::Image>("mm.png");
         lang::Lang lang = utils::load_language(conf.lang);
 
-        app::App{font, std::move(icon), window_size, conf, lang, theme::DEFAULT_THEME}.run();
+        app::App app{
+            font,
+            std::move(icon),
+            window_size,
+            conf,
+            lang,
+            theme::DEFAULT_THEME
+        };
+        app.run();
     } catch (const nlohmann::json::exception& e) {
         std::cerr << "JSON: " << e.what() << '\n';
         return EXIT_FAILURE;
