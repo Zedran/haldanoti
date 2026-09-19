@@ -3,33 +3,27 @@
 
 include_guard(GLOBAL)
 
-set(app_data_dir ${CMAKE_BINARY_DIR}/app_data)
-set(assets_dir "${app_data_dir}/assets")
+set(app_data_dir "${CMAKE_BINARY_DIR}/app_data")
 
-file(MAKE_DIRECTORY ${app_data_dir} "${assets_dir}")
+set(assets_dir_src  "${CMAKE_SOURCE_DIR}/assets")
+set(assets_dir_dest "${app_data_dir}/assets")
 
-function(link_asset src_path)
-    get_filename_component(base_name "${src_path}" NAME)
+file(MAKE_DIRECTORY "${app_data_dir}")
 
-    set(dest_path "${assets_dir}/${base_name}")
-
-    if(NOT EXISTS ${dest_path})
-        execute_process(
-            COMMAND
-                ${CMAKE_COMMAND} -E create_symlink
-                "${src_path}"
-                "${dest_path}"
-            COMMAND_ERROR_IS_FATAL ANY
-        )
-    endif()
-endfunction()
-
-set(ASSET_PATHS
-    "${CMAKE_SOURCE_DIR}/assets/lang"
-    "${CMAKE_SOURCE_DIR}/assets/mm.png"
-    "${FONT_FILE_PATH}"
+execute_process(
+    COMMAND
+        ${CMAKE_COMMAND} -E copy_directory_if_different
+        "${assets_dir_src}"
+        "${assets_dir_dest}"
+    COMMAND_ERROR_IS_FATAL ANY
 )
 
-foreach(item IN LISTS ASSET_PATHS)
-    link_asset("${item}")
-endforeach()
+get_filename_component(base_font_name "${FONT_FILE_PATH}" NAME)
+
+execute_process(
+    COMMAND
+        ${CMAKE_COMMAND} -E copy_if_different
+        "${FONT_FILE_PATH}"
+        "${assets_dir_dest}/${base_font_name}"
+    COMMAND_ERROR_IS_FATAL ANY
+)
