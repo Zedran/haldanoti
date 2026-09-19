@@ -35,8 +35,7 @@ int main() {
 
     try {
         config::Config conf = config::read_config();
-
-        lang::Lang lang = utils::load_language(conf.lang);
+        lang::Lang     lang = utils::load_language(conf.lang);
 
         app::App app{
             window_size,
