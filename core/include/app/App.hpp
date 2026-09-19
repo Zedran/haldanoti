@@ -25,10 +25,10 @@ namespace app {
 class App {
 public:
     App(
-        sf::Vector2f    window_size,
-        config::Config  conf,
-        lang::Lang      lang,
-        theme::Theme    theme
+        sf::Vector2f   window_size,
+        config::Config conf,
+        lang::Lang     lang,
+        theme::Theme   theme
     );
 
     ~App();

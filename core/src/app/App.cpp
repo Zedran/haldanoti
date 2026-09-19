@@ -16,10 +16,10 @@
 namespace app {
 
 App::App(
-    sf::Vector2f    window_size,
-    config::Config  conf,
-    lang::Lang      lang,
-    theme::Theme    theme
+    sf::Vector2f   window_size,
+    config::Config conf,
+    lang::Lang     lang,
+    theme::Theme   theme
 ) : bg_{theme.bg},
     font_{utils::load_asset<sf::Font>(utils::FONT_FNAME)},
     board_{
