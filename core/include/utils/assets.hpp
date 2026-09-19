@@ -107,8 +107,6 @@ T load_asset(std::filesystem::path rel_path) {
 // are named with the lower-case 2-letter country code (ISO 639). The function
 // expects the file to have the '.json' extension and it will be appended
 // to lang_fname if missing.
-lang::Lang load_language(
-    std::string                lang_fname
-);
+lang::Lang load_language(std::string lang_fname);
 
 } // namespace utils

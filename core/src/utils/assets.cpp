@@ -138,9 +138,7 @@ std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) 
     return files;
 }
 
-lang::Lang load_language(
-    std::string                lang_fname
-) {
+lang::Lang load_language(std::string lang_fname) {
     if (lang_fname.empty()) {
         lang_fname = get_sys_lang_code();
     }
