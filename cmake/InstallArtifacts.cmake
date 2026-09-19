@@ -12,6 +12,9 @@ set(TOP_DOC_FILES
 set(BIN_DIR bin)
 
 if(WIN32)
+    if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+        set(CMAKE_INSTALL_PREFIX "$ENV{ProgramFiles}/${PROJECT_NAME}" CACHE PATH "Install path" FORCE)
+    endif()
     set(APP_DIR ".")
 else()
     set(APP_DIR "share/${PROJECT_NAME}")
