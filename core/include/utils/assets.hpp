@@ -37,6 +37,9 @@ static const std::filesystem::path ASSETS_DIRNAME{"assets"};
 // Language files subdirectory. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
 static const std::filesystem::path LANG_DIRNAME{"lang"};
 
+// Name of the font file. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
+static const std::filesystem::path FONT_FNAME{"InterVariable.ttf"};
+
 // Name of the icon file. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
 static const std::filesystem::path ICON_FNAME{"mm.png"};
 

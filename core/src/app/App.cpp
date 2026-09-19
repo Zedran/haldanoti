@@ -16,14 +16,14 @@
 namespace app {
 
 App::App(
-    const sf::Font& font,
     sf::Vector2f    window_size,
     config::Config  conf,
     lang::Lang      lang,
     theme::Theme    theme
 ) : bg_{theme.bg},
+    font_{utils::load_asset<sf::Font>(utils::FONT_FNAME)},
     board_{
-        font,
+        font_,
         window_size.componentWiseMul(Board::REL_SIZE),
         lang.board,
         theme.board,
@@ -31,21 +31,21 @@ App::App(
     },
     game_{conf.unique_elems},
     message_{
-        font,
+        font_,
         window_size.componentWiseMul(Message::REL_SIZE),
         lang.message,
         theme.message
     },
     scene_{Scene::Game},
     settings_{
-        font,
+        font_,
         window_size,
         lang.settings,
         theme.settings,
         utils::get_lang_fnames()
     },
     toolbar_{
-        font,
+        font_,
         window_size.componentWiseMul(Toolbar::REL_SIZE),
         lang.toolbar,
         theme.toolbar,
