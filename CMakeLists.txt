@@ -32,6 +32,8 @@ include(FetchSFML)
 include(FetchJSON)
 include(FetchFont)
 
+include(MakeAppDataDev)
+
 add_custom_target(configure_header
     COMMAND ${CMAKE_COMMAND}
         -DPROJECT_NAME="${PROJECT_NAME}"
@@ -44,9 +46,7 @@ add_custom_target(configure_header
 add_library(core_defs INTERFACE)
 
 target_compile_definitions(core_defs INTERFACE
-    FONT_FILE_PATH_DEV="${FONT_FILE_PATH}"
-    ICON_FILE_PATH_DEV="${CMAKE_SOURCE_DIR}/assets/mm.png"
-    LANG_DIR_PATH_DEV="${CMAKE_SOURCE_DIR}/assets/lang"
+    APP_DATA_DIR_DEV="${CMAKE_BINARY_DIR}/app_data"
 )
 
 add_subdirectory(core)

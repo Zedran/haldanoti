@@ -36,9 +36,7 @@ install(
 install(FILES     ${FONT_FILE_PATH} DESTINATION ${ASSETS_DIR}     )
 
 target_compile_definitions(core_defs INTERFACE
-    FONT_FILE_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/InterVariable.ttf"
-    ICON_FILE_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/mm.png"
-    LANG_DIR_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/lang"
+    APP_DATA_DIR_SYS="${CMAKE_INSTALL_PREFIX}/${APP_DIR}"
 )
 
 if(LINUX)

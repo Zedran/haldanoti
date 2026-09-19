@@ -36,11 +36,11 @@ int main() {
     try {
         const config::Config conf = config::read_config();
 
-        sf::Font font = utils::load_asset<sf::Font>({FONT_FILE_PATH_SYS, FONT_FILE_PATH_DEV});
+        sf::Font font = utils::load_asset<sf::Font>("InterVariable.ttf");
         font.setSmooth(false);
 
-        sf::Image  icon = utils::load_asset<sf::Image>({ICON_FILE_PATH_SYS, ICON_FILE_PATH_DEV});
-        lang::Lang lang = utils::load_language({LANG_DIR_PATH_SYS, LANG_DIR_PATH_DEV}, conf.lang);
+        sf::Image  icon = utils::load_asset<sf::Image>("mm.png");
+        lang::Lang lang = utils::load_language(conf.lang);
 
         app::App{font, std::move(icon), window_size, conf, lang, theme::DEFAULT_THEME}.run();
     } catch (const nlohmann::json::exception& e) {

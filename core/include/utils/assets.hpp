@@ -3,10 +3,8 @@
 
 #pragma once
 
-#include <array>
 #include <filesystem>
 #include <fstream>
-#include <initializer_list>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -33,6 +31,12 @@ static const std::filesystem::path CONFIG_FNAME{"mm.json"};
 // Full path to config file.
 static const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;
 
+// Name of the assets directory located in the APP_DATA_DIR.
+static const std::filesystem::path ASSETS_DIRNAME{"assets"};
+
+// Language files subdirectory. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
+static const std::filesystem::path LANG_DIRNAME{"lang"};
+
 // 2-letter code of the default language.
 static constexpr std::string_view DEFAULT_LANG_CODE{"en"};
 
@@ -46,14 +50,31 @@ std::string get_sys_lang_code();
 // Returns a list of file paths in dir.
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);
 
-// Iterates over the list of possible asset file locations and initializes
-// T using the first found file. Throws runtime_error if no file was found.
+// Iterates over the list of possible asset file locations (system installation
+// then dev directory) and returns T constructed from the first found file.
+//
+// Accepts a relative path to the asset file. It is appended to
+// APP_DATA_DIR/ASSETS_DIRNAME.
+//
+// Throws runtime_error if rel_path is empty or is an absolute path.
 template <typename T>
     requires std::is_same_v<T, sf::Font> ||
              std::is_same_v<T, sf::Image> ||
              std::is_same_v<T, std::ifstream>
-T load_asset(std::initializer_list<std::string_view> paths) {
-    for (const auto& p : paths) {
+T load_asset(std::filesystem::path rel_path) {
+    if (rel_path.empty()) {
+        throw std::runtime_error{"asset relative path is empty"};
+    }
+
+    if (!rel_path.is_relative()) {
+        throw std::runtime_error{"path '" + rel_path.string() + "' is not relative"};
+    }
+
+    rel_path = ASSETS_DIRNAME / rel_path;
+
+    for (const auto& d : {APP_DATA_DIR_SYS, APP_DATA_DIR_DEV}) {
+        const std::filesystem::path p = d / rel_path;
+
         try {
             if (!std::filesystem::exists(p)) {
                 continue;
@@ -75,20 +96,18 @@ T load_asset(std::initializer_list<std::string_view> paths) {
         } catch (const sf::Exception&) {
         }
     }
-    throw std::runtime_error{"unable to load asset"};
+    throw std::runtime_error{"unable to load asset '" + rel_path.string() + '\''};
 }
 
 // Returns a lang::Lang struct with game text translations corresponding to the
 // system locale or lang::DEFAULT_LANG if suitable translation file is not
 // found. Throws upon encountering JSON parsing errors.
 //
-// lang_dirs is an array containing possible locations of the lang directory.
 // lang_fname is the name of the desired translation file. Translation files
 // are named with the lower-case 2-letter country code (ISO 639). The function
 // expects the file to have the '.json' extension and it will be appended
 // to lang_fname if missing.
 lang::Lang load_language(
-    std::array<std::string, 2> lang_dirs,
     std::string                lang_fname
 );
 
