@@ -84,7 +84,9 @@ T load_asset(std::filesystem::path rel_path) {
             }
 
             if constexpr (std::is_same_v<T, sf::Font>) {
-                return sf::Font{p};
+                sf::Font font{p};
+                font.setSmooth(false);
+                return font;
             } else if constexpr (std::is_same_v<T, sf::Image>) {
                 sf::Image img;
                 if (img.loadFromFile(p)) {

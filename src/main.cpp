@@ -36,8 +36,7 @@ int main() {
     try {
         const config::Config conf = config::read_config();
 
-        sf::Font font = utils::load_asset<sf::Font>("InterVariable.ttf");
-        font.setSmooth(false);
+        const sf::Font font = utils::load_asset<sf::Font>("InterVariable.ttf");
 
         lang::Lang lang = utils::load_language(conf.lang);
 
