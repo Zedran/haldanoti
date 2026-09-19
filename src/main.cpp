@@ -34,14 +34,14 @@ int main() {
     dbg("{}", VERSION_INFO);
 
     try {
-        const config::Config conf = config::read_config();
+        config::Config conf = config::read_config();
 
         lang::Lang lang = utils::load_language(conf.lang);
 
         app::App app{
             window_size,
-            conf,
-            lang,
+            std::move(conf),
+            std::move(lang),
             theme::DEFAULT_THEME
         };
         app.run();
