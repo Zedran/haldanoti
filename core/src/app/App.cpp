@@ -21,7 +21,7 @@ App::App(
     lang::Lang     lang,
     theme::Theme   theme
 ) : bg_{theme.bg},
-    font_{utils::load_asset<sf::Font>(utils::FONT_FNAME)},
+    font_{utils::load_asset<sf::Font>("InterVariable.ttf")},
     board_{
         font_,
         window_size.componentWiseMul(Board::REL_SIZE),
@@ -54,7 +54,7 @@ App::App(
         [this] { this->close(); }
     },
     window_{sf::VideoMode(static_cast<sf::Vector2u>(window_size)), "mm", sf::Style::Close} {
-    window_.setIcon(utils::load_asset<sf::Image>(utils::ICON_FNAME));
+    window_.setIcon(utils::load_asset<sf::Image>("mm.png"));
     set_vsync(conf.vsync);
 
     dbg("screen_size = {{{:.0f}, {:.0f}}}", window_size.x, window_size.y);
