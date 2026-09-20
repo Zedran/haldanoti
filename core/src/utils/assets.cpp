@@ -24,6 +24,23 @@
 
 namespace utils {
 
+std::filesystem::path find_app_data_dir() {
+#if defined(_WIN32)
+    // Reference: https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulefilenamew
+
+    wchar_t buffer[MAX_PATH];
+
+    const DWORD n = GetModuleFileNameW(nullptr, buffer, MAX_PATH);
+    if (n == 0) {
+        throw std::runtime_error{"unable to determine executable path"};
+    }
+
+    return std::filesystem::path{buffer}.parent_path().parent_path();
+#else
+    return std::filesystem::path{APP_DATA_DIR_SYS};
+#endif
+}
+
 std::filesystem::path find_config_dir() {
     char* home{};
 
@@ -68,7 +85,7 @@ std::vector<sf::String> get_lang_fnames() {
 
     const std::filesystem::path rel_path = ASSETS_DIRNAME / LANG_DIRNAME;
 
-    for (const auto& d : {APP_DATA_DIR_SYS, APP_DATA_DIR_DEV}) {
+    for (const auto& d : {APP_DATA_SYS_PATH, std::filesystem::path{APP_DATA_DIR_DEV}}) {
         const std::filesystem::path dir = d / rel_path;
 
         if (std::filesystem::exists(dir)) {

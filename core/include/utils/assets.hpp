@@ -22,6 +22,16 @@ namespace utils {
 // Returns user config directory.
 std::filesystem::path find_config_dir();
 
+// Returns the installed application data path. This function exists to resolve
+// differences in installation layout between platforms. The application relies
+// on CMAKE_INSTALL_PREFIX to determine the installed path - it is written as
+// APP_DATA_DIR_SYS compile definition. This works well in all cases except
+// for NSIS, because NSIS installer allows the user to choose installation path.
+// A custom installation directory does not match the path hard-coded by compile
+// definitions. For this reason, on Windows, the application data directory
+// must be determined in relation to the executable file path.
+std::filesystem::path find_app_data_dir();
+
 // Location of the user config directory.
 static const std::filesystem::path CONFIG_DIR = utils::find_config_dir();
 
@@ -30,6 +40,9 @@ static const std::filesystem::path CONFIG_FNAME{"mm.json"};
 
 // Full path to config file.
 static const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;
+
+// System application data path.
+static const std::filesystem::path APP_DATA_SYS_PATH{find_app_data_dir()};
 
 // Name of the assets directory located in the APP_DATA_DIR.
 static const std::filesystem::path ASSETS_DIRNAME{"assets"};
@@ -72,7 +85,7 @@ T load_asset(std::filesystem::path rel_path) {
 
     rel_path = ASSETS_DIRNAME / rel_path;
 
-    for (const auto& d : {APP_DATA_DIR_SYS, APP_DATA_DIR_DEV}) {
+    for (const auto& d : {APP_DATA_SYS_PATH, std::filesystem::path{APP_DATA_DIR_DEV}}) {
         const std::filesystem::path p = d / rel_path;
 
         try {
