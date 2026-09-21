@@ -36,4 +36,8 @@ set(CPACK_NSIS_MODIFY_PATH                     OFF                              
 set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON                                           )
 set(CPACK_NSIS_IGNORE_COMPONENTS_PAGE          ON                                           )
 
+set(CPACK_NSIS_MENU_LINKS
+    "${BIN_DIR}/${PROJECT_NAME}.exe" "${CPACK_PACKAGE_NAME}"
+)
+
 include(CPack)
