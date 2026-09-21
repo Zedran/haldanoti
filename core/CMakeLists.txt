@@ -47,6 +47,7 @@ if(MAKE_TESTS AND COVER)
         SFML::System
         SFML::Window
         SFML::Graphics
+        nlohmann_json::nlohmann_json
     )
 
     target_compile_options(core_coverage PRIVATE -g --coverage)
