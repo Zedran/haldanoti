@@ -25,12 +25,10 @@ namespace app {
 class App {
 public:
     App(
-        const sf::Font& font,
-        sf::Image       icon,
-        sf::Vector2f    window_size,
-        config::Config  conf,
-        lang::Lang      lang,
-        theme::Theme    theme
+        sf::Vector2f   window_size,
+        config::Config conf,
+        lang::Lang     lang,
+        theme::Theme   theme
     );
 
     ~App();
@@ -53,6 +51,9 @@ private:
 
     // Window background color.
     sf::Color bg_;
+
+    // Font used by the application.
+    sf::Font font_;
 
     // Game display.
     Board board_;

@@ -16,15 +16,14 @@
 namespace app {
 
 App::App(
-    const sf::Font& font,
-    sf::Image       icon,
-    sf::Vector2f    window_size,
-    config::Config  conf,
-    lang::Lang      lang,
-    theme::Theme    theme
+    sf::Vector2f   window_size,
+    config::Config conf,
+    lang::Lang     lang,
+    theme::Theme   theme
 ) : bg_{theme.bg},
+    font_{utils::load_asset<sf::Font>("InterVariable.ttf")},
     board_{
-        font,
+        font_,
         window_size.componentWiseMul(Board::REL_SIZE),
         lang.board,
         theme.board,
@@ -32,21 +31,21 @@ App::App(
     },
     game_{conf.unique_elems},
     message_{
-        font,
+        font_,
         window_size.componentWiseMul(Message::REL_SIZE),
         lang.message,
         theme.message
     },
     scene_{Scene::Game},
     settings_{
-        font,
+        font_,
         window_size,
         lang.settings,
         theme.settings,
         utils::get_lang_fnames()
     },
     toolbar_{
-        font,
+        font_,
         window_size.componentWiseMul(Toolbar::REL_SIZE),
         lang.toolbar,
         theme.toolbar,
@@ -55,7 +54,7 @@ App::App(
         [this] { this->close(); }
     },
     window_{sf::VideoMode(static_cast<sf::Vector2u>(window_size)), "mm", sf::Style::Close} {
-    window_.setIcon(std::move(icon));
+    window_.setIcon(utils::load_asset<sf::Image>("mm.png"));
     set_vsync(conf.vsync);
 
     dbg("screen_size = {{{:.0f}, {:.0f}}}", window_size.x, window_size.y);

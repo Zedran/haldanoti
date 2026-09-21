@@ -24,6 +24,23 @@
 
 namespace utils {
 
+std::filesystem::path find_app_data_dir() {
+#if defined(_WIN32)
+    // Reference: https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulefilenamew
+
+    wchar_t buffer[MAX_PATH];
+
+    const DWORD n = GetModuleFileNameW(nullptr, buffer, MAX_PATH);
+    if (n == 0) {
+        throw std::runtime_error{"unable to determine executable path"};
+    }
+
+    return std::filesystem::path{buffer}.parent_path().parent_path();
+#else
+    return std::filesystem::path{DEF_APP_DATA_DIR_SYS};
+#endif
+}
+
 std::filesystem::path find_config_dir() {
     char* home{};
 
@@ -66,8 +83,10 @@ std::filesystem::path find_config_dir() {
 std::vector<sf::String> get_lang_fnames() {
     std::vector<sf::String> fnames;
 
-    for (const auto& d : {LANG_DIR_PATH_SYS, LANG_DIR_PATH_DEV}) {
-        const std::filesystem::path dir{d};
+    const std::filesystem::path rel_path = ASSETS_DIRNAME / LANG_DIRNAME;
+
+    for (const auto& d : {APP_DATA_SYS_PATH, std::filesystem::path{DEF_APP_DATA_DIR_DEV}}) {
+        const std::filesystem::path dir = d / rel_path;
 
         if (std::filesystem::exists(dir)) {
             for (const auto& p : list_files(dir)) {
@@ -136,10 +155,7 @@ std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) 
     return files;
 }
 
-lang::Lang load_language(
-    std::array<std::string, 2> lang_dirs,
-    std::string                lang_fname
-) {
+lang::Lang load_language(std::string lang_fname) {
     if (lang_fname.empty()) {
         lang_fname = get_sys_lang_code();
     }
@@ -148,14 +164,13 @@ lang::Lang load_language(
         return lang::DEFAULT_LANG;
     }
 
-    const auto ext = [&lang_fname](std::string fname) {
-        fname += '/' + lang_fname;
-        return fname.ends_with(".json") ? fname : fname + ".json";
-    };
+    if (!lang_fname.ends_with(".json")) {
+        lang_fname += ".json";
+    }
 
     std::ifstream lf;
     try {
-        lf = load_asset<std::ifstream>({ext(lang_dirs[0]), ext(lang_dirs[1])});
+        lf = load_asset<std::ifstream>(LANG_DIRNAME / lang_fname);
     } catch (const std::runtime_error&) {
         return lang::DEFAULT_LANG;
     }

@@ -12,6 +12,9 @@ set(TOP_DOC_FILES
 set(BIN_DIR bin)
 
 if(WIN32)
+    if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+        set(CMAKE_INSTALL_PREFIX "$ENV{ProgramFiles}/${PROJECT_NAME}" CACHE PATH "Install path" FORCE)
+    endif()
     set(APP_DIR ".")
 else()
     set(APP_DIR "share/${PROJECT_NAME}")
@@ -36,9 +39,7 @@ install(
 install(FILES     ${FONT_FILE_PATH} DESTINATION ${ASSETS_DIR}     )
 
 target_compile_definitions(core_defs INTERFACE
-    FONT_FILE_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/InterVariable.ttf"
-    ICON_FILE_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/mm.png"
-    LANG_DIR_PATH_SYS="${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/lang"
+    DEF_APP_DATA_DIR_SYS="${CMAKE_INSTALL_PREFIX}/${APP_DIR}"
 )
 
 if(LINUX)

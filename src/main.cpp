@@ -4,8 +4,6 @@
 #include <cstdlib>
 #include <iostream>
 
-#include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/Image.hpp>
 #include <SFML/Main.hpp>
 #include <SFML/System/Exception.hpp>
 #include <SFML/Window/VideoMode.hpp>
@@ -34,15 +32,16 @@ int main() {
     dbg("{}", VERSION_INFO);
 
     try {
-        const config::Config conf = config::read_config();
+        config::Config conf = config::read_config();
+        lang::Lang     lang = utils::load_language(conf.lang);
 
-        sf::Font font = utils::load_asset<sf::Font>({FONT_FILE_PATH_SYS, FONT_FILE_PATH_DEV});
-        font.setSmooth(false);
-
-        sf::Image  icon = utils::load_asset<sf::Image>({ICON_FILE_PATH_SYS, ICON_FILE_PATH_DEV});
-        lang::Lang lang = utils::load_language({LANG_DIR_PATH_SYS, LANG_DIR_PATH_DEV}, conf.lang);
-
-        app::App{font, std::move(icon), window_size, conf, lang, theme::DEFAULT_THEME}.run();
+        app::App app{
+            window_size,
+            std::move(conf),
+            std::move(lang),
+            theme::DEFAULT_THEME
+        };
+        app.run();
     } catch (const nlohmann::json::exception& e) {
         std::cerr << "JSON: " << e.what() << '\n';
         return EXIT_FAILURE;
