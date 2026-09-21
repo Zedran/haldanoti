@@ -44,6 +44,8 @@ if(MAKE_TESTS AND COVER)
     target_include_directories(core_coverage PUBLIC include)
     target_link_libraries(core_coverage PUBLIC
         core_defs
+        SFML::System
+        SFML::Window
         SFML::Graphics
     )
 
