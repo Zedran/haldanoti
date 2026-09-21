@@ -137,7 +137,7 @@ const Theme DEFAULT_THEME{
                 .ol{a0},
             },
             .info_running{
-                .bg{a0},
+                .bg{0x8b7659ff},
                 .fg{a0},
                 .ol{a0},
             },
