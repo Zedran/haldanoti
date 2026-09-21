@@ -37,7 +37,7 @@ std::filesystem::path find_app_data_dir() {
 
     return std::filesystem::path{buffer}.parent_path().parent_path();
 #else
-    return std::filesystem::path{APP_DATA_DIR_SYS};
+    return std::filesystem::path{DEF_APP_DATA_DIR_SYS};
 #endif
 }
 
@@ -85,7 +85,7 @@ std::vector<sf::String> get_lang_fnames() {
 
     const std::filesystem::path rel_path = ASSETS_DIRNAME / LANG_DIRNAME;
 
-    for (const auto& d : {APP_DATA_SYS_PATH, std::filesystem::path{APP_DATA_DIR_DEV}}) {
+    for (const auto& d : {APP_DATA_SYS_PATH, std::filesystem::path{DEF_APP_DATA_DIR_DEV}}) {
         const std::filesystem::path dir = d / rel_path;
 
         if (std::filesystem::exists(dir)) {
