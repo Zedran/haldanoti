@@ -5,7 +5,6 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "ui/Label.hpp"
-#include "utils/utils.hpp"
 
 namespace ui {
 
@@ -82,7 +81,7 @@ void Label::handle_event([[maybe_unused]] const sf::Event& event) {
 }
 
 void Label::set_position(sf::Vector2f pos) {
-    bg_.setPosition(utils::round(pos));
+    bg_.setPosition(pos);
     center_text();
 }
 
