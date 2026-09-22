@@ -20,8 +20,7 @@ App::App(
     config::Config conf,
     lang::Lang     lang,
     theme::Theme   theme
-) : bg_{theme.bg},
-    font_{utils::load_asset<sf::Font>("InterVariable.ttf")},
+) : font_{utils::load_asset<sf::Font>("InterVariable.ttf")},
     board_{
         font_,
         window_size.componentWiseMul(Board::REL_SIZE),
@@ -53,12 +52,7 @@ App::App(
         [this] { this->set_scene(Scene::Settings); },
         [this] { this->close(); }
     },
-    window_{sf::VideoMode(static_cast<sf::Vector2u>(window_size)), "mm", sf::Style::Close} {
-    window_.setIcon(utils::load_asset<sf::Image>("mm.png"));
-    set_vsync(conf.vsync);
-
-    dbg("screen_size = {{{:.0f}, {:.0f}}}", window_size.x, window_size.y);
-
+    window_{window_size, theme.bg, conf.vsync} {
     board_.set_position(sf::Vector2f{
         (1 - Board::REL_SIZE.x) / 2 * window_size.x,
         (1 - Board::REL_SIZE.y - Toolbar::REL_SIZE.y) / 2 * window_size.y,
@@ -81,7 +75,7 @@ App::~App() = default;
 void App::apply_config(const config::Config& c) {
     configure_hints(c);
     game_.allow_unique_only(c.unique_elems);
-    set_vsync(c.vsync);
+    window_.set_vsync(c.vsync);
 }
 
 void App::close() {
@@ -97,7 +91,7 @@ void App::configure_hints(const config::Config& c) {
 }
 
 void App::draw() {
-    window_.clear(bg_);
+    window_.draw_bg();
 
     window_.draw(board_);
     window_.draw(toolbar_);
@@ -175,12 +169,6 @@ void App::set_scene(Scene scene) noexcept {
     if (scene == Scene::Settings) {
         settings_.set_state(Settings::State::Running);
     }
-}
-
-void App::set_vsync(bool enabled) {
-    dbg("VSync: {}", enabled);
-    window_.setVerticalSyncEnabled(enabled);
-    window_.setFramerateLimit(enabled ? FPS_UNLIM : FPS_LIMIT);
 }
 
 void App::tick() {

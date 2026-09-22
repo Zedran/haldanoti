@@ -3,18 +3,14 @@
 
 #pragma once
 
-#include <limits>
-
-#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/Image.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
 
 #include "app/Board.hpp"
 #include "app/Message.hpp"
 #include "app/Settings.hpp"
 #include "app/Toolbar.hpp"
+#include "app/Window.hpp"
 #include "game/Game.hpp"
 #include "lang/Lang.hpp"
 #include "theme/Theme.hpp"
@@ -43,15 +39,6 @@ private:
         Settings,
     };
 
-    // Framerate limit when vertical sync is disabled.
-    static constexpr unsigned int FPS_LIMIT = 60;
-
-    // High framerate limit that does not collide with vertical sync.
-    static constexpr unsigned int FPS_UNLIM = std::numeric_limits<unsigned int>::max();
-
-    // Window background color.
-    sf::Color bg_;
-
     // Font used by the application.
     sf::Font font_;
 
@@ -72,7 +59,7 @@ private:
     Toolbar toolbar_;
 
     // Render target.
-    sf::RenderWindow window_;
+    Window window_;
 
     // Apply configuration options that can take effect without restarting
     // the application.
@@ -108,9 +95,6 @@ private:
     // Sets the current scene, allowing the App to transition between the game
     // and subpages.
     void set_scene(Scene scene) noexcept;
-
-    // Enables or disables VSync and sets the framerate limit accordingly.
-    void set_vsync(bool enabled);
 
     // Game logic tick.
     void tick();

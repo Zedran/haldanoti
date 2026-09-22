@@ -11,6 +11,7 @@ set(CORE_SOURCES
     src/app/SecretRow.cpp
     src/app/Settings.cpp
     src/app/Toolbar.cpp
+    src/app/Window.cpp
     src/config/Config.cpp
     src/game/Game.cpp
     src/game/Row.cpp
