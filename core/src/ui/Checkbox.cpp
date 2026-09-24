@@ -2,6 +2,7 @@
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
 #include <cassert>
+#include <utility>
 
 #include <SFML/Window/Mouse.hpp>
 
@@ -17,7 +18,7 @@ Checkbox::Checkbox(
     sf::String      label_text,
     sf::String      check_mark
 ) : Box{size, style.box, ui::Layout::Type::RowLayout},
-    check_mark_{check_mark},
+    check_mark_{std::move(check_mark)},
     state_{},
     style_(style) {
     constexpr ui::Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
@@ -38,7 +39,7 @@ Checkbox::Checkbox(
         font,
         size.componentWiseMul(LABEL_REL_SIZE),
         style.label,
-        label_text
+        std::move(label_text)
     );
 
     cb_ = &rbox.add_component<ui::Button>(
