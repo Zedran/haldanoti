@@ -29,7 +29,7 @@ int main() {
         static_cast<float>(desktop.size.y) * relh_to_winh,
     });
 
-    dbg("{}", VERSION_INFO);
+    dbg("{} {} {}", APP_NAME, VERSION, BRANCH);
 
     try {
         config::Config conf = config::read_config();
