@@ -43,7 +43,7 @@ Settings::Settings(
         opt_line_size,
         theme.selector,
         lang.opt_lang,
-        lang_fnames
+        std::move(lang_fnames)
     );
 
     cb_fb_chars_ = &opt_box.add_component<ui::Checkbox>(
