@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cassert>
 #include <stdexcept>
+#include <utility>
 
 #include "ui/Selector.hpp"
 
@@ -15,7 +16,7 @@ Selector::Selector(
     Style                   style,
     sf::String              label,
     std::vector<sf::String> entries
-) : Box{size, style.box, Layout::Type::RowLayout}, entries_{entries}, index_{} {
+) : Box{size, style.box, Layout::Type::RowLayout}, entries_{std::move(entries)}, index_{} {
     constexpr Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
 
     Box& lbox = add_component<Box>(
@@ -36,7 +37,7 @@ Selector::Selector(
         font,
         size.componentWiseMul(LABEL_REL_SIZE),
         style.label,
-        label
+        std::move(label)
     );
 
     const sf::Vector2f sel_button_size{rbox_size.y, rbox_size.y};
