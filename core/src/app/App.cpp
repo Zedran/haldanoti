@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
+#include <utility>
+
 #include "app/App.hpp"
 #include "app/Board.hpp"
 #include "app/GameRow.hpp"
@@ -19,7 +21,8 @@ App::App(
     sf::Vector2f   window_size,
     config::Config conf,
     lang::Lang     lang,
-    theme::Theme   theme
+    theme::Theme   theme,
+    sf::String     version
 ) : font_{utils::load_asset<sf::Font>("InterVariable.ttf")},
     board_{
         font_,
@@ -41,7 +44,8 @@ App::App(
         window_size,
         lang.settings,
         theme.settings,
-        utils::get_lang_fnames()
+        utils::get_lang_fnames(),
+        std::move(version)
     },
     toolbar_{
         font_,
@@ -60,7 +64,6 @@ App::App(
     configure_hints(conf);
 
     toolbar_.set_position(sf::Vector2f{0.0f, (1.0f - Toolbar::REL_SIZE.y) * window_size.y});
-
     message_.set_position({0.0f, 0.8f * window_size.y});
 
     settings_.set_position({0.0f, 0.0f});

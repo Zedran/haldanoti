@@ -4,6 +4,7 @@
 #pragma once
 
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
 
 #include "app/Board.hpp"
@@ -24,7 +25,8 @@ public:
         sf::Vector2f   window_size,
         config::Config conf,
         lang::Lang     lang,
-        theme::Theme   theme
+        theme::Theme   theme,
+        sf::String     version
     );
 
     ~App();

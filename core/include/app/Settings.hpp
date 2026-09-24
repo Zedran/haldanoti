@@ -4,6 +4,7 @@
 #pragma once
 
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
 
 #include "config/Config.hpp"
@@ -37,7 +38,8 @@ public:
         sf::Vector2f            size,
         lang::Settings          lang,
         theme::Settings         theme,
-        std::vector<sf::String> lang_fnames
+        std::vector<sf::String> lang_fnames,
+        sf::String              version
     );
 
     // Returns true if conf differs from the reference Config struct. This
@@ -87,6 +89,10 @@ private:
 
     // Font size relative to the height of the button.
     static constexpr float FONT_REL_SIZE{0.3f};
+
+    // Dimensions of the version Label relative to the size
+    // of the Settings page.
+    static constexpr sf::Vector2f VERSION_RELSIZE{0.8f, 0.016f};
 
     // Non-owning pointer to the preferred language Selector.
     // Required for getting and setting its value.

@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
-#include <SFML/System/String.hpp>
+#include <utility>
+
 #include <SFML/Window/Mouse.hpp>
 
 #include "app/Settings.hpp"
@@ -17,7 +18,8 @@ Settings::Settings(
     sf::Vector2f            size,
     lang::Settings          lang,
     theme::Settings         theme,
-    std::vector<sf::String> lang_fnames
+    std::vector<sf::String> lang_fnames,
+    sf::String              version
 ) : ui::Box{size, theme.bg, ui::Layout::Type::ColumnLayout}, state_{} {
     constexpr Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
 
@@ -79,6 +81,13 @@ Settings::Settings(
     constexpr sf::Vector2f toolbar_spacing{0.0f, 7.0f};
 
     opt_box.add_component<ui::Blank>(opt_line_size.componentWiseMul(toolbar_spacing));
+
+    opt_box.add_component<ui::Label>(
+        font,
+        size.componentWiseMul(VERSION_RELSIZE),
+        theme.label,
+        std::move(version)
+    );
 
     const sf::Vector2f toolbar_size = size.componentWiseMul(TOOLBAR_REL_SIZE);
 

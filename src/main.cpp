@@ -39,7 +39,8 @@ int main() {
             window_size,
             std::move(conf),
             std::move(lang),
-            theme::DEFAULT_THEME
+            theme::DEFAULT_THEME,
+            VERSION
         };
         app.run();
     } catch (const nlohmann::json::exception& e) {
