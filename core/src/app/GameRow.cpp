@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cstddef>
 #include <string>
+#include <utility>
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
@@ -147,7 +148,7 @@ void GameRow::set_feedback(game::Feedback fb) {
 
 void GameRow::set_lang(lang::GameRow lang) noexcept {
     ok_button_text_ = std::move(lang.ok);
-    FeedbackLabel::set_lang(lang.fb_label);
+    FeedbackLabel::set_lang(std::move(lang.fb_label));
 }
 
 void GameRow::set_theme(theme::GameRow theme, bool force_fb_chars) noexcept {

@@ -27,7 +27,7 @@ App::App(
     board_{
         font_,
         window_size.componentWiseMul(Board::REL_SIZE),
-        lang.board,
+        std::move(lang.board),
         theme.board,
         conf.fb_chars
     },
@@ -35,14 +35,14 @@ App::App(
     message_{
         font_,
         window_size.componentWiseMul(Message::REL_SIZE),
-        lang.message,
+        std::move(lang.message),
         theme.message
     },
     scene_{Scene::Game},
     settings_{
         font_,
         window_size,
-        lang.settings,
+        std::move(lang.settings),
         theme.settings,
         utils::get_lang_fnames(),
         std::move(version)
@@ -50,7 +50,7 @@ App::App(
     toolbar_{
         font_,
         window_size.componentWiseMul(Toolbar::REL_SIZE),
-        lang.toolbar,
+        std::move(lang.toolbar),
         theme.toolbar,
         [this] { this->new_game(); },
         [this] { this->set_scene(Scene::Settings); },

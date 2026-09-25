@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
+#include <utility>
+
 #include "app/FeedbackLabel.hpp"
 #include "lang/FeedbackLabel.hpp"
 #include "theme/FeedbackLabel.hpp"
@@ -26,7 +28,7 @@ void FeedbackLabel::reset() {
 }
 
 void FeedbackLabel::set_lang(lang::FeedbackLabel lang) {
-    FeedbackLabel::lang_ = lang;
+    FeedbackLabel::lang_ = std::move(lang);
 }
 
 void FeedbackLabel::set_pin(Pin pin) {

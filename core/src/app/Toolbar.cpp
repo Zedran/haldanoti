@@ -23,7 +23,7 @@ Toolbar::Toolbar(
         font,
         sf::Vector2f{size.y * BUTTON_RELSIZE.x, size.y * BUTTON_RELSIZE.y},
         theme.new_game,
-        lang.new_game,
+        std::move(lang.new_game),
         font_size
     )
         .bind(sf::Mouse::Button::Left, std::move(new_game_func));
@@ -32,7 +32,7 @@ Toolbar::Toolbar(
         font,
         sf::Vector2f{size.y * BUTTON_RELSIZE.x, size.y * BUTTON_RELSIZE.y},
         theme.settings,
-        lang.settings,
+        std::move(lang.settings),
         font_size
     )
         .bind(sf::Mouse::Button::Left, std::move(settings_func));
@@ -41,7 +41,7 @@ Toolbar::Toolbar(
         font,
         sf::Vector2f{size.y * BUTTON_RELSIZE.x, size.y * BUTTON_RELSIZE.y},
         theme.exit,
-        lang.exit,
+        std::move(lang.exit),
         font_size
     )
         .bind(sf::Mouse::Button::Left, std::move(exit_func));
