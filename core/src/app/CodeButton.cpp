@@ -4,6 +4,7 @@
 #include <cassert>
 #include <stdexcept>
 #include <string>
+#include <utility>
 
 #include "app/CodeButton.hpp"
 #include "game/Game.hpp"
