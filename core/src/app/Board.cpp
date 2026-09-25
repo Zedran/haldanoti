@@ -23,7 +23,7 @@ Board::Board(
     active_row_{},
     game_rows_(game::Game::NUM_ROWS) {
     GameRow::set_lang(std::move(lang.game_row));
-    GameRow::set_theme(theme.game_row, force_fb_chars);
+    GameRow::set_theme(std::move(theme.game_row), force_fb_chars);
 
     secret_row_ = &add_component<SecretRow>(
         font,

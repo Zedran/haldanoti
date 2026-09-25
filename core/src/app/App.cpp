@@ -28,7 +28,7 @@ App::App(
         font_,
         window_size.componentWiseMul(Board::REL_SIZE),
         std::move(lang.board),
-        theme.board,
+        std::move(theme.board),
         conf.fb_chars
     },
     game_{conf.unique_elems},

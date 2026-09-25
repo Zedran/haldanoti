@@ -69,7 +69,7 @@ void CodeButton::reset() {
 }
 
 void CodeButton::set_theme(theme::CodeButton theme) {
-    CodeButton::styles_ = theme;
+    CodeButton::styles_ = std::move(theme);
 
     if (CodeButton::styles_.elements.size() != game::Game::NUM_UNIQUE_ELEMS) {
         throw std::logic_error{
