@@ -23,7 +23,7 @@ namespace app {
 
 sf::String GameRow::ok_button_text_{};
 
-theme::GameRow GameRow::styles_{};
+theme::GameRowBase GameRow::styles_{};
 
 GameRow::GameRow(const sf::Font& font, sf::Vector2f size, int row_number)
     : ui::Box{size, styles_.box.inactive, ui::Layout::Type::RowLayout},
@@ -152,9 +152,9 @@ void GameRow::set_lang(lang::GameRow lang) noexcept {
 }
 
 void GameRow::set_theme(theme::GameRow theme, bool force_fb_chars) noexcept {
-    styles_ = theme;
-    CodeButton::set_theme(styles_.code_button);
-    FeedbackLabel::set_theme(styles_.fb_label, force_fb_chars);
+    styles_ = theme.base;
+    CodeButton::set_theme(theme.code_button);
+    FeedbackLabel::set_theme(theme.fb_label, force_fb_chars);
 }
 
 void GameRow::unlock() {

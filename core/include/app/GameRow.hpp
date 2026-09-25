@@ -15,6 +15,7 @@
 #include "game/Row.hpp"
 #include "lang/GameRow.hpp"
 #include "theme/GameRow.hpp"
+#include "theme/GameRowBase.hpp"
 #include "ui/Box.hpp"
 #include "ui/Button.hpp"
 
@@ -83,7 +84,7 @@ private:
     static sf::String ok_button_text_;
 
     // Stores the styles associated with different box states.
-    static theme::GameRow styles_;
+    static theme::GameRowBase styles_;
 
     // Non-owning pointer required for modifying styles of to the code box.
     ui::Box* code_box_;
