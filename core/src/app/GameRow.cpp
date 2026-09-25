@@ -20,7 +20,7 @@
 
 namespace app {
 
-lang::GameRow GameRow::lang_{};
+sf::String GameRow::ok_button_text_{};
 
 theme::GameRow GameRow::styles_{};
 
@@ -146,8 +146,8 @@ void GameRow::set_feedback(game::Feedback fb) {
 }
 
 void GameRow::set_lang(lang::GameRow lang) noexcept {
-    lang_ = lang;
-    FeedbackLabel::set_lang(lang_.fb_label);
+    ok_button_text_ = std::move(lang.ok);
+    FeedbackLabel::set_lang(lang.fb_label);
 }
 
 void GameRow::set_theme(theme::GameRow theme, bool force_fb_chars) noexcept {
@@ -162,7 +162,7 @@ void GameRow::unlock() {
     for (auto& b : code_buttons_) {
         b->enable();
     }
-    ok_button_->set_text(lang_.ok);
+    ok_button_->set_text(ok_button_text_);
     ok_button_->enable();
 
     update_box_styles();
