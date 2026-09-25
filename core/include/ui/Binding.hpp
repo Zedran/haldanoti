@@ -4,6 +4,7 @@
 #pragma once
 
 #include <functional>
+#include <utility>
 #include <variant>
 
 #include <SFML/Window/Event.hpp>

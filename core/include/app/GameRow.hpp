@@ -15,6 +15,7 @@
 #include "game/Row.hpp"
 #include "lang/GameRow.hpp"
 #include "theme/GameRow.hpp"
+#include "theme/GameRowBase.hpp"
 #include "ui/Box.hpp"
 #include "ui/Button.hpp"
 
@@ -79,11 +80,11 @@ private:
     // Size of the ok box relative to the dimensions of the outer container.
     static constexpr sf::Vector2f OK_BUTTON_REL_SIZE{0.75f, 0.5f};
 
-    // Contains text value set to the ok button.
-    static lang::GameRow lang_;
+    // Contains text value set to the ok Button when the GameRow is active.
+    static sf::String ok_button_text_;
 
     // Stores the styles associated with different box states.
-    static theme::GameRow styles_;
+    static theme::GameRowBase styles_;
 
     // Non-owning pointer required for modifying styles of to the code box.
     ui::Box* code_box_;

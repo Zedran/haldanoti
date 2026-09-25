@@ -35,22 +35,22 @@ Settings::Settings(
         font,
         opt_line_size,
         theme.label,
-        lang.title
+        std::move(lang.title)
     );
 
     sel_lang_ = &opt_box.add_component<ui::Selector>(
         font,
         opt_line_size,
         theme.selector,
-        lang.opt_lang,
-        lang_fnames
+        std::move(lang.opt_lang),
+        std::move(lang_fnames)
     );
 
     cb_fb_chars_ = &opt_box.add_component<ui::Checkbox>(
         font,
         opt_line_size,
         theme.checkbox,
-        lang.opt_fb_chars,
+        std::move(lang.opt_fb_chars),
         lang.check_mark
     );
 
@@ -58,7 +58,7 @@ Settings::Settings(
         font,
         opt_line_size,
         theme.checkbox,
-        lang.opt_hints,
+        std::move(lang.opt_hints),
         lang.check_mark
     );
 
@@ -66,7 +66,7 @@ Settings::Settings(
         font,
         opt_line_size,
         theme.checkbox,
-        lang.opt_unique_elems,
+        std::move(lang.opt_unique_elems),
         lang.check_mark
     );
 
@@ -74,7 +74,7 @@ Settings::Settings(
         font,
         opt_line_size,
         theme.checkbox,
-        lang.opt_vsync,
+        std::move(lang.opt_vsync),
         lang.check_mark
     );
 
@@ -104,7 +104,7 @@ Settings::Settings(
         font,
         tb_button_size,
         theme.save,
-        lang.save,
+        std::move(lang.save),
         font_size
     );
     save.bind(sf::Mouse::Button::Left, [this] { this->set_state(State::SaveAndClose); });
@@ -113,7 +113,7 @@ Settings::Settings(
         font,
         tb_button_size,
         theme.cancel,
-        lang.cancel,
+        std::move(lang.cancel),
         font_size
     );
     cancel.bind(sf::Mouse::Button::Left, [this] { this->set_state(State::Close); });

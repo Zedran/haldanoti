@@ -3,6 +3,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <utility>
 
 #include <SFML/Main.hpp>
 #include <SFML/System/Exception.hpp>

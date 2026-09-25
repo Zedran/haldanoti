@@ -2,6 +2,7 @@
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
 #include <cassert>
+#include <utility>
 
 #include "app/Board.hpp"
 #include "app/GameRow.hpp"
@@ -21,13 +22,13 @@ Board::Board(
 ) : ui::Box{size, theme.box, ui::Layout::Type::ColumnLayout},
     active_row_{},
     game_rows_(game::Game::NUM_ROWS) {
-    GameRow::set_lang(lang.game_row);
-    GameRow::set_theme(theme.game_row, force_fb_chars);
+    GameRow::set_lang(std::move(lang.game_row));
+    GameRow::set_theme(std::move(theme.game_row), force_fb_chars);
 
     secret_row_ = &add_component<SecretRow>(
         font,
         size.componentWiseMul(SecretRow::REL_SIZE),
-        lang.secret_row,
+        std::move(lang.secret_row),
         theme.secret_row
     );
 

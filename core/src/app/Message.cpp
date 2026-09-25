@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
+#include <utility>
+
 #include <SFML/System/Time.hpp>
 
 #include "app/Message.hpp"
@@ -13,7 +15,7 @@ Message::Message(
     lang::Message    lang,
     ui::Label::Style style
 ) : ui::Label{font, size, style, {}, static_cast<unsigned int>(size.y * FONT_REL_SIZE)},
-    lang_{lang} {
+    lang_{std::move(lang)} {
     clock_.reset();
 }
 

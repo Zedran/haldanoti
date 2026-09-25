@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
+#include <utility>
+
 #include "app/Toolbar.hpp"
 #include "ui/Button.hpp"
 
@@ -21,28 +23,28 @@ Toolbar::Toolbar(
         font,
         sf::Vector2f{size.y * BUTTON_RELSIZE.x, size.y * BUTTON_RELSIZE.y},
         theme.new_game,
-        lang.new_game,
+        std::move(lang.new_game),
         font_size
     )
-        .bind(sf::Mouse::Button::Left, new_game_func);
+        .bind(sf::Mouse::Button::Left, std::move(new_game_func));
 
     add_component<ui::Button>(
         font,
         sf::Vector2f{size.y * BUTTON_RELSIZE.x, size.y * BUTTON_RELSIZE.y},
         theme.settings,
-        lang.settings,
+        std::move(lang.settings),
         font_size
     )
-        .bind(sf::Mouse::Button::Left, settings_func);
+        .bind(sf::Mouse::Button::Left, std::move(settings_func));
 
     add_component<ui::Button>(
         font,
         sf::Vector2f{size.y * BUTTON_RELSIZE.x, size.y * BUTTON_RELSIZE.y},
         theme.exit,
-        lang.exit,
+        std::move(lang.exit),
         font_size
     )
-        .bind(sf::Mouse::Button::Left, exit_func);
+        .bind(sf::Mouse::Button::Left, std::move(exit_func));
 }
 
 Toolbar::~Toolbar() = default;

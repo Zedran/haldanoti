@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <string>
+#include <utility>
 
 #include "app/SecretRow.hpp"
 
@@ -15,7 +16,7 @@ SecretRow::SecretRow(
     theme::SecretRow theme
 ) : ui::Box{size, theme.box, ui::Layout::Type::RowLayout},
     game_state_{game::State::Running},
-    lang_{lang},
+    lang_{std::move(lang)},
     theme_{theme} {
     auto& code_box = add_component<ui::Box>(
         size.componentWiseMul(CODE_BOX_REL_SIZE),

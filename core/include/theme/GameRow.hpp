@@ -5,32 +5,19 @@
 
 #include "theme/CodeButton.hpp"
 #include "theme/FeedbackLabel.hpp"
-#include "theme/RowBoxStyle.hpp"
-#include "ui/Button.hpp"
+#include "theme/GameRowBase.hpp"
 
 namespace theme {
 
 struct GameRow {
-    // Outer box.
-    RowBoxStyle box;
-
-    // Box with code buttons.
-    RowBoxStyle code_box;
-
-    // Box holding feedback labels.
-    RowBoxStyle fb_box;
-
-    // Box containing the ok button or row number.
-    RowBoxStyle ok_box;
+    // A part of the GameRow's style used exclusively by GameRow.
+    GameRowBase base;
 
     // Passed to CodeButton to set its theme-related static members.
     CodeButton code_button;
 
     // Passed to FeedbackLabel to set its theme-related static members.
     FeedbackLabel fb_label;
-
-    // Style for the ok button.
-    ui::Button::Style ok_button;
 };
 
 } // namespace theme

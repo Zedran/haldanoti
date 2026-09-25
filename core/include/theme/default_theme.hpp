@@ -99,32 +99,34 @@ const Theme DEFAULT_THEME{
             .ol{a0},
         },
         .game_row{
-            .box{
-                .active{
-                    .bg{0xffffffff},
-                    .ol{a0},
+            .base{
+                .box{
+                    .active{
+                        .bg{0xffffffff},
+                        .ol{a0},
+                    },
+                    .inactive{
+                        .bg{a0},
+                        .ol{a0},
+                    },
                 },
-                .inactive{
-                    .bg{a0},
-                    .ol{a0},
+                .code_box{rbs_a0},
+                .fb_box{rbs_a0},
+                .ok_box{rbs_a0},
+                .ok_button{
+                    .disabled{.bg{0xfff8f2ff}, .fg{0x000000ff}, .ol{a0}},
+                    .normal{.bg{0x009b00ff}, .fg{0xffffffff}, .ol{ol}},
+                    .hover{.bg{0x00b400ff}, .fg{0xffffffff}, .ol{ol}},
+                    .active{.bg{0x00ce00ff}, .fg{0x000000ff}, .ol{ol}},
+
                 },
             },
-            .code_box{rbs_a0},
-            .fb_box{rbs_a0},
-            .ok_box{rbs_a0},
             .code_button{cb},
             .fb_label{
                 .show_text = false,
                 .none{dbs},
                 .red{.bg{0xc90e0eff}, .fg{0xffffffff}, .ol{ol}},
                 .white{.bg{0xffffffff}, .fg{0x000000ff}, .ol{ol}},
-            },
-            .ok_button{
-                .disabled{.bg{0xfff8f2ff}, .fg{0x000000ff}, .ol{a0}},
-                .normal{.bg{0x009b00ff}, .fg{0xffffffff}, .ol{ol}},
-                .hover{.bg{0x00b400ff}, .fg{0xffffffff}, .ol{ol}},
-                .active{.bg{0x00ce00ff}, .fg{0x000000ff}, .ol{ol}},
-
             },
         },
         .secret_row{

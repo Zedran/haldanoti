@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cstddef>
 #include <string>
+#include <utility>
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
@@ -20,9 +21,9 @@
 
 namespace app {
 
-lang::GameRow GameRow::lang_{};
+sf::String GameRow::ok_button_text_{};
 
-theme::GameRow GameRow::styles_{};
+theme::GameRowBase GameRow::styles_{};
 
 GameRow::GameRow(const sf::Font& font, sf::Vector2f size, int row_number)
     : ui::Box{size, styles_.box.inactive, ui::Layout::Type::RowLayout},
@@ -146,14 +147,14 @@ void GameRow::set_feedback(game::Feedback fb) {
 }
 
 void GameRow::set_lang(lang::GameRow lang) noexcept {
-    lang_ = lang;
-    FeedbackLabel::set_lang(lang_.fb_label);
+    ok_button_text_ = std::move(lang.ok);
+    FeedbackLabel::set_lang(std::move(lang.fb_label));
 }
 
 void GameRow::set_theme(theme::GameRow theme, bool force_fb_chars) noexcept {
-    styles_ = theme;
-    CodeButton::set_theme(styles_.code_button);
-    FeedbackLabel::set_theme(styles_.fb_label, force_fb_chars);
+    styles_ = theme.base;
+    CodeButton::set_theme(std::move(theme.code_button));
+    FeedbackLabel::set_theme(theme.fb_label, force_fb_chars);
 }
 
 void GameRow::unlock() {
@@ -162,7 +163,7 @@ void GameRow::unlock() {
     for (auto& b : code_buttons_) {
         b->enable();
     }
-    ok_button_->set_text(lang_.ok);
+    ok_button_->set_text(ok_button_text_);
     ok_button_->enable();
 
     update_box_styles();
