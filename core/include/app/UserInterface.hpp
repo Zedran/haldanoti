@@ -87,6 +87,9 @@ private:
     // Font used by the UI.
     sf::Font font_;
 
+    // Window background color.
+    sf::Color bg_;
+
     // Game display.
     Board board_;
 

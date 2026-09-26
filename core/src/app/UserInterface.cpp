@@ -16,6 +16,7 @@ UserInterface::UserInterface(
     theme::Theme   theme,
     sf::String     version
 ) : font_{utils::load_asset<sf::Font>("InterVariable.ttf")},
+    bg_{theme.bg},
     board_{
         font_,
         window_size.componentWiseMul(Board::REL_SIZE),
@@ -63,7 +64,7 @@ UserInterface::UserInterface(
 UserInterface::~UserInterface() = default;
 
 void UserInterface::draw(Window& window) {
-    window.draw_bg();
+    window.clear(bg_);
 
     window.draw(board_);
     window.draw(toolbar_);

@@ -23,8 +23,8 @@ App::App(
     theme::Theme   theme,
     sf::String     version
 ) : game_{conf.unique_elems},
-    ui_{window_size, conf, std::move(lang), theme, std::move(version)},
-    window_{window_size, theme.bg, conf.vsync} {
+    ui_{window_size, conf, std::move(lang), std::move(theme), std::move(version)},
+    window_{window_size, conf.vsync} {
     configure_hints(conf);
 
     [[maybe_unused]] const auto gc = game_.good_code();
