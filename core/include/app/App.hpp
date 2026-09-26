@@ -7,10 +7,7 @@
 #include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
 
-#include "app/Board.hpp"
-#include "app/Message.hpp"
-#include "app/Settings.hpp"
-#include "app/Toolbar.hpp"
+#include "app/UserInterface.hpp"
 #include "app/Window.hpp"
 #include "game/Game.hpp"
 #include "lang/Lang.hpp"
@@ -35,30 +32,11 @@ public:
     void run();
 
 private:
-    // Indicates which scene should be displayed.
-    enum class Scene {
-        Game,
-        Settings,
-    };
-
-    // Font used by the application.
-    sf::Font font_;
-
-    // Game display.
-    Board board_;
-
     // Logic engine.
     game::Game game_;
 
-    Message message_;
-
-    // Currently displayed scene.
-    Scene scene_;
-
-    // Settings page.
-    Settings settings_;
-
-    Toolbar toolbar_;
+    // Application's frontend.
+    UserInterface ui_;
 
     // Render target.
     Window window_;
@@ -67,7 +45,7 @@ private:
     // the application.
     void apply_config(const config::Config& c);
 
-    // Function for the exit button.
+    // Causes the game loop to end.
     void close();
 
     // Sets the hints on the Board according to the user's preference.
@@ -80,10 +58,6 @@ private:
     // is derived and config determines whether the player wants hints.
     void configure_hints(const config::Config& c);
 
-    // Calls the draw member function for every sf::Drawable
-    // and displays the resulting frame.
-    void draw();
-
     // Resets logic engine and game display.
     void new_game();
 
@@ -93,10 +67,6 @@ private:
     // Gathers the state from the elements of the Settings page
     // and writes them into the config file.
     void save_config();
-
-    // Sets the current scene, allowing the App to transition between the game
-    // and subpages.
-    void set_scene(Scene scene) noexcept;
 
     // Game logic tick.
     void tick();

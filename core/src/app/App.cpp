@@ -7,11 +7,10 @@
 #include "app/Board.hpp"
 #include "app/GameRow.hpp"
 #include "app/Settings.hpp"
-#include "app/Toolbar.hpp"
+#include "app/UserInterface.hpp"
 #include "config/Config.hpp"
 #include "game/Feedback.hpp"
 #include "game/State.hpp"
-#include "utils/assets.hpp"
 #include "utils/debug.hpp"
 #include "utils/utils.hpp"
 
@@ -23,51 +22,10 @@ App::App(
     lang::Lang     lang,
     theme::Theme   theme,
     sf::String     version
-) : font_{utils::load_asset<sf::Font>("InterVariable.ttf")},
-    board_{
-        font_,
-        window_size.componentWiseMul(Board::REL_SIZE),
-        std::move(lang.board),
-        std::move(theme.board),
-        conf.fb_chars
-    },
-    game_{conf.unique_elems},
-    message_{
-        font_,
-        window_size.componentWiseMul(Message::REL_SIZE),
-        std::move(lang.message),
-        theme.message
-    },
-    scene_{Scene::Game},
-    settings_{
-        font_,
-        window_size,
-        std::move(lang.settings),
-        theme.settings,
-        utils::get_lang_fnames(),
-        std::move(version)
-    },
-    toolbar_{
-        font_,
-        window_size.componentWiseMul(Toolbar::REL_SIZE),
-        std::move(lang.toolbar),
-        theme.toolbar,
-        [this] { this->new_game(); },
-        [this] { this->set_scene(Scene::Settings); },
-        [this] { this->close(); }
-    },
+) : game_{conf.unique_elems},
+    ui_{window_size, conf, std::move(lang), theme, std::move(version)},
     window_{window_size, theme.bg, conf.vsync} {
-    board_.set_position(sf::Vector2f{
-        (1 - Board::REL_SIZE.x) / 2 * window_size.x,
-        (1 - Board::REL_SIZE.y - Toolbar::REL_SIZE.y) / 2 * window_size.y,
-    });
     configure_hints(conf);
-
-    toolbar_.set_position(sf::Vector2f{0.0f, (1.0f - Toolbar::REL_SIZE.y) * window_size.y});
-    message_.set_position({0.0f, 0.8f * window_size.y});
-
-    settings_.set_position({0.0f, 0.0f});
-    settings_.set_config(conf);
 
     [[maybe_unused]] const auto gc = game_.good_code();
     dbg("secret code {} {} {} {}", gc[0], gc[1], gc[2], gc[3]);
@@ -87,32 +45,17 @@ void App::close() {
 
 void App::configure_hints(const config::Config& c) {
     if (c.hints) {
-        board_.set_hints(utils::count_distinct(game_.good_code()));
+        ui_.set_hints(utils::count_distinct(game_.good_code()));
     } else {
-        board_.set_hints(std::nullopt);
+        ui_.set_hints(std::nullopt);
     }
-}
-
-void App::draw() {
-    window_.draw_bg();
-
-    window_.draw(board_);
-    window_.draw(toolbar_);
-
-    if (scene_ == Scene::Settings) {
-        window_.draw(settings_);
-    }
-
-    window_.draw(message_);
-
-    window_.display();
 }
 
 void App::new_game() {
-    board_.reset();
+    ui_.reset();
     game_.reset();
 
-    configure_hints(settings_.get_ref_config());
+    configure_hints(ui_.get_settings().get_ref_config());
 
     [[maybe_unused]] const auto gc = game_.good_code();
     dbg("secret code {} {} {} {}", gc[0], gc[1], gc[2], gc[3]);
@@ -124,15 +67,7 @@ void App::poll_events() {
             close();
             break;
         }
-
-        switch (scene_) {
-        case Scene::Game:
-            board_.handle_event(*event);
-            toolbar_.handle_event(*event);
-            break;
-        case Scene::Settings:
-            settings_.handle_event(*event);
-        }
+        ui_.handle_event(*event);
     }
 }
 
@@ -142,7 +77,7 @@ void App::run() {
     while (window_.isOpen()) {
         poll_events();
         tick();
-        draw();
+        ui_.draw(window_);
     }
 
     dbg("---  MAIN LOOP ENDS  ---");
@@ -151,68 +86,64 @@ void App::run() {
 void App::save_config() {
     dbg("saving configuration");
 
-    const config::Config c = settings_.get_config();
+    Settings& settings = ui_.get_settings();
 
-    if (settings_.config_differs(c)) {
+    const config::Config c = settings.get_config();
+
+    if (settings.config_differs(c)) {
         dbg("config modified");
-        if (settings_.restart_required(c)) {
-            message_.show(Message::Content::RestartRequired);
+        if (settings.restart_required(c)) {
+            ui_.show_message(Message::Content::RestartRequired);
         }
         apply_config(c);
-        config::write_config(settings_.get_config());
-        settings_.set_ref_config(c);
-    }
-}
-
-void App::set_scene(Scene scene) noexcept {
-    dbg("setting scene {}", static_cast<int>(scene));
-
-    scene_ = scene;
-
-    if (scene == Scene::Settings) {
-        settings_.set_state(Settings::State::Running);
+        config::write_config(settings.get_config());
+        settings.set_ref_config(c);
     }
 }
 
 void App::tick() {
-    message_.tick();
+    ui_.update();
 
-    if (scene_ == Scene::Settings) {
-        switch (settings_.get_state()) {
-        case Settings::State::Running:
-            break;
-        case Settings::State::SaveAndClose:
-            save_config();
-            set_scene(Scene::Game);
-            break;
-        case Settings::State::Close:
-            set_scene(Scene::Game);
-            break;
-        }
-    }
+    using Signal = enum UserInterface::Signal;
 
-    if (game_.state() != game::State::Running || !board_.get_active_row().is_locked()) {
+    switch (ui_.emit_signal()) {
+    case Signal::None:
+        break;
+    case Signal::SaveConfig:
+        save_config();
+        return;
+    case Signal::NewGame:
+        new_game();
+        return;
+    case Signal::Exit:
+        close();
         return;
     }
 
-    game_.submit_code(board_.get_active_row().get_code());
+    Board& board = ui_.get_board();
+
+    if (game_.state() != game::State::Running || !board.get_active_row().is_locked()) {
+        return;
+    }
+
+    game_.submit_code(board.get_active_row().get_code());
 
     const game::Feedback fb = game_.active_row().feedback();
     dbg("feedback: red = {}, white = {}", fb.red_count, fb.white_count);
 
-    board_.get_active_row().set_feedback(fb);
+    board.get_active_row().set_feedback(fb);
 
     const game::State state = game_.state();
 
     if (state != game::State::Running || game_.last_row()) {
         dbg("GAME OVER");
-        board_.get_active_row().lock(true);
-        board_.end_game(game_.good_code(), state);
+        board.get_active_row().lock(true);
+        board.end_game(game_.good_code(), state);
         return;
     }
 
     game_.advance();
-    board_.next_row();
+    board.next_row();
 }
 
 } // namespace app
