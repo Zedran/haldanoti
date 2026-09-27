@@ -2,7 +2,6 @@
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
 #include <cstdlib>
-#include <iostream>
 #include <utility>
 
 #include <SFML/Main.hpp>
@@ -14,6 +13,7 @@
 #include "config/Config.hpp"
 #include "lang/Lang.hpp"
 #include "theme/default_theme.hpp"
+#include "utils/Logger.hpp"
 #include "utils/assets.hpp"
 #include "utils/debug.hpp"
 
@@ -35,13 +35,16 @@ int main() {
         };
         app.run();
     } catch (const nlohmann::json::exception& e) {
-        std::cerr << "JSON: " << e.what() << '\n';
+        utils::Logger::println(VERSION, "JSON", e);
         return EXIT_FAILURE;
     } catch (const sf::Exception& e) {
-        std::cerr << "SFML: " << e.what() << '\n';
+        utils::Logger::println(VERSION, "SFML", e);
         return EXIT_FAILURE;
     } catch (const std::exception& e) {
-        std::cerr << e.what() << '\n';
+        utils::Logger::println(VERSION, "Exception", e);
+        return EXIT_FAILURE;
+    } catch (...) {
+        utils::Logger::println(VERSION, "Unknown");
         return EXIT_FAILURE;
     }
 
