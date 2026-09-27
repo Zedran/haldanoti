@@ -49,15 +49,26 @@ UserInterface::UserInterface(
         [this] { this->set_scene(Scene::Settings); },
         [this] { this->set_signal(Signal::Exit); }
     } {
-    board_.set_position(sf::Vector2f{
+    board_.set_position({
         (1 - Board::REL_SIZE.x) / 2 * window_size.x,
         (1 - Board::REL_SIZE.y - Toolbar::REL_SIZE.y) / 2 * window_size.y,
     });
 
-    toolbar_.set_position(sf::Vector2f{0.0f, (1.0f - Toolbar::REL_SIZE.y) * window_size.y});
-    message_.set_position({0.0f, 0.8f * window_size.y});
+    toolbar_.set_position({
+        0.0f,
+        (1.0f - Toolbar::REL_SIZE.y) * window_size.y,
+    });
 
-    settings_.set_position({0.0f, 0.0f});
+    message_.set_position({
+        0.0f,
+        0.8f * window_size.y,
+    });
+
+    settings_.set_position({
+        0.0f,
+        0.0f,
+    });
+
     settings_.set_config(conf);
 }
 
