@@ -14,6 +14,9 @@ namespace app {
 // Applies a set of application-specific modifications to sf::RenderWindow.
 class Window : public sf::RenderWindow {
 public:
+    // Returns the default size of the game window.
+    static sf::Vector2f default_size() noexcept;
+
     Window(sf::Vector2f window_size, bool vsync);
 
     ~Window();
