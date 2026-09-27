@@ -41,6 +41,45 @@ std::filesystem::path find_app_data_dir() {
 #endif
 }
 
+std::filesystem::path find_cache_dir() {
+    char* home{};
+
+#if defined(__linux__)
+    bool xdg_var_set{true};
+
+    home = std::getenv("XDG_CACHE_HOME");
+    if (!home) {
+        home        = std::getenv("HOME");
+        xdg_var_set = false;
+    }
+#elif defined(_WIN32)
+    const auto finally = utils::finally([home] { if (home) { free(home); } });
+
+    std::size_t   size{};
+    const errno_t err = _dupenv_s(&home, &size, "LOCALAPPDATA");
+
+    if (err != 0 || size == 0) {
+        throw std::runtime_error{"LOCALAPPDATA env var not found (" + std::to_string(err) + ')'};
+    }
+#endif
+
+    if (!home) {
+        throw std::runtime_error{"could not resolve cache path"};
+    }
+
+    std::filesystem::path cache_dir{home};
+
+#if defined(__linux__)
+    if (!xdg_var_set) {
+        cache_dir /= ".cache";
+    }
+#endif
+
+    constexpr auto MM_DIR_NAME{"mm-game"};
+
+    return cache_dir / MM_DIR_NAME;
+}
+
 std::filesystem::path find_config_dir() {
     char* home{};
 
