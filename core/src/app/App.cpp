@@ -104,7 +104,7 @@ void App::save_config() {
 void App::tick() {
     ui_.update();
 
-    using Signal = enum UserInterface::Signal;
+    using Signal = UserInterface::Signal;
 
     switch (ui_.emit_signal()) {
     case Signal::None:
