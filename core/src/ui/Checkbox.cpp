@@ -11,14 +11,14 @@
 
 namespace ui {
 
+sf::String Checkbox::check_mark_{};
+
 Checkbox::Checkbox(
     const sf::Font& font,
     sf::Vector2f    size,
     Checkbox::Style style,
-    sf::String      label_text,
-    sf::String      check_mark
+    sf::String      label_text
 ) : Box{size, style.box, ui::Layout::Type::RowLayout},
-    check_mark_{std::move(check_mark)},
     state_{},
     style_(style) {
     constexpr ui::Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
@@ -79,6 +79,10 @@ void Checkbox::flip_state() {
     } else {
         enable();
     }
+}
+
+void Checkbox::set_check_mark(sf::String mark) noexcept {
+    check_mark_ = std::move(mark);
 }
 
 void Checkbox::set_state(bool s) {

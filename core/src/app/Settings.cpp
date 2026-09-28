@@ -21,6 +21,8 @@ Settings::Settings(
     std::vector<sf::String> lang_fnames,
     sf::String              version
 ) : ui::Box{size, theme.bg, ui::Layout::Type::ColumnLayout}, state_{} {
+    ui::Checkbox::set_check_mark(std::move(lang.check_mark));
+
     constexpr Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
 
     ui::Box& opt_box = add_component<ui::Box>(
@@ -50,32 +52,28 @@ Settings::Settings(
         font,
         opt_line_size,
         theme.checkbox,
-        std::move(lang.opt_fb_chars),
-        lang.check_mark
+        std::move(lang.opt_fb_chars)
     );
 
     cb_hints_ = &opt_box.add_component<ui::Checkbox>(
         font,
         opt_line_size,
         theme.checkbox,
-        std::move(lang.opt_hints),
-        lang.check_mark
+        std::move(lang.opt_hints)
     );
 
     cb_unique_elems_ = &opt_box.add_component<ui::Checkbox>(
         font,
         opt_line_size,
         theme.checkbox,
-        std::move(lang.opt_unique_elems),
-        lang.check_mark
+        std::move(lang.opt_unique_elems)
     );
 
     cb_vsync_ = &opt_box.add_component<ui::Checkbox>(
         font,
         opt_line_size,
         theme.checkbox,
-        std::move(lang.opt_vsync),
-        lang.check_mark
+        std::move(lang.opt_vsync)
     );
 
     constexpr sf::Vector2f toolbar_spacing{0.0f, 7.0f};
