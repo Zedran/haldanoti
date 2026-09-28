@@ -8,7 +8,6 @@
 #include <cstddef>
 #include <cstdlib>
 #include <windows.h>
-#include <winnls.h>
 #else
 #include <locale>
 #endif
