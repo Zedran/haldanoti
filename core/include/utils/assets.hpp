@@ -53,6 +53,9 @@ static const std::filesystem::path LANG_DIRNAME{"lang"};
 // 2-letter code of the default language.
 static constexpr std::string_view DEFAULT_LANG_CODE{"en"};
 
+// Returns user cache directory.
+std::filesystem::path find_cache_dir();
+
 // Returns a list of available language filenames without extensions.
 std::vector<sf::String> get_lang_fnames();
 

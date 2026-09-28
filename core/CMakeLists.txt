@@ -25,6 +25,7 @@ set(CORE_SOURCES
     src/ui/Label.cpp
     src/ui/Layout.cpp
     src/ui/Selector.cpp
+    src/utils/Logger.cpp
     src/utils/Source.cpp
     src/utils/assets.cpp
     src/utils/json.cpp
