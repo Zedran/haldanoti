@@ -28,41 +28,41 @@ std::filesystem::path find_app_data_dir() {
 }
 
 std::filesystem::path find_cache_dir() {
-    char* home{};
+    char* env_var{};
 
-    const auto finally = utils::finally([home] { if (home) { free(home); } });
+    const auto finally = utils::finally([env_var] { if (env_var) { free(env_var); } });
 
     std::size_t   size{};
-    const errno_t err = _dupenv_s(&home, &size, "LOCALAPPDATA");
+    const errno_t err = _dupenv_s(&env_var, &size, "LOCALAPPDATA");
 
     if (err != 0 || size == 0) {
         throw std::runtime_error{"LOCALAPPDATA env var not found (" + std::to_string(err) + ')'};
     }
 
-    if (!home) {
+    if (!env_var) {
         throw std::runtime_error{"could not resolve cache path"};
     }
 
-    return std::filesystem::path{home};
+    return std::filesystem::path{env_var};
 }
 
 std::filesystem::path find_config_dir() {
-    char* home{};
+    char* env_var{};
 
-    const auto finally = utils::finally([home] { if (home) { free(home); } });
+    const auto finally = utils::finally([env_var] { if (env_var) { free(env_var); } });
 
     std::size_t   size{};
-    const errno_t err = _dupenv_s(&home, &size, "APPDATA");
+    const errno_t err = _dupenv_s(&env_var, &size, "APPDATA");
 
     if (err != 0 || size == 0) {
         throw std::runtime_error{"APPDATA env var not found (" + std::to_string(err) + ')'};
     }
 
-    if (!home) {
+    if (!env_var) {
         throw std::runtime_error{"could not resolve config path"};
     }
 
-    return std::filesystem::path{home};
+    return std::filesystem::path{env_var};
 }
 
 std::optional<std::string> get_sys_lang_code() {

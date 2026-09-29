@@ -16,21 +16,21 @@ std::filesystem::path find_app_data_dir() {
 }
 
 std::filesystem::path find_cache_dir() {
-    char* home{};
+    char* env_var{};
 
     bool xdg_var_set{true};
 
-    home = std::getenv("XDG_CACHE_HOME");
-    if (!home) {
-        home        = std::getenv("HOME");
+    env_var = std::getenv("XDG_CACHE_HOME");
+    if (!env_var) {
+        env_var     = std::getenv("HOME");
         xdg_var_set = false;
     }
 
-    if (!home) {
+    if (!env_var) {
         throw std::runtime_error{"could not resolve cache path"};
     }
 
-    std::filesystem::path cache_dir{home};
+    std::filesystem::path cache_dir{env_var};
 
     if (!xdg_var_set) {
         cache_dir /= ".cache";
@@ -40,21 +40,21 @@ std::filesystem::path find_cache_dir() {
 }
 
 std::filesystem::path find_config_dir() {
-    char* home{};
+    char* env_var{};
 
     bool xdg_var_set{true};
 
-    home = std::getenv("XDG_CONFIG_HOME");
-    if (!home) {
-        home        = std::getenv("HOME");
+    env_var = std::getenv("XDG_CONFIG_HOME");
+    if (!env_var) {
+        env_var     = std::getenv("HOME");
         xdg_var_set = false;
     }
 
-    if (!home) {
+    if (!env_var) {
         throw std::runtime_error{"could not resolve config path"};
     }
 
-    std::filesystem::path config_dir{home};
+    std::filesystem::path config_dir{env_var};
 
     if (!xdg_var_set) {
         config_dir /= ".config";
