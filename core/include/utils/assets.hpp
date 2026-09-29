@@ -5,6 +5,7 @@
 
 #include <filesystem>
 #include <fstream>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -60,8 +61,8 @@ std::filesystem::path find_cache_dir();
 std::vector<sf::String> get_lang_fnames();
 
 // Returns a 2-letter language code retrieved from system's default locale name.
-// Returns DEFAULT_LANG_CODE if querying locale fails.
-std::string get_sys_lang_code();
+// Returns nullopt if querying locale fails.
+std::optional<std::string> get_sys_lang_code();
 
 // Returns a list of file paths in dir.
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);

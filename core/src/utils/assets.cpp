@@ -146,7 +146,7 @@ std::vector<sf::String> get_lang_fnames() {
     return fnames;
 }
 
-std::string get_sys_lang_code() {
+std::optional<std::string> get_sys_lang_code() {
 #if defined(_WIN32)
     // Reference: https://learn.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-getuserdefaultlocalename
 
@@ -155,8 +155,8 @@ std::string get_sys_lang_code() {
     // Assuming output structured as follows: "pl-PL ".
 
     if (n < 2) {
-        dbg("locale lookup failed, fallback to '{}'", DEFAULT_LANG_CODE);
-        return std::string{DEFAULT_LANG_CODE};
+        dbg("locale lookup failed");
+        return std::nullopt;
     }
 
     const auto is_ascii = [](wchar_t c) {
@@ -164,8 +164,8 @@ std::string get_sys_lang_code() {
     };
 
     if (!is_ascii(buffer[0]) || !is_ascii(buffer[1])) {
-        dbg("buffer elements are non-ASCII characters, fallback to '{}'", DEFAULT_LANG_CODE);
-        return std::string{DEFAULT_LANG_CODE};
+        dbg("buffer elements are non-ASCII characters");
+        return std::nullopt;
     }
 
     return std::string(buffer, buffer + 2);
@@ -173,8 +173,8 @@ std::string get_sys_lang_code() {
     const std::string lang = std::locale{""}.name();
 
     if (lang.size() < 2) {
-        dbg("locale lookup failed (got '{}'), fallback to '{}'", lang, DEFAULT_LANG_CODE);
-        return std::string{DEFAULT_LANG_CODE};
+        dbg("locale lookup failed (got '{}')", lang);
+        return std::nullopt;
     }
 
     return lang.substr(0, 2);
@@ -195,7 +195,7 @@ std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) 
 
 lang::Lang load_language(std::string lang_fname) {
     if (lang_fname.empty()) {
-        lang_fname = get_sys_lang_code();
+        lang_fname = get_sys_lang_code().value_or(std::string{DEFAULT_LANG_CODE});
     }
 
     if (lang_fname == DEFAULT_LANG_CODE) {

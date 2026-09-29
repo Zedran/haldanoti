@@ -19,7 +19,7 @@ namespace config {
 static std::string get_default_lang_code() {
     const std::vector<sf::String> langs = utils::get_lang_fnames();
 
-    std::string sys_lang = utils::get_sys_lang_code();
+    std::string sys_lang = utils::get_sys_lang_code().value_or(std::string{utils::DEFAULT_LANG_CODE});
 
     if (std::find(langs.begin(), langs.end(), sf::String{sys_lang}) != langs.end()) {
         return sys_lang;
