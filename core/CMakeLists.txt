@@ -17,8 +17,6 @@ set(CORE_SOURCES
     src/game/Game.cpp
     src/game/Row.cpp
     src/game/helpers.cpp
-    src/os/os_linux.cpp
-    src/os/os_windows.cpp
     src/ui/Binding.cpp
     src/ui/Blank.cpp
     src/ui/Box.cpp
@@ -33,6 +31,16 @@ set(CORE_SOURCES
     src/utils/json.cpp
     src/utils/utils.cpp
 )
+
+if(LINUX)
+    list(APPEND CORE_SOURCES
+        src/os/os_linux.cpp
+    )
+elseif(WIN32)
+    list(APPEND CORE_SOURCES
+        src/os/os_windows.cpp
+    )
+endif()
 
 add_library(core STATIC ${CORE_SOURCES})
 target_include_directories(core PUBLIC include)
