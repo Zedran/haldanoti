@@ -43,9 +43,7 @@ std::filesystem::path find_cache_dir() {
         throw std::runtime_error{"could not resolve cache path"};
     }
 
-    std::filesystem::path cache_dir{home};
-
-    return cache_dir;
+    return std::filesystem::path{home};
 }
 
 std::filesystem::path find_config_dir() {
@@ -64,9 +62,7 @@ std::filesystem::path find_config_dir() {
         throw std::runtime_error{"could not resolve config path"};
     }
 
-    std::filesystem::path config_dir{home};
-
-    return config_dir;
+    return std::filesystem::path{home};
 }
 
 std::optional<std::string> get_sys_lang_code() {
