@@ -17,6 +17,8 @@ set(CORE_SOURCES
     src/game/Game.cpp
     src/game/Row.cpp
     src/game/helpers.cpp
+    src/os/os_linux.cpp
+    src/os/os_windows.cpp
     src/ui/Binding.cpp
     src/ui/Blank.cpp
     src/ui/Box.cpp

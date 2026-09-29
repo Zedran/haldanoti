@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <filesystem>
 #if defined(_WIN32)
-#include <climits>
 #include <cstddef>
 #include <cstdlib>
 #include <windows.h>
@@ -22,23 +21,6 @@
 #endif
 
 namespace utils {
-
-std::filesystem::path find_app_data_dir() {
-#if defined(_WIN32)
-    // Reference: https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulefilenamew
-
-    wchar_t buffer[MAX_PATH];
-
-    const DWORD n = GetModuleFileNameW(nullptr, buffer, MAX_PATH);
-    if (n == 0) {
-        throw std::runtime_error{"unable to determine executable path"};
-    }
-
-    return std::filesystem::path{buffer}.parent_path().parent_path();
-#else
-    return std::filesystem::path{DEF_APP_DATA_DIR_SYS};
-#endif
-}
 
 std::filesystem::path find_cache_dir() {
     char* home{};
