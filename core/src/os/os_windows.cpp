@@ -10,6 +10,7 @@
 
 #include "os/os.hpp"
 #include "utils/FinalAction.hpp"
+#include "utils/debug.hpp"
 
 namespace os {
 
@@ -66,6 +67,30 @@ std::filesystem::path find_config_dir() {
     std::filesystem::path config_dir{home};
 
     return config_dir;
+}
+
+std::optional<std::string> get_sys_lang_code() {
+    // Reference: https://learn.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-getuserdefaultlocalename
+
+    wchar_t   buffer[LOCALE_NAME_MAX_LENGTH];
+    const int n = GetUserDefaultLocaleName(buffer, std::size(buffer));
+    // Assuming output structured as follows: "pl-PL ".
+
+    if (n < 2) {
+        dbg("locale lookup failed");
+        return std::nullopt;
+    }
+
+    const auto is_ascii = [](wchar_t c) {
+        return c >= CHAR_MIN && c <= CHAR_MAX;
+    };
+
+    if (!is_ascii(buffer[0]) || !is_ascii(buffer[1])) {
+        dbg("buffer elements are non-ASCII characters");
+        return std::nullopt;
+    }
+
+    return std::string(buffer, buffer + 2);
 }
 
 } // namespace os

@@ -2,17 +2,11 @@
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
 #include <filesystem>
-#if defined(_WIN32)
-#include <windows.h>
-#else
-#include <locale>
-#endif
 
 #include <nlohmann/json.hpp>
 
 #include "lang/default_lang.hpp"
 #include "utils/assets.hpp"
-#include "utils/debug.hpp"
 
 namespace utils {
 
@@ -44,41 +38,6 @@ std::vector<sf::String> get_lang_fnames() {
     return fnames;
 }
 
-std::optional<std::string> get_sys_lang_code() {
-#if defined(_WIN32)
-    // Reference: https://learn.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-getuserdefaultlocalename
-
-    wchar_t   buffer[LOCALE_NAME_MAX_LENGTH];
-    const int n = GetUserDefaultLocaleName(buffer, std::size(buffer));
-    // Assuming output structured as follows: "pl-PL ".
-
-    if (n < 2) {
-        dbg("locale lookup failed");
-        return std::nullopt;
-    }
-
-    const auto is_ascii = [](wchar_t c) {
-        return c >= CHAR_MIN && c <= CHAR_MAX;
-    };
-
-    if (!is_ascii(buffer[0]) || !is_ascii(buffer[1])) {
-        dbg("buffer elements are non-ASCII characters");
-        return std::nullopt;
-    }
-
-    return std::string(buffer, buffer + 2);
-#else
-    const std::string lang = std::locale{""}.name();
-
-    if (lang.size() < 2) {
-        dbg("locale lookup failed (got '{}')", lang);
-        return std::nullopt;
-    }
-
-    return lang.substr(0, 2);
-#endif
-}
-
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) {
     std::vector<std::filesystem::path> files;
 
@@ -93,7 +52,7 @@ std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) 
 
 lang::Lang load_language(std::string lang_fname) {
     if (lang_fname.empty()) {
-        lang_fname = get_sys_lang_code().value_or(std::string{DEFAULT_LANG_CODE});
+        lang_fname = os::get_sys_lang_code().value_or(std::string{DEFAULT_LANG_CODE});
     }
 
     if (lang_fname == DEFAULT_LANG_CODE) {

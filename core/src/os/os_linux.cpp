@@ -7,6 +7,7 @@
 #include <stdexcept>
 
 #include "os/os.hpp"
+#include "utils/debug.hpp"
 
 namespace os {
 
@@ -60,6 +61,17 @@ std::filesystem::path find_config_dir() {
     }
 
     return config_dir;
+}
+
+std::optional<std::string> get_sys_lang_code() {
+    const std::string lang = std::locale{""}.name();
+
+    if (lang.size() < 2) {
+        dbg("locale lookup failed (got '{}')", lang);
+        return std::nullopt;
+    }
+
+    return lang.substr(0, 2);
 }
 
 } // namespace os

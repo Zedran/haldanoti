@@ -5,7 +5,6 @@
 
 #include <filesystem>
 #include <fstream>
-#include <optional>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -47,10 +46,6 @@ static constexpr std::string_view DEFAULT_LANG_CODE{"en"};
 
 // Returns a list of available language filenames without extensions.
 std::vector<sf::String> get_lang_fnames();
-
-// Returns a 2-letter language code retrieved from system's default locale name.
-// Returns nullopt if querying locale fails.
-std::optional<std::string> get_sys_lang_code();
 
 // Returns a list of file paths in dir.
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);

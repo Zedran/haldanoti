@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "config/Config.hpp"
+#include "os/os.hpp"
 #include "utils/assets.hpp"
 
 namespace config {
@@ -19,7 +20,7 @@ namespace config {
 static std::string get_default_lang_code() {
     const std::vector<sf::String> langs = utils::get_lang_fnames();
 
-    std::string sys_lang = utils::get_sys_lang_code().value_or(std::string{utils::DEFAULT_LANG_CODE});
+    std::string sys_lang = os::get_sys_lang_code().value_or(std::string{utils::DEFAULT_LANG_CODE});
 
     if (std::find(langs.begin(), langs.end(), sf::String{sys_lang}) != langs.end()) {
         return sys_lang;
