@@ -74,9 +74,7 @@ std::filesystem::path find_cache_dir() {
     }
 #endif
 
-    constexpr auto MM_DIR_NAME{"mm-game"};
-
-    return cache_dir / MM_DIR_NAME;
+    return cache_dir;
 }
 
 std::filesystem::path find_config_dir() {
@@ -113,9 +111,7 @@ std::filesystem::path find_config_dir() {
     }
 #endif
 
-    constexpr auto MM_DIR_NAME{"mm-game"};
-
-    return config_dir / MM_DIR_NAME;
+    return config_dir;
 }
 
 std::vector<sf::String> get_lang_fnames() {

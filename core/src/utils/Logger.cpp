@@ -12,7 +12,7 @@
 namespace utils {
 
 Logger::Logger() {
-    const std::filesystem::path cache_dir = utils::find_cache_dir();
+    const std::filesystem::path cache_dir = utils::find_cache_dir() / utils::APP_DIRNAME;
 
     if (!std::filesystem::exists(cache_dir)) {
         std::filesystem::create_directories(cache_dir);

@@ -33,8 +33,11 @@ std::filesystem::path find_config_dir();
 // must be determined in relation to the executable file path.
 std::filesystem::path find_app_data_dir();
 
+// Application directory name. Created in user's cache and config directories.
+static constexpr std::string_view APP_DIRNAME{"mm-game"};
+
 // Location of the user config directory.
-static const std::filesystem::path CONFIG_DIR = utils::find_config_dir();
+static const std::filesystem::path CONFIG_DIR = utils::find_config_dir() / APP_DIRNAME;
 
 // Name of the config file.
 static const std::filesystem::path CONFIG_FNAME{"mm.json"};
