@@ -21,14 +21,11 @@
 
 namespace utils {
 
-// Returns user config directory.
-std::filesystem::path find_config_dir();
-
 // Application directory name. Created in user's cache and config directories.
 static constexpr std::string_view APP_DIRNAME{"mm-game"};
 
 // Location of the user config directory.
-static const std::filesystem::path CONFIG_DIR = utils::find_config_dir() / APP_DIRNAME;
+static const std::filesystem::path CONFIG_DIR = os::find_config_dir() / APP_DIRNAME;
 
 // Name of the config file.
 static const std::filesystem::path CONFIG_FNAME{"mm.json"};

@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
-#include <cstdlib>
 #include <filesystem>
 #if defined(_WIN32)
-#include <cstddef>
-#include <cstdlib>
 #include <windows.h>
 #else
 #include <locale>
@@ -16,48 +13,8 @@
 #include "lang/default_lang.hpp"
 #include "utils/assets.hpp"
 #include "utils/debug.hpp"
-#if defined(_WIN32)
-#include "utils/FinalAction.hpp"
-#endif
 
 namespace utils {
-
-std::filesystem::path find_config_dir() {
-    char* home{};
-
-#if defined(__linux__)
-    bool xdg_var_set{true};
-
-    home = std::getenv("XDG_CONFIG_HOME");
-    if (!home) {
-        home        = std::getenv("HOME");
-        xdg_var_set = false;
-    }
-#elif defined(_WIN32)
-    const auto finally = utils::finally([home] { if (home) { free(home); } });
-
-    std::size_t   size{};
-    const errno_t err = _dupenv_s(&home, &size, "APPDATA");
-
-    if (err != 0 || size == 0) {
-        throw std::runtime_error{"APPDATA env var not found (" + std::to_string(err) + ')'};
-    }
-#endif
-
-    if (!home) {
-        throw std::runtime_error{"could not resolve config path"};
-    }
-
-    std::filesystem::path config_dir{home};
-
-#if defined(__linux__)
-    if (!xdg_var_set) {
-        config_dir /= ".config";
-    }
-#endif
-
-    return config_dir;
-}
 
 std::vector<sf::String> get_lang_fnames() {
     std::vector<sf::String> fnames;

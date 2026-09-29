@@ -20,4 +20,7 @@ std::filesystem::path find_app_data_dir();
 // Returns user cache directory.
 std::filesystem::path find_cache_dir();
 
+// Returns user config directory.
+std::filesystem::path find_config_dir();
+
 } // namespace os

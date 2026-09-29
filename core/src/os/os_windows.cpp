@@ -47,6 +47,27 @@ std::filesystem::path find_cache_dir() {
     return cache_dir;
 }
 
+std::filesystem::path find_config_dir() {
+    char* home{};
+
+    const auto finally = utils::finally([home] { if (home) { free(home); } });
+
+    std::size_t   size{};
+    const errno_t err = _dupenv_s(&home, &size, "APPDATA");
+
+    if (err != 0 || size == 0) {
+        throw std::runtime_error{"APPDATA env var not found (" + std::to_string(err) + ')'};
+    }
+
+    if (!home) {
+        throw std::runtime_error{"could not resolve config path"};
+    }
+
+    std::filesystem::path config_dir{home};
+
+    return config_dir;
+}
+
 } // namespace os
 
 #endif

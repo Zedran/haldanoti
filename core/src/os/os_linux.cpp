@@ -38,6 +38,30 @@ std::filesystem::path find_cache_dir() {
     return cache_dir;
 }
 
+std::filesystem::path find_config_dir() {
+    char* home{};
+
+    bool xdg_var_set{true};
+
+    home = std::getenv("XDG_CONFIG_HOME");
+    if (!home) {
+        home        = std::getenv("HOME");
+        xdg_var_set = false;
+    }
+
+    if (!home) {
+        throw std::runtime_error{"could not resolve config path"};
+    }
+
+    std::filesystem::path config_dir{home};
+
+    if (!xdg_var_set) {
+        config_dir /= ".config";
+    }
+
+    return config_dir;
+}
+
 } // namespace os
 
 #endif
