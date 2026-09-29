@@ -17,4 +17,7 @@ namespace os {
 // must be determined in relation to the executable file path.
 std::filesystem::path find_app_data_dir();
 
+// Returns user cache directory.
+std::filesystem::path find_cache_dir();
+
 } // namespace os

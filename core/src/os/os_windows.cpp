@@ -3,10 +3,13 @@
 
 #if defined(_WIN32)
 
+#include <cstddef>
+#include <cstdlib>
 #include <stdexcept>
 #include <windows.h>
 
 #include "os/os.hpp"
+#include "utils/FinalAction.hpp"
 
 namespace os {
 
@@ -21,6 +24,27 @@ std::filesystem::path find_app_data_dir() {
     }
 
     return std::filesystem::path{buffer}.parent_path().parent_path();
+}
+
+std::filesystem::path find_cache_dir() {
+    char* home{};
+
+    const auto finally = utils::finally([home] { if (home) { free(home); } });
+
+    std::size_t   size{};
+    const errno_t err = _dupenv_s(&home, &size, "LOCALAPPDATA");
+
+    if (err != 0 || size == 0) {
+        throw std::runtime_error{"LOCALAPPDATA env var not found (" + std::to_string(err) + ')'};
+    }
+
+    if (!home) {
+        throw std::runtime_error{"could not resolve cache path"};
+    }
+
+    std::filesystem::path cache_dir{home};
+
+    return cache_dir;
 }
 
 } // namespace os
