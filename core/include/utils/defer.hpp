@@ -14,7 +14,7 @@ struct FinalAction {
 };
 
 template <class F>
-[[nodiscard]] auto finally(F f) {
+[[nodiscard]] auto defer(F f) {
     return FinalAction{f};
 }
 

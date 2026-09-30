@@ -3,7 +3,7 @@
 
 #include "ui/Button.hpp"
 #include "ui/Binding.hpp"
-#include "utils/FinalAction.hpp"
+#include "utils/defer.hpp"
 #include "utils/utils.hpp"
 
 namespace ui {
@@ -41,7 +41,7 @@ void Button::handle_event(const sf::Event& event) {
         return;
     }
 
-    const auto update = utils::finally([this] { this->update(); });
+    const auto update = utils::defer([this] { this->update(); });
 
     if (const auto* e = event.getIf<sf::Event::MouseMoved>()) {
         handle_mouse_move(*e);

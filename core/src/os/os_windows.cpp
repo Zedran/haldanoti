@@ -9,8 +9,8 @@
 #include <windows.h>
 
 #include "os/os.hpp"
-#include "utils/FinalAction.hpp"
 #include "utils/debug.hpp"
+#include "utils/defer.hpp"
 
 namespace os {
 
@@ -34,7 +34,7 @@ std::filesystem::path find_app_data_dir() {
 std::filesystem::path find_cache_dir() {
     char* env_var{};
 
-    const auto finally = utils::finally([env_var] { if (env_var) { free(env_var); } });
+    const auto cleanup = utils::defer([env_var] { if (env_var) { free(env_var); } });
 
     std::size_t   size{};
     const errno_t err = _dupenv_s(&env_var, &size, "LOCALAPPDATA");
@@ -56,7 +56,7 @@ std::filesystem::path find_cache_dir() {
 std::filesystem::path find_config_dir() {
     char* env_var{};
 
-    const auto finally = utils::finally([env_var] { if (env_var) { free(env_var); } });
+    const auto cleanup = utils::defer([env_var] { if (env_var) { free(env_var); } });
 
     std::size_t   size{};
     const errno_t err = _dupenv_s(&env_var, &size, "APPDATA");
