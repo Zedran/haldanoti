@@ -21,28 +21,28 @@
 namespace utils {
 
 // Application directory name. Created in user's cache and config directories.
-static constexpr std::string_view APP_DIRNAME{"mm-game"};
+inline constexpr std::string_view APP_DIRNAME{"mm-game"};
 
 // Location of the user config directory.
-static const std::filesystem::path CONFIG_DIR = os::find_config_dir() / APP_DIRNAME;
+inline const std::filesystem::path CONFIG_DIR = os::find_config_dir() / APP_DIRNAME;
 
 // Name of the config file.
-static const std::filesystem::path CONFIG_FNAME{"mm.json"};
+inline const std::filesystem::path CONFIG_FNAME{"mm.json"};
 
 // Full path to config file.
-static const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;
+inline const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;
 
 // System application data path.
-static const std::filesystem::path APP_DATA_SYS_PATH{os::find_app_data_dir()};
+inline const std::filesystem::path APP_DATA_SYS_PATH{os::find_app_data_dir()};
 
 // Name of the assets directory located in the APP_DATA_DIR.
-static const std::filesystem::path ASSETS_DIRNAME{"assets"};
+inline const std::filesystem::path ASSETS_DIRNAME{"assets"};
 
 // Language files subdirectory. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
-static const std::filesystem::path LANG_DIRNAME{"lang"};
+inline const std::filesystem::path LANG_DIRNAME{"lang"};
 
 // 2-letter code of the default language.
-static constexpr std::string_view DEFAULT_LANG_CODE{"en"};
+inline constexpr std::string_view DEFAULT_LANG_CODE{"en"};
 
 // Returns a list of available language filenames without extensions.
 std::vector<sf::String> get_lang_fnames();
