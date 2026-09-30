@@ -32,6 +32,16 @@ set(CORE_SOURCES
     src/utils/utils.cpp
 )
 
+if(LINUX)
+    list(APPEND CORE_SOURCES
+        src/os/os_linux.cpp
+    )
+elseif(WIN32)
+    list(APPEND CORE_SOURCES
+        src/os/os_windows.cpp
+    )
+endif()
+
 add_library(core STATIC ${CORE_SOURCES})
 target_include_directories(core PUBLIC include)
 target_link_libraries(core PUBLIC

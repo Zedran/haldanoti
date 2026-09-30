@@ -16,24 +16,15 @@
 #include <SFML/System/String.hpp>
 
 #include "lang/Lang.hpp"
+#include "os/os.hpp"
 
 namespace utils {
 
-// Returns user config directory.
-std::filesystem::path find_config_dir();
-
-// Returns the installed application data path. This function exists to resolve
-// differences in installation layout between platforms. The application relies
-// on CMAKE_INSTALL_PREFIX to determine the installed path - it is written as
-// DEF_APP_DATA_DIR_SYS compile definition. This works well in all cases except
-// for NSIS, because NSIS installer allows the user to choose installation path.
-// A custom installation directory does not match the path hard-coded by compile
-// definitions. For this reason, on Windows, the application data directory
-// must be determined in relation to the executable file path.
-std::filesystem::path find_app_data_dir();
+// Application directory name. Created in user's cache and config directories.
+static constexpr std::string_view APP_DIRNAME{"mm-game"};
 
 // Location of the user config directory.
-static const std::filesystem::path CONFIG_DIR = utils::find_config_dir();
+static const std::filesystem::path CONFIG_DIR = os::find_config_dir() / APP_DIRNAME;
 
 // Name of the config file.
 static const std::filesystem::path CONFIG_FNAME{"mm.json"};
@@ -42,7 +33,7 @@ static const std::filesystem::path CONFIG_FNAME{"mm.json"};
 static const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;
 
 // System application data path.
-static const std::filesystem::path APP_DATA_SYS_PATH{find_app_data_dir()};
+static const std::filesystem::path APP_DATA_SYS_PATH{os::find_app_data_dir()};
 
 // Name of the assets directory located in the APP_DATA_DIR.
 static const std::filesystem::path ASSETS_DIRNAME{"assets"};
@@ -53,15 +44,8 @@ static const std::filesystem::path LANG_DIRNAME{"lang"};
 // 2-letter code of the default language.
 static constexpr std::string_view DEFAULT_LANG_CODE{"en"};
 
-// Returns user cache directory.
-std::filesystem::path find_cache_dir();
-
 // Returns a list of available language filenames without extensions.
 std::vector<sf::String> get_lang_fnames();
-
-// Returns a 2-letter language code retrieved from system's default locale name.
-// Returns DEFAULT_LANG_CODE if querying locale fails.
-std::string get_sys_lang_code();
 
 // Returns a list of file paths in dir.
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);
