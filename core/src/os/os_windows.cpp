@@ -24,7 +24,11 @@ std::filesystem::path find_app_data_dir() {
         throw std::runtime_error{"unable to determine executable path"};
     }
 
-    return std::filesystem::path{buffer}.parent_path().parent_path();
+    std::filesystem::path path{buffer};
+    path = path.parent_path().parent_path();
+
+    dbg("{}", path.string());
+    return path;
 }
 
 std::filesystem::path find_cache_dir() {
@@ -43,7 +47,10 @@ std::filesystem::path find_cache_dir() {
         throw std::runtime_error{"could not resolve cache path"};
     }
 
-    return std::filesystem::path{env_var};
+    std::filesystem::path cache_dir{env_var};
+
+    dbg("{}", cache_dir.string());
+    return cache_dir;
 }
 
 std::filesystem::path find_config_dir() {
@@ -62,7 +69,10 @@ std::filesystem::path find_config_dir() {
         throw std::runtime_error{"could not resolve config path"};
     }
 
-    return std::filesystem::path{env_var};
+    std::filesystem::path config_dir{env_var};
+
+    dbg("{}", config_dir.string());
+    return config_dir;
 }
 
 std::optional<std::string> get_sys_lang_code() {
@@ -86,7 +96,10 @@ std::optional<std::string> get_sys_lang_code() {
         return std::nullopt;
     }
 
-    return std::string(buffer, buffer + 2);
+    std::string code = std::string(buffer, buffer + 2);
+
+    dbg("{}", code);
+    return code;
 }
 
 } // namespace os

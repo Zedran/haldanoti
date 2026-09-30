@@ -12,7 +12,9 @@
 namespace os {
 
 std::filesystem::path find_app_data_dir() {
-    return std::filesystem::path{DEF_APP_DATA_DIR_SYS};
+    std::filesystem::path path{DEF_APP_DATA_DIR_SYS};
+    dbg("{}", path.string());
+    return path;
 }
 
 std::filesystem::path find_cache_dir() {
@@ -36,6 +38,7 @@ std::filesystem::path find_cache_dir() {
         cache_dir /= ".cache";
     }
 
+    dbg("{}", cache_dir.string());
     return cache_dir;
 }
 
@@ -60,6 +63,7 @@ std::filesystem::path find_config_dir() {
         config_dir /= ".config";
     }
 
+    dbg("{}", config_dir.string());
     return config_dir;
 }
 
@@ -71,7 +75,10 @@ std::optional<std::string> get_sys_lang_code() {
         return std::nullopt;
     }
 
-    return lang.substr(0, 2);
+    std::string code = lang.substr(0, 2);
+
+    dbg("{}", code);
+    return code;
 }
 
 } // namespace os
