@@ -3,19 +3,26 @@
 
 #pragma once
 
+#include <utility>
+
 namespace utils {
 
 template <class F>
-struct FinalAction {
-    F act;
+class DeferredAction {
+public:
+    explicit DeferredAction(F func) noexcept : func_{std::move(func)} {}
 
-    explicit FinalAction(F f) : act(f) {}
-    ~FinalAction() { act(); };
+    ~DeferredAction() {
+        func_();
+    };
+
+private:
+    F func_;
 };
 
 template <class F>
-[[nodiscard]] auto defer(F f) {
-    return FinalAction{f};
+[[nodiscard]] auto defer(F&& func) noexcept {
+    return DeferredAction{std::move(func)};
 }
 
 } // namespace utils
