@@ -4,6 +4,7 @@
 #if defined(__linux__)
 
 #include <cstdlib>
+#include <locale>
 #include <stdexcept>
 
 #include "os/os.hpp"
