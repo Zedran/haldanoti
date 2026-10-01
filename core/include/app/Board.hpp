@@ -28,7 +28,8 @@ public:
         const sf::Font& font,
         sf::Vector2f    size,
         lang::Board     lang,
-        theme::Board    theme
+        theme::Board    theme,
+        bool            fb_chars
     );
 
     ~Board();

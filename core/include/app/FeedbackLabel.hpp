@@ -40,6 +40,9 @@ public:
     // Size relative to the height of the FeedbackLabel's container.
     static constexpr sf::Vector2f REL_SIZE{0.25f, 0.25f};
 
+    // Enable the display of text in all instances of FeedbackLabel.
+    static void enable_text(bool enable);
+
     // Sets the static member lang_.
     static void set_lang(lang::FeedbackLabel lang);
 
@@ -66,6 +69,9 @@ private:
     // Contains text value set to the FeedbackLabel, depending on its state
     // and styles_.show_text.
     static lang::FeedbackLabel lang_;
+
+    // If true, instances of FeedbackLabel will display text.
+    static bool show_text_;
 
     // Stores the styles associated with different Pin values.
     static theme::FeedbackLabel styles_;
