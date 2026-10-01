@@ -10,7 +10,7 @@
 namespace config {
 
 struct Config {
-    // Always display feedback characters, regardless of the theme's settings.
+    // Display feedback characters.
     bool fb_chars;
 
     // Display hints regarding secret code elements.
