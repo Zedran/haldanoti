@@ -36,10 +36,12 @@ Board::Board(
         theme.secret_row
     );
 
+    const sf::Vector2f gr_size = size.componentWiseMul(GameRow::REL_SIZE);
+
     for (std::size_t i = game::Game::NUM_ROWS; i > 0; i--) {
         GameRow* ptr = &add_component<GameRow>(
             font,
-            size.componentWiseMul(GameRow::REL_SIZE),
+            gr_size,
             i
         );
         game_rows_[i - 1] = ptr;
