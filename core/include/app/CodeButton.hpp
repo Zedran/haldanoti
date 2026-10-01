@@ -88,6 +88,9 @@ private:
     // Increases the code element's value by 1. The value loops around
     // to the minimum once the maximum value is incremented.
     void increment();
+
+    // Updates CodeButton's text after a new code_element_ value has been set.
+    void update_text();
 };
 
 } // namespace app

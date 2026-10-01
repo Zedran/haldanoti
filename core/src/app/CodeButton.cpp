@@ -73,7 +73,7 @@ bool CodeButton::is_set() const noexcept {
 
 void CodeButton::reset() {
     code_element_ = game::Row::CODE_VALUE_NONE;
-    set_text(std::to_string(code_element_));
+    update_text();
     set_style(styles_.empty);
 }
 
@@ -94,12 +94,16 @@ void CodeButton::set_value(int value) {
     assert(value <= game::Game::SCORE_MAX);
 
     code_element_ = value;
-    set_text(std::to_string(code_element_));
+    update_text();
     set_style(styles_.elements[elem_index()]);
 }
 
 void CodeButton::set_show_text(bool show_text) noexcept {
     show_text_ = show_text;
+}
+
+void CodeButton::update_text() {
+    set_text(std::to_string(code_element_));
 }
 
 void CodeButton::use_active_style() {
