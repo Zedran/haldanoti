@@ -151,10 +151,10 @@ void GameRow::set_lang(lang::GameRow lang) noexcept {
     FeedbackLabel::set_lang(std::move(lang.fb_label));
 }
 
-void GameRow::set_theme(theme::GameRow theme, bool force_fb_chars) noexcept {
+void GameRow::set_theme(theme::GameRow theme) noexcept {
     styles_ = theme.base;
     CodeButton::set_theme(std::move(theme.code_button));
-    FeedbackLabel::set_theme(theme.fb_label, force_fb_chars);
+    FeedbackLabel::set_theme(theme.fb_label);
 }
 
 void GameRow::unlock() {

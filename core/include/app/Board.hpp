@@ -29,7 +29,7 @@ public:
         sf::Vector2f    size,
         lang::Board     lang,
         theme::Board    theme,
-        bool            force_fb_chars
+        bool            fb_chars
     );
 
     ~Board();

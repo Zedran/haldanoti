@@ -18,12 +18,13 @@ Board::Board(
     sf::Vector2f    size,
     lang::Board     lang,
     theme::Board    theme,
-    bool            force_fb_chars
+    bool            fb_chars
 ) : ui::Box{size, theme.box, ui::Layout::Type::ColumnLayout},
     active_row_{},
     game_rows_(game::Game::NUM_ROWS) {
     GameRow::set_lang(std::move(lang.game_row));
-    GameRow::set_theme(std::move(theme.game_row), force_fb_chars);
+    GameRow::set_theme(std::move(theme.game_row));
+    FeedbackLabel::enable_text(fb_chars);
 
     secret_row_ = &add_component<SecretRow>(
         font,
