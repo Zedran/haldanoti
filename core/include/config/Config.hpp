@@ -10,6 +10,9 @@
 namespace config {
 
 struct Config {
+    // Display code characters.
+    bool code_chars;
+
     // Display feedback characters.
     bool fb_chars;
 

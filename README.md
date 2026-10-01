@@ -20,6 +20,7 @@ The following table presents configuration options that are available. Some chan
 
 | Option                  | Restart | Description                                                                 |
 |:------------------------|:-------:|:----------------------------------------------------------------------------|
+| **Code characters**     | yes     | Display numbers in addition to colors in the code fields.                   |
 | **Feedback characters** | yes     | Display small signs in the feedback fields in addition to colors.           |
 | **Language**            | yes     | Game's display language.                                                    |
 | **Show hints**          |         | Show a number of distinct elements in the secret code.                      |

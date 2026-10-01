@@ -37,6 +37,7 @@ const Lang DEFAULT_LANG{
         .title{L"Settings"},
         .opt_unique_elems{L"Unique elements"},
         .opt_lang{L"Language"},
+        .opt_code_chars{L"Code characters"},
         .opt_fb_chars{L"Feedback characters"},
         .opt_hints{L"Show hints"},
         .opt_vsync{L"VSync"},

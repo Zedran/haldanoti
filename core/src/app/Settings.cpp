@@ -48,6 +48,13 @@ Settings::Settings(
         std::move(lang_fnames)
     );
 
+    cb_code_chars_ = &opt_box.add_component<ui::Checkbox>(
+        font,
+        opt_line_size,
+        theme.checkbox,
+        std::move(lang.opt_code_chars)
+    );
+
     cb_fb_chars_ = &opt_box.add_component<ui::Checkbox>(
         font,
         opt_line_size,
@@ -76,7 +83,7 @@ Settings::Settings(
         std::move(lang.opt_vsync)
     );
 
-    constexpr sf::Vector2f toolbar_spacing{0.0f, 7.0f};
+    constexpr sf::Vector2f toolbar_spacing{0.0f, 6.0f};
 
     opt_box.add_component<ui::Blank>(opt_line_size.componentWiseMul(toolbar_spacing));
 
@@ -123,6 +130,7 @@ bool Settings::config_differs(const config::Config& c) const noexcept {
 
 config::Config Settings::get_config() const noexcept {
     return config::Config{
+        .code_chars   = cb_code_chars_->get_state(),
         .fb_chars     = cb_fb_chars_->get_state(),
         .hints        = cb_hints_->get_state(),
         .lang         = sel_lang_->get_value().toAnsiString(),
@@ -149,6 +157,9 @@ void Settings::set_config(const config::Config& c) {
     assert(sel_lang_);
     sel_lang_->set_value(c.lang);
 
+    assert(cb_code_chars_);
+    cb_code_chars_->set_state(c.code_chars);
+
     assert(cb_fb_chars_);
     cb_fb_chars_->set_state(c.fb_chars);
 
@@ -160,6 +171,7 @@ void Settings::set_config(const config::Config& c) {
 
 bool Settings::restart_required(const config::Config& c) const noexcept {
     return ref_config_.lang != c.lang ||
+           ref_config_.code_chars != c.code_chars ||
            ref_config_.fb_chars != c.fb_chars;
 }
 

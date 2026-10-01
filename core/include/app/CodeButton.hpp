@@ -24,6 +24,9 @@ public:
     // Sets the static member styles_.
     static void set_theme(theme::CodeButton theme);
 
+    // Enable the display of text in all instances of CodeButton.
+    static void set_show_text(bool show_text) noexcept;
+
     CodeButton(const sf::Font& font, sf::Vector2f size);
 
     ~CodeButton();
@@ -68,6 +71,9 @@ private:
     // Stores the styles associated with different button states.
     static theme::CodeButton styles_;
 
+    // If true, instances of CodeButton will display text.
+    static bool show_text_;
+
     // Holds current code element value.
     int code_element_;
 
@@ -82,6 +88,9 @@ private:
     // Increases the code element's value by 1. The value loops around
     // to the minimum once the maximum value is incremented.
     void increment();
+
+    // Updates CodeButton's text after a new code_element_ value has been set.
+    void update_text();
 };
 
 } // namespace app

@@ -29,6 +29,7 @@ public:
         sf::Vector2f    size,
         lang::Board     lang,
         theme::Board    theme,
+        bool            code_chars,
         bool            fb_chars
     );
 

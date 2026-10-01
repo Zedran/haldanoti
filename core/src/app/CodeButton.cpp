@@ -16,8 +16,16 @@ namespace app {
 
 theme::CodeButton CodeButton::styles_{};
 
+bool CodeButton::show_text_{};
+
 CodeButton::CodeButton(const sf::Font& font, sf::Vector2f size)
-    : ui::Button{font, size, styles_.empty, std::to_string(game::Row::CODE_VALUE_NONE), static_cast<unsigned int>(FONT_REL_SIZE * size.y)},
+    : ui::Button{
+          font,
+          size,
+          styles_.empty,
+          CodeButton::show_text_ ? std::to_string(game::Row::CODE_VALUE_NONE) : "",
+          static_cast<unsigned int>(FONT_REL_SIZE * size.y),
+      },
       code_element_{game::Row::CODE_VALUE_NONE} {
     bind(sf::Mouse::Button::Left, [this] { this->increment(); });
     bind(sf::Mouse::Button::Right, [this] { this->decrement(); });
@@ -65,7 +73,7 @@ bool CodeButton::is_set() const noexcept {
 
 void CodeButton::reset() {
     code_element_ = game::Row::CODE_VALUE_NONE;
-    set_text(std::to_string(code_element_));
+    update_text();
     set_style(styles_.empty);
 }
 
@@ -86,8 +94,18 @@ void CodeButton::set_value(int value) {
     assert(value <= game::Game::SCORE_MAX);
 
     code_element_ = value;
-    set_text(std::to_string(code_element_));
+    update_text();
     set_style(styles_.elements[elem_index()]);
+}
+
+void CodeButton::set_show_text(bool show_text) noexcept {
+    show_text_ = show_text;
+}
+
+void CodeButton::update_text() {
+    if (CodeButton::show_text_) {
+        set_text(std::to_string(code_element_));
+    }
 }
 
 void CodeButton::use_active_style() {

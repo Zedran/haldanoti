@@ -98,6 +98,10 @@ private:
     // Required for getting and setting its value.
     ui::Selector* sel_lang_;
 
+    // Non-owning pointer to the Checkbox representing the code characters
+    // option. Required for getting and setting its state.
+    ui::Checkbox* cb_code_chars_;
+
     // Non-owning pointer to the Checkbox representing the feedback characters
     // option. Required for getting and setting its state.
     ui::Checkbox* cb_fb_chars_;

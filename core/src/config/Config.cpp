@@ -42,6 +42,7 @@ void from_json(const nlohmann::json& j, Config& v) {
         return false;
     };
 
+    v.code_chars   = has("code_chars") ? j["code_chars"].get<bool>() : default_config->code_chars;
     v.fb_chars     = has("fb_chars") ? j["fb_chars"].get<bool>() : default_config->fb_chars;
     v.hints        = has("hints") ? j["hints"].get<bool>() : default_config->hints;
     v.lang         = has("lang") ? j["lang"].get<std::string>() : default_config->lang;
@@ -51,6 +52,7 @@ void from_json(const nlohmann::json& j, Config& v) {
 
 Config get_default_config() {
     return Config{
+        .code_chars   = true,
         .fb_chars     = false,
         .hints        = false,
         .lang         = get_default_lang_code(),
@@ -79,6 +81,7 @@ config::Config read_config() {
 }
 
 void to_json(nlohmann::json& j, const Config& v) {
+    j["code_chars"]   = v.code_chars;
     j["fb_chars"]     = v.fb_chars;
     j["hints"]        = v.hints;
     j["lang"]         = v.lang;
