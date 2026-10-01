@@ -5,6 +5,7 @@
 #include <utility>
 
 #include "app/Board.hpp"
+#include "app/CodeButton.hpp"
 #include "app/GameRow.hpp"
 #include "app/SecretRow.hpp"
 #include "game/Game.hpp"
@@ -18,12 +19,14 @@ Board::Board(
     sf::Vector2f    size,
     lang::Board     lang,
     theme::Board    theme,
+    bool            code_chars,
     bool            fb_chars
 ) : ui::Box{size, theme.box, ui::Layout::Type::ColumnLayout},
     active_row_{},
     game_rows_(game::Game::NUM_ROWS) {
     GameRow::set_lang(std::move(lang.game_row));
     GameRow::set_theme(std::move(theme.game_row));
+    CodeButton::set_show_text(code_chars);
     FeedbackLabel::enable_text(fb_chars);
 
     secret_row_ = &add_component<SecretRow>(

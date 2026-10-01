@@ -22,6 +22,7 @@ UserInterface::UserInterface(
         window_size.componentWiseMul(Board::REL_SIZE),
         std::move(lang.board),
         std::move(theme.board),
+        conf.code_chars,
         conf.fb_chars
     },
     message_{
