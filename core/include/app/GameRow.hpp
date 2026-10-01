@@ -32,7 +32,7 @@ public:
 
     // Sets the static member styles_. force_fb_chars is relayed down to
     // FeedbackLabel::set_theme.
-    static void set_theme(theme::GameRow theme, bool force_fb_chars) noexcept;
+    static void set_theme(theme::GameRow theme) noexcept;
 
     GameRow(const sf::Font& font, sf::Vector2f size, int row_number);
 

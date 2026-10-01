@@ -43,18 +43,11 @@ void FeedbackLabel::set_pin(Pin pin) {
     update_text();
 }
 
-void FeedbackLabel::set_theme(theme::FeedbackLabel theme, bool force_fb_chars) {
+void FeedbackLabel::set_theme(theme::FeedbackLabel theme) {
     FeedbackLabel::styles_ = theme;
-    if (force_fb_chars) {
-        FeedbackLabel::styles_.show_text = true;
-    }
 }
 
 void FeedbackLabel::update_text() {
-    if (!styles_.show_text) {
-        return;
-    }
-
     switch (pin_) {
     case Pin::None:  set_text(lang_.none); break;
     case Pin::Red:   set_text(lang_.red); break;

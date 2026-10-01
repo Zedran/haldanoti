@@ -123,7 +123,6 @@ const Theme DEFAULT_THEME{
             },
             .code_button{cb},
             .fb_label{
-                .show_text = false,
                 .none{dbs},
                 .red{.bg{0xc90e0eff}, .fg{0xffffffff}, .ol{ol}},
                 .white{.bg{0xffffffff}, .fg{0x000000ff}, .ol{ol}},

@@ -43,10 +43,8 @@ public:
     // Sets the static member lang_.
     static void set_lang(lang::FeedbackLabel lang);
 
-    // Sets the static member styles_. If force_fb_chars is true,
-    // FeedbackLabel.show_text will be set to true, regardless
-    // of the theme's settings.
-    static void set_theme(theme::FeedbackLabel theme, bool force_fb_chars);
+    // Sets the static member styles_.
+    static void set_theme(theme::FeedbackLabel theme);
 
     FeedbackLabel(const sf::Font& font, sf::Vector2f size);
 
