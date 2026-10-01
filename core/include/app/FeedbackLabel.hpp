@@ -41,13 +41,13 @@ public:
     static constexpr sf::Vector2f REL_SIZE{0.25f, 0.25f};
 
     // Sets the static member lang_.
-    static void set_lang(lang::FeedbackLabel lang);
+    static void set_lang(lang::FeedbackLabel lang) noexcept;
 
     // Enable the display of text in all instances of FeedbackLabel.
     static void set_show_text(bool enable) noexcept;
 
     // Sets the static member styles_.
-    static void set_theme(theme::FeedbackLabel theme);
+    static void set_theme(theme::FeedbackLabel theme) noexcept;
 
     FeedbackLabel(const sf::Font& font, sf::Vector2f size);
 

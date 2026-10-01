@@ -29,7 +29,7 @@ void FeedbackLabel::reset() {
     set_pin(Pin::None);
 }
 
-void FeedbackLabel::set_lang(lang::FeedbackLabel lang) {
+void FeedbackLabel::set_lang(lang::FeedbackLabel lang) noexcept {
     FeedbackLabel::lang_ = std::move(lang);
 }
 
@@ -49,7 +49,7 @@ void FeedbackLabel::set_show_text(bool enable) noexcept {
     show_text_ = enable;
 }
 
-void FeedbackLabel::set_theme(theme::FeedbackLabel theme) {
+void FeedbackLabel::set_theme(theme::FeedbackLabel theme) noexcept {
     FeedbackLabel::styles_ = theme;
 }
 
