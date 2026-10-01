@@ -19,7 +19,13 @@ theme::CodeButton CodeButton::styles_{};
 bool CodeButton::show_text_{};
 
 CodeButton::CodeButton(const sf::Font& font, sf::Vector2f size)
-    : ui::Button{font, size, styles_.empty, std::to_string(game::Row::CODE_VALUE_NONE), static_cast<unsigned int>(FONT_REL_SIZE * size.y)},
+    : ui::Button{
+          font,
+          size,
+          styles_.empty,
+          std::to_string(game::Row::CODE_VALUE_NONE),
+          static_cast<unsigned int>(FONT_REL_SIZE * size.y),
+      },
       code_element_{game::Row::CODE_VALUE_NONE} {
     bind(sf::Mouse::Button::Left, [this] { this->increment(); });
     bind(sf::Mouse::Button::Right, [this] { this->decrement(); });
