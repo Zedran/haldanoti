@@ -40,11 +40,11 @@ public:
     // Size relative to the height of the FeedbackLabel's container.
     static constexpr sf::Vector2f REL_SIZE{0.25f, 0.25f};
 
-    // Enable the display of text in all instances of FeedbackLabel.
-    static void enable_text(bool enable);
-
     // Sets the static member lang_.
     static void set_lang(lang::FeedbackLabel lang);
+
+    // Enable the display of text in all instances of FeedbackLabel.
+    static void set_show_text(bool enable);
 
     // Sets the static member styles_.
     static void set_theme(theme::FeedbackLabel theme);

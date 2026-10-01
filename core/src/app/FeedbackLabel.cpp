@@ -21,10 +21,6 @@ FeedbackLabel::FeedbackLabel(const sf::Font& font, sf::Vector2f size)
 
 FeedbackLabel::~FeedbackLabel() = default;
 
-void FeedbackLabel::enable_text(bool enable) {
-    show_text_ = enable;
-}
-
 FeedbackLabel::Pin FeedbackLabel::get_pin() const noexcept {
     return pin_;
 }
@@ -47,6 +43,10 @@ void FeedbackLabel::set_pin(Pin pin) {
     }
 
     update_text();
+}
+
+void FeedbackLabel::set_show_text(bool enable) {
+    show_text_ = enable;
 }
 
 void FeedbackLabel::set_theme(theme::FeedbackLabel theme) {

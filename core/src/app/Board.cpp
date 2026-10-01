@@ -27,7 +27,7 @@ Board::Board(
     GameRow::set_lang(std::move(lang.game_row));
     GameRow::set_theme(std::move(theme.game_row));
     CodeButton::set_show_text(code_chars);
-    FeedbackLabel::enable_text(fb_chars);
+    FeedbackLabel::set_show_text(fb_chars);
 
     secret_row_ = &add_component<SecretRow>(
         font,
