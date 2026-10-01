@@ -23,6 +23,7 @@ Things easily forgotten.
     * [Settings.cpp](/core/src/app/Settings.cpp)
         * `Settings` - add a new component to `opt_box` and store the pointer to it in the newly created member of the `Settings` class.
         * `get_config` - retrieve value stored in the new option.
+        * `restart_required` - add conditional statement for the option if modifying it requires restart.
         * `set_config` - add pointer assertion and set the value to the new component.
 4. [README.md](/README.md)
     * Document the new option.
