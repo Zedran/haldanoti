@@ -45,7 +45,7 @@ void FeedbackLabel::set_pin(Pin pin) {
     update_text();
 }
 
-void FeedbackLabel::set_show_text(bool enable) {
+void FeedbackLabel::set_show_text(bool enable) noexcept {
     show_text_ = enable;
 }
 

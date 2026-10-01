@@ -44,7 +44,7 @@ public:
     static void set_lang(lang::FeedbackLabel lang);
 
     // Enable the display of text in all instances of FeedbackLabel.
-    static void set_show_text(bool enable);
+    static void set_show_text(bool enable) noexcept;
 
     // Sets the static member styles_.
     static void set_theme(theme::FeedbackLabel theme);
