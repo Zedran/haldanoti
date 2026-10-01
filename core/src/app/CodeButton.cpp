@@ -77,6 +77,10 @@ void CodeButton::reset() {
     set_style(styles_.empty);
 }
 
+void CodeButton::set_show_text(bool show_text) noexcept {
+    show_text_ = show_text;
+}
+
 void CodeButton::set_theme(theme::CodeButton theme) {
     CodeButton::styles_ = std::move(theme);
 
@@ -96,10 +100,6 @@ void CodeButton::set_value(int value) {
     code_element_ = value;
     update_text();
     set_style(styles_.elements[elem_index()]);
-}
-
-void CodeButton::set_show_text(bool show_text) noexcept {
-    show_text_ = show_text;
 }
 
 void CodeButton::update_text() {

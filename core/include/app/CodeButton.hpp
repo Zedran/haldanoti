@@ -21,11 +21,11 @@ public:
     // Size relative to the height of the CodeButton's container.
     static constexpr sf::Vector2f REL_SIZE{0.5f, 0.5f};
 
-    // Sets the static member styles_.
-    static void set_theme(theme::CodeButton theme);
-
     // Enable the display of text in all instances of CodeButton.
     static void set_show_text(bool show_text) noexcept;
+
+    // Sets the static member styles_.
+    static void set_theme(theme::CodeButton theme);
 
     CodeButton(const sf::Font& font, sf::Vector2f size);
 
