@@ -22,7 +22,6 @@
         "exit": "Wyjście"
     },
     "settings": {
-        "check_mark": "x",
         "title": "Opcje",
         "opt_unique_elems": "Unikatowe elementy",
         "opt_lang": "Język",

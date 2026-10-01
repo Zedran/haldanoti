@@ -22,9 +22,6 @@ public:
         ui::Label::Style  label;
     };
 
-    // Sets the value of the check_mark_ static member.
-    static void set_check_mark(sf::String mark) noexcept;
-
     Checkbox(
         const sf::Font& font,
         sf::Vector2f    size,
@@ -46,7 +43,7 @@ private:
     static constexpr sf::Vector2f CHECKBOX_REL_SIZE{0.6f, 0.6f};
 
     // Text displayed inside the Button when the box is "checked".
-    static sf::String check_mark_;
+    static const sf::String check_mark_;
 
     // None-owning pointer to the Button, required to manipulate its style.
     ui::Button* cb_;

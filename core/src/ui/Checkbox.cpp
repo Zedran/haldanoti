@@ -11,7 +11,7 @@
 
 namespace ui {
 
-sf::String Checkbox::check_mark_{};
+const sf::String Checkbox::check_mark_{'x'};
 
 Checkbox::Checkbox(
     const sf::Font& font,
@@ -79,10 +79,6 @@ void Checkbox::flip_state() {
     } else {
         enable();
     }
-}
-
-void Checkbox::set_check_mark(sf::String mark) noexcept {
-    check_mark_ = std::move(mark);
 }
 
 void Checkbox::set_state(bool s) {

@@ -21,8 +21,6 @@ Settings::Settings(
     std::vector<sf::String> lang_fnames,
     sf::String              version
 ) : ui::Box{size, theme.bg, ui::Layout::Type::ColumnLayout}, state_{} {
-    ui::Checkbox::set_check_mark(std::move(lang.check_mark));
-
     constexpr Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
 
     ui::Box& opt_box = add_component<ui::Box>(

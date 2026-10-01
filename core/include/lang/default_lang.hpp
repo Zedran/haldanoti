@@ -33,7 +33,6 @@ const Lang DEFAULT_LANG{
         .exit{L"Exit"},
     },
     .settings{
-        .check_mark{L"x"},
         .title{L"Settings"},
         .opt_unique_elems{L"Unique elements"},
         .opt_lang{L"Language"},

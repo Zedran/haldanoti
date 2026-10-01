@@ -11,7 +11,6 @@
 namespace lang {
 
 struct Settings {
-    sf::String check_mark;
     sf::String title;
     sf::String opt_unique_elems;
     sf::String opt_lang;
@@ -25,7 +24,6 @@ struct Settings {
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     Settings,
-    check_mark,
     title,
     opt_unique_elems,
     opt_lang,
