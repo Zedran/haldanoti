@@ -11,19 +11,11 @@ namespace utils {
 std::vector<sf::String> get_lang_fnames() {
     std::vector<sf::String> fnames;
 
-    const std::filesystem::path rel_path = ASSETS_DIRNAME / LANG_DIRNAME;
+    const std::filesystem::path dir = APP_DATA_SYS_PATH / ASSETS_DIRNAME / LANG_DIRNAME;
 
-    for (const auto& d : {APP_DATA_SYS_PATH, std::filesystem::path{DEF_APP_DATA_DIR_DEV}}) {
-        const std::filesystem::path dir = d / rel_path;
-
-        if (std::filesystem::exists(dir)) {
-            for (const auto& p : list_files(dir)) {
-                fnames.push_back(p.filename().replace_extension({}).string());
-            }
-            if (!fnames.empty()) {
-                // Only one, non-empty directory should be walked through.
-                break;
-            }
+    if (std::filesystem::exists(dir)) {
+        for (const auto& p : list_files(dir)) {
+            fnames.push_back(p.filename().replace_extension({}).string());
         }
     }
 

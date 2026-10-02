@@ -50,8 +50,7 @@ std::vector<sf::String> get_lang_fnames();
 // Returns a list of file paths in dir.
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);
 
-// Iterates over the list of possible asset file locations (system installation
-// then dev directory) and returns T constructed from the first found file.
+// Returns T constructed from the asset file.
 //
 // Accepts a relative path to the asset file. It is appended to
 // APP_DATA_DIR/ASSETS_DIRNAME.
@@ -70,35 +69,21 @@ T load_asset(std::filesystem::path rel_path) {
         throw std::runtime_error{"path '" + rel_path.string() + "' is not relative"};
     }
 
-    rel_path = ASSETS_DIRNAME / rel_path;
+    const std::filesystem::path p = APP_DATA_SYS_PATH / ASSETS_DIRNAME / rel_path;
 
-    for (const auto& d : {APP_DATA_SYS_PATH, std::filesystem::path{DEF_APP_DATA_DIR_DEV}}) {
-        const std::filesystem::path p = d / rel_path;
-
-        try {
-            if (!std::filesystem::exists(p)) {
-                continue;
-            }
-
-            if constexpr (std::is_same_v<T, sf::Font>) {
-                sf::Font font{p};
-                font.setSmooth(false);
-                return font;
-            } else if constexpr (std::is_same_v<T, sf::Image>) {
-                sf::Image img;
-                if (img.loadFromFile(p)) {
-                    return img;
-                }
-            } else if constexpr (std::is_same_v<T, std::ifstream>) {
-                std::ifstream f{std::filesystem::path{p}};
-                if (f.good()) {
-                    return f;
-                }
-            }
-        } catch (const sf::Exception&) {
+    if constexpr (std::is_same_v<T, sf::Font>) {
+        sf::Font font{p};
+        font.setSmooth(false);
+        return font;
+    } else if constexpr (std::is_same_v<T, sf::Image>) {
+        return sf::Image{p};
+    } else if constexpr (std::is_same_v<T, std::ifstream>) {
+        std::ifstream f{std::filesystem::path{p}};
+        if (!f.good()) {
+            throw std::runtime_error{"unable to load file '" + rel_path.string() + '\''};
         }
+        return f;
     }
-    throw std::runtime_error{"unable to load asset '" + rel_path.string() + '\''};
 }
 
 // Returns a lang::Lang struct with game text translations corresponding to the
