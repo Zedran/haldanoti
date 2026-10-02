@@ -45,10 +45,6 @@ add_custom_target(configure_header
 
 add_library(core_defs INTERFACE)
 
-target_compile_definitions(core_defs INTERFACE
-    DEF_APP_DATA_DIR_DEV="${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}"
-)
-
 add_subdirectory(core)
 
 if(WIN32 AND NOT CMAKE_BUILD_TYPE STREQUAL "Debug")

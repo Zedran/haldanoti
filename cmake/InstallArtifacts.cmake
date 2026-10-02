@@ -35,10 +35,6 @@ install(
 )
 install(FILES     ${FONT_FILE_PATH} DESTINATION ${ASSETS_DIR}     )
 
-target_compile_definitions(core_defs INTERFACE
-    DEF_APP_DATA_DIR_SYS="${CMAKE_INSTALL_PREFIX}/share"
-)
-
 if(LINUX)
     set(DT_ENTRY "${CMAKE_BINARY_DIR}/platform/linux/mm-game.desktop")
 
