@@ -11,14 +11,11 @@ set(TOP_DOC_FILES
 
 set(BIN_DIR bin)
 
-if(WIN32)
-    if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-        set(CMAKE_INSTALL_PREFIX "$ENV{ProgramFiles}/${PROJECT_NAME}" CACHE PATH "Install path" FORCE)
-    endif()
-    set(APP_DIR ".")
-else()
-    set(APP_DIR "share/${PROJECT_NAME}")
+if(WIN32 AND CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX "$ENV{ProgramFiles}/${PROJECT_NAME}" CACHE PATH "Install path" FORCE)
 endif()
+
+set(APP_DIR "share/${PROJECT_NAME}")
 
 set(ASSETS_DIR_SRC ${PROJECT_SOURCE_DIR}/assets)
 set(ASSETS_DIR_DEST ${APP_DIR})
@@ -39,7 +36,7 @@ install(
 install(FILES     ${FONT_FILE_PATH} DESTINATION ${ASSETS_DIR}     )
 
 target_compile_definitions(core_defs INTERFACE
-    DEF_APP_DATA_DIR_SYS="${CMAKE_INSTALL_PREFIX}/${APP_DIR}"
+    DEF_APP_DATA_DIR_SYS="${CMAKE_INSTALL_PREFIX}/share"
 )
 
 if(LINUX)

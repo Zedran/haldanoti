@@ -32,8 +32,8 @@ inline const std::filesystem::path CONFIG_FNAME{"mm.json"};
 // Full path to config file.
 inline const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;
 
-// System application data path.
-inline const std::filesystem::path APP_DATA_SYS_PATH{os::find_app_data_dir()};
+// Application data path.
+inline const std::filesystem::path APP_DATA_SYS_PATH = os::find_app_data_dir() / APP_DIRNAME;
 
 // Name of the assets directory located in the APP_DATA_DIR.
 inline const std::filesystem::path ASSETS_DIRNAME{"assets"};

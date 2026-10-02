@@ -25,7 +25,7 @@ std::filesystem::path find_app_data_dir() {
     }
 
     std::filesystem::path path{buffer};
-    path = path.parent_path().parent_path();
+    path = path.parent_path().parent_path() / "share";
 
     dbg("{}", path.string());
     return path;
