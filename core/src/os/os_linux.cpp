@@ -3,9 +3,14 @@
 
 #if defined(__linux__)
 
+#include <cerrno>
 #include <cstdlib>
+#include <cstring>
+#include <linux/limits.h>
 #include <locale>
 #include <stdexcept>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "os/os.hpp"
 #include "utils/debug.hpp"
@@ -13,7 +18,20 @@
 namespace os {
 
 std::filesystem::path find_app_data_dir() {
-    std::filesystem::path path{DEF_APP_DATA_DIR_SYS};
+    char buffer[PATH_MAX + 1];
+
+    const ssize_t n = readlink("/proc/self/exe", buffer, PATH_MAX);
+    if (n == -1) {
+        throw std::runtime_error{"readlink error: " + std::string{std::strerror(errno)}};
+    } else if (n == 0) {
+        throw std::runtime_error{"unable to determine executable path"};
+    }
+
+    buffer[n] = '\0';
+
+    std::filesystem::path path{buffer};
+    path = path.parent_path().parent_path() / "share";
+
     dbg("{}", path.string());
     return path;
 }
