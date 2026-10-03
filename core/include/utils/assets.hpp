@@ -91,8 +91,9 @@ T load_asset(std::filesystem::path rel_path) {
 }
 
 // Returns a lang::Lang struct with game text translations corresponding to the
-// system locale or lang::DEFAULT_LANG if suitable translation file is not
-// found. Throws upon encountering JSON parsing errors.
+// chosen language or default language if suitable translation file is not
+// found. Throws upon encountering JSON parsing errors or problems with
+// the file.
 //
 // lang_fname is the name of the desired translation file. Translation files
 // are named with the lower-case 2-letter country code (ISO 639). The function
