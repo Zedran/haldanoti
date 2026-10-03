@@ -75,9 +75,13 @@ T load_asset(std::filesystem::path rel_path) {
         sf::Font font{p};
         font.setSmooth(false);
         return font;
-    } else if constexpr (std::is_same_v<T, sf::Image>) {
+    }
+
+    if constexpr (std::is_same_v<T, sf::Image>) {
         return sf::Image{p};
-    } else if constexpr (std::is_same_v<T, std::ifstream>) {
+    }
+
+    if constexpr (std::is_same_v<T, std::ifstream>) {
         std::ifstream f{std::filesystem::path{p}};
         if (!f.good()) {
             throw std::runtime_error{"unable to load file '" + rel_path.string() + '\''};
