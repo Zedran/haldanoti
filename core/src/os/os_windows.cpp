@@ -14,6 +14,16 @@
 
 namespace os {
 
+static std::string get_errstr(const errno_t err) noexcept {
+    // Reference: https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/strerror-s-strerror-s-wcserror-s-wcserror-s
+
+    constexpr std::size_t max_errno = 4096;
+
+    char buffer[max_errno];
+    strerror_s(buffer, max_errno, err);
+    return '(' + std::to_string(err) + ") " + std::string{buffer};
+}
+
 std::filesystem::path find_app_data_dir() {
     // Reference: https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulefilenamew
 
@@ -39,11 +49,11 @@ std::filesystem::path find_cache_dir() {
     std::size_t   size{};
     const errno_t err = _dupenv_s(&env_var, &size, "LOCALAPPDATA");
 
-    if (err != 0 || size == 0) {
-        throw std::runtime_error{"LOCALAPPDATA env var not found (" + std::to_string(err) + ')'};
+    if (err != 0) {
+        throw std::runtime_error{"_dupenv_s error (LOCALAPPDATA): " + get_errstr(err)};
     }
 
-    if (!env_var) {
+    if (!env_var || size == 0) {
         throw std::runtime_error{"could not resolve cache path"};
     }
 
@@ -61,11 +71,11 @@ std::filesystem::path find_config_dir() {
     std::size_t   size{};
     const errno_t err = _dupenv_s(&env_var, &size, "APPDATA");
 
-    if (err != 0 || size == 0) {
-        throw std::runtime_error{"APPDATA env var not found (" + std::to_string(err) + ')'};
+    if (err != 0) {
+        throw std::runtime_error{"_dupenv_s error (APPDATA): " + get_errstr(err)};
     }
 
-    if (!env_var) {
+    if (!env_var || size == 0) {
         throw std::runtime_error{"could not resolve config path"};
     }
 
