@@ -3,7 +3,7 @@
 
 include_guard(GLOBAL)
 
-set(app_data_dir "${CMAKE_BINARY_DIR}/app_data")
+set(app_data_dir "${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}")
 
 set(assets_dir_src  "${CMAKE_SOURCE_DIR}/assets")
 set(assets_dir_dest "${app_data_dir}/assets")

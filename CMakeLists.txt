@@ -45,10 +45,6 @@ add_custom_target(configure_header
 
 add_library(core_defs INTERFACE)
 
-target_compile_definitions(core_defs INTERFACE
-    DEF_APP_DATA_DIR_DEV="${CMAKE_BINARY_DIR}/app_data"
-)
-
 add_subdirectory(core)
 
 if(WIN32 AND NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -68,6 +64,19 @@ endif()
 
 add_dependencies(${PROJECT_NAME} configure_header)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/src)
+
+if(LINUX)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+    execute_process(
+        COMMAND
+            ${CMAKE_COMMAND} -E create_symlink
+            "${CMAKE_BINARY_DIR}/bin/${PROJECT_NAME}"
+            "${CMAKE_BINARY_DIR}/${PROJECT_NAME}"
+        COMMAND_ERROR_IS_FATAL ANY
+    )
+endif()
 
 include(InstallArtifacts)
 
