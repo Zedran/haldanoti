@@ -3,7 +3,6 @@
 
 #include <nlohmann/json.hpp>
 
-#include "lang/default_lang.hpp"
 #include "utils/assets.hpp"
 
 namespace utils {
@@ -22,8 +21,6 @@ std::vector<sf::String> get_lang_fnames() {
     if (fnames.empty()) {
         throw std::runtime_error{"could not find language files"};
     }
-
-    fnames.push_back(sf::String{DEFAULT_LANG_CODE});
 
     return fnames;
 }
@@ -45,10 +42,6 @@ lang::Lang load_language(std::string lang_fname) {
         lang_fname = os::get_sys_lang_code().value_or(std::string{DEFAULT_LANG_CODE});
     }
 
-    if (lang_fname == DEFAULT_LANG_CODE) {
-        return lang::DEFAULT_LANG;
-    }
-
     if (!lang_fname.ends_with(".json")) {
         lang_fname += ".json";
     }
@@ -57,7 +50,10 @@ lang::Lang load_language(std::string lang_fname) {
     try {
         lf = load_asset<std::ifstream>(LANG_DIRNAME / lang_fname);
     } catch (const std::runtime_error&) {
-        return lang::DEFAULT_LANG;
+        if (lang_fname.starts_with(DEFAULT_LANG_CODE)) {
+            throw;
+        }
+        lf = load_asset<std::ifstream>((LANG_DIRNAME / DEFAULT_LANG_CODE).replace_extension(".json"));
     }
 
     nlohmann::json j = nlohmann::json::parse(lf);

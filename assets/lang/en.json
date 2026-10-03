@@ -1,0 +1,35 @@
+{
+    "board": {
+        "game_row": {
+            "fb_label": {
+                "none": "",
+                "red": "+",
+                "white": "-"
+            },
+            "ok": "Ok"
+        },
+        "secret_row": {
+            "info_won": "Code correct",
+            "info_lost": "Game over"
+        }
+    },
+    "message": {
+        "restart_required": "Restart required"
+    },
+    "toolbar": {
+        "new_game": "New\ngame",
+        "settings": "Settings",
+        "exit": "Exit"
+    },
+    "settings": {
+        "title": "Settings",
+        "opt_unique_elems": "Unique elements",
+        "opt_lang": "Language",
+        "opt_code_chars": "Code characters",
+        "opt_fb_chars": "Feedback characters",
+        "opt_hints": "Show hints",
+        "opt_vsync": "VSync",
+        "save": "Save",
+        "cancel": "Cancel"
+    }
+}
