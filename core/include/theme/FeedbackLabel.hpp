@@ -3,7 +3,10 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include "ui/Label.hpp"
+#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace theme {
 
@@ -12,5 +15,12 @@ struct FeedbackLabel {
     ui::Label::Style red;
     ui::Label::Style white;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    FeedbackLabel,
+    none,
+    red,
+    white
+)
 
 } // namespace theme

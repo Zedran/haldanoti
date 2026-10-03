@@ -3,8 +3,11 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include "theme/RowBoxStyle.hpp"
 #include "ui/Button.hpp"
+#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace theme {
 
@@ -31,5 +34,14 @@ struct GameRowBase {
     // Style for the ok button.
     ui::Button::Style ok_button;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    GameRowBase,
+    box,
+    code_box,
+    fb_box,
+    ok_box,
+    ok_button
+)
 
 } // namespace theme

@@ -3,9 +3,12 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include "theme/GameRow.hpp"
 #include "theme/SecretRow.hpp"
 #include "ui/Box.hpp"
+#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace theme {
 
@@ -19,5 +22,12 @@ struct Board {
     // Style for the row holding the secret code.
     SecretRow secret_row;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    Board,
+    box,
+    game_row,
+    secret_row
+)
 
 } // namespace theme

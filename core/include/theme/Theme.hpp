@@ -4,11 +4,13 @@
 #pragma once
 
 #include <SFML/Graphics/Color.hpp>
+#include <nlohmann/json.hpp>
 
 #include "theme/Board.hpp"
 #include "theme/Settings.hpp"
 #include "theme/Toolbar.hpp"
 #include "ui/Label.hpp"
+#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace theme {
 
@@ -20,5 +22,14 @@ struct Theme {
     Toolbar          toolbar;
     Settings         settings;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    Theme,
+    bg,
+    board,
+    message,
+    toolbar,
+    settings
+);
 
 } // namespace theme

@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include "theme/CodeButton.hpp"
 #include "theme/FeedbackLabel.hpp"
 #include "theme/GameRowBase.hpp"
@@ -19,5 +21,12 @@ struct GameRow {
     // Passed to FeedbackLabel to set its theme-related static members.
     FeedbackLabel fb_label;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    GameRow,
+    base,
+    code_button,
+    fb_label
+)
 
 } // namespace theme

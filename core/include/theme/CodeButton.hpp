@@ -5,7 +5,10 @@
 
 #include <vector>
 
+#include <nlohmann/json.hpp>
+
 #include "ui/Button.hpp"
+#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace theme {
 
@@ -16,5 +19,11 @@ struct CodeButton {
     // A vector of styles, one for each unique code value.
     std::vector<ui::Button::Style> elements;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    CodeButton,
+    empty,
+    elements
+)
 
 } // namespace theme
