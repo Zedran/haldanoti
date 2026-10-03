@@ -33,7 +33,7 @@ inline const std::filesystem::path CONFIG_FNAME{"mm.json"};
 inline const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;
 
 // Application data path.
-inline const std::filesystem::path APP_DATA_SYS_PATH = os::find_app_data_dir() / APP_DIRNAME;
+inline const std::filesystem::path APP_DATA_DIR = os::find_app_data_dir() / APP_DIRNAME;
 
 // Name of the assets directory located in the APP_DATA_DIR.
 inline const std::filesystem::path ASSETS_DIRNAME{"assets"};
@@ -69,7 +69,7 @@ T load_asset(std::filesystem::path rel_path) {
         throw std::runtime_error{"path '" + rel_path.string() + "' is not relative"};
     }
 
-    const std::filesystem::path p = APP_DATA_SYS_PATH / ASSETS_DIRNAME / rel_path;
+    const std::filesystem::path p = APP_DATA_DIR / ASSETS_DIRNAME / rel_path;
 
     if constexpr (std::is_same_v<T, sf::Font>) {
         sf::Font font{p};

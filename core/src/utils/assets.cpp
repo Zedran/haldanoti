@@ -10,7 +10,7 @@ namespace utils {
 std::vector<sf::String> get_lang_fnames() {
     std::vector<sf::String> fnames;
 
-    const std::filesystem::path dir = APP_DATA_SYS_PATH / ASSETS_DIRNAME / LANG_DIRNAME;
+    const std::filesystem::path dir = APP_DATA_DIR / ASSETS_DIRNAME / LANG_DIRNAME;
 
     if (std::filesystem::exists(dir)) {
         for (const auto& p : list_files(dir)) {
