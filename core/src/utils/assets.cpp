@@ -25,6 +25,24 @@ std::vector<sf::String> get_lang_fnames() {
     return fnames;
 }
 
+std::vector<sf::String> get_theme_fnames() {
+    std::vector<sf::String> fnames;
+
+    const std::filesystem::path dir = APP_DATA_DIR / ASSETS_DIRNAME / THEME_DIRNAME;
+
+    if (std::filesystem::exists(dir)) {
+        for (const auto& p : list_files(dir)) {
+            fnames.push_back(p.filename().replace_extension({}).string());
+        }
+    }
+
+    if (fnames.empty()) {
+        throw std::runtime_error{"could not find theme files"};
+    }
+
+    return fnames;
+}
+
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir) {
     std::vector<std::filesystem::path> files;
 

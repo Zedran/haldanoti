@@ -54,6 +54,9 @@ inline constexpr std::string_view DEFAULT_THEME{"default"};
 // Returns a list of available language filenames without extensions.
 std::vector<sf::String> get_lang_fnames();
 
+// Returns a list of available theme filenames without extensions.
+std::vector<sf::String> get_theme_fnames();
+
 // Returns a list of file paths in dir.
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);
 
