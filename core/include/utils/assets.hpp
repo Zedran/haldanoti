@@ -48,6 +48,7 @@ inline const std::filesystem::path THEME_DIRNAME{"theme"};
 // 2-letter code of the default language.
 inline constexpr std::string_view DEFAULT_LANG_CODE{"en"};
 
+// Name of the default theme.
 inline constexpr std::string_view DEFAULT_THEME{"default"};
 
 // Returns a list of available language filenames without extensions.
