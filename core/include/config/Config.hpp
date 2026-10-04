@@ -22,6 +22,9 @@ struct Config {
     // Language used by the application.
     std::string lang;
 
+    // Name of the selected color theme.
+    std::string theme;
+
     // Does not permit repeating elements in the generated code.
     bool unique_elems;
 
