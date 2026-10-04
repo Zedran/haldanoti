@@ -17,6 +17,7 @@
 
 #include "lang/Lang.hpp"
 #include "os/os.hpp"
+#include "theme/Theme.hpp"
 
 namespace utils {
 
@@ -41,8 +42,13 @@ inline const std::filesystem::path ASSETS_DIRNAME{"assets"};
 // Language files subdirectory. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
 inline const std::filesystem::path LANG_DIRNAME{"lang"};
 
+// Theme files subdirectory. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
+inline const std::filesystem::path THEME_DIRNAME{"theme"};
+
 // 2-letter code of the default language.
 inline constexpr std::string_view DEFAULT_LANG_CODE{"en"};
+
+inline constexpr std::string_view DEFAULT_THEME{"default"};
 
 // Returns a list of available language filenames without extensions.
 std::vector<sf::String> get_lang_fnames();
@@ -100,5 +106,13 @@ T load_asset(std::filesystem::path rel_path) {
 // expects the file to have the '.json' extension and it will be appended
 // to lang_fname if missing.
 lang::Lang load_language(std::string lang_fname);
+
+// Returns a theme::Theme struct read from the received file name or the default
+// theme if file is missing. Throws upon encountering JSON parsing errors
+// or problems with fallback file.
+//
+// The function expects filenames to have the '.json' extension and it will be
+// appended to theme_fname if missing.
+theme::Theme load_theme(std::string theme_fname);
 
 } // namespace utils

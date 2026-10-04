@@ -60,4 +60,27 @@ lang::Lang load_language(std::string lang_fname) {
     return j.get<lang::Lang>();
 }
 
+theme::Theme load_theme(std::string theme_fname) {
+    if (theme_fname.empty()) {
+        theme_fname = os::get_sys_lang_code().value_or(std::string{DEFAULT_THEME});
+    }
+
+    if (!theme_fname.ends_with(".json")) {
+        theme_fname += ".json";
+    }
+
+    std::ifstream lf;
+    try {
+        lf = load_asset<std::ifstream>(THEME_DIRNAME / theme_fname);
+    } catch (const std::runtime_error&) {
+        if (theme_fname.starts_with(DEFAULT_THEME)) {
+            throw;
+        }
+        lf = load_asset<std::ifstream>((THEME_DIRNAME / DEFAULT_THEME).replace_extension(".json"));
+    }
+
+    nlohmann::json j = nlohmann::json::parse(lf);
+    return j.get<theme::Theme>();
+}
+
 } // namespace utils
