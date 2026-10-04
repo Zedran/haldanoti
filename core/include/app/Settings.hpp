@@ -39,6 +39,7 @@ public:
         lang::Settings          lang,
         theme::Settings         theme,
         std::vector<sf::String> lang_fnames,
+        std::vector<sf::String> theme_fnames,
         sf::String              version
     );
 
@@ -117,6 +118,10 @@ private:
     // Non-owning pointer to the Checkbox representing the vsync option.
     // Required for getting and setting its state.
     ui::Checkbox* cb_vsync_;
+
+    // Non-owning pointer to the theme Selector. Required for getting
+    // and setting its value.
+    ui::Selector* sel_theme_;
 
     // Config used as a reference to determine whether the settings were changed
     // between saves.
