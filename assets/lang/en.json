@@ -25,6 +25,7 @@
         "title": "Settings",
         "opt_unique_elems": "Unique elements",
         "opt_lang": "Language",
+        "opt_theme": "Theme",
         "opt_code_chars": "Code characters",
         "opt_fb_chars": "Feedback characters",
         "opt_hints": "Show hints",
