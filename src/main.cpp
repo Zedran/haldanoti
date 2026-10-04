@@ -12,7 +12,6 @@
 #include "app/Window.hpp"
 #include "config/Config.hpp"
 #include "lang/Lang.hpp"
-#include "theme/default_theme.hpp"
 #include "utils/Logger.hpp"
 #include "utils/assets.hpp"
 #include "utils/debug.hpp"
@@ -30,7 +29,7 @@ int main() {
             app::Window::default_size(),
             std::move(conf),
             std::move(lang),
-            theme::DEFAULT_THEME,
+            utils::load_theme("default"),
             VERSION
         };
         app.run();
