@@ -24,12 +24,13 @@ int main() {
     try {
         config::Config conf = config::read_config();
         lang::Lang     lang = utils::load_language(conf.lang);
+        theme::Theme   theme = utils::load_theme(conf.theme);
 
         app::App app{
             app::Window::default_size(),
             std::move(conf),
             std::move(lang),
-            utils::load_theme("default"),
+            std::move(theme),
             VERSION
         };
         app.run();
