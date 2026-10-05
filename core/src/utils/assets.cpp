@@ -2,6 +2,7 @@
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
 #include <algorithm>
+#include <exception>
 #include <utility>
 
 #include <nlohmann/json.hpp>
@@ -86,28 +87,28 @@ lang::Lang load_language(std::string lang_fname) {
 }
 
 theme::Theme load_theme(std::string theme_fname) {
-    if (theme_fname.empty()) {
-        theme_fname = DEFAULT_THEME;
-    }
+    const auto parse_tf = [](std::filesystem::path p) {
+        if (p.extension() != ".json") {
+            p.replace_extension(".json");
+        }
 
-    if (!theme_fname.ends_with(".json")) {
-        theme_fname += ".json";
-    }
+        std::ifstream tf = load_asset<std::ifstream>(std::move(p));
+        if (!tf.good()) {
+            throw std::runtime_error{"cannot read theme file"};
+        }
 
-    const auto parse_tf = [](const std::filesystem::path& p) {
-        std::ifstream  tf = load_asset<std::ifstream>(p);
-        nlohmann::json j  = nlohmann::json::parse(tf);
+        nlohmann::json j = nlohmann::json::parse(tf);
         return j.get<theme::Theme>();
     };
 
-    if (theme_fname.starts_with(DEFAULT_THEME)) {
-        return parse_tf((THEME_DIR_SYS / DEFAULT_THEME).replace_extension({".json"}));
+    if (theme_fname.empty() || theme_fname.starts_with(DEFAULT_THEME)) {
+        return parse_tf(THEME_DIR_SYS / DEFAULT_THEME);
     }
 
     for (const auto& dir : {THEME_DIR_USR, THEME_DIR_SYS}) {
         try {
             return parse_tf(dir / theme_fname);
-        } catch (const std::runtime_error&) {
+        } catch (const std::exception&) {
             // Ignore path errors and JSON parsing errors for custom themes.
             continue;
         }
