@@ -60,41 +60,35 @@ std::vector<sf::String> get_theme_fnames();
 // Returns a list of file paths in dir.
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);
 
-// Returns T constructed from the asset file.
-//
-// Accepts a relative path to the asset file. It is appended to
-// APP_DATA_DIR/ASSETS_DIRNAME.
-//
-// Throws runtime_error if rel_path is empty or is an absolute path.
+// Returns T constructed from the asset file. If path is relative,
+// it is appended to APP_DATA_DIR/ASSETS_DIRNAME.
 template <typename T>
     requires std::is_same_v<T, sf::Font> ||
              std::is_same_v<T, sf::Image> ||
              std::is_same_v<T, std::ifstream>
-T load_asset(std::filesystem::path rel_path) {
-    if (rel_path.empty()) {
+T load_asset(std::filesystem::path path) {
+    if (path.empty()) {
         throw std::runtime_error{"asset relative path is empty"};
     }
 
-    if (!rel_path.is_relative()) {
-        throw std::runtime_error{"path '" + rel_path.string() + "' is not relative"};
+    if (path.is_relative()) {
+        path = APP_DATA_DIR / ASSETS_DIRNAME / path;
     }
 
-    const std::filesystem::path p = APP_DATA_DIR / ASSETS_DIRNAME / rel_path;
-
     if constexpr (std::is_same_v<T, sf::Font>) {
-        sf::Font font{p};
+        sf::Font font{path};
         font.setSmooth(false);
         return font;
     }
 
     if constexpr (std::is_same_v<T, sf::Image>) {
-        return sf::Image{p};
+        return sf::Image{path};
     }
 
     if constexpr (std::is_same_v<T, std::ifstream>) {
-        std::ifstream f{std::filesystem::path{p}};
+        std::ifstream f{std::filesystem::path{path}};
         if (!f.good()) {
-            throw std::runtime_error{"unable to load file '" + rel_path.string() + '\''};
+            throw std::runtime_error{"unable to load file '" + path.string() + '\''};
         }
         return f;
     }
