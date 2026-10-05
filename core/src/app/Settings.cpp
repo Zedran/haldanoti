@@ -84,13 +84,14 @@ Settings::Settings(
 
     sel_theme_ = &opt_box.add_component<ui::Selector>(
         font,
-        opt_line_size,
+        opt_line_size.componentWiseMul({1.0f, 1.5f}),
         theme.selector,
         std::move(lang.opt_theme),
-        std::move(theme_fnames)
+        std::move(theme_fnames),
+        ui::Layout::Type::ColumnLayout
     );
 
-    constexpr sf::Vector2f toolbar_spacing{0.0f, 5.0f};
+    constexpr sf::Vector2f toolbar_spacing{0.0f, 4.0f};
 
     opt_box.add_component<ui::Blank>(opt_line_size.componentWiseMul(toolbar_spacing));
 
