@@ -15,17 +15,27 @@ Selector::Selector(
     sf::Vector2f            size,
     Style                   style,
     sf::String              label,
-    std::vector<sf::String> entries
-) : Box{size, style.box, Layout::Type::RowLayout}, entries_{std::move(entries)}, index_{} {
+    std::vector<sf::String> entries,
+    Layout::Type            layout
+) : Box{size, style.box, layout}, entries_{std::move(entries)}, index_{} {
     constexpr Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
 
+    const sf::Vector2f label_rel_size =
+        layout == Layout::Type::RowLayout
+            ? LABEL_REL_SIZE_ROW
+            : LABEL_REL_SIZE_COL;
+
     Box& lbox = add_component<Box>(
-        size.componentWiseMul(LABEL_REL_SIZE),
+        size.componentWiseMul(label_rel_size),
         INNER_BOX_STYLE,
         Layout::Type::RowLayout
     );
 
-    const sf::Vector2f rbox_size = size.componentWiseMul({1.0f - LABEL_REL_SIZE.x, LABEL_REL_SIZE.y});
+    const sf::Vector2f rbox_size = size.componentWiseMul(
+        layout == Layout::Type::RowLayout
+            ? sf::Vector2f{1.0f - label_rel_size.x, label_rel_size.y}
+            : sf::Vector2f{label_rel_size.x, 1.0f - label_rel_size.y}
+    );
 
     Box& rbox = add_component<Box>(
         rbox_size,
@@ -35,7 +45,7 @@ Selector::Selector(
 
     lbox.add_component<Label>(
         font,
-        size.componentWiseMul(LABEL_REL_SIZE),
+        size.componentWiseMul(label_rel_size),
         style.label,
         std::move(label)
     );
