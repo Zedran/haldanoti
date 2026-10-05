@@ -87,7 +87,7 @@ lang::Lang load_language(std::string lang_fname) {
 
 theme::Theme load_theme(std::string theme_fname) {
     if (theme_fname.empty()) {
-        theme_fname = os::get_sys_lang_code().value_or(std::string{DEFAULT_THEME});
+        theme_fname = DEFAULT_THEME;
     }
 
     if (!theme_fname.ends_with(".json")) {
