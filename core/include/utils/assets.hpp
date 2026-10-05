@@ -45,6 +45,12 @@ inline const std::filesystem::path LANG_DIRNAME{"lang"};
 // Theme files subdirectory. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
 inline const std::filesystem::path THEME_DIRNAME{"theme"};
 
+// System theme directory - for themes shipped with the game.
+inline const std::filesystem::path THEME_DIR_SYS = APP_DATA_DIR / ASSETS_DIRNAME / THEME_DIRNAME;
+
+// User theme directory - for custom themes.
+inline const std::filesystem::path THEME_DIR_USR = CONFIG_DIR / THEME_DIRNAME;
+
 // 2-letter code of the default language.
 inline constexpr std::string_view DEFAULT_LANG_CODE{"en"};
 
@@ -55,6 +61,8 @@ inline constexpr std::string_view DEFAULT_THEME{"default"};
 std::vector<sf::String> get_lang_fnames();
 
 // Returns a list of available theme filenames without extensions.
+// Duplicates are filtered out. Themes found in THEME_DIR_USR have
+// precedence over those found in THEME_DIR_SYS.
 std::vector<sf::String> get_theme_fnames();
 
 // Returns a list of file paths in dir.
@@ -105,12 +113,16 @@ T load_asset(std::filesystem::path path) {
 // to lang_fname if missing.
 lang::Lang load_language(std::string lang_fname);
 
-// Returns a theme::Theme struct read from the received file name or the default
-// theme if file is missing. Throws upon encountering JSON parsing errors
-// or problems with fallback file.
+// Returns a Theme struct read from the file or the default theme if the file
+// cannot be read or is incorrectly structured. Throws upon encountering JSON
+// parsing errors or problems with the fallback file.
 //
-// The function expects filenames to have the '.json' extension and it will be
-// appended to theme_fname if missing.
+// The function expects filenames to have '.json' extension and it will
+// be appended to theme_fname if missing.
+//
+// The function attempts to load a theme file from the THEME_DIR_USR first.
+// If theme_fname == DEFAULT_THEME, the file is always loaded from
+// the system path.
 theme::Theme load_theme(std::string theme_fname);
 
 } // namespace utils
