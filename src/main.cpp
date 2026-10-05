@@ -22,8 +22,8 @@ int main() {
     dbg("{} {} {}", APP_NAME, VERSION, BRANCH);
 
     try {
-        config::Config conf = config::read_config();
-        lang::Lang     lang = utils::load_language(conf.lang);
+        config::Config conf  = config::read_config();
+        lang::Lang     lang  = utils::load_language(conf.lang);
         theme::Theme   theme = utils::load_theme(conf.theme);
 
         app::App app{
