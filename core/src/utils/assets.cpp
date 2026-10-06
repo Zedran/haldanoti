@@ -8,6 +8,7 @@
 #include <nlohmann/json.hpp>
 
 #include "utils/assets.hpp"
+#include "utils/debug.hpp"
 
 namespace utils {
 
@@ -105,8 +106,9 @@ theme::Theme load_theme(std::string theme_fname) {
     for (const auto& dir : {THEME_DIR_USR, THEME_DIR_SYS}) {
         try {
             return parse_tf(dir / theme_fname);
-        } catch (const std::exception&) {
+        } catch (const std::exception& e) {
             // Ignore path errors and JSON parsing errors for custom themes.
+            dbg("{}", e.what());
             continue;
         }
     }
