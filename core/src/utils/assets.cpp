@@ -93,9 +93,6 @@ theme::Theme load_theme(std::string theme_fname) {
         }
 
         std::ifstream tf = load_asset<std::ifstream>(std::move(p));
-        if (!tf.good()) {
-            throw std::runtime_error{"cannot read theme file"};
-        }
 
         nlohmann::json j = nlohmann::json::parse(tf);
         return j.get<theme::Theme>();
