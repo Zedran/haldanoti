@@ -12,6 +12,7 @@
 
 namespace theme {
 
+// Style used by CodeButton class instances.
 struct CodeButton {
     // Special style for CodeButtons with unset values.
     ui::Button::Style empty;

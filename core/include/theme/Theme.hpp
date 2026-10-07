@@ -16,11 +16,20 @@ namespace theme {
 
 // Top-level theme structure.
 struct Theme {
-    sf::Color        bg;
-    Board            board;
+    // Window's background color, visible under the game board.
+    sf::Color bg;
+
+    // Game board.
+    Board board;
+
+    // Notification label.
     ui::Label::Style message;
-    Toolbar          toolbar;
-    Settings         settings;
+
+    // Contains the "New game", "Settings" and "Exit" buttons.
+    Toolbar toolbar;
+
+    // Settings page.
+    Settings settings;
 };
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(

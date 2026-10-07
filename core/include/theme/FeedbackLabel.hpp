@@ -10,6 +10,7 @@
 
 namespace theme {
 
+// Style of the FeedbackLabel class.
 struct FeedbackLabel {
     ui::Label::Style none;
     ui::Label::Style red;

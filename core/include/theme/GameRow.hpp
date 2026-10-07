@@ -11,6 +11,7 @@
 
 namespace theme {
 
+// Style used by all instances of the GameRow class.
 struct GameRow {
     // A part of the GameRow's style used exclusively by GameRow.
     GameRowBase base;

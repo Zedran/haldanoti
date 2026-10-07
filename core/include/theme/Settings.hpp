@@ -13,14 +13,28 @@
 
 namespace theme {
 
+// Style of the Settings class.
 struct Settings {
-    ui::Box::Style      bg;
-    ui::Box::Style      box;
-    ui::Label::Style    label;
+    // Background of the settings page.
+    ui::Box::Style bg;
+
+    // Style of the option box, drawn over background.
+    ui::Box::Style box;
+
+    // Style used by every Label on the settings page.
+    ui::Label::Style label;
+
+    // Style used by every Checkbox on the settings page.
     ui::Checkbox::Style checkbox;
+
+    // Style used by every Selector on the settings page.
     ui::Selector::Style selector;
-    ui::Button::Style   save;
-    ui::Button::Style   cancel;
+
+    // Style of the "Save" button.
+    ui::Button::Style save;
+
+    // Style of the "Cancel" button.
+    ui::Button::Style cancel;
 };
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(

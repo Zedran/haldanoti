@@ -11,6 +11,7 @@
 
 namespace theme {
 
+// Style of the SecretRow class.
 struct SecretRow {
     // Outer box.
     ui::Box::Style box;

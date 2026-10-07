@@ -12,6 +12,7 @@
 
 namespace theme {
 
+// Style of the game board.
 struct Board {
     // Outer box of the Board.
     ui::Box::Style box;

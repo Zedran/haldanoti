@@ -11,6 +11,7 @@
 
 namespace theme {
 
+// Style of the Toolbar class.
 struct Toolbar {
     // Outer box.
     ui::Box::Style box;
