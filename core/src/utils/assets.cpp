@@ -114,6 +114,7 @@ theme::Theme load_theme(std::string theme_fname) {
     }
 
     // If custom theme parsing failed, fall back to the default theme.
+    dbg("falling back to the default theme");
     return parse_tf(THEME_DIR_SYS / DEFAULT_THEME);
 }
 
