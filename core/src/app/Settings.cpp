@@ -26,7 +26,7 @@ Settings::Settings(
 
     ui::Box& opt_box = add_component<ui::Box>(
         size.componentWiseMul(OPT_BOX_REL_SIZE),
-        theme.box,
+        theme.opt_box,
         ui::Layout::Type::ColumnLayout
     );
 

@@ -19,7 +19,7 @@ struct Settings {
     ui::Box::Style bg;
 
     // Style of the option box, drawn over background.
-    ui::Box::Style box;
+    ui::Box::Style opt_box;
 
     // Style used by every Label on the settings page.
     ui::Label::Style label;
@@ -40,7 +40,7 @@ struct Settings {
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     Settings,
     bg,
-    box,
+    opt_box,
     label,
     checkbox,
     selector,
