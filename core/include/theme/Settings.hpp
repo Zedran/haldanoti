@@ -15,8 +15,8 @@ namespace theme {
 
 // Style of the Settings class.
 struct Settings {
-    // Background of the settings page.
-    ui::Box::Style bg;
+    // Outer box of the settings page.
+    ui::Box::Style box;
 
     // Style of the option box, drawn over background.
     ui::Box::Style opt_box;
@@ -39,7 +39,7 @@ struct Settings {
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     Settings,
-    bg,
+    box,
     opt_box,
     label,
     checkbox,

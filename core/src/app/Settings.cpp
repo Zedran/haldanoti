@@ -21,7 +21,7 @@ Settings::Settings(
     std::vector<sf::String> lang_fnames,
     std::vector<sf::String> theme_fnames,
     sf::String              version
-) : ui::Box{size, theme.bg, ui::Layout::Type::ColumnLayout}, state_{} {
+) : ui::Box{size, theme.box, ui::Layout::Type::ColumnLayout}, state_{} {
     constexpr Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
 
     ui::Box& opt_box = add_component<ui::Box>(
