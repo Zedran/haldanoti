@@ -32,6 +32,6 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     selector,
     save,
     cancel
-)
+);
 
 } // namespace theme

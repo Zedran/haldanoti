@@ -24,6 +24,6 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     CodeButton,
     empty,
     elements
-)
+);
 
 } // namespace theme

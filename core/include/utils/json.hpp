@@ -27,12 +27,12 @@ namespace ui {
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Label::Style, bg, fg, ol);
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Box::Style, bg, ol)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Box::Style, bg, ol);
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Button::Style, disabled, normal, active, hover)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Button::Style, disabled, normal, active, hover);
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Checkbox::Style, box, button_off, button_on, label)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Checkbox::Style, box, button_off, button_on, label);
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Selector::Style, box, label, button)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Selector::Style, box, label, button);
 
 } // namespace ui

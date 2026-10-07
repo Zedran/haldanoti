@@ -31,6 +31,6 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     new_game,
     settings,
     exit
-)
+);
 
 } // namespace theme

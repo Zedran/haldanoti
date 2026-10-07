@@ -42,6 +42,6 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     fb_box,
     ok_box,
     ok_button
-)
+);
 
 } // namespace theme

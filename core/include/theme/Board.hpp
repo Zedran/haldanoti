@@ -28,6 +28,6 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     box,
     game_row,
     secret_row
-)
+);
 
 } // namespace theme

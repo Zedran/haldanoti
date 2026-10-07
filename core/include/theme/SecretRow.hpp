@@ -39,6 +39,6 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     info_running_hint,
     info_lost,
     info_won
-)
+);
 
 } // namespace theme

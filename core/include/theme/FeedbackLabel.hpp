@@ -21,6 +21,6 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     none,
     red,
     white
-)
+);
 
 } // namespace theme
