@@ -15,13 +15,12 @@ Things easily forgotten.
     * [Settings.hpp](/core/include/lang/Settings.hpp)
         * Add the option field to the `Settings` struct, prefix it with `opt_`.
         * Include the new field in the JSON macro.
-    * Add the new `opt_` field to [`DEFAULT_LANG`](/core/include/lang/default_lang.hpp).
     * Add the new `opt_` field to every language file in the [lang](/assets/lang/) directory.
 3. `app`
     * [Settings.hpp](/core/include/app/Settings.hpp)
         * Add a new raw pointer for `ui::Box` component related to the option.
     * [Settings.cpp](/core/src/app/Settings.cpp)
-        * `Settings` - add a new component to `opt_box` and store the pointer to it in the newly created member of the `Settings` class.
+        * `Settings` - add a new component to `opt_box` and store the pointer to it in the newly created member of the `Settings` class. Adjust `toolbar_spacing.y`.
         * `get_config` - retrieve value stored in the new option.
         * `restart_required` - add conditional statement for the option if modifying it requires restart.
         * `set_config` - add pointer assertion and set the value to the new component.
