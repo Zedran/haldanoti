@@ -3,8 +3,8 @@
         "game_row": {
             "fb_label": {
                 "none": "",
-                "red": "+",
-                "white": "-"
+                "red": "C",
+                "white": "B"
             },
             "ok": "Ok"
         },
