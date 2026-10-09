@@ -53,7 +53,7 @@ Selector::Selector(
         font,
         sel_button_size,
         style.button,
-        L"<"
+        '<'
     );
     rev.bind(sf::Mouse::Button::Left, [this] { this->decrement(); });
 
@@ -68,7 +68,7 @@ Selector::Selector(
         font,
         sel_button_size,
         style.button,
-        L">"
+        '>'
     );
     fwd.bind(sf::Mouse::Button::Left, [this] { this->increment(); });
 
