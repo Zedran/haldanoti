@@ -1,9 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
+#include <algorithm>
+#include <exception>
+#include <utility>
+
 #include <nlohmann/json.hpp>
 
 #include "utils/assets.hpp"
+#include "utils/debug.hpp"
 
 namespace utils {
 
@@ -20,6 +25,28 @@ std::vector<sf::String> get_lang_fnames() {
 
     if (fnames.empty()) {
         throw std::runtime_error{"could not find language files"};
+    }
+
+    return fnames;
+}
+
+std::vector<sf::String> get_theme_fnames() {
+    std::vector<sf::String> fnames;
+
+    for (const auto& dir : {THEME_DIR_USR, THEME_DIR_SYS}) {
+        if (std::filesystem::exists(dir)) {
+            for (const auto& p : list_files(dir)) {
+                sf::String name = p.filename().replace_extension({}).string();
+
+                if (std::find(fnames.begin(), fnames.end(), sf::String{p.filename()}) == fnames.end()) {
+                    fnames.push_back(std::move(name));
+                }
+            }
+        }
+    }
+
+    if (fnames.empty()) {
+        throw std::runtime_error{"could not find theme files"};
     }
 
     return fnames;
@@ -58,6 +85,37 @@ lang::Lang load_language(std::string lang_fname) {
 
     nlohmann::json j = nlohmann::json::parse(lf);
     return j.get<lang::Lang>();
+}
+
+theme::Theme load_theme(std::string theme_fname) {
+    const auto parse_tf = [](std::filesystem::path p) {
+        if (p.extension() != ".json") {
+            p.replace_extension(".json");
+        }
+
+        std::ifstream tf = load_asset<std::ifstream>(std::move(p));
+
+        nlohmann::json j = nlohmann::json::parse(tf);
+        return j.get<theme::Theme>();
+    };
+
+    if (theme_fname.empty() || theme_fname.starts_with(DEFAULT_THEME)) {
+        return parse_tf(THEME_DIR_SYS / DEFAULT_THEME);
+    }
+
+    for (const auto& dir : {THEME_DIR_USR, THEME_DIR_SYS}) {
+        try {
+            return parse_tf(dir / theme_fname);
+        } catch (const std::exception& e) {
+            // Ignore path errors and JSON parsing errors for custom themes.
+            dbg("{}", e.what());
+            continue;
+        }
+    }
+
+    // If custom theme parsing failed, fall back to the default theme.
+    dbg("falling back to the default theme");
+    return parse_tf(THEME_DIR_SYS / DEFAULT_THEME);
 }
 
 } // namespace utils

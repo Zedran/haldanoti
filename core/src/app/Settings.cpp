@@ -19,13 +19,14 @@ Settings::Settings(
     lang::Settings          lang,
     theme::Settings         theme,
     std::vector<sf::String> lang_fnames,
+    std::vector<sf::String> theme_fnames,
     sf::String              version
-) : ui::Box{size, theme.bg, ui::Layout::Type::ColumnLayout}, state_{} {
+) : ui::Box{size, theme.box, ui::Layout::Type::ColumnLayout}, state_{} {
     constexpr Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
 
     ui::Box& opt_box = add_component<ui::Box>(
         size.componentWiseMul(OPT_BOX_REL_SIZE),
-        theme.box,
+        theme.opt_box,
         ui::Layout::Type::ColumnLayout
     );
 
@@ -81,7 +82,16 @@ Settings::Settings(
         std::move(lang.opt_vsync)
     );
 
-    constexpr sf::Vector2f toolbar_spacing{0.0f, 6.0f};
+    sel_theme_ = &opt_box.add_component<ui::Selector>(
+        font,
+        opt_line_size.componentWiseMul({1.0f, 1.5f}),
+        theme.selector,
+        std::move(lang.opt_theme),
+        std::move(theme_fnames),
+        ui::Layout::Type::ColumnLayout
+    );
+
+    constexpr sf::Vector2f toolbar_spacing{0.0f, 4.0f};
 
     opt_box.add_component<ui::Blank>(opt_line_size.componentWiseMul(toolbar_spacing));
 
@@ -132,6 +142,7 @@ config::Config Settings::get_config() const noexcept {
         .fb_chars     = cb_fb_chars_->get_state(),
         .hints        = cb_hints_->get_state(),
         .lang         = sel_lang_->get_value().toAnsiString(),
+        .theme        = sel_theme_->get_value().toAnsiString(),
         .unique_elems = cb_unique_elems_->get_state(),
         .vsync        = cb_vsync_->get_state(),
     };
@@ -155,6 +166,9 @@ void Settings::set_config(const config::Config& c) {
     assert(sel_lang_);
     sel_lang_->set_value(c.lang);
 
+    assert(sel_theme_);
+    sel_theme_->set_value(c.theme);
+
     assert(cb_code_chars_);
     cb_code_chars_->set_state(c.code_chars);
 
@@ -169,6 +183,7 @@ void Settings::set_config(const config::Config& c) {
 
 bool Settings::restart_required(const config::Config& c) const noexcept {
     return ref_config_.lang != c.lang ||
+           ref_config_.theme != c.theme ||
            ref_config_.code_chars != c.code_chars ||
            ref_config_.fb_chars != c.fb_chars;
 }

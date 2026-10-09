@@ -46,6 +46,7 @@ void from_json(const nlohmann::json& j, Config& v) {
     v.fb_chars     = has("fb_chars") ? j["fb_chars"].get<bool>() : default_config->fb_chars;
     v.hints        = has("hints") ? j["hints"].get<bool>() : default_config->hints;
     v.lang         = has("lang") ? j["lang"].get<std::string>() : default_config->lang;
+    v.theme        = has("theme") ? j["theme"].get<std::string>() : default_config->theme;
     v.unique_elems = has("unique_elems") ? j["unique_elems"].get<bool>() : default_config->unique_elems;
     v.vsync        = has("vsync") ? j["vsync"].get<bool>() : default_config->vsync;
 }
@@ -56,6 +57,7 @@ Config get_default_config() {
         .fb_chars     = false,
         .hints        = false,
         .lang         = get_default_lang_code(),
+        .theme        = std::string{utils::DEFAULT_THEME},
         .unique_elems = true,
         .vsync        = false,
     };
@@ -85,6 +87,7 @@ void to_json(nlohmann::json& j, const Config& v) {
     j["fb_chars"]     = v.fb_chars;
     j["hints"]        = v.hints;
     j["lang"]         = v.lang;
+    j["theme"]        = v.theme;
     j["unique_elems"] = v.unique_elems;
     j["vsync"]        = v.vsync;
 }

@@ -3,7 +3,10 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include "ui/Box.hpp"
+#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace theme {
 
@@ -13,5 +16,11 @@ struct RowBoxStyle {
     ui::Box::Style active;
     ui::Box::Style inactive;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    RowBoxStyle,
+    active,
+    inactive
+);
 
 } // namespace theme

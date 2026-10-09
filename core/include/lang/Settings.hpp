@@ -14,6 +14,7 @@ struct Settings {
     sf::String title;
     sf::String opt_unique_elems;
     sf::String opt_lang;
+    sf::String opt_theme;
     sf::String opt_code_chars;
     sf::String opt_fb_chars;
     sf::String opt_hints;
@@ -27,6 +28,7 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     title,
     opt_unique_elems,
     opt_lang,
+    opt_theme,
     opt_code_chars,
     opt_fb_chars,
     opt_hints,

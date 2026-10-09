@@ -12,7 +12,7 @@
 #include "app/Window.hpp"
 #include "config/Config.hpp"
 #include "lang/Lang.hpp"
-#include "theme/default_theme.hpp"
+#include "theme/Theme.hpp"
 #include "utils/Logger.hpp"
 #include "utils/assets.hpp"
 #include "utils/debug.hpp"
@@ -23,14 +23,15 @@ int main() {
     dbg("{} {} {}", APP_NAME, VERSION, BRANCH);
 
     try {
-        config::Config conf = config::read_config();
-        lang::Lang     lang = utils::load_language(conf.lang);
+        config::Config conf  = config::read_config();
+        lang::Lang     lang  = utils::load_language(conf.lang);
+        theme::Theme   theme = utils::load_theme(conf.theme);
 
         app::App app{
             app::Window::default_size(),
             std::move(conf),
             std::move(lang),
-            theme::DEFAULT_THEME,
+            std::move(theme),
             VERSION
         };
         app.run();

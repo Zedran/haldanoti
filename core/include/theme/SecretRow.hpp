@@ -3,11 +3,15 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include "ui/Box.hpp"
 #include "ui/Label.hpp"
+#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace theme {
 
+// Style of the SecretRow class.
 struct SecretRow {
     // Outer box.
     ui::Box::Style box;
@@ -27,5 +31,15 @@ struct SecretRow {
     // Info label: won.
     ui::Label::Style info_won;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    SecretRow,
+    box,
+    code_box,
+    info_running,
+    info_running_hint,
+    info_lost,
+    info_won
+);
 
 } // namespace theme

@@ -4,21 +4,41 @@
 #pragma once
 
 #include <SFML/Graphics/Color.hpp>
+#include <nlohmann/json.hpp>
 
 #include "theme/Board.hpp"
 #include "theme/Settings.hpp"
 #include "theme/Toolbar.hpp"
 #include "ui/Label.hpp"
+#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace theme {
 
 // Top-level theme structure.
 struct Theme {
-    sf::Color        bg;
-    Board            board;
+    // Window's background color, visible under the game board.
+    sf::Color bg;
+
+    // Game board.
+    Board board;
+
+    // Notification label.
     ui::Label::Style message;
-    Toolbar          toolbar;
-    Settings         settings;
+
+    // Contains the "New game", "Settings" and "Exit" buttons.
+    Toolbar toolbar;
+
+    // Settings page.
+    Settings settings;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    Theme,
+    bg,
+    board,
+    message,
+    toolbar,
+    settings
+);
 
 } // namespace theme

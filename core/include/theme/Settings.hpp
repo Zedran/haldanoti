@@ -3,21 +3,49 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include "ui/Box.hpp"
 #include "ui/Checkbox.hpp"
 #include "ui/Label.hpp"
 #include "ui/Selector.hpp"
+#include "utils/json.hpp" // IWYU pragma: keep
 
 namespace theme {
 
+// Style of the Settings class.
 struct Settings {
-    ui::Box::Style      bg;
-    ui::Box::Style      box;
-    ui::Label::Style    label;
+    // Outer box of the settings page.
+    ui::Box::Style box;
+
+    // Style of the option box, drawn over background.
+    ui::Box::Style opt_box;
+
+    // Style used by every Label on the settings page.
+    ui::Label::Style label;
+
+    // Style used by every Checkbox on the settings page.
     ui::Checkbox::Style checkbox;
+
+    // Style used by every Selector on the settings page.
     ui::Selector::Style selector;
-    ui::Button::Style   save;
-    ui::Button::Style   cancel;
+
+    // Style of the "Save" button.
+    ui::Button::Style save;
+
+    // Style of the "Cancel" button.
+    ui::Button::Style cancel;
 };
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    Settings,
+    box,
+    opt_box,
+    label,
+    checkbox,
+    selector,
+    save,
+    cancel
+);
 
 } // namespace theme

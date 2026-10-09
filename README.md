@@ -24,6 +24,7 @@ The following table presents configuration options that are available. Some chan
 | **Feedback characters** | yes     | Display small signs in the feedback fields in addition to colors.           |
 | **Language**            | yes     | Game's display language.                                                    |
 | **Show hints**          |         | Show a number of distinct elements in the secret code.                      |
+| **Theme**               | yes     | Game's color theme.                                                         |
 | **Unique elements**     |         | Do not repeat code elements.                                                |
 | **VSync**               |         | Run at native framerate instead of limiting it to 60 FPS.                   |
 

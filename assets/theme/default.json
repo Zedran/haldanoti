@@ -1,0 +1,548 @@
+{
+    "bg": "8b7659ff",
+    "board": {
+        "box": {
+            "bg": "fff8f2ff",
+            "ol": "00000000"
+        },
+        "game_row": {
+            "base": {
+                "box": {
+                    "active": {
+                        "bg": "ffffffff",
+                        "ol": "00000000"
+                    },
+                    "inactive": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    }
+                },
+                "code_box": {
+                    "active": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    },
+                    "inactive": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    }
+                },
+                "fb_box": {
+                    "active": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    },
+                    "inactive": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    }
+                },
+                "ok_box": {
+                    "active": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    },
+                    "inactive": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    }
+                },
+                "ok_button": {
+                    "active": {
+                        "bg": "00ce00ff",
+                        "fg": "000000ff",
+                        "ol": "8b7659ff"
+                    },
+                    "disabled": {
+                        "bg": "fff8f2ff",
+                        "fg": "000000ff",
+                        "ol": "00000000"
+                    },
+                    "hover": {
+                        "bg": "00b400ff",
+                        "fg": "ffffffff",
+                        "ol": "8b7659ff"
+                    },
+                    "normal": {
+                        "bg": "009b00ff",
+                        "fg": "ffffffff",
+                        "ol": "8b7659ff"
+                    }
+                }
+            },
+            "code_button": {
+                "elements": [
+                    {
+                        "active": {
+                            "bg": "4484c4ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        },
+                        "disabled": {
+                            "bg": "f2dec6ff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "hover": {
+                            "bg": "4484c4ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        },
+                        "normal": {
+                            "bg": "4484c4ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "07efccff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "disabled": {
+                            "bg": "f2dec6ff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "hover": {
+                            "bg": "07efccff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "normal": {
+                            "bg": "07efccff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "249635ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        },
+                        "disabled": {
+                            "bg": "f2dec6ff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "hover": {
+                            "bg": "249635ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        },
+                        "normal": {
+                            "bg": "249635ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "ff8800ff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "disabled": {
+                            "bg": "f2dec6ff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "hover": {
+                            "bg": "ff8800ff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "normal": {
+                            "bg": "ff8800ff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "c90e0eff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        },
+                        "disabled": {
+                            "bg": "f2dec6ff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "hover": {
+                            "bg": "c90e0eff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        },
+                        "normal": {
+                            "bg": "c90e0eff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "5f17d3ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        },
+                        "disabled": {
+                            "bg": "f2dec6ff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "hover": {
+                            "bg": "5f17d3ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        },
+                        "normal": {
+                            "bg": "5f17d3ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "000000ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        },
+                        "disabled": {
+                            "bg": "f2dec6ff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "hover": {
+                            "bg": "000000ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        },
+                        "normal": {
+                            "bg": "000000ff",
+                            "fg": "ffffffff",
+                            "ol": "8b7659ff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "ffea0aff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "disabled": {
+                            "bg": "f2dec6ff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "hover": {
+                            "bg": "ffea0aff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        },
+                        "normal": {
+                            "bg": "ffea0aff",
+                            "fg": "000000ff",
+                            "ol": "8b7659ff"
+                        }
+                    }
+                ],
+                "empty": {
+                    "active": {
+                        "bg": "f2dec6ff",
+                        "fg": "000000ff",
+                        "ol": "8b7659ff"
+                    },
+                    "disabled": {
+                        "bg": "f2dec6ff",
+                        "fg": "00000000",
+                        "ol": "8b7659ff"
+                    },
+                    "hover": {
+                        "bg": "f2dec6ff",
+                        "fg": "000000ff",
+                        "ol": "8b7659ff"
+                    },
+                    "normal": {
+                        "bg": "f2dec6ff",
+                        "fg": "000000ff",
+                        "ol": "8b7659ff"
+                    }
+                }
+            },
+            "fb_label": {
+                "none": {
+                    "bg": "f2dec6ff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                },
+                "red": {
+                    "bg": "c90e0eff",
+                    "fg": "ffffffff",
+                    "ol": "8b7659ff"
+                },
+                "white": {
+                    "bg": "ffffffff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                }
+            }
+        },
+        "secret_row": {
+            "box": {
+                "bg": "00000000",
+                "ol": "00000000"
+            },
+            "code_box": {
+                "bg": "f2dec6ff",
+                "ol": "00000000"
+            },
+            "info_lost": {
+                "bg": "f2dec6ff",
+                "fg": "000000ff",
+                "ol": "00000000"
+            },
+            "info_running": {
+                "bg": "8b7659ff",
+                "fg": "00000000",
+                "ol": "00000000"
+            },
+            "info_running_hint": {
+                "bg": "f2dec6ff",
+                "fg": "000000ff",
+                "ol": "00000000"
+            },
+            "info_won": {
+                "bg": "249635ff",
+                "fg": "ffffffff",
+                "ol": "00000000"
+            }
+        }
+    },
+    "message": {
+        "bg": "000000aa",
+        "fg": "ffffffff",
+        "ol": "00000000"
+    },
+    "settings": {
+        "box": {
+            "bg": "00000044",
+            "ol": "00000000"
+        },
+        "opt_box": {
+            "bg": "f2dec6ff",
+            "ol": "8b7659ff"
+        },
+        "cancel": {
+            "active": {
+                "bg": "ff4040ff",
+                "fg": "000000ff",
+                "ol": "8b7659ff"
+            },
+            "disabled": {
+                "bg": "f2dec6ff",
+                "fg": "000000ff",
+                "ol": "8b7659ff"
+            },
+            "hover": {
+                "bg": "e80000ff",
+                "fg": "ffffffff",
+                "ol": "8b7659ff"
+            },
+            "normal": {
+                "bg": "c80000ff",
+                "fg": "ffffffff",
+                "ol": "8b7659ff"
+            }
+        },
+        "checkbox": {
+            "box": {
+                "bg": "00000000",
+                "ol": "00000000"
+            },
+            "button_off": {
+                "active": {
+                    "bg": "ffffffff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                },
+                "disabled": {
+                    "bg": "f2dec6ff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                },
+                "hover": {
+                    "bg": "fff8f2ff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                },
+                "normal": {
+                    "bg": "f2dec6ff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                }
+            },
+            "button_on": {
+                "active": {
+                    "bg": "ffffffff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                },
+                "disabled": {
+                    "bg": "f2dec6ff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                },
+                "hover": {
+                    "bg": "fff8f2ff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                },
+                "normal": {
+                    "bg": "f2dec6ff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                }
+            },
+            "label": {
+                "bg": "00000000",
+                "fg": "000000ff",
+                "ol": "00000000"
+            }
+        },
+        "label": {
+            "bg": "00000000",
+            "fg": "000000ff",
+            "ol": "00000000"
+        },
+        "save": {
+            "active": {
+                "bg": "00ce00ff",
+                "fg": "000000ff",
+                "ol": "8b7659ff"
+            },
+            "disabled": {
+                "bg": "fff8f2ff",
+                "fg": "000000ff",
+                "ol": "00000000"
+            },
+            "hover": {
+                "bg": "00b400ff",
+                "fg": "ffffffff",
+                "ol": "8b7659ff"
+            },
+            "normal": {
+                "bg": "009b00ff",
+                "fg": "ffffffff",
+                "ol": "8b7659ff"
+            }
+        },
+        "selector": {
+            "box": {
+                "bg": "00000000",
+                "ol": "00000000"
+            },
+            "button": {
+                "active": {
+                    "bg": "ffffffff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                },
+                "disabled": {
+                    "bg": "f2dec6ff",
+                    "fg": "000000ff",
+                    "ol": "00000000"
+                },
+                "hover": {
+                    "bg": "f2dec6ff",
+                    "fg": "000000ff",
+                    "ol": "8b7659ff"
+                },
+                "normal": {
+                    "bg": "f2dec6ff",
+                    "fg": "000000ff",
+                    "ol": "00000000"
+                }
+            },
+            "label": {
+                "bg": "00000000",
+                "fg": "000000ff",
+                "ol": "00000000"
+            }
+        }
+    },
+    "toolbar": {
+        "box": {
+            "bg": "f2dec6ff",
+            "ol": "00000000"
+        },
+        "exit": {
+            "active": {
+                "bg": "ff4040ff",
+                "fg": "000000ff",
+                "ol": "8b7659ff"
+            },
+            "disabled": {
+                "bg": "f2dec6ff",
+                "fg": "000000ff",
+                "ol": "8b7659ff"
+            },
+            "hover": {
+                "bg": "e80000ff",
+                "fg": "ffffffff",
+                "ol": "8b7659ff"
+            },
+            "normal": {
+                "bg": "c80000ff",
+                "fg": "ffffffff",
+                "ol": "8b7659ff"
+            }
+        },
+        "new_game": {
+            "active": {
+                "bg": "6d9fd1ff",
+                "fg": "000000ff",
+                "ol": "8b7659ff"
+            },
+            "disabled": {
+                "bg": "f2dec6ff",
+                "fg": "000000ff",
+                "ol": "8b7659ff"
+            },
+            "hover": {
+                "bg": "4484c4ff",
+                "fg": "ffffffff",
+                "ol": "8b7659ff"
+            },
+            "normal": {
+                "bg": "3774b0ff",
+                "fg": "ffffffff",
+                "ol": "8b7659ff"
+            }
+        },
+        "settings": {
+            "active": {
+                "bg": "ffcc80ff",
+                "fg": "000000ff",
+                "ol": "8b7659ff"
+            },
+            "disabled": {
+                "bg": "f2dec6ff",
+                "fg": "000000ff",
+                "ol": "8b7659ff"
+            },
+            "hover": {
+                "bg": "ffad33ff",
+                "fg": "000000ff",
+                "ol": "8b7659ff"
+            },
+            "normal": {
+                "bg": "ff9900ff",
+                "fg": "000000ff",
+                "ol": "8b7659ff"
+            }
+        }
+    }
+}

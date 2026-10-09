@@ -35,7 +35,8 @@ public:
         sf::Vector2f            size,
         Style                   style,
         sf::String              label,
-        std::vector<sf::String> entries
+        std::vector<sf::String> entries,
+        Layout::Type            layout = Layout::Type::RowLayout
     );
 
     virtual ~Selector();
@@ -48,11 +49,26 @@ public:
     void set_value(const sf::String& v);
 
 private:
-    // Size of the description Label relative to the outer Box.
-    static constexpr sf::Vector2f LABEL_REL_SIZE{0.6f, 0.75f};
+    // Relative dimensions of the Selector's components.
+    struct Dimensions {
+        // Size of the description Label relative to the outer Box.
+        sf::Vector2f LabelRelSize;
 
-    // Size of the Selector's Label relative to the right Box.
-    static constexpr sf::Vector2f LABEL_TO_RBOX_REL_SIZE{0.3f, 1.0f};
+        // Size of the Selector's Label relative to the right Box.
+        sf::Vector2f LabelToRBoxRelSize;
+    };
+
+    // Relative dimensions of the Selector when using ColumnLayout.
+    static constexpr Dimensions DIM_COL{
+        .LabelRelSize{1.0f, 0.5f},
+        .LabelToRBoxRelSize{0.8f, 1.0f},
+    };
+
+    // Relative dimensions of the Selector when using RowLayout.
+    static constexpr Dimensions DIM_ROW{
+        .LabelRelSize{0.6f, 0.75f},
+        .LabelToRBoxRelSize{0.4f, 1.0f},
+    };
 
     // Entries to display in the Selector's Label.
     std::vector<sf::String> entries_;

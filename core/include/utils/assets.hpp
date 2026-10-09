@@ -17,6 +17,7 @@
 
 #include "lang/Lang.hpp"
 #include "os/os.hpp"
+#include "theme/Theme.hpp"
 
 namespace utils {
 
@@ -41,50 +42,61 @@ inline const std::filesystem::path ASSETS_DIRNAME{"assets"};
 // Language files subdirectory. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
 inline const std::filesystem::path LANG_DIRNAME{"lang"};
 
+// Theme files subdirectory. Combine with APP_DATA_DIR/ASSETS_DIRNAME.
+inline const std::filesystem::path THEME_DIRNAME{"theme"};
+
+// System theme directory - for themes shipped with the game.
+inline const std::filesystem::path THEME_DIR_SYS = APP_DATA_DIR / ASSETS_DIRNAME / THEME_DIRNAME;
+
+// User theme directory - for custom themes.
+inline const std::filesystem::path THEME_DIR_USR = CONFIG_DIR / THEME_DIRNAME;
+
 // 2-letter code of the default language.
 inline constexpr std::string_view DEFAULT_LANG_CODE{"en"};
+
+// Name of the default theme.
+inline constexpr std::string_view DEFAULT_THEME{"default"};
 
 // Returns a list of available language filenames without extensions.
 std::vector<sf::String> get_lang_fnames();
 
+// Returns a list of available theme filenames without extensions.
+// Duplicates are filtered out. Themes found in THEME_DIR_USR have
+// precedence over those found in THEME_DIR_SYS.
+std::vector<sf::String> get_theme_fnames();
+
 // Returns a list of file paths in dir.
 std::vector<std::filesystem::path> list_files(const std::filesystem::path& dir);
 
-// Returns T constructed from the asset file.
-//
-// Accepts a relative path to the asset file. It is appended to
-// APP_DATA_DIR/ASSETS_DIRNAME.
-//
-// Throws runtime_error if rel_path is empty or is an absolute path.
+// Returns T constructed from the asset file. If path is relative,
+// it is appended to APP_DATA_DIR/ASSETS_DIRNAME.
 template <typename T>
     requires std::is_same_v<T, sf::Font> ||
              std::is_same_v<T, sf::Image> ||
              std::is_same_v<T, std::ifstream>
-T load_asset(std::filesystem::path rel_path) {
-    if (rel_path.empty()) {
+T load_asset(std::filesystem::path path) {
+    if (path.empty()) {
         throw std::runtime_error{"asset relative path is empty"};
     }
 
-    if (!rel_path.is_relative()) {
-        throw std::runtime_error{"path '" + rel_path.string() + "' is not relative"};
+    if (path.is_relative()) {
+        path = APP_DATA_DIR / ASSETS_DIRNAME / path;
     }
 
-    const std::filesystem::path p = APP_DATA_DIR / ASSETS_DIRNAME / rel_path;
-
     if constexpr (std::is_same_v<T, sf::Font>) {
-        sf::Font font{p};
+        sf::Font font{path};
         font.setSmooth(false);
         return font;
     }
 
     if constexpr (std::is_same_v<T, sf::Image>) {
-        return sf::Image{p};
+        return sf::Image{path};
     }
 
     if constexpr (std::is_same_v<T, std::ifstream>) {
-        std::ifstream f{std::filesystem::path{p}};
+        std::ifstream f{std::filesystem::path{path}};
         if (!f.good()) {
-            throw std::runtime_error{"unable to load file '" + rel_path.string() + '\''};
+            throw std::runtime_error{"unable to load file '" + path.string() + '\''};
         }
         return f;
     }
@@ -100,5 +112,17 @@ T load_asset(std::filesystem::path rel_path) {
 // expects the file to have the '.json' extension and it will be appended
 // to lang_fname if missing.
 lang::Lang load_language(std::string lang_fname);
+
+// Returns a Theme struct read from the file or the default theme if the file
+// cannot be read or is incorrectly structured. Throws upon encountering JSON
+// parsing errors or problems with the fallback file.
+//
+// The function expects filenames to have '.json' extension and it will
+// be appended to theme_fname if missing.
+//
+// The function attempts to load a theme file from the THEME_DIR_USR first.
+// If theme_fname == DEFAULT_THEME, the file is always loaded from
+// the system path.
+theme::Theme load_theme(std::string theme_fname);
 
 } // namespace utils
