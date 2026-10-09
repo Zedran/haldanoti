@@ -12,6 +12,7 @@
 #include "app/Window.hpp"
 #include "config/Config.hpp"
 #include "lang/Lang.hpp"
+#include "theme/Theme.hpp"
 #include "utils/Logger.hpp"
 #include "utils/assets.hpp"
 #include "utils/debug.hpp"
