@@ -6,6 +6,7 @@
 #include <memory>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "config/Config.hpp"
@@ -45,8 +46,8 @@ void from_json(const nlohmann::json& j, Config& v) {
     v.code_chars   = has("code_chars") ? j["code_chars"].get<bool>() : default_config->code_chars;
     v.fb_chars     = has("fb_chars") ? j["fb_chars"].get<bool>() : default_config->fb_chars;
     v.hints        = has("hints") ? j["hints"].get<bool>() : default_config->hints;
-    v.lang         = has("lang") ? j["lang"].get<std::string>() : default_config->lang;
-    v.theme        = has("theme") ? j["theme"].get<std::string>() : default_config->theme;
+    v.lang         = has("lang") ? j["lang"].get<std::string>() : std::move(default_config->lang);
+    v.theme        = has("theme") ? j["theme"].get<std::string>() : std::move(default_config->theme);
     v.unique_elems = has("unique_elems") ? j["unique_elems"].get<bool>() : default_config->unique_elems;
     v.vsync        = has("vsync") ? j["vsync"].get<bool>() : default_config->vsync;
 }
