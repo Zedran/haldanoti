@@ -9,6 +9,7 @@
 #include "os/os.hpp"
 #include "utils/Logger.hpp"
 #include "utils/assets.hpp"
+#include "utils/debug.hpp"
 
 namespace utils {
 
@@ -41,11 +42,17 @@ Logger& Logger::instance() {
 }
 
 void Logger::println(std::string_view version, std::string_view msg) {
-    instance().file_ << "[ " << get_timestamp() << " ] (" << version << ") " << msg << '\n';
+    const std::int64_t ts = get_timestamp();
+
+    dbg("[ {} ] ({}) {}", ts, version, msg);
+    instance().file_ << "[ " << ts << " ] (" << version << ") " << msg << '\n';
 }
 
 void Logger::println(std::string_view version, std::string_view msg, const std::exception& e) {
-    instance().file_ << "[ " << get_timestamp() << " ] (" << version << ") " << msg << ": " << e.what() << '\n';
+    const std::int64_t ts = get_timestamp();
+
+    dbg("[ {} ] ({}) {}: {}", ts, version, msg, e.what());
+    instance().file_ << "[ " << ts << " ] (" << version << ") " << msg << ": " << e.what() << '\n';
 }
 
 } // namespace utils
