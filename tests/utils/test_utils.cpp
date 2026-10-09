@@ -46,10 +46,10 @@ TEST_CASE("decode_color") {
     };
 
     const test_data test_cases[]{
-        {"#000000", sf::Color{0x0, 0x0, 0x0, 0xff}},     // #RGB
-        {"ffffff", sf::Color{0xff, 0xff, 0xff, 0xff}},   // RGB
-        {"#00000000", sf::Color{0x0, 0x0, 0x0, 0x00}},   // #RGBA
-        {"ffffff50", sf::Color{0xff, 0xff, 0xff, 0x50}}, // RGBA
+        {"#000000", sf::Color{0x000000ff}},   // #RGB
+        {"ffffff", sf::Color{0xffffffff}},    // RGB
+        {"#00000000", sf::Color{0x00000000}}, // #RGBA
+        {"ffffff50", sf::Color{0xffffff50}},  // RGBA
         {"", true},                                      // Empty string
         {"#12345", true},                                // Too short for #RGB
         {"12345", true},                                 // Too short for RGB
