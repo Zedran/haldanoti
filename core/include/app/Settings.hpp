@@ -95,8 +95,8 @@ private:
     // of the Settings page.
     static constexpr sf::Vector2f VERSION_RELSIZE{0.8f, 0.016f};
 
-    // Non-owning pointer to the preferred language Selector.
-    // Required for getting and setting its value.
+    // Non-owning pointer to the language Selector. Required for getting
+    // and setting its value.
     ui::Selector* sel_lang_;
 
     // Non-owning pointer to the Checkbox representing the code characters
