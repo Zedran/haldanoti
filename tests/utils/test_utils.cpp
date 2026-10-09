@@ -5,8 +5,8 @@
 
 #include <array>
 #include <cstddef>
+#include <optional>
 #include <string>
-#include <variant>
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Rect.hpp>
@@ -37,11 +37,11 @@ TEST_CASE("count_distinct") {
 
 TEST_CASE("decode_color") {
     struct test_data {
-        std::string                   input;
-        std::variant<sf::Color, bool> expected;
+        std::string              input;
+        std::optional<sf::Color> expected{};
 
         bool good_case() const noexcept {
-            return std::holds_alternative<sf::Color>(expected);
+            return expected.has_value();
         }
     };
 
@@ -50,15 +50,15 @@ TEST_CASE("decode_color") {
         {"ffffff", sf::Color{0xffffffff}},    // RGB
         {"#00000000", sf::Color{0x00000000}}, // #RGBA
         {"ffffff50", sf::Color{0xffffff50}},  // RGBA
-        {"", true},                                      // Empty string
-        {"#12345", true},                                // Too short for #RGB
-        {"12345", true},                                 // Too short for RGB
-        {"#1234567", true},                              // Too short for #RGBA
-        {"1234567", true},                               // Too short for RGBA
-        {"#123456789", true},                            // Too long for #RGBA
-        {"123456789", true},                             // Too long for RGBA
-        {"#hello", true},                                // Invalid characters
-        {"hello", true},                                 // Invalid characters
+        {""},                                 // Empty string
+        {"#12345"},                           // Too short for #RGB
+        {"12345"},                            // Too short for RGB
+        {"#1234567"},                         // Too short for #RGBA
+        {"1234567"},                          // Too short for RGBA
+        {"#123456789"},                       // Too long for #RGBA
+        {"123456789"},                        // Too long for RGBA
+        {"#hello"},                           // Invalid characters
+        {"hello"},                            // Invalid characters
     };
 
     for (const auto& c : test_cases) {
@@ -66,7 +66,7 @@ TEST_CASE("decode_color") {
 
         if (c.good_case()) {
             const sf::Color out = utils::decode_color(c.input);
-            REQUIRE(out == std::get<sf::Color>(c.expected));
+            REQUIRE(out == *c.expected);
         } else {
             REQUIRE_THROWS(utils::decode_color(c.input));
         }
