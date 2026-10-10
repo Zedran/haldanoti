@@ -60,9 +60,9 @@ public:
     // Sets the specified code value to the CodeButton instance.
     void set_value(int value);
 
-    // Forces CodeButton instance to use its active style, even when disabled.
+    // Forces CodeButton instance to use its normal style, even when disabled.
     // This cannot be done if code_element_ value is equal to CODE_VALUE_NONE.
-    void use_active_style();
+    void use_normal_style();
 
 private:
     // Font size relative to the height of CodeButton.

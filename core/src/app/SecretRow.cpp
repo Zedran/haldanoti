@@ -50,7 +50,7 @@ SecretRow::~SecretRow() = default;
 void SecretRow::display_code(std::span<const int, game::Row::ROW_LEN> code) {
     for (std::size_t i = 0; i < code.size(); i++) {
         code_buttons_[i]->set_value(code[i]);
-        code_buttons_[i]->use_active_style();
+        code_buttons_[i]->use_normal_style();
     }
 }
 
