@@ -129,7 +129,10 @@ Settings::Settings(
         std::move(lang.cancel),
         font_size
     );
-    cancel.bind(sf::Mouse::Button::Left, [this] { this->set_state(State::Close); });
+    cancel.bind(sf::Mouse::Button::Left, [this] {
+        this->set_state(State::Close);
+        this->reset();
+    });
 }
 
 bool Settings::config_differs(const config::Config& c) const noexcept {
@@ -179,6 +182,10 @@ void Settings::set_config(const config::Config& c) {
     cb_vsync_->set_state(c.vsync);
 
     set_ref_config(c);
+}
+
+void Settings::reset() {
+    set_config(ref_config_);
 }
 
 bool Settings::restart_required(const config::Config& c) const noexcept {

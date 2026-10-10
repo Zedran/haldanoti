@@ -129,6 +129,9 @@ private:
 
     // Stores the current state of the Settings page.
     State state_;
+
+    // Resets the display state. Called if the cancel Button is pressed.
+    void reset();
 };
 
 } // namespace app
