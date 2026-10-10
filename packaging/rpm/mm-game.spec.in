@@ -44,6 +44,7 @@ BuildRequires:  json-devel >= 3.9.0
 %license %{_datadir}/%{name}/NOTICE.md
 %license %{_datadir}/%{name}/docs/licenses
 %doc     %{_datadir}/%{name}/README.md
+%doc     %{_datadir}/%{name}/SECURITY.md
 %{_bindir}/%{name}
 %{_datadir}/%{name}/assets
 %{_datadir}/applications/%{name}.desktop
