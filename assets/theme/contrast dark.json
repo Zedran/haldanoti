@@ -1,0 +1,548 @@
+{
+    "bg": "000000ff",
+    "board": {
+        "box": {
+            "bg": "00000000",
+            "ol": "00000000"
+        },
+        "game_row": {
+            "base": {
+                "box": {
+                    "active": {
+                        "bg": "00000000",
+                        "ol": "ffffffff"
+                    },
+                    "inactive": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    }
+                },
+                "code_box": {
+                    "active": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    },
+                    "inactive": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    }
+                },
+                "fb_box": {
+                    "active": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    },
+                    "inactive": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    }
+                },
+                "ok_box": {
+                    "active": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    },
+                    "inactive": {
+                        "bg": "00000000",
+                        "ol": "00000000"
+                    }
+                },
+                "ok_button": {
+                    "active": {
+                        "bg": "ffffffff",
+                        "fg": "000000ff",
+                        "ol": "00000000"
+                    },
+                    "disabled": {
+                        "bg": "00000000",
+                        "fg": "ffffffff",
+                        "ol": "00000000"
+                    },
+                    "hover": {
+                        "bg": "ffffffff",
+                        "fg": "000000ff",
+                        "ol": "ffffffff"
+                    },
+                    "normal": {
+                        "bg": "00000000",
+                        "fg": "ffffffff",
+                        "ol": "ffffffff"
+                    }
+                }
+            },
+            "code_button": {
+                "elements": [
+                    {
+                        "active": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "00000000"
+                        },
+                        "disabled": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "00000000"
+                        },
+                        "hover": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "ffffffff"
+                        },
+                        "normal": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "ffffffff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "00000000"
+                        },
+                        "disabled": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "00000000"
+                        },
+                        "hover": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "ffffffff"
+                        },
+                        "normal": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "ffffffff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "00000000"
+                        },
+                        "disabled": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "00000000"
+                        },
+                        "hover": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "ffffffff"
+                        },
+                        "normal": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "ffffffff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "00000000"
+                        },
+                        "disabled": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "00000000"
+                        },
+                        "hover": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "ffffffff"
+                        },
+                        "normal": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "ffffffff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "00000000"
+                        },
+                        "disabled": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "00000000"
+                        },
+                        "hover": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "ffffffff"
+                        },
+                        "normal": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "ffffffff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "00000000"
+                        },
+                        "disabled": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "00000000"
+                        },
+                        "hover": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "ffffffff"
+                        },
+                        "normal": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "ffffffff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "00000000"
+                        },
+                        "disabled": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "00000000"
+                        },
+                        "hover": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "ffffffff"
+                        },
+                        "normal": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "ffffffff"
+                        }
+                    },
+                    {
+                        "active": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "00000000"
+                        },
+                        "disabled": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "00000000"
+                        },
+                        "hover": {
+                            "bg": "ffffffff",
+                            "fg": "000000ff",
+                            "ol": "ffffffff"
+                        },
+                        "normal": {
+                            "bg": "00000000",
+                            "fg": "ffffffff",
+                            "ol": "ffffffff"
+                        }
+                    }
+                ],
+                "empty": {
+                    "active": {
+                        "bg": "ffffffff",
+                        "fg": "000000ff",
+                        "ol": "00000000"
+                    },
+                    "disabled": {
+                        "bg": "00000000",
+                        "fg": "00000000",
+                        "ol": "ffffffff"
+                    },
+                    "hover": {
+                        "bg": "ffffffff",
+                        "fg": "000000ff",
+                        "ol": "ffffffff"
+                    },
+                    "normal": {
+                        "bg": "00000000",
+                        "fg": "ffffffff",
+                        "ol": "ffffffff"
+                    }
+                }
+            },
+            "fb_label": {
+                "none": {
+                    "bg": "00000000",
+                    "fg": "00000000",
+                    "ol": "00000000"
+                },
+                "red": {
+                    "bg": "ffffffff",
+                    "fg": "000000ff",
+                    "ol": "ffffffff"
+                },
+                "white": {
+                    "bg": "00000000",
+                    "fg": "ffffffff",
+                    "ol": "ffffffff"
+                }
+            }
+        },
+        "secret_row": {
+            "box": {
+                "bg": "00000000",
+                "ol": "ffffffff"
+            },
+            "code_box": {
+                "bg": "00000000",
+                "ol": "00000000"
+            },
+            "info_lost": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "00000000"
+            },
+            "info_running": {
+                "bg": "00000000",
+                "fg": "00000000",
+                "ol": "00000000"
+            },
+            "info_running_hint": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "00000000"
+            },
+            "info_won": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "00000000"
+            }
+        }
+    },
+    "message": {
+        "bg": "ffffffff",
+        "fg": "000000ff",
+        "ol": "00000000"
+    },
+    "settings": {
+        "box": {
+            "bg": "000000ff",
+            "ol": "00000000"
+        },
+        "opt_box": {
+            "bg": "00000000",
+            "ol": "ffffffff"
+        },
+        "cancel": {
+            "active": {
+                "bg": "ffffffff",
+                "fg": "000000ff",
+                "ol": "00000000"
+            },
+            "disabled": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "00000000"
+            },
+            "hover": {
+                "bg": "ffffffff",
+                "fg": "000000ff",
+                "ol": "ffffffff"
+            },
+            "normal": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "ffffffff"
+            }
+        },
+        "checkbox": {
+            "box": {
+                "bg": "00000000",
+                "ol": "00000000"
+            },
+            "button_off": {
+                "active": {
+                    "bg": "ffffffff",
+                    "fg": "000000ff",
+                    "ol": "00000000"
+                },
+                "disabled": {
+                    "bg": "00000000",
+                    "fg": "ffffffff",
+                    "ol": "00000000"
+                },
+                "hover": {
+                    "bg": "ffffffff",
+                    "fg": "000000ff",
+                    "ol": "ffffffff"
+                },
+                "normal": {
+                    "bg": "00000000",
+                    "fg": "ffffffff",
+                    "ol": "ffffffff"
+                }
+            },
+            "button_on": {
+                "active": {
+                    "bg": "ffffffff",
+                    "fg": "000000ff",
+                    "ol": "00000000"
+                },
+                "disabled": {
+                    "bg": "00000000",
+                    "fg": "ffffffff",
+                    "ol": "00000000"
+                },
+                "hover": {
+                    "bg": "ffffffff",
+                    "fg": "000000ff",
+                    "ol": "ffffffff"
+                },
+                "normal": {
+                    "bg": "00000000",
+                    "fg": "ffffffff",
+                    "ol": "ffffffff"
+                }
+            },
+            "label": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "00000000"
+            }
+        },
+        "label": {
+            "bg": "00000000",
+            "fg": "ffffffff",
+            "ol": "00000000"
+        },
+        "save": {
+            "active": {
+                "bg": "ffffffff",
+                "fg": "000000ff",
+                "ol": "00000000"
+            },
+            "disabled": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "00000000"
+            },
+            "hover": {
+                "bg": "ffffffff",
+                "fg": "000000ff",
+                "ol": "ffffffff"
+            },
+            "normal": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "ffffffff"
+            }
+        },
+        "selector": {
+            "box": {
+                "bg": "00000000",
+                "ol": "00000000"
+            },
+            "button": {
+                "active": {
+                    "bg": "ffffffff",
+                    "fg": "000000ff",
+                    "ol": "00000000"
+                },
+                "disabled": {
+                    "bg": "00000000",
+                    "fg": "00000000",
+                    "ol": "00000000"
+                },
+                "hover": {
+                    "bg": "ffffffff",
+                    "fg": "000000ff",
+                    "ol": "ffffffff"
+                },
+                "normal": {
+                    "bg": "00000000",
+                    "fg": "ffffffff",
+                    "ol": "ffffffff"
+                }
+            },
+            "label": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "00000000"
+            }
+        }
+    },
+    "toolbar": {
+        "box": {
+            "bg": "00000000",
+            "ol": "ffffffff"
+        },
+        "exit": {
+            "active": {
+                "bg": "ffffffff",
+                "fg": "000000ff",
+                "ol": "00000000"
+            },
+            "disabled": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "00000000"
+            },
+            "hover": {
+                "bg": "ffffffff",
+                "fg": "000000ff",
+                "ol": "ffffffff"
+            },
+            "normal": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "ffffffff"
+            }
+        },
+        "new_game": {
+            "active": {
+                "bg": "ffffffff",
+                "fg": "000000ff",
+                "ol": "00000000"
+            },
+            "disabled": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "00000000"
+            },
+            "hover": {
+                "bg": "ffffffff",
+                "fg": "000000ff",
+                "ol": "ffffffff"
+            },
+            "normal": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "ffffffff"
+            }
+        },
+        "settings": {
+            "active": {
+                "bg": "ffffffff",
+                "fg": "000000ff",
+                "ol": "00000000"
+            },
+            "disabled": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "00000000"
+            },
+            "hover": {
+                "bg": "ffffffff",
+                "fg": "000000ff",
+                "ol": "ffffffff"
+            },
+            "normal": {
+                "bg": "00000000",
+                "fg": "ffffffff",
+                "ol": "ffffffff"
+            }
+        }
+    }
+}
