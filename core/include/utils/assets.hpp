@@ -22,13 +22,13 @@
 namespace utils {
 
 // Application directory name. Created in user's cache and config directories.
-inline constexpr std::string_view APP_DIRNAME{"mm-game"};
+inline constexpr std::string_view APP_DIRNAME{"haldanoti"};
 
 // Location of the user config directory.
 inline const std::filesystem::path CONFIG_DIR = os::find_config_dir() / APP_DIRNAME;
 
 // Name of the config file.
-inline const std::filesystem::path CONFIG_FNAME{"mm.json"};
+inline const std::filesystem::path CONFIG_FNAME{"haldanoti.json"};
 
 // Full path to config file.
 inline const std::filesystem::path CONFIG_PATH = CONFIG_DIR / CONFIG_FNAME;

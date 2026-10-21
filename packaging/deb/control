@@ -1,4 +1,4 @@
-Source: mm-game
+Source: haldanoti
 Section: games
 Priority: optional
 Maintainer: Wojciech Głąb (github.com/Zedran)
@@ -20,14 +20,14 @@ Build-Depends:
  libflac-dev,
  nlohmann-json3-dev,
 Standards-Version: 4.7.0
-Homepage: https://github.com/Zedran/mm
+Homepage: https://github.com/Zedran/haldanoti
 Rules-Requires-Root: no
-Vcs-Git: https://github.com/Zedran/mm.git
+Vcs-Git: https://github.com/Zedran/haldanoti.git
 
-Package: mm-game
+Package: haldanoti
 Architecture: any
 Multi-Arch: foreign
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
-Description: Digital version of the Mastermind game
+Description: Digital adaptation of the Bulls and Cows game

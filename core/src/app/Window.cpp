@@ -11,10 +11,10 @@
 namespace app {
 
 Window::Window(sf::Vector2f window_size, bool vsync)
-    : sf::RenderWindow{sf::VideoMode{static_cast<sf::Vector2u>(window_size)}, "mm", sf::Style::Close} {
+    : sf::RenderWindow{sf::VideoMode{static_cast<sf::Vector2u>(window_size)}, L"Haldan\u00f3ti", sf::Style::Close} {
     dbg("screen_size = {{{:.0f}, {:.0f}}}", window_size.x, window_size.y);
 
-    setIcon(utils::load_asset<sf::Image>("mm.png"));
+    setIcon(utils::load_asset<sf::Image>("haldanoti.png"));
     set_vsync(vsync);
 }
 

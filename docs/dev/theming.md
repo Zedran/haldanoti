@@ -131,18 +131,18 @@ System theme directory location depends on the platform and installation method.
 
 ```sh
 # Debian
-dpkg -L mm-game
+dpkg -L haldanoti
 
 # RPM-based systems
-rpm -ql mm-game
+rpm -ql haldanoti
 ```
 
 ### User theme directory
 
 Usually, you will want to work with the user directory, which is located at:
 
-* Linux: `$HOME/.config/mm-game/theme/`
-* Windows: `%APPDATA%\mm-game\theme\`
+* Linux: `$HOME/.config/haldanoti/theme/`
+* Windows: `%APPDATA%\haldanoti\theme\`
 
 You will have to create the `theme` directory by yourself.
 
@@ -152,8 +152,8 @@ User-defined themes take precedence over themes in the system directory. This al
 
 Unrecoverable errors are written to the crash log, which is located at:
 
-* Linux: `$HOME/.cache/mm-game/mm-game.log`
-* Windows: `%LOCALAPPDATA%\mm-game\mm-game.log`
+* Linux: `$HOME/.cache/haldanoti/haldanoti.log`
+* Windows: `%LOCALAPPDATA%\haldanoti\haldanoti.log`
 
 If the application crashes silently while you are tinkering with your theme file, check error messages written in the log. Typical problems are:
 

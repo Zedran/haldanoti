@@ -19,25 +19,27 @@ endif()
 
 string(REGEX REPLACE "^v" "" CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}")
 
-set(CPACK_PACKAGE_NAME                         "mm"                                         )
+set(HALDANOTI_DISPLAY_NAME                     "Haldanóti"                                  )
+
+set(CPACK_PACKAGE_NAME                         "haldanoti"                                  )
 set(CPACK_PACKAGE_VENDOR                       "Wojciech Głąb (github.com/Zedran)"          )
-set(CPACK_PACKAGE_HOMEPAGE_URL                 "https://github.com/Zedran/mm"               )
+set(CPACK_PACKAGE_HOMEPAGE_URL                 "https://github.com/Zedran/haldanoti"        )
 
 set(CPACK_RESOURCE_FILE_LICENSE                "${PROJECT_SOURCE_DIR}/LICENSE"              )
 set(CPACK_RESOURCE_FILE_README                 "${PROJECT_SOURCE_DIR}/README.md"            )
 
 set(CPACK_PACKAGE_INSTALL_DIRECTORY            "${PROJECT_NAME}"                            )
-set(CPACK_NSIS_DISPLAY_NAME                    "${CPACK_PACKAGE_NAME}"                      )
-set(CPACK_NSIS_PACKAGE_NAME                    "${CPACK_PACKAGE_NAME}"                      )
+set(CPACK_NSIS_DISPLAY_NAME                    "${HALDANOTI_DISPLAY_NAME}"                  )
+set(CPACK_NSIS_PACKAGE_NAME                    "${HALDANOTI_DISPLAY_NAME}"                  )
 set(CPACK_NSIS_CONTACT                         "${CPACK_PACKAGE_VENDOR}"                    )
 set(CPACK_NSIS_URL_INFO_ABOUT                  "${CPACK_PACKAGE_HOMEPAGE_URL}"              )
-set(CPACK_NSIS_MUI_ICON                        "${CMAKE_SOURCE_DIR}/platform/windows/mm.ico")
+set(CPACK_NSIS_MUI_ICON                        "${CMAKE_SOURCE_DIR}/platform/windows/haldanoti.ico")
 set(CPACK_NSIS_MODIFY_PATH                     OFF                                          )
 set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON                                           )
 set(CPACK_NSIS_IGNORE_COMPONENTS_PAGE          ON                                           )
 
 set(CPACK_NSIS_MENU_LINKS
-    "${BIN_DIR}/${PROJECT_NAME}.exe" "${CPACK_PACKAGE_NAME}"
+    "${BIN_DIR}/${PROJECT_NAME}.exe" "${HALDANOTI_DISPLAY_NAME}"
 )
 
 include(CPack)

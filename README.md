@@ -1,6 +1,6 @@
-# <img src="assets/mm.svg" alt="mm.svg" width="24"> mm
+# <img src="assets/haldanoti.svg" alt="haldanoti.svg" width="24"> Haldanóti
 
-Digital version of the [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)) game.
+Haldanóti (Quenya: hidden numbers) is a digital adaptation of the classic [Bulls and Cows](https://en.wikipedia.org/wiki/Bulls_and_cows) game.
 
 ## Rules
 

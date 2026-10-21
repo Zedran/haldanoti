@@ -20,7 +20,7 @@ Logger::Logger() {
         std::filesystem::create_directories(cache_dir);
     }
 
-    constexpr auto LOG_FILE{"mm-game.log"};
+    constexpr auto LOG_FILE{"haldanoti.log"};
 
     file_ = std::ofstream{cache_dir / LOG_FILE, std::ios::app};
 

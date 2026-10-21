@@ -2,8 +2,8 @@
 
 Type=Application
 Version=1.5
-Name=mm
-Comment=Digital version of the Mastermind game
+Name=Haldanóti
+Comment=Code-breaking game
 Exec=@BIN_PATH@
 Icon=@ICON_PATH@
 Terminal=false

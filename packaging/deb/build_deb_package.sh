@@ -14,7 +14,7 @@ mkdir -p "$WD"
 
 VERSION=$(git describe --tags | sed 's/v//')
 
-PACKAGE_NAME="mm-game_$VERSION"
+PACKAGE_NAME="haldanoti_$VERSION"
 
 ROOT=$(git rev-parse --show-toplevel)
 
@@ -50,7 +50,7 @@ export DEBEMAIL="17592740+Zedran@users.noreply.github.com"
 export NAME="Zedran"
 
 dch --create                  \
-    --package mm-game         \
+    --package haldanoti       \
     --newversion "$VERSION-1" \
     "Automated build"         \
 

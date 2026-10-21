@@ -16,14 +16,14 @@ VERSION=$(git describe --tags | sed 's/v//')
 
 git -C .. archive                            \
     --format=tar.gz                          \
-    --prefix="mm-game-$VERSION/"             \
-    -o "$WD/SOURCES/mm-game-$VERSION.tar.gz" \
+    --prefix="haldanoti-$VERSION/"             \
+    -o "$WD/SOURCES/haldanoti-$VERSION.tar.gz" \
     HEAD
 
-sed "s/@VERSION@/$VERSION/" "$(dirname "$0")/mm-game.spec.in" > "$WD/SPECS/mm-game.spec"
+sed "s/@VERSION@/$VERSION/" "$(dirname "$0")/haldanoti.spec.in" > "$WD/SPECS/haldanoti.spec"
 
 if [ "$1" = "--build-deps" ]; then
-    dnf builddep -y "$WD/SPECS/mm-game.spec"
+    dnf builddep -y "$WD/SPECS/haldanoti.spec"
 fi
 
-rpmbuild --define "_topdir $WD" -ba "$WD/SPECS/mm-game.spec"
+rpmbuild --define "_topdir $WD" -ba "$WD/SPECS/haldanoti.spec"

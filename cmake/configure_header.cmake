@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-only
 # Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
-if(MM_VERSION)
-    set(GIT_TAG ${MM_VERSION})
+if(HALDANOTI_VERSION)
+    set(GIT_TAG ${HALDANOTI_VERSION})
 else()
     execute_process(
         COMMAND git describe --tags

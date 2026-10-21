@@ -1,10 +1,10 @@
-Name:           mm-game
+Name:           haldanoti
 Version:        @VERSION@
-Release:        4%{?dist}
-Summary:        Digital version of the Mastermind game
+Release:        5%{?dist}
+Summary:        Digital adaptation of the Bulls and Cows game
 
 License:        AGPL3.0-only
-URL:            https://github.com/Zedran/mm
+URL:            https://github.com/Zedran/haldanoti
 Vendor:         Wojciech Głąb (github.com/Zedran)
 Group:          Unspecified
 Source0:        %{name}-%{version}.tar.gz
@@ -33,7 +33,7 @@ BuildRequires:  json-devel
 %autosetup
 
 %build
-%cmake -DCMAKE_BUILD_TYPE=Release -DMM_VERSION=v%{version}
+%cmake -DCMAKE_BUILD_TYPE=Release -DHALDANOTI_VERSION=v%{version}
 %cmake_build
 
 %install
@@ -50,6 +50,9 @@ BuildRequires:  json-devel
 %{_datadir}/applications/%{name}.desktop
 
 %changelog
+* Wed Oct 21 2026 Zedran <17592740+Zedran@users.noreply.github.com> - 0.11.0-5
+- Rename the project
+
 * Mon Aug 03 2026 Zedran <17592740+Zedran@users.noreply.github.com> - 0.2.3-4
 - Rename the package and its components to prevent naming conflicts
 
