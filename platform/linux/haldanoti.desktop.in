@@ -9,3 +9,5 @@ Icon=@ICON_PATH@
 Terminal=false
 PrefersNonDefaultGPU=true
 Categories=Game;
+
+Comment[pl]=Gra w odgadywanie tajnego kodu
