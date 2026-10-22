@@ -5,7 +5,6 @@
 
 #include "app/App.hpp"
 #include "app/Board.hpp"
-#include "app/GameRow.hpp"
 #include "app/Settings.hpp"
 #include "app/UserInterface.hpp"
 #include "config/Config.hpp"
@@ -25,6 +24,7 @@ App::App(
 ) : game_{conf.unique_elems},
     ui_{window_size, conf, std::move(lang), std::move(theme), std::move(version)},
     window_{window_size, conf.vsync} {
+    ui_.get_board().allow_unique_only(conf.unique_elems);
     configure_hints(conf);
 
     [[maybe_unused]] const auto gc = game_.good_code();
@@ -36,6 +36,7 @@ App::~App() = default;
 void App::apply_config(const config::Config& c) {
     configure_hints(c);
     game_.allow_unique_only(c.unique_elems);
+    ui_.get_board().allow_unique_only(c.unique_elems);
     window_.set_vsync(c.vsync);
 }
 

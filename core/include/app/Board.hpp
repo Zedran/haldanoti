@@ -35,6 +35,11 @@ public:
 
     ~Board();
 
+    // Relays the setting to the static GameRow::allow_unique_only function
+    // to set the evaluation strategy for the GameRow::all_set member function.
+    // The parameter must be coherent with the game's unique_only setting.
+    void allow_unique_only(bool v) noexcept;
+
     // Displays the secret code and the result. game::State::Running does not
     // signal the conclusion of the game, therefore attempting to set this
     // state through the end_game function will result in assertion error.
