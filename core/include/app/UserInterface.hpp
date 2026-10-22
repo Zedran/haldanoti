@@ -3,9 +3,6 @@
 
 #pragma once
 
-#include <cstddef>
-#include <optional>
-
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -67,10 +64,6 @@ public:
 
     // Reset the state of the UI to prepare it for a new game.
     void reset();
-
-    // Relays the number of distinct elements in secret code
-    // to the Board::set_hint function. nullopt disables hints.
-    void set_hints(std::optional<std::size_t> hint);
 
     void show_message(Message::Content msg);
 

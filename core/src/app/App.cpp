@@ -45,10 +45,12 @@ void App::close() {
 }
 
 void App::configure_hints(const config::Config& c) {
+    Board& board = ui_.get_board();
+
     if (c.hints) {
-        ui_.set_hints(utils::count_distinct(game_.good_code()));
+        board.set_hints(utils::count_distinct(game_.good_code()));
     } else {
-        ui_.set_hints(std::nullopt);
+        board.set_hints(std::nullopt);
     }
 }
 
