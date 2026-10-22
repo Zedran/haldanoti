@@ -139,6 +139,10 @@ bool Settings::config_differs(const config::Config& c) const noexcept {
     return ref_config_ != c;
 }
 
+bool Settings::game_reset_required(const config::Config& c) const noexcept {
+    return ref_config_.unique_elems != c.unique_elems;
+}
+
 config::Config Settings::get_config() const noexcept {
     return config::Config{
         .code_chars   = cb_code_chars_->get_state(),
