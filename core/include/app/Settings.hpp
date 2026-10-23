@@ -48,6 +48,10 @@ public:
     // since the last call to set_config or set_ref_config.
     bool config_differs(const config::Config& c) const noexcept;
 
+    // Returns true if the game needs to be reset in order for the new settings
+    // to take effect.
+    bool game_reset_required(const config::Config& c) const noexcept;
+
     // Reads the values set by the player and returns them packed into
     // the Config struct.
     config::Config get_config() const noexcept;

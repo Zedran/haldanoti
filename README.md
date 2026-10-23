@@ -25,8 +25,10 @@ The following table presents configuration options that are available. Some chan
 | **Language**            | yes     | Game's display language.                                                    |
 | **Show hints**          |         | Show a number of distinct elements in the secret code.                      |
 | **Theme**               | yes     | Game's color theme.                                                         |
-| **Unique elements**     |         | Do not repeat code elements.                                                |
+| **Unique elements**\*   |         | Do not repeat code elements and do not allow duplicates in guesses.         |
 | **VSync**               |         | Run at native framerate instead of limiting it to 60 FPS.                   |
+
+\* Modifying the **Unique elements** option immediately starts a new game.
 
 ## License
 

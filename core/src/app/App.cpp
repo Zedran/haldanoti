@@ -5,7 +5,6 @@
 
 #include "app/App.hpp"
 #include "app/Board.hpp"
-#include "app/GameRow.hpp"
 #include "app/Settings.hpp"
 #include "app/UserInterface.hpp"
 #include "config/Config.hpp"
@@ -25,6 +24,7 @@ App::App(
 ) : game_{conf.unique_elems},
     ui_{window_size, conf, std::move(lang), std::move(theme), std::move(version)},
     window_{window_size, conf.vsync} {
+    ui_.get_board().allow_unique_only(conf.unique_elems);
     configure_hints(conf);
 
     [[maybe_unused]] const auto gc = game_.good_code();
@@ -36,6 +36,7 @@ App::~App() = default;
 void App::apply_config(const config::Config& c) {
     configure_hints(c);
     game_.allow_unique_only(c.unique_elems);
+    ui_.get_board().allow_unique_only(c.unique_elems);
     window_.set_vsync(c.vsync);
 }
 
@@ -44,11 +45,13 @@ void App::close() {
 }
 
 void App::configure_hints(const config::Config& c) {
-    if (c.hints) {
-        ui_.set_hints(utils::count_distinct(game_.good_code()));
-    } else {
-        ui_.set_hints(std::nullopt);
+    std::optional<std::size_t> hint{};
+
+    if (c.hints && !c.unique_elems) {
+        hint = utils::count_distinct(game_.good_code());
     }
+
+    ui_.get_board().set_hints(c.hints, hint);
 }
 
 void App::new_game() {
@@ -95,9 +98,17 @@ void App::save_config() {
         if (settings.restart_required(c)) {
             ui_.show_message(Message::Content::RestartRequired);
         }
+
+        const bool grr = settings.game_reset_required(c);
+
         apply_config(c);
         config::write_config(settings.get_config());
         settings.set_ref_config(c);
+
+        if (grr) {
+            dbg("starting new game to apply settings");
+            new_game();
+        }
     }
 }
 

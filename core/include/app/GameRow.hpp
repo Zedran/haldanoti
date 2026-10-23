@@ -27,6 +27,10 @@ public:
     // Size relative to outer container.
     static constexpr sf::Vector2f REL_SIZE{1.0f, 0.077f};
 
+    // Determines the behavior of the all_set member function. This setting
+    // must be coherent with the game's unique_only setting.
+    static void allow_unique_only(bool v) noexcept;
+
     // Sets the value of the static member lang_.
     static void set_lang(lang::GameRow lang) noexcept;
 
@@ -40,6 +44,16 @@ public:
 
     // Returns true if every CodeButton within the row has a code value
     // assigned.
+    //
+    // The algorithm used to determine a successfull assignment of every code
+    // value varies, depending on whether all characters in the secret code are
+    // required to be unique or not.
+    //
+    // With duplicates allowed in the secret code, all_set returns true if
+    // every code value is not equal to game::Row::CODE_VALUE_NONE.
+    //
+    // If the unique requirement is in force, all_set returns true if every
+    // code value is unique and is not equal to game::Row::CODE_VALUE_NONE.
     bool all_set() const noexcept;
 
     // Returns a vector of code values retrieved from CodeButtons within
@@ -80,6 +94,9 @@ private:
     // Size of the ok box relative to the dimensions of the outer container.
     static constexpr sf::Vector2f OK_BUTTON_REL_SIZE{0.75f, 0.5f};
 
+    // Determines which row evaluation strategy should be used by all_set.
+    static bool allow_unique_only_;
+
     // Contains text value set to the ok Button when the GameRow is active.
     static sf::String ok_button_text_;
 
@@ -114,6 +131,12 @@ private:
 
     // Row number in string form, stored for the ok button.
     sf::String row_num_;
+
+    // Called by all_set if allow_unique_only_ is false.
+    bool all_set_any_kind() const noexcept;
+
+    // Called by all_set if allow_unique_only_ is true.
+    bool all_set_if_unique() const noexcept;
 
     // Sets the correct box styles following locking and unlocking
     // of the GameRow instance.

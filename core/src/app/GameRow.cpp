@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cstddef>
 #include <string>
+#include <unordered_set>
 #include <utility>
 
 #include <SFML/System/Vector2.hpp>
@@ -22,6 +23,8 @@
 namespace app {
 
 sf::String GameRow::ok_button_text_{};
+
+bool GameRow::allow_unique_only_{};
 
 theme::GameRowBase GameRow::styles_{};
 
@@ -84,12 +87,31 @@ GameRow::GameRow(const sf::Font& font, sf::Vector2f size, int row_number)
 GameRow::~GameRow() = default;
 
 bool GameRow::all_set() const noexcept {
+    return allow_unique_only_ ? all_set_if_unique() : all_set_any_kind();
+}
+
+bool GameRow::all_set_any_kind() const noexcept {
     for (const auto& cb : code_buttons_) {
         if (!cb->is_set()) {
             return false;
         }
     }
     return true;
+}
+
+bool GameRow::all_set_if_unique() const noexcept {
+    std::unordered_set<int> seen;
+
+    for (const auto& cb : code_buttons_) {
+        if (!cb->is_set() || !seen.insert(cb->code_element()).second) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void GameRow::allow_unique_only(bool v) noexcept {
+    allow_unique_only_ = v;
 }
 
 std::array<int, game::Row::ROW_LEN> GameRow::get_code() const noexcept {

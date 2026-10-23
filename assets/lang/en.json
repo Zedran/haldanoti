@@ -9,6 +9,7 @@
             "ok": "Ok"
         },
         "secret_row": {
+            "hint_unique": "U",
             "info_won": "Code correct",
             "info_lost": "Game over"
         }

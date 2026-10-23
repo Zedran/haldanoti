@@ -121,10 +121,6 @@ void UserInterface::reset() {
     signal_ = Signal::None;
 }
 
-void UserInterface::set_hints(std::optional<std::size_t> hint) {
-    board_.set_hints(hint);
-}
-
 void UserInterface::set_scene(Scene scene) noexcept {
     dbg("setting scene {}", static_cast<int>(scene));
 

@@ -52,6 +52,10 @@ Board::Board(
 
 Board::~Board() = default;
 
+void Board::allow_unique_only(bool v) noexcept {
+    GameRow::allow_unique_only(v);
+}
+
 void Board::end_game(std::span<const int, game::Row::ROW_LEN> good_code, game::State state) {
     assert(state != game::State::Running);
     assert(secret_row_);
@@ -90,8 +94,8 @@ void Board::reset() {
     dbg("---  BOARD RESET ENDS  ---");
 }
 
-void Board::set_hints(std::optional<std::size_t> hint) {
-    secret_row_->set_hint(hint);
+void Board::set_hints(bool enabled, std::optional<std::size_t> hint) {
+    secret_row_->set_hint(enabled, hint);
 }
 
 } // namespace app

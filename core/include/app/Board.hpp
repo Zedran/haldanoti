@@ -35,6 +35,11 @@ public:
 
     ~Board();
 
+    // Relays the setting to the static GameRow::allow_unique_only function
+    // to set the evaluation strategy for the GameRow::all_set member function.
+    // The parameter must be coherent with the game's unique_only setting.
+    void allow_unique_only(bool v) noexcept;
+
     // Displays the secret code and the result. game::State::Running does not
     // signal the conclusion of the game, therefore attempting to set this
     // state through the end_game function will result in assertion error.
@@ -53,9 +58,11 @@ public:
     // Resets the Board instance.
     void reset();
 
-    // Relays the number of distinct elements in secret code
-    // to the SecretRow::set_hint function. nullopt disables hints.
-    void set_hints(std::optional<std::size_t> hint);
+    // Relays settings to the SecretRow::set_hints member function, which
+    // applies the hints config option. The hint parameter is a number of
+    // distinct elements in the secret code. nullopt means that the unique_elems
+    // option was set and hint should reflect that.
+    void set_hints(bool enabled, std::optional<std::size_t> hint);
 
 private:
     // Index of the currently active GameRow.
