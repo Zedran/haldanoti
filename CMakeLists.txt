@@ -43,8 +43,6 @@ add_custom_target(configure_header
         -P "${CMAKE_SOURCE_DIR}/cmake/configure_header.cmake"
 )
 
-add_library(core_defs INTERFACE)
-
 add_subdirectory(core)
 
 if(WIN32 AND NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
