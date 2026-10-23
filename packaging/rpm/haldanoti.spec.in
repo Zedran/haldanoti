@@ -24,8 +24,6 @@ BuildRequires:  libvorbis-devel
 BuildRequires:  flac-devel
 BuildRequires:  json-devel
 
-%global debug_package %{nil}
-
 %description
 %{summary}
 
