@@ -11,11 +11,10 @@
 namespace lang {
 
 struct FeedbackLabel {
-    sf::String none;
     sf::String red;
     sf::String white;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(FeedbackLabel, none, red, white);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(FeedbackLabel, red, white);
 
 } // namespace lang

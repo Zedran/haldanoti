@@ -17,7 +17,7 @@ bool FeedbackLabel::show_text_{};
 theme::FeedbackLabel FeedbackLabel::styles_{};
 
 FeedbackLabel::FeedbackLabel(const sf::Font& font, sf::Vector2f size)
-    : ui::Label{font, size, styles_.none, lang_.none, static_cast<unsigned int>(FONT_REL_SIZE * size.y)}, pin_{Pin::None} {}
+    : ui::Label{font, size, styles_.none, "", static_cast<unsigned int>(FONT_REL_SIZE * size.y)}, pin_{Pin::None} {}
 
 FeedbackLabel::~FeedbackLabel() = default;
 
@@ -59,7 +59,7 @@ void FeedbackLabel::update_text() {
     }
 
     switch (pin_) {
-    case Pin::None:  set_text(lang_.none); break;
+    case Pin::None:  set_text(""); break;
     case Pin::Red:   set_text(lang_.red); break;
     case Pin::White: set_text(lang_.white);
     }

@@ -2,7 +2,6 @@
     "board": {
         "game_row": {
             "fb_label": {
-                "none": "",
                 "red": "R",
                 "white": "W"
             },
