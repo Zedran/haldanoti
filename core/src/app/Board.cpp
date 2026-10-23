@@ -94,8 +94,8 @@ void Board::reset() {
     dbg("---  BOARD RESET ENDS  ---");
 }
 
-void Board::set_hints(std::optional<std::size_t> hint) {
-    secret_row_->set_hint(hint);
+void Board::set_hints(bool enabled, std::optional<std::size_t> hint) {
+    secret_row_->set_hint(enabled, hint);
 }
 
 } // namespace app

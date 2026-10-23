@@ -45,13 +45,13 @@ void App::close() {
 }
 
 void App::configure_hints(const config::Config& c) {
-    Board& board = ui_.get_board();
+    std::optional<std::size_t> hint{};
 
-    if (c.hints) {
-        board.set_hints(utils::count_distinct(game_.good_code()));
-    } else {
-        board.set_hints(std::nullopt);
+    if (c.hints && !c.unique_elems) {
+        hint = utils::count_distinct(game_.good_code());
     }
+
+    ui_.get_board().set_hints(c.hints, hint);
 }
 
 void App::new_game() {

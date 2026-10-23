@@ -66,9 +66,9 @@ void SecretRow::reset() {
     display_info(game::State::Running);
 }
 
-void SecretRow::set_hint(std::optional<std::size_t> hint) {
-    if (hint) {
-        hint_ = sf::String{std::to_string(*hint)};
+void SecretRow::set_hint(bool enabled, std::optional<std::size_t> hint) {
+    if (enabled) {
+        hint_ = hint ? sf::String{std::to_string(*hint)} : lang_.hint_unique;
     } else {
         hint_ = std::nullopt;
     }

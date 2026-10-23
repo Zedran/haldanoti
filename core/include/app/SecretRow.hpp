@@ -47,10 +47,11 @@ public:
     // Clears the displayed code and info.
     void reset();
 
-    // Accepts the number of distinct elements in the secret code. If nullopt
-    // is received, the hint is hidden. This function updates style and text
-    // of the info box.
-    void set_hint(std::optional<std::size_t> hint);
+    // Enables or disables hints. The hint parameter is a number of distinct
+    // elements in the secret code. nullopt means that the unique_elems option
+    // was set and hint should reflect that. This function updates style and
+    // text of the info box.
+    void set_hint(bool enabled, std::optional<std::size_t> hint);
 
 private:
     // Size of the code box relative to the dimensions of the SecretRow's

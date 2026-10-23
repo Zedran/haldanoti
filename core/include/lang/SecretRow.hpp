@@ -11,10 +11,11 @@
 namespace lang {
 
 struct SecretRow {
+    sf::String hint_unique;
     sf::String info_won;
     sf::String info_lost;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(SecretRow, info_won, info_lost);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(SecretRow, hint_unique, info_won, info_lost);
 
 } // namespace lang

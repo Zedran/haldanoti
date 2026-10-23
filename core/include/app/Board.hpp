@@ -58,9 +58,11 @@ public:
     // Resets the Board instance.
     void reset();
 
-    // Relays the number of distinct elements in secret code
-    // to the SecretRow::set_hint function. nullopt disables hints.
-    void set_hints(std::optional<std::size_t> hint);
+    // Relays settings to the SecretRow::set_hints member function, which
+    // applies the hints config option. The hint parameter is a number of
+    // distinct elements in the secret code. nullopt means that the unique_elems
+    // option was set and hint should reflect that.
+    void set_hints(bool enabled, std::optional<std::size_t> hint);
 
 private:
     // Index of the currently active GameRow.
