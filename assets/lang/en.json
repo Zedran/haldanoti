@@ -27,6 +27,7 @@
         "opt_lang": "Language",
         "opt_theme": "Theme",
         "opt_code_chars": "Code characters",
+        "opt_code_len": "Code length",
         "opt_fb_chars": "Feedback characters",
         "opt_hints": "Show hints",
         "opt_vsync": "VSync",
