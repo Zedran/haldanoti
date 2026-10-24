@@ -27,8 +27,7 @@ App::App(
     ui_.get_board().allow_unique_only(conf.unique_elems);
     configure_hints(conf);
 
-    [[maybe_unused]] const auto gc = game_.good_code();
-    dbg("secret code {} {} {} {}", gc[0], gc[1], gc[2], gc[3]);
+    dbg("secret code = {}", game_.good_code());
 }
 
 App::~App() = default;
@@ -60,8 +59,7 @@ void App::new_game() {
 
     configure_hints(ui_.get_settings().get_ref_config());
 
-    [[maybe_unused]] const auto gc = game_.good_code();
-    dbg("secret code {} {} {} {}", gc[0], gc[1], gc[2], gc[3]);
+    dbg("secret code = {}", game_.good_code());
 }
 
 void App::poll_events() {
