@@ -10,6 +10,12 @@
 
 namespace config {
 
+// Maximum code length.
+constexpr std::size_t CODE_LEN_MAX = 6;
+
+// Minimum code length.
+constexpr std::size_t CODE_LEN_MIN = 3;
+
 struct Config {
     // Display code characters.
     bool code_chars;

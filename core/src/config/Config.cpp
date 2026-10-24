@@ -30,9 +30,6 @@ static std::string get_default_lang_code() {
 }
 
 void enforce_limits(Config& c) noexcept {
-    constexpr std::size_t CODE_LEN_MAX = 6;
-    constexpr std::size_t CODE_LEN_MIN = 3;
-
     if (c.code_len < CODE_LEN_MIN) {
         c.code_len = CODE_LEN_MIN;
     } else if (c.code_len > CODE_LEN_MAX) {
