@@ -15,13 +15,14 @@ Row::Row() noexcept : code_{}, feedback_{}, locked_{} {
 
 Row::~Row() = default;
 
-std::span<const int, Row::ROW_LEN> Row::code() const noexcept {
+std::span<const int> Row::code() const noexcept {
     return code_;
 }
 
-void Row::commit(std::span<const int, ROW_LEN> good_code, std::span<const int, ROW_LEN> guess) noexcept {
+void Row::commit(std::span<const int> good_code, std::span<const int> guess) noexcept {
     assert(!locked_);
 
+    assert(guess.size() == code_.size());
     std::copy(guess.begin(), guess.end(), code_.begin());
 
     feedback_ = internal::compare_codes(good_code, guess);

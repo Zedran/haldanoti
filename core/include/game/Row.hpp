@@ -27,12 +27,12 @@ public:
     ~Row();
 
     // Returns the view into the current code held by the Row.
-    std::span<const int, ROW_LEN> code() const noexcept;
+    std::span<const int> code() const noexcept;
 
     // Writes the user's guess to the user_code_ field and generates Feedback
     // against good_code. Row becomes locked after calling commit. Subsequent
     // call to commit will trigger an assertion error.
-    void commit(std::span<const int, ROW_LEN> good_code, std::span<const int, ROW_LEN> guess) noexcept;
+    void commit(std::span<const int> good_code, std::span<const int> guess) noexcept;
 
     // Returns the Feedback for the Row.
     Feedback feedback() const noexcept;

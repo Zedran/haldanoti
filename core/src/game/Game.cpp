@@ -58,7 +58,7 @@ void Game::generate_code() noexcept {
     }
 }
 
-std::span<const int, Row::ROW_LEN> Game::good_code() const noexcept {
+std::span<const int> Game::good_code() const noexcept {
     return good_code_;
 }
 
@@ -92,7 +92,7 @@ State Game::state() const noexcept {
     return State::Running;
 }
 
-void Game::submit_code(std::span<const int, Row::ROW_LEN> guess) noexcept {
+void Game::submit_code(std::span<const int> guess) noexcept {
     for ([[maybe_unused]] const auto& e : guess) {
         assert(e >= SCORE_MIN);
         assert(e <= SCORE_MAX);

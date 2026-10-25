@@ -13,7 +13,6 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "app/CodeButton.hpp"
-#include "game/Row.hpp"
 #include "game/State.hpp"
 #include "lang/SecretRow.hpp"
 #include "theme/SecretRow.hpp"
@@ -39,7 +38,7 @@ public:
     ~SecretRow();
 
     // Displays the code until reset.
-    void display_code(std::span<const int, game::Row::ROW_LEN> code);
+    void display_code(std::span<const int> code);
 
     // Displays the selected info indefinitely.
     void display_info(game::State state);

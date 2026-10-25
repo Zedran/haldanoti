@@ -41,7 +41,7 @@ TEST_CASE("Game::submit_code") {
 
     {
         // Making sure that the guess is not the same as the generated code.
-        std::span<const int, Row::ROW_LEN> good_code = g.good_code();
+        std::span<const int> good_code = g.good_code();
         REQUIRE_FALSE(std::equal(good_code.begin(), good_code.end(), guess.begin(), guess.end()));
     }
 
@@ -55,7 +55,7 @@ TEST_CASE("Game::submit_code") {
     const Row& r = g.active_row();
     REQUIRE(r.locked());
 
-    std::span<const int, Row::ROW_LEN> code = r.code();
+    std::span<const int> code = r.code();
     REQUIRE(std::equal(guess.begin(), guess.end(), code.begin(), code.end()));
 
     const Feedback fb = r.feedback();
@@ -82,7 +82,7 @@ TEST_CASE("Game::state") {
     constexpr std::array<int, Row::ROW_LEN> guess{1, 2, 3, 4};
     {
         // Making sure that the guess is not the same as the generated code.
-        std::span<const int, Row::ROW_LEN> good_code = g.good_code();
+        std::span<const int> good_code = g.good_code();
         REQUIRE_FALSE(std::equal(good_code.begin(), good_code.end(), guess.begin(), guess.end()));
     }
 

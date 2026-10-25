@@ -28,7 +28,7 @@ TEST_CASE("Row::Row") {
     REQUIRE(fb.white_count == 0);
 
     // All code elements should be set to CODE_VALUE_NONE.
-    std::span<const int, Row::ROW_LEN> code = r.code();
+    std::span<const int> code = r.code();
     CAPTURE(empty);
     CAPTURE(code);
     REQUIRE(std::equal(empty.begin(), empty.end(), code.begin(), code.end()));
@@ -46,7 +46,7 @@ TEST_CASE("Row::commit") {
     REQUIRE(r.locked());
 
     // Values in guess should be written to Row::code_.
-    std::span<const int, Row::ROW_LEN> code = r.code();
+    std::span<const int> code = r.code();
     CAPTURE(guess);
     CAPTURE(code);
     REQUIRE(std::equal(guess.begin(), guess.end(), code.begin(), code.end()));
@@ -74,7 +74,7 @@ TEST_CASE("Row::reset") {
     REQUIRE_FALSE(r.locked());
 
     // The code is empty again.
-    std::span<const int, Row::ROW_LEN> code = r.code();
+    std::span<const int> code = r.code();
     CAPTURE(empty);
     CAPTURE(code);
     REQUIRE(std::equal(empty.begin(), empty.end(), code.begin(), code.end()));

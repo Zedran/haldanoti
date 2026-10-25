@@ -6,6 +6,7 @@
 #include <utility>
 
 #include "app/SecretRow.hpp"
+#include "game/Row.hpp"
 
 namespace app {
 
@@ -47,7 +48,7 @@ SecretRow::SecretRow(
 
 SecretRow::~SecretRow() = default;
 
-void SecretRow::display_code(std::span<const int, game::Row::ROW_LEN> code) {
+void SecretRow::display_code(std::span<const int> code) {
     for (std::size_t i = 0; i < code.size(); i++) {
         code_buttons_[i]->set_value(code[i]);
         code_buttons_[i]->use_normal_style();

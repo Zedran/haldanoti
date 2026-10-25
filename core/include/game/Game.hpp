@@ -56,7 +56,7 @@ public:
     void allow_unique_only(bool v) noexcept;
 
     // Returns a view into the correct code.
-    std::span<const int, Row::ROW_LEN> good_code() const noexcept;
+    std::span<const int> good_code() const noexcept;
 
     // Returns true if currently active row represents the last attempt.
     bool last_row() const noexcept;
@@ -69,7 +69,7 @@ public:
 
     // Writes the user-provided guess to the currently used row and generates
     // Feedback. Subsequent submission attempt will trigger an assertion error.
-    void submit_code(std::span<const int, Row::ROW_LEN> guess) noexcept;
+    void submit_code(std::span<const int> guess) noexcept;
 
 private:
     static_assert(SCORE_MIN < SCORE_MAX);
