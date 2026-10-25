@@ -114,11 +114,11 @@ void GameRow::allow_unique_only(bool v) noexcept {
     allow_unique_only_ = v;
 }
 
-std::array<int, game::Row::ROW_LEN> GameRow::get_code() const noexcept {
-    std::array<int, game::Row::ROW_LEN> code;
+std::vector<int> GameRow::get_code() const noexcept {
+    std::vector<int> code;
 
     for (std::size_t i = 0; i < code_buttons_.size(); i++) {
-        code[i] = code_buttons_[i]->code_element();
+        code.push_back(code_buttons_[i]->code_element());
     }
     return code;
 }
