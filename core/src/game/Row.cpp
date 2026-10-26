@@ -9,7 +9,7 @@
 
 namespace game {
 
-Row::Row(std::size_t len) noexcept : code_(len, CODE_VALUE_NONE), feedback_{}, locked_{} {}
+Row::Row(std::size_t len) : code_(len, CODE_VALUE_NONE), feedback_{}, locked_{} {}
 
 Row::~Row() = default;
 

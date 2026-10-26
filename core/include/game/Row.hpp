@@ -19,7 +19,7 @@ public:
     static constexpr int CODE_VALUE_NONE = 0;
 
     // Constructs a new Row.
-    explicit Row(std::size_t size) noexcept;
+    explicit Row(std::size_t size);
 
     ~Row();
 
