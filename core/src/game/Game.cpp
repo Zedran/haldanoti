@@ -8,11 +8,13 @@
 
 namespace game {
 
-Game::Game(bool unique_elems, std::optional<unsigned long> seed)
+Game::Game(std::size_t code_len, bool unique_elems, std::optional<unsigned long> seed)
     : active_row_num_{},
+      good_code_(code_len, Row::CODE_VALUE_NONE),
       rand_{Game::SCORE_MIN, Game::SCORE_MAX, seed},
-      rows_{},
+      rows_(NUM_ROWS, Row{code_len}),
       unique_elems_{unique_elems} {
+    assert(code_len <= NUM_UNIQUE_ELEMS);
     generate_code();
 }
 
@@ -73,7 +75,7 @@ State Game::state() const noexcept {
         return State::Running;
     }
 
-    if (cur_row.feedback().red_count == Row::ROW_LEN) {
+    if (cur_row.feedback().red_count == good_code_.size()) {
         return State::Won;
     }
 

@@ -21,7 +21,7 @@ App::App(
     lang::Lang     lang,
     theme::Theme   theme,
     sf::String     version
-) : game_{conf.unique_elems},
+) : game_{conf.code_len, conf.unique_elems},
     ui_{window_size, conf, std::move(lang), std::move(theme), std::move(version)},
     window_{window_size, conf.vsync} {
     ui_.get_board().allow_unique_only(conf.unique_elems);

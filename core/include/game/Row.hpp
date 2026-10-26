@@ -3,9 +3,9 @@
 
 #pragma once
 
-#include <array>
 #include <cstddef>
 #include <span>
+#include <vector>
 
 #include "game/Feedback.hpp"
 
@@ -22,7 +22,7 @@ public:
     static constexpr std::size_t ROW_LEN = 4;
 
     // Constructs a new Row.
-    Row() noexcept;
+    explicit Row(std::size_t size) noexcept;
 
     ~Row();
 
@@ -43,9 +43,12 @@ public:
     // Resets the Row instance to the default state.
     void reset() noexcept;
 
+    // Returns number of code elements in the Row.
+    std::size_t size() const noexcept;
+
 private:
     // Code written to the Row.
-    std::array<int, ROW_LEN> code_;
+    std::vector<int> code_;
 
     // Feedback for the Row.
     Feedback feedback_;

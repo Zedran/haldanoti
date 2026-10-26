@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include <array>
 #include <cstddef>
 #include <optional>
 #include <span>
+#include <vector>
 
 #include "game/Row.hpp"
 #include "game/State.hpp"
@@ -29,14 +29,20 @@ public:
     // Number of unique code elements.
     static constexpr int NUM_UNIQUE_ELEMS = SCORE_MAX - SCORE_MIN + 1;
 
-    // Constructs a new instance of the Game. Optionally, a custom seed
-    // for the random source can be provided.
-    Game(bool unique_elems, std::optional<unsigned long> seed = std::nullopt);
+    // Constructs a new instance of the Game with secret code of length
+    // code_len. Optionally, a custom seed for the random number generator
+    // can be provided.
+    Game(std::size_t code_len, bool unique_elems, std::optional<unsigned long> seed = std::nullopt);
 
-    // Prevents Game(bool) from interpreting unsigned int as bool when calling
-    // Game{seed} by mistake.
+    // Prevents integral type confusion in mistaken call Game{code_len, seed}.
     template <std::integral T>
-    Game(T) = delete;
+    Game(T, T) = delete;
+
+    // Prevents integral type confusion in call Game{unique_elems, seed}.
+    // It was correct when constructor was defined as Game(unique_elems, seed),
+    // now it can lead to mistakes if overloads are not explicitly removed.
+    template <std::integral T>
+    Game(bool, T) = delete;
 
     ~Game();
 
@@ -71,20 +77,19 @@ public:
 private:
     static_assert(SCORE_MIN < SCORE_MAX);
     static_assert(Row::CODE_VALUE_NONE < SCORE_MIN);
-    static_assert(NUM_UNIQUE_ELEMS >= Row::ROW_LEN);
 
     // Indicates currently active row.
     std::size_t active_row_num_;
 
     // Stores the correct code.
-    std::array<int, Row::ROW_LEN> good_code_;
+    std::vector<int> good_code_;
 
     // Random number generator.
     utils::Source rand_;
 
     // Container for Row instances, each representing a single attempt
     // at guessing.
-    std::array<Row, NUM_ROWS> rows_;
+    std::vector<Row> rows_;
 
     // true allows the generated code to contain unique elements only.
     bool unique_elems_;

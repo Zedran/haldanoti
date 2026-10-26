@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cstddef>
 #include <span>
 
 #include "game/Feedback.hpp"
@@ -14,10 +15,12 @@ using namespace game;
 
 // Tests whether Row assumes the correct state after construction.
 TEST_CASE("Row::Row") {
-    std::array<int, Row::ROW_LEN> empty{};
+    constexpr std::size_t ROW_LEN = 4;
+
+    std::array<int, ROW_LEN> empty{};
     empty.fill(Row::CODE_VALUE_NONE);
 
-    const Row r;
+    const Row r{ROW_LEN};
 
     // Empty, ready for writing.
     REQUIRE_FALSE(r.locked());
@@ -36,10 +39,12 @@ TEST_CASE("Row::Row") {
 
 // Tests the correctness of the Row::commit function.
 TEST_CASE("Row::commit") {
-    constexpr std::array<int, Row::ROW_LEN> good_code{1, 2, 3, 4};
-    constexpr std::array<int, Row::ROW_LEN> guess{1, 2, 3, 4};
+    constexpr std::size_t ROW_LEN = 4;
 
-    Row r;
+    constexpr std::array<int, ROW_LEN> good_code{1, 2, 3, 4};
+    constexpr std::array<int, ROW_LEN> guess{1, 2, 3, 4};
+
+    Row r{ROW_LEN};
 
     // Committing locks the Row.
     r.commit(good_code, guess);
@@ -59,13 +64,15 @@ TEST_CASE("Row::commit") {
 
 // Tests whether the Row assumes the correct state after reset.
 TEST_CASE("Row::reset") {
-    std::array<int, Row::ROW_LEN> empty{};
+    constexpr std::size_t ROW_LEN = 4;
+
+    std::array<int, ROW_LEN> empty{};
     empty.fill(Row::CODE_VALUE_NONE);
 
-    constexpr std::array<int, Row::ROW_LEN> good_code{1, 2, 3, 4};
-    constexpr std::array<int, Row::ROW_LEN> guess{1, 2, 3, 4};
+    constexpr std::array<int, ROW_LEN> good_code{1, 2, 3, 4};
+    constexpr std::array<int, ROW_LEN> guess{1, 2, 3, 4};
 
-    Row r;
+    Row r{ROW_LEN};
 
     r.commit(good_code, guess);
 

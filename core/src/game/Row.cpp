@@ -9,9 +9,7 @@
 
 namespace game {
 
-Row::Row() noexcept : code_{}, feedback_{}, locked_{} {
-    code_.fill(CODE_VALUE_NONE);
-}
+Row::Row(std::size_t len) noexcept : code_(len, CODE_VALUE_NONE), feedback_{}, locked_{} {}
 
 Row::~Row() = default;
 
@@ -38,9 +36,13 @@ bool Row::locked() const noexcept {
 }
 
 void Row::reset() noexcept {
-    code_.fill(CODE_VALUE_NONE);
+    std::fill(code_.begin(), code_.end(), CODE_VALUE_NONE);
     feedback_ = Feedback{};
     locked_   = false;
+}
+
+std::size_t Row::size() const noexcept {
+    return code_.size();
 }
 
 } // namespace game
