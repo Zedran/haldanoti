@@ -13,7 +13,6 @@
 #include "app/CodeButton.hpp"
 #include "app/FeedbackLabel.hpp"
 #include "app/GameRow.hpp"
-#include "game/Row.hpp"
 #include "lang/GameRow.hpp"
 #include "theme/GameRow.hpp"
 #include "ui/Button.hpp"
@@ -28,7 +27,7 @@ bool GameRow::allow_unique_only_{};
 
 theme::GameRowBase GameRow::styles_{};
 
-GameRow::GameRow(const sf::Font& font, sf::Vector2f size, int row_number)
+GameRow::GameRow(const sf::Font& font, sf::Vector2f size, std::size_t code_len, int row_number)
     : ui::Box{size, styles_.box.inactive, ui::Layout::Type::RowLayout},
       locked_{}, row_num_{std::to_string(row_number)} {
     code_box_ = &add_component<ui::Box>(
@@ -42,7 +41,7 @@ GameRow::GameRow(const sf::Font& font, sf::Vector2f size, int row_number)
         size.y * CodeButton::REL_SIZE.y,
     };
 
-    for (std::size_t i = 0; i < game::Row::ROW_LEN; i++) {
+    for (std::size_t i = 0; i < code_len; i++) {
         auto* cb = &code_box_->add_component<CodeButton>(font, cb_size);
         code_buttons_.push_back(cb);
     }
@@ -58,7 +57,7 @@ GameRow::GameRow(const sf::Font& font, sf::Vector2f size, int row_number)
         size.y * FeedbackLabel::REL_SIZE.y,
     };
 
-    for (std::size_t i = 0; i < game::Row::ROW_LEN; i++) {
+    for (std::size_t i = 0; i < code_len; i++) {
         auto* fbl = &fb_box_->add_component<FeedbackLabel>(font, fbl_size);
         fb_labels_.push_back(fbl);
     }
@@ -147,7 +146,7 @@ void GameRow::lock(bool commit) {
 }
 
 void GameRow::reset() {
-    for (std::size_t i = 0; i < game::Row::ROW_LEN; i++) {
+    for (std::size_t i = 0; i < code_buttons_.size(); i++) {
         code_buttons_[i]->reset();
         fb_labels_[i]->reset();
     }
@@ -155,7 +154,7 @@ void GameRow::reset() {
 }
 
 void GameRow::set_feedback(game::Feedback fb) {
-    assert(static_cast<std::size_t>(fb.red_count + fb.white_count) <= game::Row::ROW_LEN);
+    assert(static_cast<std::size_t>(fb.red_count + fb.white_count) <= code_buttons_.size());
 
     for (std::size_t i = 0; i < static_cast<std::size_t>(fb.red_count); i++) {
         fb_labels_[i]->set_pin(FeedbackLabel::Pin::Red);

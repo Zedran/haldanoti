@@ -19,6 +19,7 @@ Board::Board(
     sf::Vector2f    size,
     lang::Board     lang,
     theme::Board    theme,
+    std::size_t     code_len,
     bool            code_chars,
     bool            fb_chars
 ) : ui::Box{size, theme.box, ui::Layout::Type::ColumnLayout},
@@ -32,6 +33,7 @@ Board::Board(
     secret_row_ = &add_component<SecretRow>(
         font,
         size.componentWiseMul(SecretRow::REL_SIZE),
+        code_len,
         std::move(lang.secret_row),
         theme.secret_row
     );
@@ -42,6 +44,7 @@ Board::Board(
         GameRow* ptr = &add_component<GameRow>(
             font,
             gr_size,
+            code_len,
             i
         );
         game_rows_[i - 1] = ptr;

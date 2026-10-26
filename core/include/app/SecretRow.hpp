@@ -31,6 +31,7 @@ public:
     SecretRow(
         const sf::Font&  font,
         sf::Vector2f     size,
+        std::size_t      code_len,
         lang::SecretRow  lang,
         theme::SecretRow theme
     );

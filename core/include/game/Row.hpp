@@ -18,9 +18,6 @@ public:
     // was set.
     static constexpr int CODE_VALUE_NONE = 0;
 
-    // The number of elements in the code.
-    static constexpr std::size_t ROW_LEN = 4;
-
     // Constructs a new Row.
     explicit Row(std::size_t size) noexcept;
 

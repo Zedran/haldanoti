@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <cstddef>
 #include <vector>
 
 #include <SFML/Graphics/Font.hpp>
@@ -37,7 +38,7 @@ public:
     // FeedbackLabel::set_theme.
     static void set_theme(theme::GameRow theme) noexcept;
 
-    GameRow(const sf::Font& font, sf::Vector2f size, int row_number);
+    GameRow(const sf::Font& font, sf::Vector2f size, std::size_t code_len, int row_number);
 
     ~GameRow();
 

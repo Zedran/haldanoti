@@ -6,13 +6,13 @@
 #include <utility>
 
 #include "app/SecretRow.hpp"
-#include "game/Row.hpp"
 
 namespace app {
 
 SecretRow::SecretRow(
     const sf::Font&  font,
     sf::Vector2f     size,
+    std::size_t      code_len,
     lang::SecretRow  lang,
     theme::SecretRow theme
 ) : ui::Box{size, theme.box, ui::Layout::Type::RowLayout},
@@ -30,7 +30,7 @@ SecretRow::SecretRow(
         size.y * CodeButton::REL_SIZE.y,
     };
 
-    for (std::size_t i = 0; i < game::Row::ROW_LEN; i++) {
+    for (std::size_t i = 0; i < code_len; i++) {
         CodeButton& cb = code_box.add_component<CodeButton>(font, button_size);
         cb.unbind(sf::Mouse::Button::Left);
         cb.unbind(sf::Mouse::Button::Right);
