@@ -4,8 +4,8 @@
 #pragma once
 
 #include <array>
-#include <concepts>
 #include <cstddef>
+#include <optional>
 #include <span>
 
 #include "game/Row.hpp"
@@ -29,12 +29,9 @@ public:
     // Number of unique code elements.
     static constexpr int NUM_UNIQUE_ELEMS = SCORE_MAX - SCORE_MIN + 1;
 
-    // Constructs a new instance of the Game.
-    explicit Game(bool unique_elems);
-
-    // Constructs a new instance of the Game, initializing random number
-    // generator with a custom seed.
-    Game(bool unique_elems, const unsigned long seed);
+    // Constructs a new instance of the Game. Optionally, a custom seed
+    // for the random source can be provided.
+    Game(bool unique_elems, std::optional<unsigned long> seed = std::nullopt);
 
     // Prevents Game(bool) from interpreting unsigned int as bool when calling
     // Game{seed} by mistake.

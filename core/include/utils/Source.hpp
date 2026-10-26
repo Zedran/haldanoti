@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <optional>
 #include <random>
 #include <span>
 
@@ -11,11 +12,9 @@ namespace utils {
 // Random number generator.
 class Source {
 public:
-    // Creates a new Source, seeding it from random_device.
-    Source(const int low, const int high);
-
-    // Creates a new Source, seeding it from the specified seed value.
-    Source(const int low, const int high, const unsigned long seed);
+    // Constructs a new Source, seeding the generator with pseudorandom number
+    // or a custom seed value.
+    Source(const int low, const int high, std::optional<unsigned long> seed = std::nullopt);
 
     ~Source();
 

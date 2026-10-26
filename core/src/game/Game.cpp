@@ -8,15 +8,7 @@
 
 namespace game {
 
-Game::Game(bool unique_elems)
-    : active_row_num_{},
-      rand_{Game::SCORE_MIN, Game::SCORE_MAX},
-      rows_{},
-      unique_elems_{unique_elems} {
-    generate_code();
-}
-
-Game::Game(bool unique_elems, const unsigned long seed)
+Game::Game(bool unique_elems, std::optional<unsigned long> seed)
     : active_row_num_{},
       rand_{Game::SCORE_MIN, Game::SCORE_MAX, seed},
       rows_{},
