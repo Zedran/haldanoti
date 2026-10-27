@@ -41,6 +41,10 @@ void Row::reset() noexcept {
     locked_   = false;
 }
 
+void Row::resize(std::size_t count) {
+    code_.resize(count);
+}
+
 std::size_t Row::size() const noexcept {
     return code_.size();
 }

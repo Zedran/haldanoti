@@ -68,6 +68,14 @@ void Game::reset() noexcept {
     generate_code();
 }
 
+void Game::resize(std::size_t code_len) {
+    good_code_.resize(code_len);
+    for (auto& r : rows_) {
+        r.resize(code_len);
+    }
+    reset();
+}
+
 State Game::state() const noexcept {
     const Row& cur_row = active_row();
 

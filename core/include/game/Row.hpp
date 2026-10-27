@@ -40,6 +40,10 @@ public:
     // Resets the Row instance to the default state.
     void reset() noexcept;
 
+    // Changes the code length to the specified count of elements.
+    // No values are modified - the caller should reset the Row.
+    void resize(std::size_t count);
+
     // Returns number of code elements in the Row.
     std::size_t size() const noexcept;
 

@@ -70,6 +70,9 @@ public:
     // Resets the game state.
     void reset() noexcept;
 
+    // Resizes the code and resets the Game.
+    void resize(std::size_t code_len);
+
     // Writes the user-provided guess to the currently used row and generates
     // Feedback. Subsequent submission attempt will trigger an assertion error.
     void submit_code(std::span<const int> guess) noexcept;
