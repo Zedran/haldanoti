@@ -32,6 +32,13 @@ CodeButton::CodeButton(const sf::Font& font, sf::Vector2f size)
     disable(false);
 }
 
+CodeButton::CodeButton(const CodeButton& other)
+    : ui::Button{other},
+      code_element_{other.code_element_} {
+    bind(sf::Mouse::Button::Left, [this] { this->increment(); });
+    bind(sf::Mouse::Button::Right, [this] { this->decrement(); });
+}
+
 CodeButton::~CodeButton() = default;
 
 int CodeButton::code_element() const noexcept {

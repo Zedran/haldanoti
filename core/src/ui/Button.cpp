@@ -19,6 +19,13 @@ Button::Button(
     state_{State::Normal},
     style_{style} {}
 
+Button::Button(const Button& other)
+    : Label{other},
+      bindings_{},
+      pressed_by_{},
+      state_{other.state_},
+      style_{other.style_} {}
+
 Button::~Button() = default;
 
 bool Button::check_collision(sf::Vector2i pos) {
