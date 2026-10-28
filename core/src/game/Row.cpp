@@ -21,6 +21,7 @@ void Row::commit(std::span<const int> good_code, std::span<const int> guess) noe
     assert(!locked_);
 
     assert(guess.size() == code_.size());
+    assert(guess.size() == good_code.size());
     std::copy(guess.begin(), guess.end(), code_.begin());
 
     feedback_ = internal::compare_codes(good_code, guess);

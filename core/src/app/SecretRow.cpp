@@ -49,6 +49,8 @@ SecretRow::SecretRow(
 SecretRow::~SecretRow() = default;
 
 void SecretRow::display_code(std::span<const int> code) {
+    assert(code.size() == code_buttons_.size());
+
     for (std::size_t i = 0; i < code.size(); i++) {
         code_buttons_[i]->set_value(code[i]);
         code_buttons_[i]->use_normal_style();
