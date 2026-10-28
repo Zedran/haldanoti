@@ -36,6 +36,8 @@ void App::apply_config(const config::Config& c) {
     configure_hints(c);
     game_.allow_unique_only(c.unique_elems);
     ui_.get_board().allow_unique_only(c.unique_elems);
+    game_.resize(c.code_len);
+    ui_.get_board().resize(c.code_len);
     window_.set_vsync(c.vsync);
 }
 
