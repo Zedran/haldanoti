@@ -47,6 +47,8 @@ public:
 
     virtual void handle_event(const sf::Event& event) override;
 
+    void layout_components();
+
     void pop_component() noexcept;
 
     virtual void set_position(sf::Vector2f pos) override;
