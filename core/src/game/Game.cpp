@@ -77,7 +77,6 @@ void Game::resize(std::size_t code_len) {
     for (auto& r : rows_) {
         r.resize(code_len);
     }
-    reset();
 }
 
 State Game::state() const noexcept {
