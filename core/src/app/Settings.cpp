@@ -164,9 +164,9 @@ bool Settings::game_reset_required(const config::Config& c) const noexcept {
 config::Config Settings::get_config() const noexcept {
     const std::string cl_str = sel_code_len_->get_value().toAnsiString();
 
-    std::size_t code_len;
+    std::size_t code_len{};
 
-    const auto [ptr, ec] = std::from_chars(
+    [[maybe_unused]] const auto [ptr, ec] = std::from_chars(
         cl_str.data(),
         cl_str.data() + cl_str.size(),
         code_len
