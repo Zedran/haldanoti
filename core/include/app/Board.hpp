@@ -59,6 +59,9 @@ public:
     // Resets the Board instance.
     void reset();
 
+    // Resizes SecretRow and GameRow instances to the specified code length.
+    void resize(std::size_t code_len);
+
     // Relays settings to the SecretRow::set_hints member function, which
     // applies the hints config option. The hint parameter is a number of
     // distinct elements in the secret code. nullopt means that the unique_elems

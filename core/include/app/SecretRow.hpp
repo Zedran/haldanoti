@@ -47,6 +47,9 @@ public:
     // Clears the displayed code and info.
     void reset();
 
+    // Resizes the SecretRow to the specified code length.
+    void resize(std::size_t code_len);
+
     // Enables or disables hints. The hint parameter is a number of distinct
     // elements in the secret code. nullopt means that the unique_elems option
     // was set and hint should reflect that. This function updates style and
@@ -64,6 +67,9 @@ private:
 
     // Font size relative to the height of the info box.
     static constexpr float INFO_FONT_REL_SIZE{0.5f};
+
+    // Non-owning pointer to the Box that holds CodeButton instances.
+    ui::Box* code_box_;
 
     // Holds non-owning pointers to CodeButton instances used to display secret
     // code.

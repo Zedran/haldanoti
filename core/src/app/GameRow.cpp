@@ -153,6 +153,36 @@ void GameRow::reset() {
     lock(false);
 }
 
+void GameRow::resize(std::size_t code_len) {
+    const long size_diff = static_cast<long>(code_len - code_buttons_.size());
+
+    if (size_diff == 0) {
+        return;
+    }
+
+    if (size_diff < 0) {
+        for (long i = 0; i > size_diff; i--) {
+            code_box_->pop_component();
+            fb_box_->pop_component();
+        }
+        code_buttons_.resize(code_len);
+        fb_labels_.resize(code_len);
+        set_position(get_position());
+        return;
+    }
+
+    // Using static_cast below, because these Boxes only contain one type.
+
+    const CodeButton&    cb = static_cast<const CodeButton&>(code_box_->get_component(0));
+    const FeedbackLabel& fl = static_cast<const FeedbackLabel&>(fb_box_->get_component(0));
+
+    for (std::size_t i = 0; i < static_cast<std::size_t>(size_diff); i++) {
+        code_buttons_.push_back(&code_box_->add_component<CodeButton>(cb));
+        fb_labels_.push_back(&fb_box_->add_component<FeedbackLabel>(fl));
+    }
+    layout_components();
+}
+
 void GameRow::set_feedback(game::Feedback fb) {
     assert(static_cast<std::size_t>(fb.red_count + fb.white_count) <= code_buttons_.size());
 

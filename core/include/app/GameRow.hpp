@@ -71,6 +71,9 @@ public:
     // Resets the GameRow instance to its initial state.
     void reset();
 
+    // Resizes the GameRow to the specified code length.
+    void resize(std::size_t code_len);
+
     // Sets the pins in FeedbackLabels according to the provided argument.
     void set_feedback(game::Feedback fb);
 

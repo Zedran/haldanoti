@@ -97,6 +97,13 @@ void Board::reset() {
     dbg("---  BOARD RESET ENDS  ---");
 }
 
+void Board::resize(std::size_t code_len) {
+    for (auto& r : game_rows_) {
+        r->resize(code_len);
+    }
+    secret_row_->resize(code_len);
+}
+
 void Board::set_hints(bool enabled, std::optional<std::size_t> hint) {
     secret_row_->set_hint(enabled, hint);
 }
