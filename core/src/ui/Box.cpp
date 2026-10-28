@@ -21,6 +21,10 @@ void Box::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     }
 }
 
+const Widget& Box::get_component(std::size_t index) const {
+    return *components_.at(index);
+}
+
 sf::Vector2f Box::get_position() const {
     return bg_.getPosition();
 }
@@ -33,6 +37,10 @@ void Box::handle_event(const sf::Event& event) {
     for (const auto& c : components_) {
         c->handle_event(event);
     }
+}
+
+void Box::pop_component() noexcept {
+    components_.pop_back();
 }
 
 void Box::set_position(sf::Vector2f pos) {
