@@ -69,6 +69,10 @@ void Game::reset() noexcept {
 }
 
 void Game::resize(std::size_t code_len) {
+    if (code_len == good_code_.size()) {
+        return;
+    }
+
     good_code_.resize(code_len);
     for (auto& r : rows_) {
         r.resize(code_len);
