@@ -38,8 +38,6 @@ UserInterface::UserInterface(
         window_size,
         std::move(lang.settings),
         theme.settings,
-        utils::get_lang_fnames(),
-        utils::get_theme_fnames(),
         std::move(version)
     },
     signal_{Signal::None},

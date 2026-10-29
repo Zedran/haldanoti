@@ -38,8 +38,6 @@ public:
         sf::Vector2f            size,
         lang::Settings          lang,
         theme::Settings         theme,
-        std::vector<sf::String> lang_fnames,
-        std::vector<sf::String> theme_fnames,
         sf::String              version
     );
 

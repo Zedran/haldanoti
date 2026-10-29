@@ -14,6 +14,7 @@
 #include "ui/Box.hpp"
 #include "ui/Label.hpp"
 #include "ui/Layout.hpp"
+#include "utils/assets.hpp"
 
 namespace app {
 
@@ -22,8 +23,6 @@ Settings::Settings(
     sf::Vector2f            size,
     lang::Settings          lang,
     theme::Settings         theme,
-    std::vector<sf::String> lang_fnames,
-    std::vector<sf::String> theme_fnames,
     sf::String              version
 ) : ui::Box{size, theme.box, ui::Layout::Type::ColumnLayout}, state_{} {
     constexpr Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
@@ -48,7 +47,7 @@ Settings::Settings(
         opt_line_size,
         theme.selector,
         std::move(lang.opt_lang),
-        std::move(lang_fnames)
+        utils::get_lang_fnames()
     );
 
     cb_code_chars_ = &opt_box.add_component<ui::Checkbox>(
@@ -104,7 +103,7 @@ Settings::Settings(
         opt_line_size.componentWiseMul({1.0f, 1.5f}),
         theme.selector,
         std::move(lang.opt_theme),
-        std::move(theme_fnames),
+        utils::get_theme_fnames(),
         ui::Layout::Type::ColumnLayout
     );
 
