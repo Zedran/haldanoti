@@ -8,6 +8,7 @@ Things easily forgotten.
     * [Config.hpp](/core/include/config/Config.hpp)
         * Add the new option to the `Config` struct. Order keys alphabetically to facilitate comparison with config file.
     * [Config.cpp](/core/src/config/Config.cpp)
+        * `enforce_limits` - if the new option should have some limits in place, add the relevant checks.
         * `from_json` - retrieve the option from JSON object.
         * `get_default_config` - add the default value.
         * `to_json` - store the option in JSON object.
@@ -21,6 +22,7 @@ Things easily forgotten.
         * Add a new raw pointer for `ui::Box` component related to the option.
     * [Settings.cpp](/core/src/app/Settings.cpp)
         * `Settings` - add a new component to `opt_box` and store the pointer to it in the newly created member of the `Settings` class. Adjust `toolbar_spacing.y`.
+        * `game_reset_required` - add conditional statement for the option if modifying it requires starting a new game.
         * `get_config` - retrieve value stored in the new option.
         * `restart_required` - add conditional statement for the option if modifying it requires restart.
         * `set_config` - add pointer assertion and set the value to the new component.
