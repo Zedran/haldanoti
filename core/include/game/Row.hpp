@@ -19,7 +19,7 @@ public:
     static constexpr int CODE_VALUE_NONE = 0;
 
     // Constructs a new Row.
-    explicit Row(std::size_t size);
+    explicit Row(std::size_t code_len);
 
     ~Row();
 
@@ -42,7 +42,7 @@ public:
 
     // Changes the code length to the specified count of elements.
     // No values are modified - the caller should reset the Row.
-    void resize(std::size_t count);
+    void resize(std::size_t code_len);
 
     // Returns number of code elements in the Row.
     std::size_t size() const noexcept;
