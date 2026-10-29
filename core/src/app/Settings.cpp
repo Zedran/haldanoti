@@ -175,7 +175,7 @@ config::Config Settings::get_config() const noexcept {
     assert(ec == std::errc{});
     assert(ptr == cl_str.data() + cl_str.size());
 
-    return config::Config{
+    config::Config c{
         .code_chars   = cb_code_chars_->get_state(),
         .code_len     = code_len,
         .fb_chars     = cb_fb_chars_->get_state(),
@@ -185,6 +185,9 @@ config::Config Settings::get_config() const noexcept {
         .unique_elems = cb_unique_elems_->get_state(),
         .vsync        = cb_vsync_->get_state(),
     };
+
+    config::enforce_limits(c);
+    return c;
 }
 
 const config::Config& Settings::get_ref_config() const noexcept {
