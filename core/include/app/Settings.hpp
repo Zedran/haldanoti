@@ -34,11 +34,11 @@ public:
     };
 
     Settings(
-        const sf::Font&         font,
-        sf::Vector2f            size,
-        lang::Settings          lang,
-        theme::Settings         theme,
-        sf::String              version
+        const sf::Font& font,
+        sf::Vector2f    size,
+        lang::Settings  lang,
+        theme::Settings theme,
+        sf::String      version
     );
 
     // Returns true if conf differs from the reference Config struct. This

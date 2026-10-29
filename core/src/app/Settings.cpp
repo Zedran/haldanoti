@@ -19,11 +19,11 @@
 namespace app {
 
 Settings::Settings(
-    const sf::Font&         font,
-    sf::Vector2f            size,
-    lang::Settings          lang,
-    theme::Settings         theme,
-    sf::String              version
+    const sf::Font& font,
+    sf::Vector2f    size,
+    lang::Settings  lang,
+    theme::Settings theme,
+    sf::String      version
 ) : ui::Box{size, theme.box, ui::Layout::Type::ColumnLayout}, state_{} {
     constexpr Box::Style INNER_BOX_STYLE{.bg{0}, .ol{0}};
 
