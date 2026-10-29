@@ -12,13 +12,14 @@ namespace app {
 SecretRow::SecretRow(
     const sf::Font&  font,
     sf::Vector2f     size,
+    std::size_t      code_len,
     lang::SecretRow  lang,
     theme::SecretRow theme
 ) : ui::Box{size, theme.box, ui::Layout::Type::RowLayout},
     game_state_{game::State::Running},
     lang_{std::move(lang)},
     theme_{theme} {
-    auto& code_box = add_component<ui::Box>(
+    code_box_ = &add_component<ui::Box>(
         size.componentWiseMul(CODE_BOX_REL_SIZE),
         theme.code_box,
         ui::Layout::Type::RowLayout
@@ -29,8 +30,8 @@ SecretRow::SecretRow(
         size.y * CodeButton::REL_SIZE.y,
     };
 
-    for (std::size_t i = 0; i < game::Row::ROW_LEN; i++) {
-        CodeButton& cb = code_box.add_component<CodeButton>(font, button_size);
+    for (std::size_t i = 0; i < code_len; i++) {
+        CodeButton& cb = code_box_->add_component<CodeButton>(font, button_size);
         cb.unbind(sf::Mouse::Button::Left);
         cb.unbind(sf::Mouse::Button::Right);
         code_buttons_.push_back(&cb);
@@ -47,7 +48,9 @@ SecretRow::SecretRow(
 
 SecretRow::~SecretRow() = default;
 
-void SecretRow::display_code(std::span<const int, game::Row::ROW_LEN> code) {
+void SecretRow::display_code(std::span<const int> code) {
+    assert(code.size() == code_buttons_.size());
+
     for (std::size_t i = 0; i < code.size(); i++) {
         code_buttons_[i]->set_value(code[i]);
         code_buttons_[i]->use_normal_style();
@@ -64,6 +67,31 @@ void SecretRow::reset() {
         b->reset();
     }
     display_info(game::State::Running);
+}
+
+void SecretRow::resize(std::size_t code_len) {
+    const long size_diff = static_cast<long>(code_len - code_buttons_.size());
+
+    if (size_diff == 0) {
+        return;
+    }
+
+    if (size_diff < 0) {
+        for (long i = 0; i > size_diff; i--) {
+            code_box_->pop_component();
+        }
+        code_buttons_.resize(code_len);
+        set_position(get_position());
+        return;
+    }
+
+    // Using static_cast, because code_box_ only contains one type.
+    const CodeButton& cb = static_cast<const CodeButton&>(code_box_->get_component(0));
+
+    for (std::size_t i = 0; i < static_cast<std::size_t>(size_diff); i++) {
+        code_buttons_.push_back(&code_box_->add_component<CodeButton>(cb));
+    }
+    layout_components();
 }
 
 void SecretRow::set_hint(bool enabled, std::optional<std::size_t> hint) {

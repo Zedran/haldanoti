@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cstddef>
 #include <span>
 
 #include "game/Feedback.hpp"
@@ -17,8 +18,10 @@ using namespace game;
 TEST_CASE("Game::Game") {
     constexpr unsigned long SEED = 1;
 
-    const Game g_rand{true};
-    const Game g_seeded{true, SEED};
+    constexpr std::size_t ROW_LEN = 4;
+
+    const Game g_rand{ROW_LEN, true};
+    const Game g_seeded{ROW_LEN, true, SEED};
 
     for (const auto& g : {g_rand, g_seeded}) {
         REQUIRE(g.active_row_num() == 0);
@@ -35,13 +38,15 @@ TEST_CASE("Game::Game") {
 TEST_CASE("Game::submit_code") {
     constexpr unsigned long SEED = 1;
 
-    constexpr std::array<int, Row::ROW_LEN> guess{1, 2, 3, 4};
+    constexpr std::size_t ROW_LEN = 4;
 
-    Game g{true, SEED};
+    constexpr std::array<int, ROW_LEN> guess{1, 2, 3, 4};
+
+    Game g{ROW_LEN, true, SEED};
 
     {
         // Making sure that the guess is not the same as the generated code.
-        std::span<const int, Row::ROW_LEN> good_code = g.good_code();
+        std::span<const int> good_code = g.good_code();
         REQUIRE_FALSE(std::equal(good_code.begin(), good_code.end(), guess.begin(), guess.end()));
     }
 
@@ -55,7 +60,7 @@ TEST_CASE("Game::submit_code") {
     const Row& r = g.active_row();
     REQUIRE(r.locked());
 
-    std::span<const int, Row::ROW_LEN> code = r.code();
+    std::span<const int> code = r.code();
     REQUIRE(std::equal(guess.begin(), guess.end(), code.begin(), code.end()));
 
     const Feedback fb = r.feedback();
@@ -67,8 +72,10 @@ TEST_CASE("Game::submit_code") {
 TEST_CASE("Game::state") {
     constexpr unsigned long SEED = 1;
 
+    constexpr std::size_t ROW_LEN = 4;
+
     // Game running from the moment of construction.
-    Game g{true, SEED};
+    Game g{ROW_LEN, true, SEED};
     REQUIRE(g.state() == State::Running);
 
     // Game won.
@@ -79,10 +86,10 @@ TEST_CASE("Game::state") {
     g.reset();
     REQUIRE(g.state() == State::Running);
 
-    constexpr std::array<int, Row::ROW_LEN> guess{1, 2, 3, 4};
+    constexpr std::array<int, ROW_LEN> guess{1, 2, 3, 4};
     {
         // Making sure that the guess is not the same as the generated code.
-        std::span<const int, Row::ROW_LEN> good_code = g.good_code();
+        std::span<const int> good_code = g.good_code();
         REQUIRE_FALSE(std::equal(good_code.begin(), good_code.end(), guess.begin(), guess.end()));
     }
 

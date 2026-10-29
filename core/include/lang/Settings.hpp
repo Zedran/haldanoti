@@ -16,6 +16,7 @@ struct Settings {
     sf::String opt_lang;
     sf::String opt_theme;
     sf::String opt_code_chars;
+    sf::String opt_code_len;
     sf::String opt_fb_chars;
     sf::String opt_hints;
     sf::String opt_vsync;
@@ -30,6 +31,7 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
     opt_lang,
     opt_theme,
     opt_code_chars,
+    opt_code_len,
     opt_fb_chars,
     opt_hints,
     opt_vsync,

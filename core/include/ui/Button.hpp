@@ -70,6 +70,10 @@ public:
         }
     }
 
+protected:
+    // Copy constructor for use in derived classes. It does not copy Bindings.
+    Button(const Button& other);
+
 private:
     enum class State {
         // Not responding to user input.

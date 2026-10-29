@@ -29,6 +29,10 @@ public:
 
     CodeButton(const sf::Font& font, sf::Vector2f size);
 
+    // This copy constructor does not copy Bindings. It defines new ones,
+    // specific to the resulting object.
+    CodeButton(const CodeButton& other);
+
     ~CodeButton();
 
     // Returns the current value of the stored code element.

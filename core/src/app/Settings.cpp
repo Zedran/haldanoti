@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (C) 2026 Wojciech Głąb (github.com/Zedran)
 
+#include <cassert>
+#include <charconv>
+#include <cstddef>
 #include <utility>
+#include <vector>
 
 #include <SFML/Window/Mouse.hpp>
 
@@ -68,6 +72,19 @@ Settings::Settings(
         std::move(lang.opt_hints)
     );
 
+    std::vector<sf::String> code_lengths;
+    for (std::size_t n = config::CODE_LEN_MIN; n <= config::CODE_LEN_MAX; n++) {
+        code_lengths.push_back(std::to_string(n));
+    }
+
+    sel_code_len_ = &opt_box.add_component<ui::Selector>(
+        font,
+        opt_line_size,
+        theme.selector,
+        std::move(lang.opt_code_len),
+        std::move(code_lengths)
+    );
+
     cb_unique_elems_ = &opt_box.add_component<ui::Checkbox>(
         font,
         opt_line_size,
@@ -91,7 +108,7 @@ Settings::Settings(
         ui::Layout::Type::ColumnLayout
     );
 
-    constexpr sf::Vector2f toolbar_spacing{0.0f, 4.0f};
+    constexpr sf::Vector2f toolbar_spacing{0.0f, 3.0f};
 
     opt_box.add_component<ui::Blank>(opt_line_size.componentWiseMul(toolbar_spacing));
 
@@ -140,12 +157,27 @@ bool Settings::config_differs(const config::Config& c) const noexcept {
 }
 
 bool Settings::game_reset_required(const config::Config& c) const noexcept {
-    return ref_config_.unique_elems != c.unique_elems;
+    return ref_config_.unique_elems != c.unique_elems ||
+           ref_config_.code_len != c.code_len;
 }
 
 config::Config Settings::get_config() const noexcept {
-    return config::Config{
+    const std::string cl_str = sel_code_len_->get_value().toAnsiString();
+
+    std::size_t code_len{};
+
+    [[maybe_unused]] const auto [ptr, ec] = std::from_chars(
+        cl_str.data(),
+        cl_str.data() + cl_str.size(),
+        code_len
+    );
+
+    assert(ec == std::errc{});
+    assert(ptr == cl_str.data() + cl_str.size());
+
+    config::Config c{
         .code_chars   = cb_code_chars_->get_state(),
+        .code_len     = code_len,
         .fb_chars     = cb_fb_chars_->get_state(),
         .hints        = cb_hints_->get_state(),
         .lang         = sel_lang_->get_value().toAnsiString(),
@@ -153,6 +185,9 @@ config::Config Settings::get_config() const noexcept {
         .unique_elems = cb_unique_elems_->get_state(),
         .vsync        = cb_vsync_->get_state(),
     };
+
+    config::enforce_limits(c);
+    return c;
 }
 
 const config::Config& Settings::get_ref_config() const noexcept {
@@ -178,6 +213,9 @@ void Settings::set_config(const config::Config& c) {
 
     assert(cb_code_chars_);
     cb_code_chars_->set_state(c.code_chars);
+
+    assert(sel_code_len_);
+    sel_code_len_->set_value(std::to_string(c.code_len));
 
     assert(cb_fb_chars_);
     cb_fb_chars_->set_state(c.fb_chars);

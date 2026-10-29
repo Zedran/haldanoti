@@ -29,6 +29,7 @@ public:
         sf::Vector2f    size,
         lang::Board     lang,
         theme::Board    theme,
+        std::size_t     code_len,
         bool            code_chars,
         bool            fb_chars
     );
@@ -43,7 +44,7 @@ public:
     // Displays the secret code and the result. game::State::Running does not
     // signal the conclusion of the game, therefore attempting to set this
     // state through the end_game function will result in assertion error.
-    void end_game(std::span<const int, game::Row::ROW_LEN> good_code, game::State state);
+    void end_game(std::span<const int> good_code, game::State state);
 
     // Returns a mutable reference to the currently active GameRow.
     GameRow& get_active_row() const noexcept;
@@ -57,6 +58,9 @@ public:
 
     // Resets the Board instance.
     void reset();
+
+    // Resizes SecretRow and GameRow instances to the specified code length.
+    void resize(std::size_t code_len);
 
     // Relays settings to the SecretRow::set_hints member function, which
     // applies the hints config option. The hint parameter is a number of

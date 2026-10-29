@@ -9,11 +9,16 @@
 
 #else
 
+#include <algorithm>
 #include <chrono>
+#include <cstddef>
 #include <format>
 #include <iostream>
 #include <source_location>
+#include <span>
+#include <string>
 #include <string_view>
+#include <utility>
 
 // A wrapper for debug::write that captures source_location at the call site.
 // Accepts a format_string along with an arbitrary number of arguments
@@ -21,6 +26,30 @@
 // display non-ASCII characters correctly, but such characters are
 // only used for presentation purposes and do not need to examined.
 #define dbg(fmt, ...) debug::write(std::source_location::current(), fmt __VA_OPT__(, ) __VA_ARGS__)
+
+template <std::size_t Extent>
+struct std::formatter<std::span<const int, Extent>, char> {
+    template <class ParseContext>
+    constexpr ParseContext::iterator parse(ParseContext& ctx) {
+        return ctx.begin();
+    }
+
+    template <class FmtContext>
+    FmtContext::iterator format(std::span<const int> s, FmtContext& ctx) const {
+        std::string str{'['};
+
+        for (std::size_t i = 0; i < s.size(); i++) {
+            str += std::to_string(s[i]);
+
+            if (i < s.size() - 1) {
+                str += ", ";
+            }
+        }
+        str += ']';
+
+        return std::ranges::copy(std::move(str), ctx.out()).out;
+    }
+};
 
 namespace debug {
 

@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <cstddef>
 #include <vector>
 
 #include <SFML/Graphics/Font.hpp>
@@ -12,7 +13,6 @@
 #include "app/CodeButton.hpp"
 #include "app/FeedbackLabel.hpp"
 #include "game/Feedback.hpp"
-#include "game/Row.hpp"
 #include "lang/GameRow.hpp"
 #include "theme/GameRow.hpp"
 #include "theme/GameRowBase.hpp"
@@ -38,7 +38,7 @@ public:
     // FeedbackLabel::set_theme.
     static void set_theme(theme::GameRow theme) noexcept;
 
-    GameRow(const sf::Font& font, sf::Vector2f size, int row_number);
+    GameRow(const sf::Font& font, sf::Vector2f size, std::size_t code_len, int row_number);
 
     ~GameRow();
 
@@ -58,7 +58,7 @@ public:
 
     // Returns a vector of code values retrieved from CodeButtons within
     // the row.
-    [[nodiscard]] std::array<int, game::Row::ROW_LEN> get_code() const noexcept;
+    [[nodiscard]] std::vector<int> get_code() const noexcept;
 
     // Returns true if the GameRow instance is locked.
     bool is_locked() const noexcept;
@@ -70,6 +70,9 @@ public:
 
     // Resets the GameRow instance to its initial state.
     void reset();
+
+    // Resizes the GameRow to the specified code length.
+    void resize(std::size_t code_len);
 
     // Sets the pins in FeedbackLabels according to the provided argument.
     void set_feedback(game::Feedback fb);

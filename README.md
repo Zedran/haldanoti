@@ -21,6 +21,7 @@ The following table presents configuration options that are available. Some chan
 | Option                  | Restart | Description                                                                 |
 |:------------------------|:-------:|:----------------------------------------------------------------------------|
 | **Code characters**     | yes     | Display numbers in addition to colors in the code fields.                   |
+| **Code length**         |         | Change the number of elements in the secret code.                           |
 | **Feedback characters** | yes     | Display small signs in the feedback fields in addition to colors.           |
 | **Language**            | yes     | Game's display language.                                                    |
 | **Show hints**          |         | Show a number of distinct elements in the secret code.                      |
@@ -28,7 +29,7 @@ The following table presents configuration options that are available. Some chan
 | **Unique elements**\*   |         | Do not repeat code elements and do not allow duplicates in guesses.         |
 | **VSync**               |         | Run at native framerate instead of limiting it to 60 FPS.                   |
 
-\* Modifying the **Unique elements** option immediately starts a new game.
+\* Modifying **Code length** or **Unique elements** options immediately starts a new game.
 
 ## License
 

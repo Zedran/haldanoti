@@ -21,14 +21,13 @@ App::App(
     lang::Lang     lang,
     theme::Theme   theme,
     sf::String     version
-) : game_{conf.unique_elems},
+) : game_{conf.code_len, conf.unique_elems},
     ui_{window_size, conf, std::move(lang), std::move(theme), std::move(version)},
     window_{window_size, conf.vsync} {
     ui_.get_board().allow_unique_only(conf.unique_elems);
     configure_hints(conf);
 
-    [[maybe_unused]] const auto gc = game_.good_code();
-    dbg("secret code {} {} {} {}", gc[0], gc[1], gc[2], gc[3]);
+    dbg("secret code = {}", game_.good_code());
 }
 
 App::~App() = default;
@@ -37,6 +36,8 @@ void App::apply_config(const config::Config& c) {
     configure_hints(c);
     game_.allow_unique_only(c.unique_elems);
     ui_.get_board().allow_unique_only(c.unique_elems);
+    game_.resize(c.code_len);
+    ui_.get_board().resize(c.code_len);
     window_.set_vsync(c.vsync);
 }
 
@@ -60,8 +61,7 @@ void App::new_game() {
 
     configure_hints(ui_.get_settings().get_ref_config());
 
-    [[maybe_unused]] const auto gc = game_.good_code();
-    dbg("secret code {} {} {} {}", gc[0], gc[1], gc[2], gc[3]);
+    dbg("secret code = {}", game_.good_code());
 }
 
 void App::poll_events() {

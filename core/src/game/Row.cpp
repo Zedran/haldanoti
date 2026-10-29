@@ -9,19 +9,19 @@
 
 namespace game {
 
-Row::Row() noexcept : code_{}, feedback_{}, locked_{} {
-    code_.fill(CODE_VALUE_NONE);
-}
+Row::Row(std::size_t code_len) : code_(code_len, CODE_VALUE_NONE), feedback_{}, locked_{} {}
 
 Row::~Row() = default;
 
-std::span<const int, Row::ROW_LEN> Row::code() const noexcept {
+std::span<const int> Row::code() const noexcept {
     return code_;
 }
 
-void Row::commit(std::span<const int, ROW_LEN> good_code, std::span<const int, ROW_LEN> guess) noexcept {
+void Row::commit(std::span<const int> good_code, std::span<const int> guess) noexcept {
     assert(!locked_);
 
+    assert(guess.size() == code_.size());
+    assert(guess.size() == good_code.size());
     std::copy(guess.begin(), guess.end(), code_.begin());
 
     feedback_ = internal::compare_codes(good_code, guess);
@@ -37,9 +37,17 @@ bool Row::locked() const noexcept {
 }
 
 void Row::reset() noexcept {
-    code_.fill(CODE_VALUE_NONE);
+    std::fill(code_.begin(), code_.end(), CODE_VALUE_NONE);
     feedback_ = Feedback{};
     locked_   = false;
+}
+
+void Row::resize(std::size_t code_len) {
+    code_.resize(code_len);
+}
+
+std::size_t Row::size() const noexcept {
+    return code_.size();
 }
 
 } // namespace game

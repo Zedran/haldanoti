@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <cstddef>
 #include <memory>
 #include <utility>
 #include <vector>
@@ -38,11 +39,17 @@ public:
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
+    const Widget& get_component(std::size_t index) const;
+
     virtual sf::Vector2f get_position() const override;
 
     virtual sf::Vector2f get_size() const override;
 
     virtual void handle_event(const sf::Event& event) override;
+
+    void layout_components();
+
+    void pop_component() noexcept;
 
     virtual void set_position(sf::Vector2f pos) override;
 

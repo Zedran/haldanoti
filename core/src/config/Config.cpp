@@ -29,6 +29,14 @@ static std::string get_default_lang_code() {
     return std::string{utils::DEFAULT_LANG_CODE};
 }
 
+void enforce_limits(Config& c) noexcept {
+    if (c.code_len < CODE_LEN_MIN) {
+        c.code_len = CODE_LEN_MIN;
+    } else if (c.code_len > CODE_LEN_MAX) {
+        c.code_len = CODE_LEN_MAX;
+    }
+}
+
 void from_json(const nlohmann::json& j, Config& v) {
     // Lazily loaded default Config.
     std::unique_ptr<Config> default_config;
@@ -44,17 +52,21 @@ void from_json(const nlohmann::json& j, Config& v) {
     };
 
     v.code_chars   = has("code_chars") ? j["code_chars"].get<bool>() : default_config->code_chars;
+    v.code_len     = has("code_len") ? j["code_len"].get<std::size_t>() : default_config->code_len;
     v.fb_chars     = has("fb_chars") ? j["fb_chars"].get<bool>() : default_config->fb_chars;
     v.hints        = has("hints") ? j["hints"].get<bool>() : default_config->hints;
     v.lang         = has("lang") ? j["lang"].get<std::string>() : std::move(default_config->lang);
     v.theme        = has("theme") ? j["theme"].get<std::string>() : std::move(default_config->theme);
     v.unique_elems = has("unique_elems") ? j["unique_elems"].get<bool>() : default_config->unique_elems;
     v.vsync        = has("vsync") ? j["vsync"].get<bool>() : default_config->vsync;
+
+    enforce_limits(v);
 }
 
 Config get_default_config() {
     return Config{
         .code_chars   = true,
+        .code_len     = 4,
         .fb_chars     = false,
         .hints        = false,
         .lang         = get_default_lang_code(),
@@ -85,6 +97,7 @@ config::Config read_config() {
 
 void to_json(nlohmann::json& j, const Config& v) {
     j["code_chars"]   = v.code_chars;
+    j["code_len"]     = v.code_len;
     j["fb_chars"]     = v.fb_chars;
     j["hints"]        = v.hints;
     j["lang"]         = v.lang;

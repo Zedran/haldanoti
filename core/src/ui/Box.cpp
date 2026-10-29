@@ -21,6 +21,10 @@ void Box::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     }
 }
 
+const Widget& Box::get_component(std::size_t index) const {
+    return *components_.at(index);
+}
+
 sf::Vector2f Box::get_position() const {
     return bg_.getPosition();
 }
@@ -35,9 +39,17 @@ void Box::handle_event(const sf::Event& event) {
     }
 }
 
+void Box::layout_components() {
+    layout_->place(bg_.getGlobalBounds(), components_);
+}
+
+void Box::pop_component() noexcept {
+    components_.pop_back();
+}
+
 void Box::set_position(sf::Vector2f pos) {
     bg_.setPosition(pos);
-    layout_->place(bg_.getGlobalBounds(), components_);
+    layout_components();
 }
 
 void Box::set_style(Style style) {

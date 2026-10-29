@@ -115,6 +115,10 @@ private:
     // Required for getting and setting its state.
     ui::Checkbox* cb_hints_;
 
+    // Non-owning pointer to the code length Selector. Required for getting
+    // and setting its value.
+    ui::Selector* sel_code_len_;
+
     // Non-owning pointer to the Checkbox representing the unique elements
     // option. Required for getting and setting its state.
     ui::Checkbox* cb_unique_elems_;

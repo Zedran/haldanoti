@@ -8,19 +8,13 @@
 
 namespace game {
 
-Game::Game(bool unique_elems)
+Game::Game(std::size_t code_len, bool unique_elems, std::optional<unsigned long> seed)
     : active_row_num_{},
-      rand_{Game::SCORE_MIN, Game::SCORE_MAX},
-      rows_{},
-      unique_elems_{unique_elems} {
-    generate_code();
-}
-
-Game::Game(bool unique_elems, const unsigned long seed)
-    : active_row_num_{},
+      good_code_(code_len, Row::CODE_VALUE_NONE),
       rand_{Game::SCORE_MIN, Game::SCORE_MAX, seed},
-      rows_{},
+      rows_(NUM_ROWS, Row{code_len}),
       unique_elems_{unique_elems} {
+    assert(code_len <= NUM_UNIQUE_ELEMS);
     generate_code();
 }
 
@@ -58,7 +52,7 @@ void Game::generate_code() noexcept {
     }
 }
 
-std::span<const int, Row::ROW_LEN> Game::good_code() const noexcept {
+std::span<const int> Game::good_code() const noexcept {
     return good_code_;
 }
 
@@ -74,6 +68,17 @@ void Game::reset() noexcept {
     generate_code();
 }
 
+void Game::resize(std::size_t code_len) {
+    if (code_len == good_code_.size()) {
+        return;
+    }
+
+    good_code_.resize(code_len);
+    for (auto& r : rows_) {
+        r.resize(code_len);
+    }
+}
+
 State Game::state() const noexcept {
     const Row& cur_row = active_row();
 
@@ -81,7 +86,7 @@ State Game::state() const noexcept {
         return State::Running;
     }
 
-    if (cur_row.feedback().red_count == Row::ROW_LEN) {
+    if (cur_row.feedback().red_count == good_code_.size()) {
         return State::Won;
     }
 
@@ -92,7 +97,9 @@ State Game::state() const noexcept {
     return State::Running;
 }
 
-void Game::submit_code(std::span<const int, Row::ROW_LEN> guess) noexcept {
+void Game::submit_code(std::span<const int> guess) noexcept {
+    assert(guess.size() == good_code_.size());
+
     for ([[maybe_unused]] const auto& e : guess) {
         assert(e >= SCORE_MIN);
         assert(e <= SCORE_MAX);

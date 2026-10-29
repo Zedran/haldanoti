@@ -3,15 +3,25 @@
 
 #pragma once
 
+#include <cstddef>
 #include <string>
 
 #include <nlohmann/json.hpp>
 
 namespace config {
 
+// Maximum code length.
+constexpr std::size_t CODE_LEN_MAX = 6;
+
+// Minimum code length.
+constexpr std::size_t CODE_LEN_MIN = 3;
+
 struct Config {
     // Display code characters.
     bool code_chars;
+
+    // Number of elements in the code.
+    std::size_t code_len;
 
     // Display feedback characters.
     bool fb_chars;
@@ -33,6 +43,9 @@ struct Config {
 
     bool operator==(const Config& other) const noexcept = default;
 };
+
+// Ensures that all values in c are within assumed limits.
+void enforce_limits(Config& c) noexcept;
 
 // Deserializes Config from JSON. Fills missing values with defaults.
 void from_json(const nlohmann::json& j, Config& v);

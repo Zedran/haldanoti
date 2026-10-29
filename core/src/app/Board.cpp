@@ -19,6 +19,7 @@ Board::Board(
     sf::Vector2f    size,
     lang::Board     lang,
     theme::Board    theme,
+    std::size_t     code_len,
     bool            code_chars,
     bool            fb_chars
 ) : ui::Box{size, theme.box, ui::Layout::Type::ColumnLayout},
@@ -32,6 +33,7 @@ Board::Board(
     secret_row_ = &add_component<SecretRow>(
         font,
         size.componentWiseMul(SecretRow::REL_SIZE),
+        code_len,
         std::move(lang.secret_row),
         theme.secret_row
     );
@@ -42,6 +44,7 @@ Board::Board(
         GameRow* ptr = &add_component<GameRow>(
             font,
             gr_size,
+            code_len,
             i
         );
         game_rows_[i - 1] = ptr;
@@ -56,7 +59,7 @@ void Board::allow_unique_only(bool v) noexcept {
     GameRow::allow_unique_only(v);
 }
 
-void Board::end_game(std::span<const int, game::Row::ROW_LEN> good_code, game::State state) {
+void Board::end_game(std::span<const int> good_code, game::State state) {
     assert(state != game::State::Running);
     assert(secret_row_);
     secret_row_->display_code(good_code);
@@ -92,6 +95,13 @@ void Board::reset() {
     game_rows_[active_row_]->unlock();
 
     dbg("---  BOARD RESET ENDS  ---");
+}
+
+void Board::resize(std::size_t code_len) {
+    for (auto& r : game_rows_) {
+        r->resize(code_len);
+    }
+    secret_row_->resize(code_len);
 }
 
 void Board::set_hints(bool enabled, std::optional<std::size_t> hint) {
