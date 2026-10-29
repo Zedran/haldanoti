@@ -30,6 +30,7 @@ void Message::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 void Message::show(Content msg) {
     switch (msg) {
     case Content::RestartRequired: set_text(lang_.restart_required); break;
+    case Content::StartingNewGame: set_text(lang_.starting_new_game); break;
     };
     clock_.restart();
 }

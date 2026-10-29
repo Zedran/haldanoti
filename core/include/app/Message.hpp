@@ -23,6 +23,7 @@ class Message final : public ui::Label {
 public:
     enum class Content {
         RestartRequired,
+        StartingNewGame,
     };
 
     // Label size relative to the game window.

@@ -14,7 +14,8 @@
         }
     },
     "message": {
-        "restart_required": "Restart required"
+        "restart_required": "Restart required",
+        "starting_new_game": "Starting new game"
     },
     "toolbar": {
         "new_game": "New\ngame",

@@ -14,7 +14,8 @@
         }
     },
     "message": {
-        "restart_required": "Wymagane ponowne uruchomienie"
+        "restart_required": "Wymagane ponowne uruchomienie",
+        "starting_new_game": "Rozpoczynanie nowej gry"
     },
     "toolbar": {
         "new_game": "Nowa\ngra",

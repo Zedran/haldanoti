@@ -95,11 +95,14 @@ void App::save_config() {
 
     if (settings.config_differs(c)) {
         dbg("config modified");
-        if (settings.restart_required(c)) {
-            ui_.show_message(Message::Content::RestartRequired);
-        }
 
         const bool grr = settings.game_reset_required(c);
+
+        if (settings.restart_required(c)) {
+            ui_.show_message(Message::Content::RestartRequired);
+        } else if (grr) {
+            ui_.show_message(Message::Content::StartingNewGame);
+        }
 
         apply_config(c);
         config::write_config(settings.get_config());

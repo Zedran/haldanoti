@@ -12,8 +12,9 @@ namespace lang {
 
 struct Message {
     sf::String restart_required;
+    sf::String starting_new_game;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Message, restart_required);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Message, restart_required, starting_new_game);
 
 } // namespace lang
