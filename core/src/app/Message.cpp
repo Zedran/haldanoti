@@ -31,7 +31,7 @@ void Message::show(Content msg) {
     switch (msg) {
     case Content::RestartRequired: set_text(lang_.restart_required); break;
     };
-    clock_.start();
+    clock_.restart();
 }
 
 void Message::tick() {
