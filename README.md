@@ -2,6 +2,17 @@
 
 Haldanóti (Quenya: hidden numbers) is a digital adaptation of the classic [Bulls and Cows](https://en.wikipedia.org/wiki/Bulls_and_cows) game.
 
+## Table of contents
+
+* [Installation](#installation)
+* [Rules](#rules)
+* [Settings](#settings)
+* [License](#license)
+
+## Installation
+
+Refer to the [installation instructions](docs/installation.md).
+
 ## Rules
 
 At the start of the game, a secret code is set. Over the course of 12 turns (each represented by a single row on the board), the player attempts to guess the correct code. Each guess is evaluated and the player receives feedback in the form of colored pins. Every pin represents a single code element. There are 3 types of pins:
