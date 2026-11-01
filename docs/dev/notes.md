@@ -17,6 +17,7 @@ Things easily forgotten.
         * Add the option field to the `Settings` struct, prefix it with `opt_`.
         * Include the new field in the JSON macro.
     * Add the new `opt_` field to every language file in the [lang](/assets/lang/) directory.
+    * Reconfigure the project to copy modified files to the directory at `${CMAKE_BINARY_DIR}/share/`.
 3. `app`
     * [Settings.hpp](/core/include/app/Settings.hpp)
         * Add a new raw pointer for `ui::Box` component related to the option.
