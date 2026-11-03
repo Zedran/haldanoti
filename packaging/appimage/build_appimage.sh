@@ -25,6 +25,12 @@ if [ ! -f "./$aic" ]; then
     chmod +x "./$aic"
 fi
 
+if [ ! -c /dev/fuse ] || [ ! -r /dev/fuse ] || [ ! -w /dev/fuse ]; then
+    echo "fuse not available - extracting linuxdeploy"
+    "./$aic" --appimage-extract
+    aic="squashfs-root/AppRun"
+fi
+
 cmake -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release    \
     -DHALDANOTI_SET_TC_FLAGS=ON   \
