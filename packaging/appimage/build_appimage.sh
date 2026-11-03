@@ -12,7 +12,16 @@ url="https://github.com/linuxdeploy/linuxdeploy/releases/download/$tag/linuxdepl
 appdir="AppDir"
 
 if [ ! -f "./$aic" ]; then
-    curl -sS -L -o "$aic" "$url"
+    if command -v curl > /dev/null 2>&1; then
+        curl -sS -L -o "$aic" "$url"
+    elif command -v wget > /dev/null 2>&1; then
+        echo "curl not found"
+        wget -qO "$aic" "$url"
+    else
+        echo "wget not found"
+        echo "download utilities missing"
+        exit 1
+    fi
     chmod +x "./$aic"
 fi
 
