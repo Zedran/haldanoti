@@ -7,6 +7,7 @@ option(MAKE_TESTS "Build test target" OFF)
 option(COVER "Generate test coverage report target if MAKE_TESTS=ON" OFF)
 option(HALDANOTI_VERSION "Version info is typically set through git describe. This override can be used when building from archive.")
 option(HALDANOTI_SET_TC_FLAGS "Set compiler flags defined in cmake/TC_*.cmake files." OFF)
+option(HALDANOTI_APPIMAGE "Setup install paths for packaging as AppImage (Linux only)." OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 

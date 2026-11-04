@@ -39,8 +39,13 @@ install(FILES     ${FONT_FILE_PATH} DESTINATION ${ASSETS_DIR}     )
 if(LINUX)
     set(DT_ENTRY "${CMAKE_BINARY_DIR}/platform/linux/haldanoti.desktop")
 
-    set(BIN_PATH  "${CMAKE_INSTALL_PREFIX}/${BIN_DIR}/${PROJECT_NAME}")
-    set(ICON_PATH "${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/haldanoti.svg")
+    if(HALDANOTI_APPIMAGE)
+        set(BIN_PATH  "${PROJECT_NAME}")
+        set(ICON_PATH "${PROJECT_NAME}")
+    else()
+        set(BIN_PATH  "${CMAKE_INSTALL_PREFIX}/${BIN_DIR}/${PROJECT_NAME}")
+        set(ICON_PATH "${CMAKE_INSTALL_PREFIX}/${ASSETS_DIR}/haldanoti.svg")
+    endif()
 
     configure_file(
         ${CMAKE_SOURCE_DIR}/platform/linux/haldanoti.desktop.in
