@@ -11,7 +11,7 @@ Haldanóti (Quenya: hidden numbers) is a digital adaptation of the classic [Bull
 
 ## Installation
 
-Refer to the [installation instructions](docs/installation.md).
+Refer to the [installation instructions](docs/manual/installation.md).
 
 ## Rules
 

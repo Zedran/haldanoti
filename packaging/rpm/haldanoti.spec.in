@@ -42,6 +42,7 @@ BuildRequires:  flac-devel
 %license %{_datadir}/%{name}/docs/licenses
 %doc     %{_datadir}/%{name}/README.md
 %doc     %{_datadir}/%{name}/SECURITY.md
+%doc     %{_datadir}/%{name}/docs/manual
 %{_bindir}/%{name}
 %{_datadir}/%{name}/assets
 %{_datadir}/applications/%{name}.desktop
