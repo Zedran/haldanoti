@@ -48,6 +48,7 @@ jobs:
         with:
           name: rpm-package
           path: dist
+
       - name: Upload artifacts
         env:
           GH_REPO: ${{ github.repository }}
