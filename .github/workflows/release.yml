@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  appimage:
+    uses: ./.github/workflows/appimage.yml
+
+  deb:
+    uses: ./.github/workflows/deb.yml
+
+  rpm:
+    uses: ./.github/workflows/rpm.yml
+
+  win:
+    uses: ./.github/workflows/win.yml
+
+  release:
+    needs: [appimage, deb, rpm, win]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download AppImage
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: appimage
+          path: dist
+
+      - name: Download DEB
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: deb-package
+          path: dist
+
+      - name: Download NSIS
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: win-installer
+          path: dist
+
+      - name: Download RPM
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: rpm-package
+          path: dist
+      - name: Upload artifacts
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          set -euo pipefail
+          find dist -type f -exec gh release upload "$TAG" {} +

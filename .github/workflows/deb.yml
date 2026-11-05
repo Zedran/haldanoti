@@ -1,0 +1,41 @@
+name: DEB
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:stable
+    permissions:
+      contents: read
+
+    steps:
+      - name: Install git
+        run: |
+          apt-get update
+          apt-get install -y git
+
+      - name: Checkout source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Mark repo directory as safe
+        run: git config --global --add safe.directory $GITHUB_WORKSPACE
+
+      - name: Create build directory
+        run: mkdir build
+
+      - name: Build DEB
+        working-directory: build
+        run: |
+          sh ../packaging/deb/build_deb_package.sh --build-deps
+
+      - name: Upload package
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: deb-package
+          path: build/debian/haldanoti_*.deb
+          if-no-files-found: error
