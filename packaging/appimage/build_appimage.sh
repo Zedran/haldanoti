@@ -3,11 +3,12 @@
 set -e
 
 arch="$(uname -m)"
-tag="continuous"
+
+aic_tag="continuous"
 
 aic="linuxdeploy-$arch.AppImage"
 
-url="https://github.com/linuxdeploy/linuxdeploy/releases/download/$tag/linuxdeploy-$arch.AppImage"
+url="https://github.com/linuxdeploy/linuxdeploy/releases/download/$aic_tag/linuxdeploy-$arch.AppImage"
 
 appdir="AppDir"
 
