@@ -2,6 +2,8 @@
 
 set -e
 
+version=$(git describe --tags | sed 's/v//')
+
 arch="$(uname -m)"
 
 aic_tag="continuous"
@@ -46,4 +48,4 @@ make install DESTDIR="$appdir"
     --icon-file "../assets/haldanoti.svg"               \
     --output appimage
 
-mv "Haldanóti-$arch.AppImage" "haldanoti-$arch.AppImage"
+mv "Haldanóti-$arch.AppImage" "haldanoti-$version-$arch.AppImage"
