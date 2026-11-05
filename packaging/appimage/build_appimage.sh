@@ -2,12 +2,12 @@
 
 set -e
 
-ai_arch="$(uname -m)"
+arch="$(uname -m)"
 tag="continuous"
 
-aic="linuxdeploy-$ai_arch.AppImage"
+aic="linuxdeploy-$arch.AppImage"
 
-url="https://github.com/linuxdeploy/linuxdeploy/releases/download/$tag/linuxdeploy-$ai_arch.AppImage"
+url="https://github.com/linuxdeploy/linuxdeploy/releases/download/$tag/linuxdeploy-$arch.AppImage"
 
 appdir="AppDir"
 
@@ -45,4 +45,4 @@ make install DESTDIR="$appdir"
     --icon-file "../assets/haldanoti.svg"               \
     --output appimage
 
-mv "Haldanóti-$ai_arch.AppImage" "haldanoti-$ai_arch.AppImage"
+mv "Haldanóti-$arch.AppImage" "haldanoti-$arch.AppImage"
