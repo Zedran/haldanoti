@@ -4,6 +4,9 @@
 
 * [Linux](#linux)
     * [Packages](#packages)
+        * [AppImage](#appimage)
+        * [DEB](#deb)
+        * [RPM](#rpm)
     * [Source](#source)
         * [Requirements](#requirements)
         * [Build and install](#build-and-install)
@@ -19,12 +22,48 @@
 
 ### Packages
 
-System packages are available for:
+Download one of the available packages from the most recent [release](https://github.com/Zedran/haldanoti/releases/latest) and follow instructions in the relevant section below.
 
-* Debian
-* RPM-based distributions
+#### AppImage
 
-Download the one for your system from the most recent [release](https://github.com/Zedran/haldanoti/releases/latest).
+Built on Debian stable 64bit.
+
+AppImage can be installed using integration tools, such as [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher), or used manually:
+
+```sh
+chmod +x ./haldanoti*.AppImage
+./haldanoti*.AppImage
+```
+
+Alternatively, if you do not have access to the `fuse` kernel module or wish to access docs and licensing information:
+
+```sh
+chmod +x ./haldanoti*.AppImage
+./haldanoti*.AppImage --appimage-extract
+mv squashfs-root haldanoti
+
+./haldanoti/AppRun
+
+# Docs and licensing information can be found in:
+# ./haldanoti/usr/share/doc/
+# ./haldanoti/usr/share/haldanoti/
+```
+
+#### DEB
+
+Built on Debian stable.
+
+```sh
+apt install ./haldanoti*.deb
+```
+
+#### RPM
+
+Built on Fedora latest.
+
+```sh
+dnf install ./haldanoti*.rpm
+```
 
 ### Source
 
