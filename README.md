@@ -8,6 +8,7 @@ Haldanóti (Quenya: hidden numbers) is a digital adaptation of the classic [Bull
 * [Installation](#installation)
 * [Rules](#rules)
 * [Settings](#settings)
+    * [Custom themes](#custom-themes)
 * [License](#license)
 
 ## Overview
@@ -52,6 +53,10 @@ The following table presents configuration options that are available. Some chan
 | **VSync**               |         | Run at native framerate instead of limiting it to 60 FPS.                   |
 
 \* Modifying **Code length** or **Unique elements** options immediately starts a new game.
+
+### Custom themes
+
+You can define your own color themes. For more information, refer to the [theming guide](docs/manual/theming.md).
 
 ## License
 
