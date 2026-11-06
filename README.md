@@ -4,10 +4,21 @@ Haldanóti (Quenya: hidden numbers) is a digital adaptation of the classic [Bull
 
 ## Table of contents
 
+* [Overview](#overview)
 * [Installation](#installation)
 * [Rules](#rules)
 * [Settings](#settings)
 * [License](#license)
+
+## Overview
+
+* **Fine-tunable difficulty**
+    * Variable code length
+    * Optional hints
+    * Choice to allow repeating elements in secret code
+* **Simple accessibility features**
+    * Theming system offers additional high-contrast color schemes with reduced visual clutter
+    * Helper characters for code and feedback fields to assist players with color vision deficiency
 
 ## Installation
 
