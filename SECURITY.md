@@ -10,7 +10,7 @@ Security updates are applied to the most recent version of the game.
 
 ## Methodology
 
-You are welcome to use any reasonable methodology to create reports, including AI-assisted processes. It is important, however, that you understand the report and are able to reproduce issues yourself on the most recent release.
+You are welcome to use any reasonable methodology to create reports, including AI-assisted processes. It is important, however, that you personally verify the findings. Reproduce them on the most recent release, understand the underlying issues and be able to explain and discuss them in your own words.
 
 ## Recognition
 
