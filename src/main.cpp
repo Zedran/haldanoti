@@ -6,7 +6,6 @@
 
 #include <SFML/Main.hpp>
 #include <SFML/System/Exception.hpp>
-#include <SFML/Window/VideoMode.hpp>
 
 #include "app/App.hpp"
 #include "app/Window.hpp"
