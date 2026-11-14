@@ -20,6 +20,7 @@ Label::Label(
 ) : bg_{size},
     fg_{font},
     pref_font_size_{font_size} {
+    bg_.setOutlineThickness(OUTLINE_SIZE);
     set_text(std::move(text));
     set_style(style);
 }
@@ -93,15 +94,7 @@ void Label::set_style(Style style) {
     visible_.fg = style.fg.a > 0;
 
     bg_.setFillColor(style.bg);
-
     bg_.setOutlineColor(style.ol);
-
-    if (style.ol.a > 0) {
-        bg_.setOutlineThickness(OUTLINE_SIZE);
-    } else {
-        bg_.setOutlineThickness(0.0f);
-    }
-
     fg_.setFillColor(style.fg);
 }
 

@@ -6,6 +6,7 @@
 namespace ui {
 
 Box::Box(sf::Vector2f size, Style style, Layout::Type layout) : bg_{size}, layout_{make_layout(layout)} {
+    bg_.setOutlineThickness(OUTLINE_SIZE);
     set_style(style);
 }
 
@@ -56,14 +57,7 @@ void Box::set_style(Style style) {
     visible_.bg = style.bg.a > 0 || style.ol.a > 0;
 
     bg_.setFillColor(style.bg);
-
     bg_.setOutlineColor(style.ol);
-
-    if (style.ol.a > 0) {
-        bg_.setOutlineThickness(OUTLINE_SIZE);
-    } else {
-        bg_.setOutlineThickness(0.0f);
-    }
 }
 
 } // namespace ui
