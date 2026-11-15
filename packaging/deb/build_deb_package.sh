@@ -12,7 +12,9 @@ WD=$(pwd)/debian
 
 mkdir -p "$WD"
 
-VERSION=$(git describe --tags | sed 's/v//')
+TAG=$(git describe --tags)
+
+VERSION=$(echo "$TAG" | sed 's/v//')
 
 PACKAGE_NAME="haldanoti_$VERSION"
 
@@ -29,7 +31,7 @@ mkdir -p "$DEB_DIR"
 
 cp "$WD/$PACKAGE_NAME.tar.gz" "$WD/$PACKAGE_NAME.orig.tar.gz"
 
-sed "s/@VERSION@/$VERSION/" "$(dirname "$0")/rules.in" > "$DEB_DIR/rules"
+sed "s/@VERSION@/$TAG/" "$(dirname "$0")/rules.in" > "$DEB_DIR/rules"
 chmod +x "$DEB_DIR/rules"
 
 {
