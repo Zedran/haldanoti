@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <concepts>
 #include <cstddef>
 #include <memory>
 #include <utility>
@@ -32,6 +33,7 @@ public:
     virtual ~Box();
 
     template <typename T, typename... Args>
+        requires std::derived_from<T, Widget>
     T& add_component(Args&&... args) {
         auto& ref = components_.emplace_back(std::make_unique<T>(std::forward<Args>(args)...));
         return *static_cast<T*>(ref.get());
